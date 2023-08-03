@@ -1,5 +1,7 @@
 ## Godot-Widgets
 
+A collection of widgets that are useful for GUIs.
+
 ---
 
 ### FilteredEdits
