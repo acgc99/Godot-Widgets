@@ -1,8 +1,12 @@
 ## Godot-Widgets
 
+A collection of widgets that are useful for GUIs.
+
 ---
 
 ### FilteredEdits
+
+The original addon [Filtered](https://godotengine.org/asset-library/asset/1992) has been embedded into this plugin to avoid dependencies issues. There is no problem since I'm the same author.
 
 Extends base nodes `LineEdit` and `TextEdit` with `FilteredLineEdit` and `FilteredTextEdit`, respectively, to filter user input. `FilteredLineEdit` also allows numeric text value clamping.
 
@@ -27,13 +31,19 @@ Notes:
 
 ### IconButton
 
-A button that consists on an icon. You might have to set its `custom_minimum_size` if used inside a `Container` or any of its variations.
+Widget that is button that consists on an icon. You might have to set its `custom_minimum_size` if used inside a `Container` or any of its variations.
 
 ---
 
 ### NavBar
 
-Navigation bar intended to be used to switch between game/app screens/pages.
+Widget to navigate through game/app pages/screens... It contains buttons and a label, you have to implement the logic for switching scenes.
+
+---
+
+### NumericInput
+
+Widget so that the game/app user can only input numeric values (float). It also has two buttons to increase/decrease the value.
 
 ---
 
