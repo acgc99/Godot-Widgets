@@ -6,7 +6,7 @@ A collection of widgets that are useful for GUIs.
 
 ### FilteredEdits
 
-The original addon [Filtered](https://godotengine.org/asset-library/asset/1992) has been embedded into this plugin to avoid dependencies issues. There is no problem since I'm the same author.
+The original addon [FilteredEdits](https://godotengine.org/asset-library/asset/1992) has been embedded into this plugin to avoid dependencies issues. There is no problem since I'm the same author.
 
 Extends base nodes `LineEdit` and `TextEdit` with `FilteredLineEdit` and `FilteredTextEdit`, respectively, to filter user input. `FilteredLineEdit` also allows numeric text value clamping.
 
