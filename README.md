@@ -14,17 +14,27 @@ The original addon [FilteredEdits](https://godotengine.org/asset-library/asset/1
 
 A button that consists on an icon. You might have to set its `custom_minimum_size` if used inside a `Container` or any of its variations.
 
+It is used for other widgets, but you can also use it.
+
 ---
 
 ### NavBar
 
-Widget to navigate through game/app pages/screens... It contains buttons and a label, you have to implement the logic for switching scenes.
+Widget to navigate through game scenes. It contains buttons and a label, you have to implement the logic for switching scenes.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/navbar.png" height="50"/>
+</p>
 
 ---
 
 ### NumericInput
 
-Widget so that the game/app user can only input numeric values (float). It also has two buttons to increase/decrease the value.
+Widget so that the game user can only input numeric values (`float`). It also has two buttons to increase/decrease the value.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/numeric_input.png" height="50"/>
+</p>
 
 ---
 
