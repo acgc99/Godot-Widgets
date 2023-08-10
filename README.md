@@ -2,6 +2,8 @@
 
 A collection of widgets that are useful for GUIs.
 
+If you download the full repository, you will get a small showcase project.
+
 ---
 
 ### FilteredEdits (v2.0.0)
