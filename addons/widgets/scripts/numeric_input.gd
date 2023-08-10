@@ -113,10 +113,12 @@ func _on_resized() -> void:
 func _on_up_button_pressed() -> void:
 	var value: float = float(filtered_line_edit.text)
 	value += step
-	filtered_line_edit.emit_signal("text_submitted", str(value))
+	filtered_line_edit.text = str(value)
+	filtered_line_edit.clamp_text()
 
 
 func _on_down_button_pressed() -> void:
 	var value: float = float(filtered_line_edit.text)
 	value -= step
-	filtered_line_edit.emit_signal("text_submitted", str(value))
+	filtered_line_edit.text = str(value)
+	filtered_line_edit.clamp_text()
