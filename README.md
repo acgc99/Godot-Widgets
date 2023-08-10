@@ -1,6 +1,6 @@
 ## Godot-Widgets
 
-A collection of widgets that are useful for GUIs.
+A collection of widgets that are useful for GUIs. Inspired by [KivyMD](https://kivymd.readthedocs.io).
 
 If you download the full repository, you will get a small showcase project.
 
