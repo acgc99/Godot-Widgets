@@ -1,11 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_gktdl"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/nav_bar.gd" id="2_7qy8g"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/numeric_input.gd" id="3_xqesj"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/nav_bar.gd" id="3_86lt4"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/numeric_input.gd" id="3_h7wgp"]
 
-[node name="Main" type="Control"]
-layout_mode = 3
+[node name="Main" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,19 +13,20 @@ grow_vertical = 2
 script = ExtResource("1_gktdl")
 
 [node name="NavBar" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+script = ExtResource("3_86lt4")
+text = "Title"
+
+[node name="Contents" type="ColorRect" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NumericInput" type="PanelContainer" parent="Contents"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 55.0
+offset_bottom = 30.0
 grow_horizontal = 2
-script = ExtResource("2_7qy8g")
-text = "Title"
-
-[node name="NumericInput" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_left = 260.0
-offset_top = 80.0
-offset_right = 479.0
-offset_bottom = 124.0
-script = ExtResource("3_xqesj")
+script = ExtResource("3_h7wgp")
 text = "Value:"

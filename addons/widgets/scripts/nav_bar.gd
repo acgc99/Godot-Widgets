@@ -2,18 +2,27 @@
 class_name NavBar
 extends PanelContainer
 ## A widget for intended to be used for navigation arround the app screens/pages.
+## It might have zero height if [param custom_minimum_height] not specified.
+
 
 ## Emitted when [code]left_button[/code] is pressed.
 signal pressed_left
 ## Emitted when the [code]right_button[/code] is pressed.
 signal pressed_right
-## [param label.horizontal_alignment]
+## [param horizontal_alignment] enum.
+enum {
+	HORIZONTAL_ALIGNMENT_LEFT,
+	HORIZONTAL_ALIGNMENT_CENTER,
+	HORIZONTAL_ALIGNMENT_RIGHT,
+	HORIZONTAL_ALIGNMENT_FILL
+}
+## [param label.horizontal_alignment].
 @export_enum(
-	"HORIZONTAL_ALIGNMENT_LEFT",
-	"HORIZONTAL_ALIGNMENT_CENTER",
-	"HORIZONTAL_ALIGNMENT_RIGHT",
-	"HORIZONTAL_ALIGNMENT_FILL"
-) var horizontal_alignment: int = 1:
+	"Horizontal alignment left",
+	"Horizontal alignment center",
+	"Horizontal alignment right",
+	"Horizontal alignment fill"
+) var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 	set(horizontal_alignment_):
 		horizontal_alignment = horizontal_alignment_
 		if label != null:
@@ -76,7 +85,9 @@ func _enter_tree() -> void:
 	right_button.disabled = right_button_disabled
 	right_button.icon = right_button_icon
 	
-	resized.connect(_on_resized)
+	# This check is to avoid conflict with [code]@tool[/code].
+	if not is_connected("resized", _on_resized):
+		resized.connect(_on_resized)
 	resized.emit()
 	left_button.pressed.connect(_on_left_button_pressed)
 	right_button.pressed.connect(_on_right_button_pressed)

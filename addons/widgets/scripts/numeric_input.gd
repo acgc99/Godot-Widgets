@@ -3,6 +3,7 @@ class_name NumericInput
 extends PanelContainer
 ## A widget for numeric inputs.
 
+
 ## [param label.text].
 @export var text: String = "":
 	set(text_):
@@ -83,6 +84,8 @@ func _enter_tree() -> void:
 	filtered_line_edit.alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	filtered_line_edit.max_value = max_value
 	filtered_line_edit.min_value = min_value
+	filtered_line_edit.text = str(initial_value)
+	filtered_line_edit.clamp_text()
 	
 	up_button = IconButton.new()
 	container.add_child(up_button)
@@ -92,15 +95,12 @@ func _enter_tree() -> void:
 	container.add_child(down_button)
 	down_button.icon = down_button_icon
 	
-	resized.connect(_on_resized)
+	# This check is to avoid conflict with [code]@tool[/code].
+	if not is_connected("resized", _on_resized):
+		resized.connect(_on_resized)
 	resized.emit()
 	up_button.pressed.connect(_on_up_button_pressed)
 	down_button.pressed.connect(_on_down_button_pressed)
-
-
-func _ready() -> void:
-	# This has to be here and not in [code]_enter_tree[/code] I don't know why.
-	filtered_line_edit.emit_signal("text_submitted", str(initial_value))
 
 
 func _on_resized() -> void:
