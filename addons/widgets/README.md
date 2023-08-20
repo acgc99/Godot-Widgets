@@ -2,6 +2,8 @@
 
 A collection of widgets that are useful for GUIs. Inspired by [KivyMD](https://kivymd.readthedocs.io).
 
+Widgets are highly customizable, check their properties in the Godot Editor. If you feel that something is missing or there is a bug, please, open a new issue.
+
 If you download the full repository, you will get a small showcase project.
 
 ---
