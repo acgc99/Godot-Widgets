@@ -250,11 +250,13 @@ func _ready() -> void:
 
 ## Called to show the popup.
 func popup() -> void:
+	get_viewport().gui_release_focus()
 	animation_player.stop(true)
 	animation_player.play("popup")
 
 
 ## Called to dismiss the popup.
 func dismiss() -> void:
+	get_viewport().gui_release_focus()
 	animation_player.stop(true)
 	animation_player.play("hide")
