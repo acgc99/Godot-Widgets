@@ -161,8 +161,9 @@ func _enter_tree() -> void:
 	theme_type_variation = outside_button_theme_type_variation
 	top_level = true
 	size = get_parent().size
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	modulate = Color(1, 1, 1, 0)
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	visible = false
 	
 	animation_player = AnimationPlayer.new()
 	add_child(animation_player)
@@ -229,6 +230,9 @@ func _enter_tree() -> void:
 	animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(1, str(get_path()) + ":mouse_filter")
 	animation.track_insert_key(1, 0, Control.MOUSE_FILTER_STOP)
+	animation.add_track(Animation.TYPE_VALUE)
+	animation.track_set_path(2, str(get_path()) + ":visible")
+	animation.track_insert_key(2, 0, true)
 	# dismiss animation
 	animation = Animation.new()
 	animation.length = animation_lenght
@@ -240,6 +244,13 @@ func _enter_tree() -> void:
 	animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(1, str(get_path()) + ":mouse_filter")
 	animation.track_insert_key(1, 0, Control.MOUSE_FILTER_IGNORE)
+	# I don't know why but if I do this like an animation, it is hidden abruptly.
+	animation_player.animation_finished.connect(
+		func hide(anim_name: StringName) -> void:
+			if anim_name == "hide":
+				visible = false
+	)
+	
 	animation_player.add_animation_library("", animation_library)
 
 
