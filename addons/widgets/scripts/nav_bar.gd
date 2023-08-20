@@ -86,21 +86,21 @@ func _enter_tree() -> void:
 	right_button.disabled = right_button_disabled
 	right_button.icon = right_button_icon
 	
-	# This check is to avoid conflict with [code]@tool[/code].
-	if not is_connected("resized", _on_resized):
-		resized.connect(_on_resized)
-	resized.emit()
 	left_button.pressed.connect(
-		func left_button_pressed() -> void:
+		func _on_left_button_pressed() -> void:
 			pressed_left.emit()
 	)
 	right_button.pressed.connect(
-		func right_button_pressed() -> void:
+		func _on_right_button_pressed() -> void:
 			pressed_right.emit()
 	)
 
 
-func _on_resized() -> void:
-	left_button.custom_minimum_size = Vector2(size[1], 0)
-	label.add_theme_font_size_override("font_size", floor(size[1]/2.0))
-	right_button.custom_minimum_size = Vector2(size[1], 0)
+func _ready() -> void:
+	resized.connect(
+	func _on_resized() -> void:
+		left_button.custom_minimum_size = Vector2(size[1], 0)
+		label.add_theme_font_size_override("font_size", floor(size[1]/2.0))
+		right_button.custom_minimum_size = Vector2(size[1], 0)
+	)
+	resized.emit()

@@ -155,7 +155,7 @@ var right_button: Button
 
 func _enter_tree() -> void:
 	pressed.connect(
-		func outside_pressed() -> void:
+		func _on_outside_pressed() -> void:
 			outside_button_pressed.emit()
 	)
 	theme_type_variation = outside_button_theme_type_variation
@@ -200,7 +200,7 @@ func _enter_tree() -> void:
 	left_button = Button.new()
 	buttons_container.add_child(left_button)
 	left_button.pressed.connect(
-		func popup_left_button_pressed() -> void:
+		func _on_popup_left_button_pressed() -> void:
 			popup_left_button_pressed.emit()
 	)
 	left_button.theme_type_variation = left_button_theme_type_variation
@@ -210,7 +210,7 @@ func _enter_tree() -> void:
 	right_button = Button.new()
 	buttons_container.add_child(right_button)
 	right_button.pressed.connect(
-		func popup_right_button_pressed() -> void:
+		func _on_popup_right_button_pressed() -> void:
 			popup_right_button_pressed.emit()
 	)
 	right_button.theme_type_variation = right_button_theme_type_variation
@@ -246,7 +246,7 @@ func _enter_tree() -> void:
 	animation.track_insert_key(1, 0, Control.MOUSE_FILTER_IGNORE)
 	# I don't know why but if I do this like an animation, it is hidden abruptly.
 	animation_player.animation_finished.connect(
-		func hide(anim_name: StringName) -> void:
+		func _on_hide(anim_name: StringName) -> void:
 			if anim_name == "dismiss":
 				visible = false
 	)

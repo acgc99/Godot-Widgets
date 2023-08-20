@@ -98,12 +98,8 @@ func _enter_tree() -> void:
 	container.add_child(down_button)
 	down_button.icon = down_button_icon
 	
-	# This check is to avoid conflict with [code]@tool[/code].
-	if not is_connected("resized", _on_resized):
-		resized.connect(_on_resized)
-	resized.emit()
 	up_button.pressed.connect(
-		func up_button_pressed() -> void:
+		func _on_up_button_pressed() -> void:
 			var value: float = float(filtered_line_edit.text)
 			value += step
 			filtered_line_edit.text = str(value)
@@ -118,8 +114,12 @@ func _enter_tree() -> void:
 	)
 
 
-func _on_resized() -> void:
-	label.add_theme_font_size_override("font_size", floor(size[1]/2.0))
-	filtered_line_edit.add_theme_font_size_override("font_size", floor(size[1]/2.0))
-	up_button.custom_minimum_size = Vector2(size[1], 0)
-	down_button.custom_minimum_size = Vector2(size[1], 0)
+func _ready() -> void:
+	resized.connect(
+		func _on_resized() -> void:
+			label.add_theme_font_size_override("font_size", floor(size[1]/2.0))
+			filtered_line_edit.add_theme_font_size_override("font_size", floor(size[1]/2.0))
+			up_button.custom_minimum_size = Vector2(size[1], 0)
+			down_button.custom_minimum_size = Vector2(size[1], 0)
+	)
+	resized.emit()
