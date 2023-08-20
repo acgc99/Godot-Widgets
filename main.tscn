@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5en2sqjkddpj"]
+[gd_scene load_steps=6 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_gktdl"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/nav_bar.gd" id="3_86lt4"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/numeric_input.gd" id="3_h7wgp"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/one_button_popup.gd" id="4_3tjh2"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/two_buttons_popup.gd" id="5_vkyrc"]
 
 [node name="Main" type="VBoxContainer"]
 anchors_preset = 15
@@ -22,11 +24,57 @@ text = "Title"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NumericInput" type="PanelContainer" parent="Contents"]
+[node name="GridContainer" type="GridContainer" parent="Contents"]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 30.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NumericInput" type="PanelContainer" parent="Contents/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 script = ExtResource("3_h7wgp")
 text = "Value:"
+
+[node name="OneButtonPopupButton" type="Button" parent="Contents/GridContainer"]
+layout_mode = 2
+text = "One Button Popup"
+
+[node name="TwoButtonPopupButton" type="Button" parent="Contents/GridContainer"]
+layout_mode = 2
+text = "Two Button Popup"
+
+[node name="OneButtonPopup" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("4_3tjh2")
+title_label_text = "Title"
+message_label_text = "Multiline message
+Multiline message
+Multiline message"
+button_text = "Accept"
+
+[node name="TwoButtonsPopup" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("5_vkyrc")
+title_label_text = "Title"
+message_label_text = "Multiline message
+Multiline message
+Multiline message"
+left_button_text = "Accept"
+right_button_text = "Cancel"
+
+[connection signal="pressed" from="Contents/GridContainer/OneButtonPopupButton" to="." method="_on_one_button_popup_button_pressed"]
+[connection signal="pressed" from="Contents/GridContainer/TwoButtonPopupButton" to="." method="_on_two_button_popup_button_pressed"]
+[connection signal="outside_button_pressed" from="OneButtonPopup" to="." method="_on_one_button_popup_outside_button_pressed"]
+[connection signal="popup_button_pressed" from="OneButtonPopup" to="." method="_on_one_button_popup_popup_button_pressed"]
+[connection signal="outside_button_pressed" from="TwoButtonsPopup" to="." method="_on_two_buttons_popup_outside_button_pressed"]
+[connection signal="popup_left_button_pressed" from="TwoButtonsPopup" to="." method="_on_two_buttons_popup_popup_left_button_pressed"]
+[connection signal="popup_right_button_pressed" from="TwoButtonsPopup" to="." method="_on_two_buttons_popup_popup_right_button_pressed"]

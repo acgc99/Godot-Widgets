@@ -54,6 +54,7 @@ extends PanelContainer
 		down_button_icon = down_button_icon_
 		if down_button != null:
 			down_button.icon = down_button_icon
+
 var container: HBoxContainer
 var label: Label
 var filtered_line_edit: FilteredLineEdit

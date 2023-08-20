@@ -9,6 +9,7 @@ extends PanelContainer
 signal pressed_left
 ## Emitted when the [code]right_button[/code] is pressed.
 signal pressed_right
+
 ## [param horizontal_alignment] enum.
 enum {
 	HORIZONTAL_ALIGNMENT_LEFT,
@@ -16,6 +17,7 @@ enum {
 	HORIZONTAL_ALIGNMENT_RIGHT,
 	HORIZONTAL_ALIGNMENT_FILL
 }
+
 ## [param label.horizontal_alignment].
 @export_enum(
 	"Horizontal alignment left",
@@ -57,6 +59,7 @@ enum {
 		right_button_icon = right_button_icon_
 		if right_button != null:
 			right_button.icon = right_button_icon
+
 var container: HBoxContainer
 var label: Label
 var left_button: IconButton
