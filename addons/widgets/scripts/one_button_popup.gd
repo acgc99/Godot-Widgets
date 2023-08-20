@@ -9,6 +9,8 @@ signal outside_button_pressed
 ## Emitted when the popup button is pressed.
 signal popup_button_pressed
 
+## Popup/dismiss animation duration. Not intended to be changed during runtime.
+@export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1
 @export_group("Texts")
 ## Popup title.
 @export var title_label_text: String:
@@ -178,23 +180,23 @@ func _enter_tree() -> void:
 	var animation: Animation
 	# show animation
 	animation = Animation.new()
-	animation.length = 1
+	animation.length = animation_lenght
 	animation_library.add_animation("popup", animation)
 	animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(0, str(get_path()) + ":modulate")
 	animation.value_track_set_update_mode(0, Animation.UPDATE_CAPTURE)
-	animation.track_insert_key(0, 1, Color(1, 1, 1, 1))
+	animation.track_insert_key(0, animation.length, Color(1, 1, 1, 1))
 	animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(1, str(get_path()) + ":mouse_filter")
 	animation.track_insert_key(1, 0, Control.MOUSE_FILTER_STOP)
 	# dismiss animation
 	animation = Animation.new()
-	animation.length = 1
+	animation.length = animation_lenght
 	animation_library.add_animation("hide", animation)
 	animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(0, str(get_path()) + ":modulate")
 	animation.value_track_set_update_mode(0, Animation.UPDATE_CAPTURE)
-	animation.track_insert_key(0, 1, Color(1, 1, 1, 0))
+	animation.track_insert_key(0, animation.length, Color(1, 1, 1, 0))
 	animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(1, str(get_path()) + ":mouse_filter")
 	animation.track_insert_key(1, 0, Control.MOUSE_FILTER_IGNORE)
