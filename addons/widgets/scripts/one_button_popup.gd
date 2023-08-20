@@ -127,7 +127,10 @@ var button: Button
 
 
 func _enter_tree() -> void:
-	connect("pressed", func outside_pressed() -> void: emit_signal("outside_button_pressed"))
+	pressed.connect(
+		func outside_pressed() -> void:
+			outside_button_pressed.emit()
+	)
 	theme_type_variation = outside_button_theme_type_variation
 	top_level = true
 	size = get_parent().size
@@ -163,7 +166,10 @@ func _enter_tree() -> void:
 	
 	button = Button.new()
 	message_container.add_child(button)
-	button.connect("pressed", func popup_button_pressed() -> void: emit_signal("popup_button_pressed"))
+	button.pressed.connect(
+		func popup_button_pressed() -> void:
+			popup_button_pressed.emit()
+	)
 	button.theme_type_variation = button_theme_type_variation
 	button.text = button_text
 	button.size_flags_horizontal = button_size_flags_horizontal

@@ -100,8 +100,20 @@ func _enter_tree() -> void:
 	if not is_connected("resized", _on_resized):
 		resized.connect(_on_resized)
 	resized.emit()
-	up_button.pressed.connect(_on_up_button_pressed)
-	down_button.pressed.connect(_on_down_button_pressed)
+	up_button.pressed.connect(
+		func up_button_pressed() -> void:
+			var value: float = float(filtered_line_edit.text)
+			value += step
+			filtered_line_edit.text = str(value)
+			filtered_line_edit.clamp_text()
+	)
+	down_button.pressed.connect(
+		func _on_down_button_pressed() -> void:
+			var value: float = float(filtered_line_edit.text)
+			value -= step
+			filtered_line_edit.text = str(value)
+			filtered_line_edit.clamp_text()
+	)
 
 
 func _on_resized() -> void:
@@ -109,17 +121,3 @@ func _on_resized() -> void:
 	filtered_line_edit.add_theme_font_size_override("font_size", floor(size[1]/2.0))
 	up_button.custom_minimum_size = Vector2(size[1], 0)
 	down_button.custom_minimum_size = Vector2(size[1], 0)
-
-
-func _on_up_button_pressed() -> void:
-	var value: float = float(filtered_line_edit.text)
-	value += step
-	filtered_line_edit.text = str(value)
-	filtered_line_edit.clamp_text()
-
-
-func _on_down_button_pressed() -> void:
-	var value: float = float(filtered_line_edit.text)
-	value -= step
-	filtered_line_edit.text = str(value)
-	filtered_line_edit.clamp_text()

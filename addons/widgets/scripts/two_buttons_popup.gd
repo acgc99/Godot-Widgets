@@ -152,7 +152,10 @@ var right_button: Button
 
 
 func _enter_tree() -> void:
-	connect("pressed", func outside_pressed() -> void: emit_signal("outside_button_pressed"))
+	pressed.connect(
+		func outside_pressed() -> void:
+			outside_button_pressed.emit()
+	)
 	theme_type_variation = outside_button_theme_type_variation
 	top_level = true
 	size = get_parent().size
@@ -193,14 +196,20 @@ func _enter_tree() -> void:
 	
 	left_button = Button.new()
 	buttons_container.add_child(left_button)
-	left_button.connect("pressed", func popup_left_button_pressed() -> void: emit_signal("popup_left_button_pressed"))
+	left_button.pressed.connect(
+		func popup_left_button_pressed() -> void:
+			popup_left_button_pressed.emit()
+	)
 	left_button.theme_type_variation = left_button_theme_type_variation
 	left_button.text = left_button_text
 	left_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
 	right_button = Button.new()
 	buttons_container.add_child(right_button)
-	right_button.connect("pressed", func popup_right_button_pressed() -> void: emit_signal("popup_right_button_pressed"))
+	right_button.pressed.connect(
+		func popup_right_button_pressed() -> void:
+			popup_right_button_pressed.emit()
+	)
 	right_button.theme_type_variation = right_button_theme_type_variation
 	right_button.text = right_button_text
 	right_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
