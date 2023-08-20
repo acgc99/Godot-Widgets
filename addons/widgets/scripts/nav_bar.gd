@@ -31,7 +31,7 @@ var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 		if title_label != null:
 			title_label.horizontal_alignment = horizontal_alignment
 @export_group("Buttons")
-@export_subgroup("Left Button")
+@export_subgroup("Left Button", "left_button")
 ## Left button disabled state.
 @export var left_button_disabled: bool = false:
 	set(left_button_disabled_):
@@ -44,7 +44,7 @@ var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 		left_button_icon = left_button_icon_
 		if left_button != null:
 			left_button.icon = left_button_icon
-@export_subgroup("Right Button")
+@export_subgroup("Right Button", "right_button")
 ## Left button disabled state.
 @export var right_button_disabled: bool = false:
 	set(right_button_disabled_):

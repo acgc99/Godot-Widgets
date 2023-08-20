@@ -12,21 +12,46 @@ signal popup_left_button_pressed
 ## Emitted when the right popup button is pressed.
 signal popup_right_button_pressed
 
-## Popup/dismiss animation duration. Not intended to be changed during runtime.
-@export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1
 @export_group("Texts")
+@export_subgroup("Title", "title_label")
 ## Popup title.
 @export var title_label_text: String:
 	set(title_label_text_):
 		title_label_text = title_label_text_
 		if title_label != null:
 			title_label.text = title_label_text
+@export_enum(
+	"Horizontal alignment left",
+	"Horizontal alignment center",
+	"Horizontal alignment right",
+	"Horizontal alignment fill"
+)
+## Popup title [param horizontal_alignment].
+var title_label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
+	set(title_label_horizontal_alignment_):
+		title_label_horizontal_alignment = title_label_horizontal_alignment_
+		if title_label != null:
+			title_label.horizontal_alignment = title_label_horizontal_alignment
+@export_subgroup("Message", "message_label")
 ## Popup message.
 @export_multiline var message_label_text: String:
 	set(message_label_text_):
 		message_label_text = message_label_text_
 		if message_label != null:
 			message_label.text = message_label_text
+@export_enum(
+	"Horizontal alignment left",
+	"Horizontal alignment center",
+	"Horizontal alignment right",
+	"Horizontal alignment fill"
+)
+## Popup message [param horizontal_alignment].
+var message_label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
+	set(message_label_horizontal_alignment_):
+		message_label_horizontal_alignment = message_label_horizontal_alignment_
+		if message_label != null:
+			message_label.horizontal_alignment = message_label_horizontal_alignment
+@export_subgroup("Buttons")
 ## Popup left button text.
 @export var left_button_text: String:
 	set(left_button_text_):
@@ -39,6 +64,24 @@ signal popup_right_button_pressed
 		right_button_text = right_button_text_
 		if right_button != null:
 			right_button.text = right_button_text
+@export_group("Size Flags")
+@export_enum(
+	"Size Shrink Begin:0",
+	"Size Fill:1",
+	"Size Expand:2",
+	"Size Expand Fill:3",
+	"Size Shrink Center:4",
+	"Size Shrink End:8"
+)
+## Popup buttons constainer [param size_flags_horizontal].
+var buttons_container_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
+	set(buttons_container_size_flags_horizontal_):
+		buttons_container_size_flags_horizontal = buttons_container_size_flags_horizontal_
+		if buttons_container != null:
+			buttons_container.size_flags_horizontal = buttons_container_size_flags_horizontal
+@export_group("Animations")
+## Popup/dismiss animation duration. Not intended to be changed during runtime.
+@export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1
 @export_group("Theme type variations")
 ## Outside button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
@@ -102,45 +145,6 @@ signal popup_right_button_pressed
 		right_button_theme_type_variation = right_button_theme_type_variation_
 		if right_button != null:
 			right_button.theme_type_variation = right_button_theme_type_variation
-@export_group("Alignments")
-@export_enum(
-	"Horizontal alignment left",
-	"Horizontal alignment center",
-	"Horizontal alignment right",
-	"Horizontal alignment fill"
-)
-## Popup title [param horizontal_alignment].
-var title_label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
-	set(title_label_horizontal_alignment_):
-		title_label_horizontal_alignment = title_label_horizontal_alignment_
-		if title_label != null:
-			title_label.horizontal_alignment = title_label_horizontal_alignment
-@export_enum(
-	"Horizontal alignment left",
-	"Horizontal alignment center",
-	"Horizontal alignment right",
-	"Horizontal alignment fill"
-)
-## Popup message [param horizontal_alignment].
-var message_label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
-	set(message_label_horizontal_alignment_):
-		message_label_horizontal_alignment = message_label_horizontal_alignment_
-		if message_label != null:
-			message_label.horizontal_alignment = message_label_horizontal_alignment
-@export_enum(
-	"Size Shrink Begin:0",
-	"Size Fill:1",
-	"Size Expand:2",
-	"Size Expand Fill:3",
-	"Size Shrink Center:4",
-	"Size Shrink End:8"
-)
-## Popup buttons constainer [param size_flags_horizontal].
-var buttons_container_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
-	set(buttons_container_size_flags_horizontal_):
-		buttons_container_size_flags_horizontal = buttons_container_size_flags_horizontal_
-		if buttons_container != null:
-			buttons_container.size_flags_horizontal = buttons_container_size_flags_horizontal
 
 var animation_player: AnimationPlayer
 var panel_container: PanelContainer
