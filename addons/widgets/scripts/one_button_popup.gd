@@ -196,7 +196,7 @@ func _enter_tree() -> void:
 	# dismiss animation
 	animation = Animation.new()
 	animation.length = animation_lenght
-	animation_library.add_animation("hide", animation)
+	animation_library.add_animation("dismiss", animation)
 	animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(0, str(get_path()) + ":modulate")
 	animation.value_track_set_update_mode(0, Animation.UPDATE_CAPTURE)
@@ -207,7 +207,7 @@ func _enter_tree() -> void:
 	# I don't know why but if I do this like an animation, it is hidden abruptly.
 	animation_player.animation_finished.connect(
 		func hide(anim_name: StringName) -> void:
-			if anim_name == "hide":
+			if anim_name == "dismiss":
 				visible = false
 	)
 	
@@ -230,4 +230,4 @@ func popup() -> void:
 func dismiss() -> void:
 	get_viewport().gui_release_focus()
 	animation_player.stop(true)
-	animation_player.play("hide")
+	animation_player.play("dismiss")
