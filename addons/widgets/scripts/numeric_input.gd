@@ -35,12 +35,6 @@ extends PanelContainer
 		max_length = max_length_
 		if filtered_line_edit != null:
 			filtered_line_edit.max_length = max_length
-## Minimum character width.
-@export var minimum_character_width: int = 2:
-	set(minimum_character_width_):
-		minimum_character_width = minimum_character_width_
-		if filtered_line_edit != null:
-			filtered_line_edit.add_theme_constant_override("minimum_character_width", minimum_character_width)
 ## Step applied when buttons are pressed.
 @export var step: float = 1.0
 @export_group("Buttons")
@@ -56,6 +50,48 @@ extends PanelContainer
 		down_button_icon = down_button_icon_
 		if down_button != null:
 			down_button.icon = down_button_icon
+@export_group("Theme type variations")
+## NumericInput panel container [param theme_type_variation].
+## The [code]Base Type[/code] must be [code]PanelContainer[/code].
+@export var panel_container_theme_type_variation: String:
+	set(panel_container_theme_type_variation_):
+		panel_container_theme_type_variation = panel_container_theme_type_variation_
+		theme_type_variation = panel_container_theme_type_variation
+## NavBar contents container [param theme_type_variation].
+## The [code]Base Type[/code] must be [code]HBoxContainer[/code].
+@export var container_theme_type_variation: String:
+	set(container_theme_type_variation_):
+		container_theme_type_variation = container_theme_type_variation_
+		if container != null:
+			container.theme_type_variation = container_theme_type_variation
+## NumericInput label [param theme_type_variation].
+## The [code]Base Type[/code] must be [code]Label[/code].
+@export var label_theme_type_variation: String:
+	set(label_theme_type_variation_):
+		label_theme_type_variation = label_theme_type_variation_
+		if label != null:
+			label.theme_type_variation = label_theme_type_variation
+## NavBar LineEdit [param theme_type_variation].
+## The [code]Base Type[/code] must be [code]LineEdit[/code].
+@export var filtered_line_edit_theme_type_variation: String:
+	set(filtered_line_edit_theme_type_variation_):
+		filtered_line_edit_theme_type_variation = filtered_line_edit_theme_type_variation_
+		if filtered_line_edit != null:
+			filtered_line_edit.theme_type_variation = filtered_line_edit_theme_type_variation
+## NavBar up button [param theme_type_variation].
+## The [code]Base Type[/code] must be [code]Button[/code].
+@export var up_button_theme_type_variation: String:
+	set(up_button_theme_type_variation_):
+		up_button_theme_type_variation = up_button_theme_type_variation_
+		if up_button != null:
+			up_button.theme_type_variation = up_button_theme_type_variation
+## NavBar down button [param theme_type_variation].
+## The [code]Base Type[/code] must be [code]Button[/code].
+@export var down_button_theme_type_variation: String:
+	set(down_button_theme_type_variation_):
+		down_button_theme_type_variation = down_button_theme_type_variation_
+		if down_button != null:
+			down_button.theme_type_variation = down_button_theme_type_variation
 
 var container: HBoxContainer
 var label: Label
@@ -65,13 +101,15 @@ var down_button: IconButton
 
 
 func _enter_tree() -> void:
+	theme_type_variation = panel_container_theme_type_variation
 	
 	container = HBoxContainer.new()
 	add_child(container)
-	container.add_theme_constant_override("separation", 0)
+	container.theme_type_variation = container_theme_type_variation
 	
 	label = Label.new()
 	container.add_child(label)
+	label.theme_type_variation = label_theme_type_variation
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.clip_text = true
 	label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
@@ -79,7 +117,7 @@ func _enter_tree() -> void:
 	
 	filtered_line_edit = FilteredLineEdit.new()
 	container.add_child(filtered_line_edit)
-	filtered_line_edit.add_theme_constant_override("minimum_character_width", minimum_character_width)
+	filtered_line_edit.theme_type_variation = filtered_line_edit_theme_type_variation
 	filtered_line_edit.max_length = max_length
 	filtered_line_edit.filter_mode = 5
 	filtered_line_edit.flat = true
@@ -92,10 +130,12 @@ func _enter_tree() -> void:
 	
 	up_button = IconButton.new()
 	container.add_child(up_button)
+	up_button.theme_type_variation = up_button_theme_type_variation
 	up_button.icon = up_button_icon
 	
 	down_button = IconButton.new()
 	container.add_child(down_button)
+	down_button.theme_type_variation = down_button_theme_type_variation
 	down_button.icon = down_button_icon
 	
 	up_button.pressed.connect(
@@ -117,8 +157,6 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	resized.connect(
 		func _on_resized() -> void:
-			label.add_theme_font_size_override("font_size", floor(size[1]/2.0))
-			filtered_line_edit.add_theme_font_size_override("font_size", floor(size[1]/2.0))
 			up_button.custom_minimum_size = Vector2(size[1], 0)
 			down_button.custom_minimum_size = Vector2(size[1], 0)
 	)
