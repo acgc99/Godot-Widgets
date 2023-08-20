@@ -4,37 +4,38 @@ extends PanelContainer
 ## A widget for numeric inputs.
 
 
-## [param label.text].
+## Text.
 @export var text: String = "":
 	set(text_):
 		text = text_
 		if label != null:
 			label.text = text
-## [param filtered_line_edit.max_value].
+@export_group("Values")
+## Maximum value.
 @export var max_value: float = INF:
 	set(max_value_):
 		max_value = max_value_
 		if filtered_line_edit != null:
 			filtered_line_edit.max_value = max_value
-## [param filtered_line_edit.min_value].
+## Minimum value.
 @export var min_value: float = -INF:
 	set(min_value_):
 		min_value = min_value_
 		if filtered_line_edit != null:
 			filtered_line_edit.min_value = min_value
-## Initial value for [code]filtered_line_edit[/code].
+## Initial value.
 @export var initial_value: float = 0:
 	set(initial_value_):
 		initial_value = initial_value_
 		if filtered_line_edit != null:
 			filtered_line_edit.text = str(initial_value)
-## [param filtered_line_edit.max_length].
+## Maximum lenght of the number.
 @export var max_length: int = 3:
 	set(max_length_):
 		max_length = max_length_
 		if filtered_line_edit != null:
 			filtered_line_edit.max_length = max_length
-## [param filtered_line_edit.minimum_character_width].
+## Minimum character width.
 @export var minimum_character_width: int = 2:
 	set(minimum_character_width_):
 		minimum_character_width = minimum_character_width_
@@ -42,13 +43,14 @@ extends PanelContainer
 			filtered_line_edit.add_theme_constant_override("minimum_character_width", minimum_character_width)
 ## Step applied when buttons are pressed.
 @export var step: float = 1.0
-## [param up_button.icon].
+@export_group("Buttons")
+## Up button icon.
 @export var up_button_icon: Texture2D = preload("res://addons/widgets/png_icons/arrow-up-bold.png"):
 	set(up_button_icon_):
 		up_button_icon = up_button_icon_
 		if up_button != null:
 			up_button.icon = up_button_icon
-## [param down_button.icon].
+## Down button icon.
 @export var down_button_icon: Texture2D = preload("res://addons/widgets/png_icons/arrow-down-bold.png"):
 	set(down_button_icon_):
 		down_button_icon = down_button_icon_

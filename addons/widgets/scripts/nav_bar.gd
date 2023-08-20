@@ -5,21 +5,14 @@ extends PanelContainer
 ## It might have zero height if [param custom_minimum_height] not specified.
 
 
-## Emitted when [code]left_button[/code] is pressed.
+## Emitted when left button is pressed.
 signal pressed_left
-## Emitted when the [code]right_button[/code] is pressed.
+## Emitted when the right button is pressed.
 signal pressed_right
 
-## [param horizontal_alignment] enum.
-enum {
-	HORIZONTAL_ALIGNMENT_LEFT,
-	HORIZONTAL_ALIGNMENT_CENTER,
-	HORIZONTAL_ALIGNMENT_RIGHT,
-	HORIZONTAL_ALIGNMENT_FILL
-}
 
 @export_group("Title")
-## [param label.text].
+## NavBar title.
 @export var title: String:
 	set(title_):
 		title = title_
@@ -31,7 +24,7 @@ enum {
 	"Horizontal alignment right",
 	"Horizontal alignment fill"
 )
-## [param label.horizontal_alignment].
+## NavBar title horizontal alignment.
 var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 	set(horizontal_alignment_):
 		horizontal_alignment = horizontal_alignment_
@@ -39,26 +32,26 @@ var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 			label.horizontal_alignment = horizontal_alignment
 @export_group("Buttons")
 @export_subgroup("Left Button")
-## [param left_button.disabled].
+## Left button disabled state.
 @export var left_button_disabled: bool = false:
 	set(left_button_disabled_):
 		left_button_disabled = left_button_disabled_
 		if left_button != null:
 			left_button.disabled = left_button_disabled
-## [param left_button.icon].
+## Left button icon.
 @export var left_button_icon: Texture2D = preload("res://addons/widgets/png_icons/arrow-left-bold.png"):
 	set(left_button_icon_):
 		left_button_icon = left_button_icon_
 		if left_button != null:
 			left_button.icon = left_button_icon
 @export_subgroup("Right Button")
-## [param right_button.disabled].
+## Left button disabled state.
 @export var right_button_disabled: bool = false:
 	set(right_button_disabled_):
 		right_button_disabled = right_button_disabled_
 		if right_button != null:
 			right_button.disabled = right_button_disabled
-## [param right_button.icon].
+## Left button icon.
 @export var right_button_icon: Texture2D = preload("res://addons/widgets/png_icons/home.png"):
 	set(right_button_icon_):
 		right_button_icon = right_button_icon_
