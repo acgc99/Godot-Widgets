@@ -1,10 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5en2sqjkddpj"]
+[gd_scene load_steps=11 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_gktdl"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/nav_bar.gd" id="3_86lt4"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/numeric_input.gd" id="3_h7wgp"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/one_button_popup.gd" id="4_3tjh2"]
+[ext_resource type="Shader" path="res://addons/widgets/shaders/card.gdshader" id="4_fkp77"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/card.gd" id="5_nwdvc"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/two_buttons_popup.gd" id="5_vkyrc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xopem"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qods7"]
+shader = ExtResource("4_fkp77")
+shader_parameter/tex = SubResource("NoiseTexture2D_xopem")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c3v87"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Main" type="VBoxContainer"]
 anchors_preset = 15
@@ -24,27 +38,47 @@ title = "Title"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="Contents"]
+[node name="MarginContainer" type="MarginContainer" parent="Contents"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
-[node name="NumericInput" type="PanelContainer" parent="Contents/GridContainer"]
+[node name="GridContainer" type="GridContainer" parent="Contents/MarginContainer"]
+layout_mode = 2
+
+[node name="NumericInput" type="PanelContainer" parent="Contents/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_h7wgp")
 text = "Value:"
 
-[node name="OneButtonPopupButton" type="Button" parent="Contents/GridContainer"]
+[node name="OneButtonPopupButton" type="Button" parent="Contents/MarginContainer/GridContainer"]
 layout_mode = 2
 text = "One Button Popup"
 
-[node name="TwoButtonPopupButton" type="Button" parent="Contents/GridContainer"]
+[node name="TwoButtonPopupButton" type="Button" parent="Contents/MarginContainer/GridContainer"]
 layout_mode = 2
 text = "Two Button Popup"
+
+[node name="Card" type="PanelContainer" parent="Contents/MarginContainer/GridContainer"]
+material = SubResource("ShaderMaterial_qods7")
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_c3v87")
+script = ExtResource("5_nwdvc")
+background_texture = SubResource("NoiseTexture2D_xopem")
+corner_radius = 10
+label_text = "Title"
+label_horizontal_alignment = 0
+label_container_color = Color(0, 0, 1, 1)
 
 [node name="OneButtonPopup" type="Button" parent="."]
 visible = false
@@ -73,8 +107,9 @@ Multiline message"
 left_button_text = "Accept"
 right_button_text = "Cancel"
 
-[connection signal="pressed" from="Contents/GridContainer/OneButtonPopupButton" to="." method="_on_one_button_popup_button_pressed"]
-[connection signal="pressed" from="Contents/GridContainer/TwoButtonPopupButton" to="." method="_on_two_button_popup_button_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/GridContainer/OneButtonPopupButton" to="." method="_on_one_button_popup_button_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/GridContainer/TwoButtonPopupButton" to="." method="_on_two_button_popup_button_pressed"]
+[connection signal="pressed" from="Contents/MarginContainer/GridContainer/Card" to="." method="_on_card_pressed"]
 [connection signal="outside_button_pressed" from="OneButtonPopup" to="." method="_on_one_button_popup_outside_button_pressed"]
 [connection signal="popup_button_pressed" from="OneButtonPopup" to="." method="_on_one_button_popup_popup_button_pressed"]
 [connection signal="outside_button_pressed" from="TwoButtonsPopup" to="." method="_on_two_buttons_popup_outside_button_pressed"]

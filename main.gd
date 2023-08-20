@@ -37,3 +37,7 @@ func _on_one_button_popup_button_pressed() -> void:
 
 func _on_two_button_popup_button_pressed() -> void:
 	two_buttons_popup.popup()
+
+
+func _on_card_pressed() -> void:
+	print("Card pressed")
