@@ -12,7 +12,7 @@ The original addon [FilteredEdits](https://godotengine.org/asset-library/asset/1
 
 ---
 
-### IconButton
+### `IconButton`
 
 A button that consists on an icon. You might have to set its `custom_minimum_size` if used inside a `Container` or any of its variations.
 
@@ -20,7 +20,7 @@ It is used for other widgets, but you can also use it.
 
 ---
 
-### NavBar
+### `NavBar`
 
 Widget to navigate through game scenes. It contains buttons and a label, you have to implement the logic for switching scenes.
 
@@ -30,12 +30,42 @@ Widget to navigate through game scenes. It contains buttons and a label, you hav
 
 ---
 
-### NumericInput
+### `NumericInput`
 
 Widget so that the game user can only input numeric values (`float`). It also has two buttons to increase/decrease the value.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/numeric_input.png" height="50"/>
+</p>
+
+---
+
+### `OneButtonPopup`
+
+A popup with one button. Smooth appearing/disappearing.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/one_button_popup.png" height="300"/>
+</p>
+
+---
+
+### `TwoButtonsPopup`
+
+A popup with two buttons. Smooth appearing/disappearing.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/two_buttons_popup.png" height="300"/>
+</p>
+
+---
+
+### `Card`
+
+A button with an image and a label on top or bottom.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/card.png" height="100"/>
 </p>
 
 ---
