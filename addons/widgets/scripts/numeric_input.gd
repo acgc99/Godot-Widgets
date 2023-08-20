@@ -57,7 +57,14 @@ extends PanelContainer
 	set(panel_container_theme_type_variation_):
 		panel_container_theme_type_variation = panel_container_theme_type_variation_
 		theme_type_variation = panel_container_theme_type_variation
-## NavBar contents container [param theme_type_variation].
+## Margin container [param theme_type_variation].
+## The [code]Base Type[/code] must be [code]MarginContainer[/code].
+@export var margin_container_theme_type_variation: String:
+	set(margin_container_theme_type_variation_):
+		margin_container_theme_type_variation = margin_container_theme_type_variation_
+		if margin_container != null:
+			margin_container.theme_type_variation = margin_container_theme_type_variation
+## Contents container [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]HBoxContainer[/code].
 @export var container_theme_type_variation: String:
 	set(container_theme_type_variation_):
@@ -71,21 +78,21 @@ extends PanelContainer
 		label_theme_type_variation = label_theme_type_variation_
 		if label != null:
 			label.theme_type_variation = label_theme_type_variation
-## NavBar LineEdit [param theme_type_variation].
+## LineEdit [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]LineEdit[/code].
 @export var filtered_line_edit_theme_type_variation: String:
 	set(filtered_line_edit_theme_type_variation_):
 		filtered_line_edit_theme_type_variation = filtered_line_edit_theme_type_variation_
 		if filtered_line_edit != null:
 			filtered_line_edit.theme_type_variation = filtered_line_edit_theme_type_variation
-## NavBar up button [param theme_type_variation].
+## Up button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
 @export var up_button_theme_type_variation: String:
 	set(up_button_theme_type_variation_):
 		up_button_theme_type_variation = up_button_theme_type_variation_
 		if up_button != null:
 			up_button.theme_type_variation = up_button_theme_type_variation
-## NavBar down button [param theme_type_variation].
+## Down button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
 @export var down_button_theme_type_variation: String:
 	set(down_button_theme_type_variation_):
@@ -93,6 +100,7 @@ extends PanelContainer
 		if down_button != null:
 			down_button.theme_type_variation = down_button_theme_type_variation
 
+var margin_container: MarginContainer
 var container: HBoxContainer
 var label: Label
 var filtered_line_edit: FilteredLineEdit
@@ -103,8 +111,12 @@ var down_button: IconButton
 func _enter_tree() -> void:
 	theme_type_variation = panel_container_theme_type_variation
 	
+	margin_container = MarginContainer.new()
+	add_child(margin_container)
+	margin_container.theme_type_variation = margin_container_theme_type_variation
+	
 	container = HBoxContainer.new()
-	add_child(container)
+	margin_container.add_child(container)
 	container.theme_type_variation = container_theme_type_variation
 	
 	label = Label.new()

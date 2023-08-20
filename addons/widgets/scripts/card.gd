@@ -81,6 +81,13 @@ var label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 		label_theme_type_variation = label_theme_type_variation_
 		if label != null:
 			label.theme_type_variation = label_theme_type_variation
+## Label margin container [param theme_type_variation].
+## The [code]Base Type[/code] must be [code]MarginContainer[/code].
+@export var label_margin_container_theme_type_variation: String:
+	set(label_margin_container_theme_type_variation_):
+		label_margin_container_theme_type_variation = label_margin_container_theme_type_variation_
+		if label_margin_container != null:
+			label_margin_container.theme_type_variation = label_margin_container_theme_type_variation
 @export_subgroup("Label Panel", "label_container")
 @export var label_container_color: Color:
 	set(label_container_color_):
@@ -93,6 +100,7 @@ var style_box: StyleBoxFlat
 var style_box_label_container: StyleBoxFlat
 var button: BaseButton
 var label_container: PanelContainer
+var label_margin_container: MarginContainer
 var label: Label
 
 
@@ -137,8 +145,12 @@ func _enter_tree() -> void:
 		style_box_label_container.corner_radius_top_left = corner_radius
 		style_box_label_container.corner_radius_top_right = corner_radius
 	
+	label_margin_container = MarginContainer.new()
+	label_container.add_child(label_margin_container)
+	label_margin_container.theme_type_variation = label_margin_container_theme_type_variation
+	
 	label = Label.new()
-	label_container.add_child(label)
+	label_margin_container.add_child(label)
 	label.theme_type_variation = label_theme_type_variation
 	label.text = label_text
 	label.horizontal_alignment = label_horizontal_alignment
