@@ -10,11 +10,11 @@
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xopem"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qods7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vs25g"]
 shader = ExtResource("4_fkp77")
 shader_parameter/tex = SubResource("NoiseTexture2D_xopem")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c3v87"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yge8q"]
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -68,11 +68,11 @@ layout_mode = 2
 text = "Two Button Popup"
 
 [node name="Card" type="PanelContainer" parent="Contents/MarginContainer/GridContainer"]
-material = SubResource("ShaderMaterial_qods7")
+material = SubResource("ShaderMaterial_vs25g")
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_c3v87")
+theme_override_styles/panel = SubResource("StyleBoxFlat_yge8q")
 script = ExtResource("5_nwdvc")
 background_texture = SubResource("NoiseTexture2D_xopem")
 corner_radius = 10
