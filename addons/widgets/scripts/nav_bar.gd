@@ -18,41 +18,46 @@ enum {
 	HORIZONTAL_ALIGNMENT_FILL
 }
 
-## [param label.horizontal_alignment].
+@export_group("Title")
+## [param label.text].
+@export var title: String:
+	set(title_):
+		title = title_
+		if label != null:
+			label.text = title
 @export_enum(
 	"Horizontal alignment left",
 	"Horizontal alignment center",
 	"Horizontal alignment right",
 	"Horizontal alignment fill"
-) var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
+)
+## [param label.horizontal_alignment].
+var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 	set(horizontal_alignment_):
 		horizontal_alignment = horizontal_alignment_
 		if label != null:
 			label.horizontal_alignment = horizontal_alignment
-## [param label.text].
-@export var text: String:
-	set(text_):
-		text = text_
-		if label != null:
-			label.text = text
+@export_group("Buttons")
+@export_subgroup("Left Button")
 ## [param left_button.disabled].
 @export var left_button_disabled: bool = false:
 	set(left_button_disabled_):
 		left_button_disabled = left_button_disabled_
 		if left_button != null:
 			left_button.disabled = left_button_disabled
-## [param right_button.disabled].
-@export var right_button_disabled: bool = false:
-	set(right_button_disabled_):
-		right_button_disabled = right_button_disabled_
-		if right_button != null:
-			right_button.disabled = right_button_disabled
 ## [param left_button.icon].
 @export var left_button_icon: Texture2D = preload("res://addons/widgets/png_icons/arrow-left-bold.png"):
 	set(left_button_icon_):
 		left_button_icon = left_button_icon_
 		if left_button != null:
 			left_button.icon = left_button_icon
+@export_subgroup("Right Button")
+## [param right_button.disabled].
+@export var right_button_disabled: bool = false:
+	set(right_button_disabled_):
+		right_button_disabled = right_button_disabled_
+		if right_button != null:
+			right_button.disabled = right_button_disabled
 ## [param right_button.icon].
 @export var right_button_icon: Texture2D = preload("res://addons/widgets/png_icons/home.png"):
 	set(right_button_icon_):
@@ -81,7 +86,7 @@ func _enter_tree() -> void:
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.horizontal_alignment = horizontal_alignment
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.text = text
+	label.text = title
 	
 	right_button = IconButton.new()
 	container.add_child(right_button)
