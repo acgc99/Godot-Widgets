@@ -1,7 +1,8 @@
 @tool
 class_name Card
 extends TextureRect
-## Like [code]TextureRect[/code] but with rounded corners and a panel for text.
+## Like [code]TextureRect[/code] but with rounded corners and a panel for text
+## and acts like a button.
 ##
 ## 1) If 'strecth_mode = keep_aspect_covered', texture borders might be not
 ## visible, since they are outside the node rectangle (although they are rounded).

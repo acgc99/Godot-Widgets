@@ -1,6 +1,8 @@
 ## Godot-Widgets
 
-A collection of widgets that are useful for GUIs. Inspired by [KivyMD](https://kivymd.readthedocs.io).
+A collection of widgets that are useful for GUIs. Inspired by [Material Design](https://m3.material.io/).
+
+Inspired means "inspired", you won't find the exact same things here.
 
 Widgets are highly customizable, check their properties in the Godot Editor. If you feel that something is missing or there is a bug, please, open a new issue.
 
@@ -27,7 +29,7 @@ It is used for other widgets, but you can also use it.
 Widget to navigate through game scenes. It contains buttons and a label, you have to implement the logic for switching scenes.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/navbar.png" height="50"/>
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/navbar.png" width="500"/>
 </p>
 
 ---
@@ -37,7 +39,7 @@ Widget to navigate through game scenes. It contains buttons and a label, you hav
 Widget so that the game user can only input numeric values (`float`). It also has two buttons to increase/decrease the value.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/numeric_input.png" height="50"/>
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/numeric_input.png" width="500"/>
 </p>
 
 ---
@@ -62,13 +64,31 @@ A popup with two buttons. Smooth appearing/disappearing.
 
 ---
 
-### `Card`
+### `TextureRounded`
 
-A button with an image and a label on top or bottom.
+Like `TextureRect` but with rounded corners.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/card.png" height="100"/>
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/rounded_image.png" height="200"/>
 </p>
+
+Known issues:
+- If 'strecth_mode = keep_aspect_covered', texture borders might be not visible, since they are outside the node rectangle (although they are rounded).
+- It is recommended to reload the scene if you changed the node properties and you get weird results in the Editor. It seems that they are not updated correctly.
+
+---
+
+### `Card`
+
+Like `TextureRect` but with rounded corners and a panel for text and acts like a button.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/card.png" height="200"/>
+</p>
+
+Known issues:
+- If 'strecth_mode = keep_aspect_covered', texture borders might be not visible, since they are outside the node rectangle (although they are rounded).
+- It is recommended to reload the scene if you changed the node properties and you get weird results in the Editor. It seems that they are not updated correctly.
 
 ---
 
