@@ -69,7 +69,7 @@ A popup with two buttons. Smooth appearing/disappearing.
 Like `TextureRect` but with rounded corners.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/rounded_image.png" height="200"/>
+  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/texture_rounded.png" height="200"/>
 </p>
 
 Known issues:
