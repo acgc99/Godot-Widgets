@@ -46,8 +46,14 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/svg_icons/numeric-2-box-multiple.svg")
 	)
 	add_custom_type(
+		"TextureRounded",
+		"TextureRect",
+		preload("res://addons/widgets/scripts/texture_rounded.gd"),
+		preload("res://addons/widgets/svg_icons/image.svg")
+	)
+	add_custom_type(
 		"Card",
-		"PanelContainer",
+		"TextureRect",
 		preload("res://addons/widgets/scripts/card.gd"),
 		preload("res://addons/widgets/svg_icons/file-presentation-box.svg")
 	)
@@ -61,4 +67,5 @@ func _exit_tree() -> void:
 	remove_custom_type("NumericInput")
 	remove_custom_type("OneButtonPopup")
 	remove_custom_type("TwoButtonsPopup")
+	remove_custom_type("TextureRounded")
 	remove_custom_type("Card")
