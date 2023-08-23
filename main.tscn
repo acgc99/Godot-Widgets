@@ -11,17 +11,17 @@
 [ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners_panel.gdshader" id="7_kkx1v"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/card.gd" id="8_aytqr"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_h7y6p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bpa06"]
 shader = ExtResource("4_xgpd8")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_top_left_corner = true
 shader_parameter/rounded_top_right_corner = true
 shader_parameter/rounded_bottom_left_corner = true
 shader_parameter/rounded_bottom_right_corner = true
-shader_parameter/width = 620.0
-shader_parameter/height = 486.0
+shader_parameter/width = 1.0
+shader_parameter/height = 1.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xy2bd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4g28"]
 shader = ExtResource("7_kkx1v")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_top_left_corner = true
@@ -31,8 +31,8 @@ shader_parameter/rounded_bottom_right_corner = true
 shader_parameter/panel_color = Color(0, 1, 0, 1)
 shader_parameter/panel_scale = 1.0
 shader_parameter/panel_pos = true
-shader_parameter/width = 620.0
-shader_parameter/height = 485.0
+shader_parameter/width = 1.0
+shader_parameter/height = 1.0
 
 [node name="Main" type="VBoxContainer"]
 anchors_preset = 15
@@ -83,7 +83,7 @@ layout_mode = 2
 text = "Two Button Popup"
 
 [node name="TextureRounded" type="TextureRect" parent="Contents/MarginContainer/GridContainer"]
-material = SubResource("ShaderMaterial_h7y6p")
+material = SubResource("ShaderMaterial_bpa06")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -91,7 +91,7 @@ texture = ExtResource("6_116be")
 script = ExtResource("6_pbvae")
 
 [node name="Card" type="TextureRect" parent="Contents/MarginContainer/GridContainer"]
-material = SubResource("ShaderMaterial_xy2bd")
+material = SubResource("ShaderMaterial_g4g28")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

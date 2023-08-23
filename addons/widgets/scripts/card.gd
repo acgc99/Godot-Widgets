@@ -171,7 +171,9 @@ func _enter_tree() -> void:
 	label.theme_type_variation = label_theme_type_variation
 	label.text = label_text
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	
+
+
+func _ready() -> void:
 	item_rect_changed.connect(
 		func _on_item_rect_changed():
 		shader_material.set_shader_parameter("width", size.x)
@@ -181,6 +183,7 @@ func _enter_tree() -> void:
 		button.size = size
 		_set_label_position()
 	)
+	item_rect_changed.emit()
 
 
 ## Sets label position.

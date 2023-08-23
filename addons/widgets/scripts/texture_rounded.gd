@@ -76,9 +76,12 @@ func _enter_tree() -> void:
 		"rounded_bottom_right_corner",
 		rounded_bottom_right_corner
 	)
-	
+
+
+func _ready() -> void:
 	item_rect_changed.connect(
 		func _on_item_rect_changed():
 		shader_material.set_shader_parameter("width", size.x)
 		shader_material.set_shader_parameter("height", size.y)
 	)
+	item_rect_changed.emit()
