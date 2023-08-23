@@ -167,9 +167,9 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	resized.connect(
-		func _on_resized() -> void:
+	item_rect_changed.connect(
+		func _on_item_rect_changed() -> void:
 			up_button.custom_minimum_size = Vector2(size[1], 0)
 			down_button.custom_minimum_size = Vector2(size[1], 0)
 	)
-	resized.emit()
+	item_rect_changed.emit()
