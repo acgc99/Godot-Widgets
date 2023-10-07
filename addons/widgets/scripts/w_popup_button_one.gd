@@ -74,13 +74,14 @@ var button_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
 ## Popup/dismiss animation duration. Not intended to be changed during runtime.
 @export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1
 
-var animation_player: AnimationPlayer
 var panel_container: PanelContainer
 var margin_container: MarginContainer
 var message_container: VBoxContainer
 var label_title: Label
 var label_message: Label
 var button: Button
+var tween_popup: Tween
+var tween_dismiss: Tween
 
 
 func _enter_tree() -> void:
@@ -93,9 +94,6 @@ func _enter_tree() -> void:
 	modulate = Color(1, 1, 1, 0)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	visible = false
-	
-	animation_player = AnimationPlayer.new()
-	add_child(animation_player)
 	
 	panel_container = PanelContainer.new()
 	add_child(panel_container)
@@ -124,42 +122,6 @@ func _enter_tree() -> void:
 	)
 	button.text = button_text
 	button.size_flags_horizontal = button_size_flags_horizontal
-	
-	var animation_library: AnimationLibrary = AnimationLibrary.new()
-	var animation: Animation
-	# show animation
-	animation = Animation.new()
-	animation.length = animation_lenght
-	animation_library.add_animation("popup", animation)
-	animation.add_track(Animation.TYPE_VALUE)
-	animation.track_set_path(0, str(get_path()) + ":modulate")
-	animation.value_track_set_update_mode(0, Animation.UPDATE_CAPTURE)
-	animation.track_insert_key(0, animation.length, Color(1, 1, 1, 1))
-	animation.add_track(Animation.TYPE_VALUE)
-	animation.track_set_path(1, str(get_path()) + ":mouse_filter")
-	animation.track_insert_key(1, 0, Control.MOUSE_FILTER_STOP)
-	animation.add_track(Animation.TYPE_VALUE)
-	animation.track_set_path(2, str(get_path()) + ":visible")
-	animation.track_insert_key(2, 0, true)
-	# dismiss animation
-	animation = Animation.new()
-	animation.length = animation_lenght
-	animation_library.add_animation("dismiss", animation)
-	animation.add_track(Animation.TYPE_VALUE)
-	animation.track_set_path(0, str(get_path()) + ":modulate")
-	animation.value_track_set_update_mode(0, Animation.UPDATE_CAPTURE)
-	animation.track_insert_key(0, animation.length, Color(1, 1, 1, 0))
-	animation.add_track(Animation.TYPE_VALUE)
-	animation.track_set_path(1, str(get_path()) + ":mouse_filter")
-	animation.track_insert_key(1, 0, Control.MOUSE_FILTER_IGNORE)
-	# I don't know why but if I do this like an animation, it is hidden abruptly.
-	animation_player.animation_finished.connect(
-		func _on_hide(anim_name: StringName) -> void:
-			if anim_name == "dismiss":
-				visible = false
-	)
-	
-	animation_player.add_animation_library("", animation_library)
 
 
 func _ready() -> void:
@@ -170,12 +132,21 @@ func _ready() -> void:
 ## Called to show the popup.
 func popup() -> void:
 	get_viewport().gui_release_focus()
-	animation_player.stop(true)
-	animation_player.play("popup")
+	if tween_dismiss != null and tween_dismiss.is_running():
+		tween_dismiss.kill()
+	tween_popup = create_tween()
+	tween_popup.tween_property(self, "modulate:a", 1.0, animation_lenght)
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	visible = true
 
 
 ## Called to dismiss the popup.
 func dismiss() -> void:
 	get_viewport().gui_release_focus()
-	animation_player.stop(true)
-	animation_player.play("dismiss")
+	if tween_popup != null and tween_popup.is_running():
+		tween_popup.kill()
+	tween_dismiss = create_tween()
+	tween_dismiss.tween_property(self, "modulate:a", 0.0, animation_lenght)
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	await  tween_dismiss.finished
+	visible = false
