@@ -82,69 +82,6 @@ var buttons_container_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
 @export_group("Animations")
 ## Popup/dismiss animation duration. Not intended to be changed during runtime.
 @export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1
-@export_group("Theme type variations")
-## Outside button [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]Button[/code].
-@export var button_outside_theme_type_variation: String:
-	set(button_outside_theme_type_variation_):
-		button_outside_theme_type_variation = button_outside_theme_type_variation_
-		theme_type_variation = button_outside_theme_type_variation
-## Popup container [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]PanelContainer[/code].
-@export var panel_container_theme_type_variation: String:
-	set(panel_container_theme_type_variation_):
-		panel_container_theme_type_variation = panel_container_theme_type_variation_
-		if panel_container != null:
-			panel_container.theme_type_variation = panel_container_theme_type_variation
-## Popup margin container [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]MarginContainer[/code].
-@export var margin_container_theme_type_variation: String:
-	set(margin_container_theme_type_variation_):
-		margin_container_theme_type_variation = margin_container_theme_type_variation_
-		if margin_container != null:
-			margin_container.theme_type_variation = margin_container_theme_type_variation
-## Popup message container [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]VBoxContainer[/code].
-@export var message_container_theme_type_variation: String:
-	set(message_container_theme_type_variation_):
-		message_container_theme_type_variation = message_container_theme_type_variation_
-		if message_container != null:
-			message_container.theme_type_variation = message_container_theme_type_variation
-## Popup title [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]Label[/code].
-@export var label_title_theme_type_variation: String:
-	set(label_title_theme_type_variation_):
-		label_title_theme_type_variation = label_title_theme_type_variation_
-		if label_title != null:
-			label_title.theme_type_variation = label_title_theme_type_variation
-## Popup message [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]Label[/code].
-@export var label_message_theme_type_variation: String:
-	set(label_message_theme_type_variation_):
-		label_message_theme_type_variation = label_message_theme_type_variation_
-		if label_message != null:
-			label_message.theme_type_variation = label_message_theme_type_variation
-## Popup buttons container [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]HBoxContainer[/code].
-@export var buttons_container_theme_type_variation: String:
-	set(buttons_container_theme_type_variation_):
-		buttons_container_theme_type_variation = buttons_container_theme_type_variation_
-		if buttons_container != null:
-			buttons_container.theme_type_variation = buttons_container_theme_type_variation
-## Popup left button [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]Button[/code].
-@export var button_left_theme_type_variation: String:
-	set(button_left_theme_type_variation_):
-		button_left_theme_type_variation = button_left_theme_type_variation_
-		if button_left != null:
-			button_left.theme_type_variation = button_left_theme_type_variation
-## Popup right button [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]Button[/code].
-@export var button_right_theme_type_variation: String:
-	set(button_right_theme_type_variation_):
-		button_right_theme_type_variation = button_right_theme_type_variation_
-		if button_right != null:
-			button_right.theme_type_variation = button_right_theme_type_variation
 
 var animation_player: AnimationPlayer
 var panel_container: PanelContainer
@@ -162,7 +99,6 @@ func _enter_tree() -> void:
 		func _on_outside_pressed() -> void:
 			button_outside_pressed.emit()
 	)
-	theme_type_variation = button_outside_theme_type_variation
 	top_level = true
 	size = get_parent().size
 	modulate = Color(1, 1, 1, 0)
@@ -174,31 +110,25 @@ func _enter_tree() -> void:
 	
 	panel_container = PanelContainer.new()
 	add_child(panel_container)
-	panel_container.theme_type_variation = panel_container_theme_type_variation
 	
 	margin_container = MarginContainer.new()
 	panel_container.add_child(margin_container)
-	margin_container.theme_type_variation = margin_container_theme_type_variation
 	
 	message_container = VBoxContainer.new()
 	margin_container.add_child(message_container)
-	message_container.theme_type_variation = message_container_theme_type_variation
 	
 	label_title = Label.new()
 	message_container.add_child(label_title)
-	label_title.theme_type_variation = label_title_theme_type_variation
 	label_title.text = label_title_text
 	label_title.horizontal_alignment = label_title_horizontal_alignment
 	
 	label_message = Label.new()
 	message_container.add_child(label_message)
-	label_message.theme_type_variation = label_message_theme_type_variation
 	label_message.text = label_message_text
 	label_message.horizontal_alignment = label_message_horizontal_alignment
 	
 	buttons_container = HBoxContainer.new()
 	message_container.add_child(buttons_container)
-	buttons_container.theme_type_variation = buttons_container_theme_type_variation
 	buttons_container.size_flags_horizontal = buttons_container_size_flags_horizontal
 	
 	button_left = Button.new()
@@ -207,7 +137,6 @@ func _enter_tree() -> void:
 		func _on_button_left_popup_pressed() -> void:
 			button_left_popup_pressed.emit()
 	)
-	button_left.theme_type_variation = button_left_theme_type_variation
 	button_left.text = button_left_text
 	button_left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
@@ -217,7 +146,6 @@ func _enter_tree() -> void:
 		func _on_button_right_popup_pressed() -> void:
 			button_right_popup_pressed.emit()
 	)
-	button_right.theme_type_variation = button_right_theme_type_variation
 	button_right.text = button_right_text
 	button_right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	

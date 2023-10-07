@@ -109,14 +109,6 @@ var label_pos: int = LEFT:
 		label_pos = label_pos_
 		if label != null:
 			_set_label_position()
-@export_group("Theme type variations")
-## Label [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]Label[/code].
-@export var label_theme_type_variation: String:
-	set(label_theme_type_variation_):
-		label_theme_type_variation = label_theme_type_variation_
-		if label != null:
-			label.theme_type_variation = label_theme_type_variation
 
 var shader_material: ShaderMaterial
 var button: BaseButton
@@ -168,7 +160,6 @@ func _enter_tree() -> void:
 	
 	label = Label.new()
 	add_child(label)
-	label.theme_type_variation = label_theme_type_variation
 	label.text = label_text
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
