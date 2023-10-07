@@ -94,7 +94,7 @@ var button_right: WIconButton
 func _init() -> void:
 	item_rect_changed.connect(_resize_children)
 	tree_entered.connect(_resize_children)
-	# Container ################################################################
+	# container ################################################################
 	container = HBoxContainer.new()
 	add_child(container)
 	# button_left ##############################################################
