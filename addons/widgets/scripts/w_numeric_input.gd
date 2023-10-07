@@ -1,5 +1,5 @@
 @tool
-class_name NumericInput
+class_name WNumericInput
 extends PanelContainer
 ## A widget for numeric inputs.
 
@@ -103,9 +103,9 @@ extends PanelContainer
 var margin_container: MarginContainer
 var container: HBoxContainer
 var label: Label
-var filtered_line_edit: FilteredLineEdit
-var up_button: IconButton
-var down_button: IconButton
+var filtered_line_edit: WFilteredLineEdit
+var up_button: WIconButton
+var down_button: WIconButton
 
 
 func _enter_tree() -> void:
@@ -127,7 +127,7 @@ func _enter_tree() -> void:
 	label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	label.text = text
 	
-	filtered_line_edit = FilteredLineEdit.new()
+	filtered_line_edit = WFilteredLineEdit.new()
 	container.add_child(filtered_line_edit)
 	filtered_line_edit.theme_type_variation = filtered_line_edit_theme_type_variation
 	filtered_line_edit.max_length = max_length
@@ -140,12 +140,12 @@ func _enter_tree() -> void:
 	filtered_line_edit.text = str(initial_value)
 	filtered_line_edit.clamp_text()
 	
-	up_button = IconButton.new()
+	up_button = WIconButton.new()
 	container.add_child(up_button)
 	up_button.theme_type_variation = up_button_theme_type_variation
 	up_button.icon = up_button_icon
 	
-	down_button = IconButton.new()
+	down_button = WIconButton.new()
 	container.add_child(down_button)
 	down_button.theme_type_variation = down_button_theme_type_variation
 	down_button.icon = down_button_icon

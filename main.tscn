@@ -1,28 +1,30 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5en2sqjkddpj"]
+[gd_scene load_steps=15 format=3 uid="uid://b5en2sqjkddpj"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_gktdl"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/nav_bar.gd" id="3_86lt4"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/numeric_input.gd" id="3_h7wgp"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/one_button_popup.gd" id="4_3tjh2"]
-[ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners.gdshader" id="4_xgpd8"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/two_buttons_popup.gd" id="5_vkyrc"]
-[ext_resource type="Texture2D" uid="uid://b3juesd7gu3d" path="res://assets/black.png" id="6_116be"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/texture_rounded.gd" id="6_pbvae"]
-[ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners_panel.gdshader" id="7_kkx1v"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/card.gd" id="8_aytqr"]
+[ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_nav_bar.gd" id="2_pyenn"]
+[ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://addons/widgets/png_icons/arrow-left-bold.png" id="3_8tqhm"]
+[ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://addons/widgets/png_icons/home.png" id="4_x4a5t"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_numeric_input.gd" id="5_arsm4"]
+[ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners.gdshader" id="6_esdkb"]
+[ext_resource type="Texture2D" uid="uid://b3juesd7gu3d" path="res://assets/black.png" id="7_j7cqe"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_texture_rounded.gd" id="8_03kac"]
+[ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners_panel.gdshader" id="9_fqtwr"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_card.gd" id="10_8kjpv"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_one.gd" id="10_lr3bw"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_two.gd" id="11_uuvgh"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ly2t"]
-shader = ExtResource("4_xgpd8")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_epaj1"]
+shader = ExtResource("6_esdkb")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_top_left_corner = true
 shader_parameter/rounded_top_right_corner = true
 shader_parameter/rounded_bottom_left_corner = true
 shader_parameter/rounded_bottom_right_corner = true
-shader_parameter/width = 1.0
-shader_parameter/height = 1.0
+shader_parameter/width = 500.0
+shader_parameter/height = 200.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wdslc"]
-shader = ExtResource("7_kkx1v")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1plf"]
+shader = ExtResource("9_fqtwr")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_top_left_corner = true
 shader_parameter/rounded_top_right_corner = true
@@ -31,29 +33,43 @@ shader_parameter/rounded_bottom_right_corner = true
 shader_parameter/panel_color = Color(0, 1, 0, 1)
 shader_parameter/panel_scale = 1.0
 shader_parameter/panel_pos = true
-shader_parameter/width = 1.0
-shader_parameter/height = 1.0
+shader_parameter/width = 500.0
+shader_parameter/height = 200.0
 
-[node name="Main" type="VBoxContainer"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.00372)
+script = ExtResource("1_e6ig7")
+
+[node name="Page" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
-script = ExtResource("1_gktdl")
 
-[node name="NavBar" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(0, 100)
+[node name="WNavBar" type="PanelContainer" parent="Page"]
+custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
-script = ExtResource("3_86lt4")
+script = ExtResource("2_pyenn")
 title = "Title"
+horizontal_alignment = 0
+left_button_icon = ExtResource("3_8tqhm")
+right_button_icon = ExtResource("4_x4a5t")
 
-[node name="Contents" type="ColorRect" parent="."]
+[node name="Contents" type="ColorRect" parent="Page"]
 layout_mode = 2
 size_flags_vertical = 3
+color = Color(0.776471, 0.776471, 0.776471, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Contents"]
+[node name="MarginContainer" type="MarginContainer" parent="Page/Contents"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,74 +81,77 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="GridContainer" type="GridContainer" parent="Contents/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Page/Contents/MarginContainer"]
 layout_mode = 2
 
-[node name="NumericInput" type="PanelContainer" parent="Contents/MarginContainer/GridContainer"]
+[node name="WTextureRounded" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_epaj1")
+custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("3_h7wgp")
-text = "Value:"
+size_flags_horizontal = 4
+texture = ExtResource("7_j7cqe")
+script = ExtResource("8_03kac")
 
-[node name="OneButtonPopupButton" type="Button" parent="Contents/MarginContainer/GridContainer"]
+[node name="WCard" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_m1plf")
+custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
-text = "One Button Popup"
-
-[node name="TwoButtonPopupButton" type="Button" parent="Contents/MarginContainer/GridContainer"]
-layout_mode = 2
-text = "Two Button Popup"
-
-[node name="TextureRounded" type="TextureRect" parent="Contents/MarginContainer/GridContainer"]
-material = SubResource("ShaderMaterial_1ly2t")
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("6_116be")
-script = ExtResource("6_pbvae")
-
-[node name="Card" type="TextureRect" parent="Contents/MarginContainer/GridContainer"]
-material = SubResource("ShaderMaterial_wdslc")
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("6_116be")
-script = ExtResource("8_aytqr")
+size_flags_horizontal = 4
+texture = ExtResource("7_j7cqe")
+script = ExtResource("10_8kjpv")
 panel_color = Color(0, 1, 0, 1)
 label_text = "Card"
-label_pos = 1
 
-[node name="OneButtonPopup" type="Button" parent="."]
+[node name="WNumericInput" type="PanelContainer" parent="Page/Contents/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("5_arsm4")
+text = "Value:"
+
+[node name="ButtonOne" type="Button" parent="Page/Contents/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "WPopupButtonOne"
+
+[node name="ButtonTwo" type="Button" parent="Page/Contents/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "WPopupButtonTwo"
+
+[node name="WPopupButtonOne" type="Button" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0)
 top_level = true
-layout_mode = 2
+layout_mode = 0
+offset_right = 720.0
+offset_bottom = 1280.0
 mouse_filter = 2
-script = ExtResource("4_3tjh2")
+script = ExtResource("10_lr3bw")
 title_label_text = "Title"
-message_label_text = "Multiline message
-Multiline message
-Multiline message"
-button_text = "Accept"
+message_label_text = "Lorem Ipsum"
+button_text = "Ok"
 
-[node name="TwoButtonsPopup" type="Button" parent="."]
+[node name="WPopupButtonTwo" type="Button" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0)
 top_level = true
-layout_mode = 2
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
 mouse_filter = 2
-script = ExtResource("5_vkyrc")
+script = ExtResource("11_uuvgh")
 title_label_text = "Title"
-message_label_text = "Multiline message
-Multiline message
-Multiline message"
-left_button_text = "Accept"
-right_button_text = "Cancel"
+message_label_text = "Lorem Ipsum"
+left_button_text = "Left"
+right_button_text = "Right"
 
-[connection signal="pressed" from="Contents/MarginContainer/GridContainer/OneButtonPopupButton" to="." method="_on_one_button_popup_button_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/GridContainer/TwoButtonPopupButton" to="." method="_on_two_button_popup_button_pressed"]
-[connection signal="pressed" from="Contents/MarginContainer/GridContainer/Card" to="." method="_on_card_pressed"]
-[connection signal="outside_button_pressed" from="OneButtonPopup" to="." method="_on_one_button_popup_outside_button_pressed"]
-[connection signal="popup_button_pressed" from="OneButtonPopup" to="." method="_on_one_button_popup_popup_button_pressed"]
-[connection signal="outside_button_pressed" from="TwoButtonsPopup" to="." method="_on_two_buttons_popup_outside_button_pressed"]
-[connection signal="popup_left_button_pressed" from="TwoButtonsPopup" to="." method="_on_two_buttons_popup_popup_left_button_pressed"]
-[connection signal="popup_right_button_pressed" from="TwoButtonsPopup" to="." method="_on_two_buttons_popup_popup_right_button_pressed"]
+[connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
+[connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]
+[connection signal="outside_button_pressed" from="WPopupButtonOne" to="." method="_on_w_popup_button_one_outside_button_pressed"]
+[connection signal="popup_button_pressed" from="WPopupButtonOne" to="." method="_on_w_popup_button_one_popup_button_pressed"]
+[connection signal="outside_button_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_outside_button_pressed"]
+[connection signal="popup_left_button_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_popup_left_button_pressed"]
+[connection signal="popup_right_button_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_popup_right_button_pressed"]

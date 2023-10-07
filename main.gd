@@ -1,43 +1,39 @@
-extends VBoxContainer
+extends Control
 
 
-@onready var one_button_popup: OneButtonPopup = $OneButtonPopup
-@onready var two_buttons_popup: TwoButtonsPopup = $TwoButtonsPopup
+@onready var popup_button_one: WPopupButtonOne = $WPopupButtonOne
+@onready var popup_button_two: WPopupButtonTwo = $WPopupButtonTwo
 
 
-# Popup singals ################################################################
+func _on_button_one_pressed() -> void:
+	popup_button_one.popup()
 
 
-func _on_one_button_popup_popup_button_pressed() -> void:
-	one_button_popup.dismiss()
+func _on_button_two_pressed() -> void:
+	popup_button_two.popup()
 
 
-func _on_one_button_popup_outside_button_pressed() -> void:
-	one_button_popup.dismiss()
+## WPopupButtonOne #############################################################
 
 
-func _on_two_buttons_popup_outside_button_pressed() -> void:
-	two_buttons_popup.dismiss()
+func _on_w_popup_button_one_outside_button_pressed() -> void:
+	popup_button_one.dismiss()
 
 
-func _on_two_buttons_popup_popup_left_button_pressed() -> void:
-	two_buttons_popup.dismiss()
+func _on_w_popup_button_one_popup_button_pressed() -> void:
+	popup_button_one.dismiss()
 
 
-func _on_two_buttons_popup_popup_right_button_pressed() -> void:
-	two_buttons_popup.dismiss()
+## WPopupButtonTwo #############################################################
 
 
-# Other signals ################################################################
+func _on_w_popup_button_two_outside_button_pressed():
+	popup_button_two.dismiss()
 
 
-func _on_one_button_popup_button_pressed() -> void:
-	one_button_popup.popup()
+func _on_w_popup_button_two_popup_left_button_pressed():
+	popup_button_two.dismiss()
 
 
-func _on_two_button_popup_button_pressed() -> void:
-	two_buttons_popup.popup()
-
-
-func _on_card_pressed() -> void:
-	print("Card pressed")
+func _on_w_popup_button_two_popup_right_button_pressed():
+	popup_button_two.dismiss()

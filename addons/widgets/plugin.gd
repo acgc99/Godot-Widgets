@@ -4,68 +4,68 @@ extends EditorPlugin
 
 func _enter_tree() -> void:
 	add_custom_type(
-		"FilteredLineEdit",
+		"WFilteredLineEdit",
 		"LineEdit",
-		preload("res://addons/widgets/scripts/filtered_line_edit.gd"),
+		preload("res://addons/widgets/scripts/w_filtered_line_edit.gd"),
 		preload("res://addons/widgets/svg_icons/LineEdit.svg")
 	)
 	add_custom_type(
-		"FilteredTextEdit",
+		"WFilteredTextEdit",
 		"TextEdit",
-		preload("res://addons/widgets/scripts/filtered_text_edit.gd"),
+		preload("res://addons/widgets/scripts/w_filtered_text_edit.gd"),
 		preload("res://addons/widgets/svg_icons/TextEdit.svg")
 	)
 	add_custom_type(
-		"IconButton",
+		"WIconButton",
 		"Button",
-		preload("res://addons/widgets/scripts/icon_button.gd"),
+		preload("res://addons/widgets/scripts/w_icon_button.gd"),
 		preload("res://addons/widgets/svg_icons/alpha-x-circle.svg")
 	)
 	add_custom_type(
-		"NavBar",
+		"WNavBar",
 		"PanelContainer",
-		preload("res://addons/widgets/scripts/nav_bar.gd"),
+		preload("res://addons/widgets/scripts/w_nav_bar.gd"),
 		preload("res://addons/widgets/svg_icons/navigation-variant.svg")
 	)
 	add_custom_type(
-		"NumericInput",
+		"WNumericInput",
 		"PanelContainer",
-		preload("res://addons/widgets/scripts/numeric_input.gd"),
+		preload("res://addons/widgets/scripts/w_numeric_input.gd"),
 		preload("res://addons/widgets/svg_icons/arrow-expand-vertical.svg")
 	)
 	add_custom_type(
-		"OneButtonPopup",
+		"WPopupButtonOne",
 		"Button",
-		preload("res://addons/widgets/scripts/one_button_popup.gd"),
+		preload("res://addons/widgets/scripts/w_popup_button_one.gd"),
 		preload("res://addons/widgets/svg_icons/numeric-1-box-multiple.svg")
 	)
 	add_custom_type(
-		"TwoButtonsPopup",
+		"WPopupButtonTwo",
 		"Button",
-		preload("res://addons/widgets/scripts/two_buttons_popup.gd"),
+		preload("res://addons/widgets/scripts/w_popup_button_two.gd"),
 		preload("res://addons/widgets/svg_icons/numeric-2-box-multiple.svg")
 	)
 	add_custom_type(
-		"TextureRounded",
+		"WTextureRounded",
 		"TextureRect",
-		preload("res://addons/widgets/scripts/texture_rounded.gd"),
+		preload("res://addons/widgets/scripts/w_texture_rounded.gd"),
 		preload("res://addons/widgets/svg_icons/image.svg")
 	)
 	add_custom_type(
-		"Card",
+		"WCard",
 		"TextureRect",
-		preload("res://addons/widgets/scripts/card.gd"),
+		preload("res://addons/widgets/scripts/w_card.gd"),
 		preload("res://addons/widgets/svg_icons/file-presentation-box.svg")
 	)
 
 
 func _exit_tree() -> void:
-	remove_custom_type("FilteredLineEdit")
-	remove_custom_type("FilteredTextEdit")
-	remove_custom_type("IconButton")
-	remove_custom_type("NavBar")
-	remove_custom_type("NumericInput")
-	remove_custom_type("OneButtonPopup")
-	remove_custom_type("TwoButtonsPopup")
-	remove_custom_type("TextureRounded")
-	remove_custom_type("Card")
+	remove_custom_type("WFilteredLineEdit")
+	remove_custom_type("WFilteredTextEdit")
+	remove_custom_type("WIconButton")
+	remove_custom_type("WNavBar")
+	remove_custom_type("WNumericInput")
+	remove_custom_type("WPopupButtonOne")
+	remove_custom_type("WPopupButtonTwo")
+	remove_custom_type("WTextureRounded")
+	remove_custom_type("WCard")

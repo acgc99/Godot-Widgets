@@ -1,5 +1,5 @@
 @tool
-class_name NavBar
+class_name WNavBar
 extends PanelContainer
 ## A widget for intended to be used for navigation arround the app screens/pages.
 ## It might have zero height if [param custom_minimum_height] not specified.
@@ -30,8 +30,7 @@ var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 		horizontal_alignment = horizontal_alignment_
 		if title_label != null:
 			title_label.horizontal_alignment = horizontal_alignment
-@export_group("Buttons")
-@export_subgroup("Left Button", "left_button")
+@export_group("Left button", "left_button")
 ## Left button disabled state.
 @export var left_button_disabled: bool = false:
 	set(left_button_disabled_):
@@ -39,12 +38,12 @@ var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 		if left_button != null:
 			left_button.disabled = left_button_disabled
 ## Left button icon.
-@export var left_button_icon: Texture2D = preload("res://addons/widgets/png_icons/arrow-left-bold.png"):
+@export var left_button_icon: Texture2D:
 	set(left_button_icon_):
 		left_button_icon = left_button_icon_
 		if left_button != null:
 			left_button.icon = left_button_icon
-@export_subgroup("Right Button", "right_button")
+@export_group("Right button", "right_button")
 ## Left button disabled state.
 @export var right_button_disabled: bool = false:
 	set(right_button_disabled_):
@@ -52,7 +51,7 @@ var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 		if right_button != null:
 			right_button.disabled = right_button_disabled
 ## Left button icon.
-@export var right_button_icon: Texture2D = preload("res://addons/widgets/png_icons/home.png"):
+@export var right_button_icon: Texture2D:
 	set(right_button_icon_):
 		right_button_icon = right_button_icon_
 		if right_button != null:
@@ -95,8 +94,8 @@ var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 
 var container: HBoxContainer
 var title_label: Label
-var left_button: IconButton
-var right_button: IconButton
+var left_button: WIconButton
+var right_button: WIconButton
 
 
 func _enter_tree() -> void:
@@ -106,7 +105,7 @@ func _enter_tree() -> void:
 	add_child(container)
 	container.theme_type_variation = container_theme_type_variation
 	
-	left_button = IconButton.new()
+	left_button = WIconButton.new()
 	container.add_child(left_button)
 	left_button.theme_type_variation = left_button_theme_type_variation
 	left_button.disabled = left_button_disabled
@@ -120,7 +119,7 @@ func _enter_tree() -> void:
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.text = title
 	
-	right_button = IconButton.new()
+	right_button = WIconButton.new()
 	container.add_child(right_button)
 	right_button.theme_type_variation = right_button_theme_type_variation
 	right_button.disabled = right_button_disabled

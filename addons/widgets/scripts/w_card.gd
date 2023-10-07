@@ -1,5 +1,5 @@
 @tool
-class_name Card
+class_name WCard
 extends TextureRect
 ## Like [code]TextureRect[/code] but with rounded corners and a panel for text
 ## and acts like a button.

@@ -1,5 +1,5 @@
 @tool
-class_name TextureRounded
+class_name WTextureRounded
 extends TextureRect
 ## Like [code]TextureRect[/code] but with rounded corners.
 ##

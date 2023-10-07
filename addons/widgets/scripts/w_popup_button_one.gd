@@ -1,16 +1,13 @@
 @tool
-class_name TwoButtonsPopup
+class_name WPopupButtonOne
 extends Button
-## A popup with two buttons.
-
+## A popup with one button.
 
 
 ## Emitted when the outside button is pressed.
 signal outside_button_pressed
-## Emitted when the left popup button is pressed.
-signal popup_left_button_pressed
-## Emitted when the right popup button is pressed.
-signal popup_right_button_pressed
+## Emitted when the popup button is pressed.
+signal popup_button_pressed
 
 @export_group("Texts")
 @export_subgroup("Title", "title_label")
@@ -51,19 +48,13 @@ var message_label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 		message_label_horizontal_alignment = message_label_horizontal_alignment_
 		if message_label != null:
 			message_label.horizontal_alignment = message_label_horizontal_alignment
-@export_subgroup("Buttons")
-## Popup left button text.
-@export var left_button_text: String:
-	set(left_button_text_):
-		left_button_text = left_button_text_
-		if left_button != null:
-			left_button.text = left_button_text
-## Popup right button text.
-@export var right_button_text: String:
-	set(right_button_text_):
-		right_button_text = right_button_text_
-		if right_button != null:
-			right_button.text = right_button_text
+@export_subgroup("Buttons", "button")
+## Popup button text.
+@export var button_text: String:
+	set(button_text_):
+		button_text = button_text_
+		if button != null:
+			button.text = button_text
 @export_group("Size Flags")
 @export_enum(
 	"Size Shrink Begin:0",
@@ -73,12 +64,12 @@ var message_label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 	"Size Shrink Center:4",
 	"Size Shrink End:8"
 )
-## Popup buttons constainer [param size_flags_horizontal].
-var buttons_container_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
-	set(buttons_container_size_flags_horizontal_):
-		buttons_container_size_flags_horizontal = buttons_container_size_flags_horizontal_
-		if buttons_container != null:
-			buttons_container.size_flags_horizontal = buttons_container_size_flags_horizontal
+## Popup button [param size_flags_horizontal].
+var button_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
+	set(button_size_flags_horizontal_):
+		button_size_flags_horizontal = button_size_flags_horizontal_
+		if button != null:
+			button.size_flags_horizontal = button_size_flags_horizontal
 @export_group("Animations")
 ## Popup/dismiss animation duration. Not intended to be changed during runtime.
 @export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1
@@ -124,27 +115,13 @@ var buttons_container_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
 		message_label_theme_type_variation = message_label_theme_type_variation_
 		if message_label != null:
 			message_label.theme_type_variation = message_label_theme_type_variation
-## Popup buttons container [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]HBoxContainer[/code].
-@export var buttons_container_theme_type_variation: String:
-	set(buttons_container_theme_type_variation_):
-		buttons_container_theme_type_variation = buttons_container_theme_type_variation_
-		if buttons_container != null:
-			buttons_container.theme_type_variation = buttons_container_theme_type_variation
-## Popup left button [param theme_type_variation].
+## Popup button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
-@export var left_button_theme_type_variation: String:
-	set(left_button_theme_type_variation_):
-		left_button_theme_type_variation = left_button_theme_type_variation_
-		if left_button != null:
-			left_button.theme_type_variation = left_button_theme_type_variation
-## Popup right button [param theme_type_variation].
-## The [code]Base Type[/code] must be [code]Button[/code].
-@export var right_button_theme_type_variation: String:
-	set(right_button_theme_type_variation_):
-		right_button_theme_type_variation = right_button_theme_type_variation_
-		if right_button != null:
-			right_button.theme_type_variation = right_button_theme_type_variation
+@export var button_theme_type_variation: String:
+	set(button_theme_type_variation_):
+		button_theme_type_variation = button_theme_type_variation_
+		if button != null:
+			button.theme_type_variation = button_theme_type_variation
 
 var animation_player: AnimationPlayer
 var panel_container: PanelContainer
@@ -152,9 +129,7 @@ var margin_container: MarginContainer
 var message_container: VBoxContainer
 var title_label: Label
 var message_label: Label
-var buttons_container: HBoxContainer
-var left_button: Button
-var right_button: Button
+var button: Button
 
 
 func _enter_tree() -> void:
@@ -196,30 +171,15 @@ func _enter_tree() -> void:
 	message_label.text = message_label_text
 	message_label.horizontal_alignment = message_label_horizontal_alignment
 	
-	buttons_container = HBoxContainer.new()
-	message_container.add_child(buttons_container)
-	buttons_container.theme_type_variation = buttons_container_theme_type_variation
-	buttons_container.size_flags_horizontal = buttons_container_size_flags_horizontal
-	
-	left_button = Button.new()
-	buttons_container.add_child(left_button)
-	left_button.pressed.connect(
-		func _on_popup_left_button_pressed() -> void:
-			popup_left_button_pressed.emit()
+	button = Button.new()
+	message_container.add_child(button)
+	button.pressed.connect(
+		func _on_popup_button_pressed() -> void:
+			popup_button_pressed.emit()
 	)
-	left_button.theme_type_variation = left_button_theme_type_variation
-	left_button.text = left_button_text
-	left_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	
-	right_button = Button.new()
-	buttons_container.add_child(right_button)
-	right_button.pressed.connect(
-		func _on_popup_right_button_pressed() -> void:
-			popup_right_button_pressed.emit()
-	)
-	right_button.theme_type_variation = right_button_theme_type_variation
-	right_button.text = right_button_text
-	right_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.theme_type_variation = button_theme_type_variation
+	button.text = button_text
+	button.size_flags_horizontal = button_size_flags_horizontal
 	
 	var animation_library: AnimationLibrary = AnimationLibrary.new()
 	var animation: Animation

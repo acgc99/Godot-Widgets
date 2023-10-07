@@ -1,5 +1,5 @@
 @tool
-class_name IconButton
+class_name WIconButton
 extends Button
 ## Button that consists of an icon.
 

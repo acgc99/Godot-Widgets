@@ -1,5 +1,5 @@
 @tool
-class_name FilteredLineEdit
+class_name WFilteredLineEdit
 extends LineEdit
 
 ## [code]LineEdit[/code] with filters. It [b]can[/b] clamp [param text] numeric value.
