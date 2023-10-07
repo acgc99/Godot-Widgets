@@ -16,24 +16,24 @@ func _on_button_two_pressed() -> void:
 ## WPopupButtonOne #############################################################
 
 
-func _on_w_popup_button_one_outside_button_pressed() -> void:
+func _on_w_popup_button_one_button_outside_pressed() -> void:
 	popup_button_one.dismiss()
 
 
-func _on_w_popup_button_one_popup_button_pressed() -> void:
+func _on_w_popup_button_one_button_popup_pressed() -> void:
 	popup_button_one.dismiss()
 
 
 ## WPopupButtonTwo #############################################################
 
 
-func _on_w_popup_button_two_outside_button_pressed():
+func _on_w_popup_button_two_button_left_popup_pressed() -> void:
 	popup_button_two.dismiss()
 
 
-func _on_w_popup_button_two_popup_left_button_pressed():
+func _on_w_popup_button_two_button_outside_pressed() -> void:
 	popup_button_two.dismiss()
 
 
-func _on_w_popup_button_two_popup_right_button_pressed():
+func _on_w_popup_button_two_button_right_popup_pressed() -> void:
 	popup_button_two.dismiss()

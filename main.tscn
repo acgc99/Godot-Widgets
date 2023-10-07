@@ -13,23 +13,23 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_one.gd" id="10_lr3bw"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_two.gd" id="11_uuvgh"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_epaj1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5hle0"]
 shader = ExtResource("6_esdkb")
 shader_parameter/radius_scale = 0.1
-shader_parameter/rounded_top_left_corner = true
-shader_parameter/rounded_top_right_corner = true
-shader_parameter/rounded_bottom_left_corner = true
-shader_parameter/rounded_bottom_right_corner = true
+shader_parameter/rounded_corner_top_left = true
+shader_parameter/rounded_corner_top_right = true
+shader_parameter/rounded_corner_bottom_left = true
+shader_parameter/rounded_corner_bottom_right = true
 shader_parameter/width = 500.0
 shader_parameter/height = 200.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1plf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2wl7"]
 shader = ExtResource("9_fqtwr")
 shader_parameter/radius_scale = 0.1
-shader_parameter/rounded_top_left_corner = true
-shader_parameter/rounded_top_right_corner = true
-shader_parameter/rounded_bottom_left_corner = true
-shader_parameter/rounded_bottom_right_corner = true
+shader_parameter/rounded_corner_top_left = true
+shader_parameter/rounded_corner_top_right = true
+shader_parameter/rounded_corner_bottom_left = true
+shader_parameter/rounded_corner_bottom_right = true
 shader_parameter/panel_color = Color(0, 1, 0, 1)
 shader_parameter/panel_scale = 1.0
 shader_parameter/panel_pos = true
@@ -61,8 +61,8 @@ layout_mode = 2
 script = ExtResource("2_pyenn")
 title = "Title"
 horizontal_alignment = 0
-left_button_icon = ExtResource("3_8tqhm")
-right_button_icon = ExtResource("4_x4a5t")
+button_left_icon = ExtResource("3_8tqhm")
+button_right_icon = ExtResource("4_x4a5t")
 
 [node name="Contents" type="ColorRect" parent="Page"]
 layout_mode = 2
@@ -85,15 +85,19 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 
 [node name="WTextureRounded" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_epaj1")
+material = SubResource("ShaderMaterial_5hle0")
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("7_j7cqe")
 script = ExtResource("8_03kac")
+rounded_corner_top_left = null
+rounded_corner_top_right = null
+rounded_corner_bottom_left = null
+rounded_corner_bottom_right = null
 
 [node name="WCard" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_m1plf")
+material = SubResource("ShaderMaterial_t2wl7")
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -108,6 +112,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("5_arsm4")
 text = "Value:"
+value_min = 0.0
 
 [node name="ButtonOne" type="Button" parent="Page/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
@@ -130,8 +135,8 @@ offset_right = 720.0
 offset_bottom = 1280.0
 mouse_filter = 2
 script = ExtResource("10_lr3bw")
-title_label_text = "Title"
-message_label_text = "Lorem Ipsum"
+label_title_text = "Title"
+label_message_text = "Lorem ipsum"
 button_text = "Ok"
 
 [node name="WPopupButtonTwo" type="Button" parent="."]
@@ -139,19 +144,19 @@ visible = false
 modulate = Color(1, 1, 1, 0)
 top_level = true
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_right = 720.0
+offset_bottom = 1280.0
 mouse_filter = 2
 script = ExtResource("11_uuvgh")
-title_label_text = "Title"
-message_label_text = "Lorem Ipsum"
-left_button_text = "Left"
-right_button_text = "Right"
+label_title_text = "Title"
+label_message_text = "Lorem Ipsum"
+button_left_text = "Ok"
+button_right_text = "No"
 
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]
-[connection signal="outside_button_pressed" from="WPopupButtonOne" to="." method="_on_w_popup_button_one_outside_button_pressed"]
-[connection signal="popup_button_pressed" from="WPopupButtonOne" to="." method="_on_w_popup_button_one_popup_button_pressed"]
-[connection signal="outside_button_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_outside_button_pressed"]
-[connection signal="popup_left_button_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_popup_left_button_pressed"]
-[connection signal="popup_right_button_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_popup_right_button_pressed"]
+[connection signal="button_outside_pressed" from="WPopupButtonOne" to="." method="_on_w_popup_button_one_button_outside_pressed"]
+[connection signal="button_popup_pressed" from="WPopupButtonOne" to="." method="_on_w_popup_button_one_button_popup_pressed"]
+[connection signal="button_left_popup_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_button_left_popup_pressed"]
+[connection signal="button_outside_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_button_outside_pressed"]
+[connection signal="button_right_popup_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_button_right_popup_pressed"]

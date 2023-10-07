@@ -12,17 +12,17 @@ extends PanelContainer
 			label.text = text
 @export_group("Values")
 ## Maximum value.
-@export var max_value: float = INF:
-	set(max_value_):
-		max_value = max_value_
+@export var value_max: float = INF:
+	set(value_max_):
+		value_max = value_max_
 		if filtered_line_edit != null:
-			filtered_line_edit.max_value = max_value
+			filtered_line_edit.value_max = value_max
 ## Minimum value.
-@export var min_value: float = -INF:
-	set(min_value_):
-		min_value = min_value_
+@export var value_min: float = -INF:
+	set(value_min_):
+		value_min = value_min_
 		if filtered_line_edit != null:
-			filtered_line_edit.min_value = min_value
+			filtered_line_edit.value_min = value_min
 ## Initial value.
 @export var initial_value: float = 0:
 	set(initial_value_):
@@ -39,17 +39,17 @@ extends PanelContainer
 @export var step: float = 1.0
 @export_group("Buttons")
 ## Up button icon.
-@export var up_button_icon: Texture2D = preload("res://addons/widgets/png_icons/arrow-up-bold.png"):
-	set(up_button_icon_):
-		up_button_icon = up_button_icon_
+@export var button_up: Texture2D = preload("res://addons/widgets/png_icons/arrow-up-bold.png"):
+	set(button_up_):
+		button_up = button_up_
 		if up_button != null:
-			up_button.icon = up_button_icon
+			up_button.icon = button_up
 ## Down button icon.
-@export var down_button_icon: Texture2D = preload("res://addons/widgets/png_icons/arrow-down-bold.png"):
-	set(down_button_icon_):
-		down_button_icon = down_button_icon_
-		if down_button != null:
-			down_button.icon = down_button_icon
+@export var button_down_icon: Texture2D = preload("res://addons/widgets/png_icons/arrow-down-bold.png"):
+	set(button_down_icon_):
+		button_down_icon = button_down_icon_
+		if button_down != null:
+			button_down.icon = button_down_icon
 @export_group("Theme type variations")
 ## NumericInput panel container [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]PanelContainer[/code].
@@ -94,18 +94,18 @@ extends PanelContainer
 			up_button.theme_type_variation = up_button_theme_type_variation
 ## Down button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
-@export var down_button_theme_type_variation: String:
-	set(down_button_theme_type_variation_):
-		down_button_theme_type_variation = down_button_theme_type_variation_
-		if down_button != null:
-			down_button.theme_type_variation = down_button_theme_type_variation
+@export var button_down_theme_type_variation: String:
+	set(button_down_theme_type_variation_):
+		button_down_theme_type_variation = button_down_theme_type_variation_
+		if button_down != null:
+			button_down.theme_type_variation = button_down_theme_type_variation
 
 var margin_container: MarginContainer
 var container: HBoxContainer
 var label: Label
 var filtered_line_edit: WFilteredLineEdit
 var up_button: WIconButton
-var down_button: WIconButton
+var button_down: WIconButton
 
 
 func _enter_tree() -> void:
@@ -135,20 +135,20 @@ func _enter_tree() -> void:
 	filtered_line_edit.flat = true
 	filtered_line_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
 	filtered_line_edit.alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	filtered_line_edit.max_value = max_value
-	filtered_line_edit.min_value = min_value
+	filtered_line_edit.value_max = value_max
+	filtered_line_edit.value_min = value_min
 	filtered_line_edit.text = str(initial_value)
 	filtered_line_edit.clamp_text()
 	
 	up_button = WIconButton.new()
 	container.add_child(up_button)
 	up_button.theme_type_variation = up_button_theme_type_variation
-	up_button.icon = up_button_icon
+	up_button.icon = button_up
 	
-	down_button = WIconButton.new()
-	container.add_child(down_button)
-	down_button.theme_type_variation = down_button_theme_type_variation
-	down_button.icon = down_button_icon
+	button_down = WIconButton.new()
+	container.add_child(button_down)
+	button_down.theme_type_variation = button_down_theme_type_variation
+	button_down.icon = button_down_icon
 	
 	up_button.pressed.connect(
 		func _on_up_button_pressed() -> void:
@@ -157,8 +157,8 @@ func _enter_tree() -> void:
 			filtered_line_edit.text = str(value)
 			filtered_line_edit.clamp_text()
 	)
-	down_button.pressed.connect(
-		func _on_down_button_pressed() -> void:
+	button_down.pressed.connect(
+		func _on_button_down_pressed() -> void:
 			var value: float = float(filtered_line_edit.text)
 			value -= step
 			filtered_line_edit.text = str(value)
@@ -170,6 +170,6 @@ func _ready() -> void:
 	item_rect_changed.connect(
 		func _on_item_rect_changed() -> void:
 			up_button.custom_minimum_size = Vector2(size[1], 0)
-			down_button.custom_minimum_size = Vector2(size[1], 0)
+			button_down.custom_minimum_size = Vector2(size[1], 0)
 	)
 	item_rect_changed.emit()

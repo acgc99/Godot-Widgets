@@ -30,32 +30,32 @@ var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 		horizontal_alignment = horizontal_alignment_
 		if title_label != null:
 			title_label.horizontal_alignment = horizontal_alignment
-@export_group("Left button", "left_button")
+@export_group("Left button", "button_left")
 ## Left button disabled state.
-@export var left_button_disabled: bool = false:
-	set(left_button_disabled_):
-		left_button_disabled = left_button_disabled_
-		if left_button != null:
-			left_button.disabled = left_button_disabled
+@export var button_left_disabled: bool = false:
+	set(button_left_disabled_):
+		button_left_disabled = button_left_disabled_
+		if button_left != null:
+			button_left.disabled = button_left_disabled
 ## Left button icon.
-@export var left_button_icon: Texture2D:
-	set(left_button_icon_):
-		left_button_icon = left_button_icon_
-		if left_button != null:
-			left_button.icon = left_button_icon
-@export_group("Right button", "right_button")
+@export var button_left_icon: Texture2D:
+	set(button_left_icon_):
+		button_left_icon = button_left_icon_
+		if button_left != null:
+			button_left.icon = button_left_icon
+@export_group("Right button", "button_right")
 ## Left button disabled state.
-@export var right_button_disabled: bool = false:
-	set(right_button_disabled_):
-		right_button_disabled = right_button_disabled_
-		if right_button != null:
-			right_button.disabled = right_button_disabled
+@export var button_right_disabled: bool = false:
+	set(button_right_disabled_):
+		button_right_disabled = button_right_disabled_
+		if button_right != null:
+			button_right.disabled = button_right_disabled
 ## Left button icon.
-@export var right_button_icon: Texture2D:
-	set(right_button_icon_):
-		right_button_icon = right_button_icon_
-		if right_button != null:
-			right_button.icon = right_button_icon
+@export var button_right_icon: Texture2D:
+	set(button_right_icon_):
+		button_right_icon = button_right_icon_
+		if button_right != null:
+			button_right.icon = button_right_icon
 @export_group("Theme type variations")
 ## NavBar panel container [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]PanelContainer[/code].
@@ -79,23 +79,23 @@ var horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 			title_label.theme_type_variation = title_label_theme_type_variation
 ## NavBar left button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
-@export var left_button_theme_type_variation: String:
-	set(left_button_theme_type_variation_):
-		left_button_theme_type_variation = left_button_theme_type_variation_
-		if left_button != null:
-			left_button.theme_type_variation = left_button_theme_type_variation
+@export var button_left_theme_type_variation: String:
+	set(button_left_theme_type_variation_):
+		button_left_theme_type_variation = button_left_theme_type_variation_
+		if button_left != null:
+			button_left.theme_type_variation = button_left_theme_type_variation
 ## NavBar right button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
-@export var right_button_theme_type_variation: String:
-	set(right_button_theme_type_variation_):
-		right_button_theme_type_variation = right_button_theme_type_variation_
-		if right_button != null:
-			right_button.theme_type_variation = right_button_theme_type_variation
+@export var button_right_theme_type_variation: String:
+	set(button_right_theme_type_variation_):
+		button_right_theme_type_variation = button_right_theme_type_variation_
+		if button_right != null:
+			button_right.theme_type_variation = button_right_theme_type_variation
 
 var container: HBoxContainer
 var title_label: Label
-var left_button: WIconButton
-var right_button: WIconButton
+var button_left: WIconButton
+var button_right: WIconButton
 
 
 func _enter_tree() -> void:
@@ -105,11 +105,11 @@ func _enter_tree() -> void:
 	add_child(container)
 	container.theme_type_variation = container_theme_type_variation
 	
-	left_button = WIconButton.new()
-	container.add_child(left_button)
-	left_button.theme_type_variation = left_button_theme_type_variation
-	left_button.disabled = left_button_disabled
-	left_button.icon = left_button_icon
+	button_left = WIconButton.new()
+	container.add_child(button_left)
+	button_left.theme_type_variation = button_left_theme_type_variation
+	button_left.disabled = button_left_disabled
+	button_left.icon = button_left_icon
 	
 	title_label = Label.new()
 	container.add_child(title_label)
@@ -119,18 +119,18 @@ func _enter_tree() -> void:
 	title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title_label.text = title
 	
-	right_button = WIconButton.new()
-	container.add_child(right_button)
-	right_button.theme_type_variation = right_button_theme_type_variation
-	right_button.disabled = right_button_disabled
-	right_button.icon = right_button_icon
+	button_right = WIconButton.new()
+	container.add_child(button_right)
+	button_right.theme_type_variation = button_right_theme_type_variation
+	button_right.disabled = button_right_disabled
+	button_right.icon = button_right_icon
 	
-	left_button.pressed.connect(
-		func _on_left_button_pressed() -> void:
+	button_left.pressed.connect(
+		func _on_button_left_pressed() -> void:
 			pressed_left.emit()
 	)
-	right_button.pressed.connect(
-		func _on_right_button_pressed() -> void:
+	button_right.pressed.connect(
+		func _on_button_right_pressed() -> void:
 			pressed_right.emit()
 	)
 
@@ -138,7 +138,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	item_rect_changed.connect(
 	func _on_item_rect_changed() -> void:
-		left_button.custom_minimum_size = Vector2(size[1], 0)
-		right_button.custom_minimum_size = Vector2(size[1], 0)
+		button_left.custom_minimum_size = Vector2(size[1], 0)
+		button_right.custom_minimum_size = Vector2(size[1], 0)
 	)
 	item_rect_changed.emit()

@@ -19,10 +19,10 @@ shader_type canvas_item;
 
 
 uniform float radius_scale: hint_range(0.0, 1.0, 0.1) = 0.1;
-uniform bool rounded_top_left_corner = true;
-uniform bool rounded_top_right_corner = true;
-uniform bool rounded_bottom_left_corner = true;
-uniform bool rounded_bottom_right_corner = true;
+uniform bool rounded_corner_top_left = true;
+uniform bool rounded_corner_top_right = true;
+uniform bool rounded_corner_bottom_left = true;
+uniform bool rounded_corner_bottom_right = true;
 uniform float width = 1.0;
 uniform float height = 1.0;
 
@@ -33,7 +33,7 @@ void fragment() {
 	float radius = min(width, height)*radius_scale;
 	float dist;
 	// Top left corner
-	if (rounded_top_left_corner) {
+	if (rounded_corner_top_left) {
 		dist = length(pos - vec2(radius));
 		if (dist > radius && pos.x < radius && pos.y < radius) {
 			image.a = 0.0;
@@ -42,7 +42,7 @@ void fragment() {
 //		if (dist < radius){image.r = 1.0;}
 	}
 	// Top right corner
-	if (rounded_top_right_corner) {
+	if (rounded_corner_top_right) {
 		dist = length(pos - vec2(width-radius, radius));
 		if (dist > radius && pos.x > width-radius && pos.y < radius) {
 			image.a = 0.0;
@@ -51,7 +51,7 @@ void fragment() {
 //		if (dist < radius){image.r = 1.0;}
 	}
 	// Bottom left corner
-	if (rounded_bottom_left_corner) {
+	if (rounded_corner_bottom_left) {
 		dist = length(pos - vec2(radius, height-radius));
 		if (dist > radius && pos.x < radius && pos.y > height-radius) {
 			image.a = 0.0;
@@ -60,7 +60,7 @@ void fragment() {
 //		if (dist < radius){image.r = 1.0;}
 	}
 	// Bottom right corner
-	if (rounded_bottom_right_corner) {
+	if (rounded_corner_bottom_right) {
 		dist = length(pos - vec2(width-radius, height-radius));
 		if (dist > radius && pos.x > width-radius && pos.y > height-radius) {
 			image.a = 0.0;

@@ -17,30 +17,30 @@ extends TextEdit
 		filter_mode = filter_mode_
 		_update_filter_mode()
 ## Maximun numeric value of the [param text]. Only used in numeric [param filter_mode].
-@export var max_value: float = INF
+@export var value_max: float = INF
 ## Minimun numeric value of the [param text]. Only used in numeric [param filter_mode].
-@export var min_value: float = -INF
+@export var value_min: float = -INF
 ## [code]RegEx[/code] to filter text.
 var reg: RegEx = RegEx.new()
 ## Current caret line.
-var current_caret_line: int = 0
+var caret_line_curr: int = 0
 ## Text before inserting a new character.
-var old_text: String
-## Length of [param old_text].
-var old_text_length: int = 0
+var text_old: String
+## Length of [param text_old].
+var text_old_length: int = 0
 ## Previous number of lines before.
-var old_line_count: int = 0
-## Lenght of [param new_text] in [code]_on_text_changed[/code].
-var new_text_length: int = 0
+var line_count_old: int = 0
+## Lenght of [param text_new] in [code]_on_text_changed[/code].
+var text_new_length: int = 0
 ## Character to be added
-var new_char: String = ""
-## Index of [param new_char] in [param new_text] in [code]_on_text_changed[/code].
-## It is the right column for the caret ([code]new_char_index = caret_column - 1[/code])
+var char_new: String = ""
+## Index of [param char_new] in [param text_new] in [code]_on_text_changed[/code].
+## It is the right column for the caret ([code]char_new_index = caret_column - 1[/code])
 ## since when [code]insert_text_at_caret[/code] is called, caret is moved forward.
-var new_char_index: int
+var char_new_index: int
 ## Function called for filtering.
-var filter: Callable =  func filter_none(new_char_: String) -> String:
-	return new_char_
+var filter: Callable =  func filter_none(char_new_: String) -> String:
+	return char_new_
 ## Control variable. If not used, when clamping values, [code]_on_text_changed[/code]
 ## is called at the end of all clampings, creating a bug if first line is clamped.
 ## This is the easiest way to solve this issue.
@@ -48,10 +48,10 @@ var _clamping: bool = false
 
 
 func _ready():
-	current_caret_line = get_caret_line()
-	old_text = get_line(current_caret_line)
-	old_text_length = old_text.length()
-	old_line_count = get_line_count()
+	caret_line_curr = get_caret_line()
+	text_old = get_line(caret_line_curr)
+	text_old_length = text_old.length()
+	line_count_old = get_line_count()
 	text_changed.connect(_on_text_changed)
 
 
@@ -59,171 +59,171 @@ func _ready():
 func _update_filter_mode() -> void:
 	# none
 	if filter_mode == 0:
-		filter = func filter_none(new_char_: String) -> String:
-			return new_char_
+		filter = func filter_none(char_new_: String) -> String:
+			return char_new_
 	# no-num
 	elif filter_mode == 1:
 		reg.compile("\\d")
-		filter = func filter_no_num(new_char_: String) -> String:
-			if reg.search(new_char_) == null:
-				return new_char_
+		filter = func filter_no_num(char_new_: String) -> String:
+			if reg.search(char_new_) == null:
+				return char_new_
 			return ""
 	# +0i
 	elif filter_mode == 2:
 		reg.compile("\\d")
-		filter = func filter_p0_i(new_char_: String) -> String:
-			if reg.search(new_char_) == null:
+		filter = func filter_p0_i(char_new_: String) -> String:
+			if reg.search(char_new_) == null:
 				return ""
 			# 0 replacement
-			elif old_text == "0":
-				if new_char_ != "0":
+			elif text_old == "0":
+				if char_new_ != "0":
 					# delete_char_at_caret() cannot be placed here due to length checks
-					set_line(current_caret_line, "")
+					set_line(caret_line_curr, "")
 				else:
 					return ""
-			return new_char_
+			return char_new_
 	# i
 	elif filter_mode == 3:
 		reg.compile("[\\d-]")
-		filter = func filter_i(new_char_: String) -> String:
-			if reg.search(new_char_) == null:
+		filter = func filter_i(char_new_: String) -> String:
+			if reg.search(char_new_) == null:
 				return ""
-			elif new_char_ == "-":
-				if old_text.contains("-"):
+			elif char_new_ == "-":
+				if text_old.contains("-"):
 					# When inserting new text, via insert_text_at_caret, caret is moved 1
-					new_char_index -= 1
-					set_line(current_caret_line, old_text.erase(0))
-					# Do this change to avoid passing new_text_length < old_text_length
-					new_text_length = old_text_length
+					char_new_index -= 1
+					set_line(caret_line_curr, text_old.erase(0))
+					# Do this change to avoid passing text_new_length < text_old_length
+					text_new_length = text_old_length
 					return ""
-				elif old_text_length == 0:
-					set_line(current_caret_line, "-0")
-					new_char_index = get_line(current_caret_line).length()
+				elif text_old_length == 0:
+					set_line(caret_line_curr, "-0")
+					char_new_index = get_line(caret_line_curr).length()
 					return ""
 				else:
-					set_line(current_caret_line, old_text.insert(0, "-"))
-					new_char_index += 1
+					set_line(caret_line_curr, text_old.insert(0, "-"))
+					char_new_index += 1
 					return ""
 			# 0 replacement
-			elif old_text == "0":
-				if new_char_ != "0":
+			elif text_old == "0":
+				if char_new_ != "0":
 					# delete_char_at_caret() cannot be placed here due to length checks
-					set_line(current_caret_line, "")
+					set_line(caret_line_curr, "")
 				else:
 					return ""
 			# 0 replacement
-			elif old_text == "-0":
-				if new_char_ != "0":
-					if new_char_index == 2:
-						set_line(current_caret_line, "-%s" % new_char_)
-						new_char_index = get_line(current_caret_line).length()
+			elif text_old == "-0":
+				if char_new_ != "0":
+					if char_new_index == 2:
+						set_line(caret_line_curr, "-%s" % char_new_)
+						char_new_index = get_line(caret_line_curr).length()
 						return ""
 				else:
 					return ""
 			# Avoid things like '1-2'
-			elif old_text.contains("-") and new_char_index == 0:
+			elif text_old.contains("-") and char_new_index == 0:
 				return ""
-			return new_char_
+			return char_new_
 	# +0f
 	elif filter_mode == 4:
 		reg.compile("[\\d.]")
-		filter = func filter_p0_f(new_char_: String) -> String:
-			if reg.search(new_char_) == null:
+		filter = func filter_p0_f(char_new_: String) -> String:
+			if reg.search(char_new_) == null:
 				return ""
-			elif new_char_ == ".":
-				if old_text.contains("."):
+			elif char_new_ == ".":
+				if text_old.contains("."):
 					return ""
-				elif old_text_length == 0:
-					set_line(current_caret_line, "0.")
-					new_char_index = get_line(current_caret_line).length()
+				elif text_old_length == 0:
+					set_line(caret_line_curr, "0.")
+					char_new_index = get_line(caret_line_curr).length()
 					return ""
 			# 0 replacement
-			elif old_text == "0":
-				if new_char_ != "0":
+			elif text_old == "0":
+				if char_new_ != "0":
 					# delete_char_at_caret() cannot be placed here due to length checks
-					set_line(current_caret_line, "")
+					set_line(caret_line_curr, "")
 				else:
 					return ""
 			# 0 replacement
-			elif old_text == "0.":
-				if new_char_ != "0":
-					if new_char_index == 1:
-						set_line(current_caret_line, "%s." % new_char_)
-						new_char_index = get_line(current_caret_line).length() - 1
+			elif text_old == "0.":
+				if char_new_ != "0":
+					if char_new_index == 1:
+						set_line(caret_line_curr, "%s." % char_new_)
+						char_new_index = get_line(caret_line_curr).length() - 1
 						return ""
-			return new_char_
+			return char_new_
 	# f
 	elif filter_mode == 5:
 		reg.compile("[\\d.-]")
-		filter = func filter_f(new_char_: String) -> String:
-			if reg.search(new_char_) == null:
+		filter = func filter_f(char_new_: String) -> String:
+			if reg.search(char_new_) == null:
 				return ""
-			elif new_char_ == ".":
-				if old_text.contains("."):
+			elif char_new_ == ".":
+				if text_old.contains("."):
 					return ""
-				elif old_text_length == 0:
-					set_line(current_caret_line, "0.")
-					new_char_index = get_line(current_caret_line).length()
+				elif text_old_length == 0:
+					set_line(caret_line_curr, "0.")
+					char_new_index = get_line(caret_line_curr).length()
 					return ""
 				# Avoid things like '-.0'
-				elif old_text.contains("-") and new_char_index == 1:
+				elif text_old.contains("-") and char_new_index == 1:
 					return ""
 				# Avoid things like '.0'
-				elif new_char_index == 0:
+				elif char_new_index == 0:
 					return ""
-			elif new_char_ == "-":
-				if old_text.contains("-"):
-					set_line(current_caret_line, get_line(current_caret_line).erase(0))
-					new_char_index = old_text_length
-					# Do this change to avoid passing new_text_length < old_text_length
-					new_text_length = old_text_length
+			elif char_new_ == "-":
+				if text_old.contains("-"):
+					set_line(caret_line_curr, get_line(caret_line_curr).erase(0))
+					char_new_index = text_old_length
+					# Do this change to avoid passing text_new_length < text_old_length
+					text_new_length = text_old_length
 					return ""
-				elif old_text_length == 0:
-					set_line(current_caret_line, "-0")
-					new_char_index = get_line(current_caret_line).length()
+				elif text_old_length == 0:
+					set_line(caret_line_curr, "-0")
+					char_new_index = get_line(caret_line_curr).length()
 					return ""
 				else:
-					set_line(current_caret_line, old_text.insert(0, "-"))
-					new_char_index += 1
+					set_line(caret_line_curr, text_old.insert(0, "-"))
+					char_new_index += 1
 					return ""
 			# 0 replacement
-			elif old_text == "0":
-				if new_char_ != "0":
+			elif text_old == "0":
+				if char_new_ != "0":
 					# delete_char_at_caret() cannot be placed here due to length checks
-					set_line(current_caret_line, "")
+					set_line(caret_line_curr, "")
 				else:
 					return ""
 			# 0 replacement
-			elif old_text == "-0":
+			elif text_old == "-0":
 				# Avoid things like '1-0'
-				if old_text.contains("-") and new_char_index == 0:
+				if text_old.contains("-") and char_new_index == 0:
 					return ""
-				if new_char_ != "0":
-					if new_char_index == 2:
-						set_line(current_caret_line, "-%s" % new_char_)
-						new_char_index = get_line(current_caret_line).length()
+				if char_new_ != "0":
+					if char_new_index == 2:
+						set_line(caret_line_curr, "-%s" % char_new_)
+						char_new_index = get_line(caret_line_curr).length()
 						return ""
 			# 0 replacement
-			elif old_text == "0.":
-				if new_char_ != "0":
-					if new_char_index == 1:
-						set_line(current_caret_line, "%s." % new_char_)
-						new_char_index = get_line(current_caret_line).length() - 1
+			elif text_old == "0.":
+				if char_new_ != "0":
+					if char_new_index == 1:
+						set_line(caret_line_curr, "%s." % char_new_)
+						char_new_index = get_line(caret_line_curr).length() - 1
 						return ""
 			# 0 replacement
-			elif old_text == "-0.":
+			elif text_old == "-0.":
 				# Avoid things like '1-0.'
-				if old_text.contains("-") and new_char_index == 0:
+				if text_old.contains("-") and char_new_index == 0:
 					return ""
-				if new_char_ != "0":
-					if new_char_index == 2:
-						set_line(current_caret_line, "-%s." % new_char_)
-						new_char_index = get_line(current_caret_line).length()
+				if char_new_ != "0":
+					if char_new_index == 2:
+						set_line(caret_line_curr, "-%s." % char_new_)
+						char_new_index = get_line(caret_line_curr).length()
 						return ""
 			# Avoid things like '1-2' (see '0 replacement's to avoid '1-0', '1-0.')
-			elif old_text.contains("-") and new_char_index == 0:
+			elif text_old.contains("-") and char_new_index == 0:
 				return ""
-			return new_char_
+			return char_new_
 
 
 ## Manages text input and filtering.
@@ -231,51 +231,51 @@ func _on_text_changed() -> void:
 	# Avoid problems when clamping at first line
 	if _clamping:
 		return
-	current_caret_line = get_caret_line()
-	var new_text: String = get_line(current_caret_line)
+	caret_line_curr = get_caret_line()
+	var text_new: String = get_line(caret_line_curr)
 	var new_line_count: int = get_line_count()
 	# Update new length
-	new_text_length = get_line(current_caret_line).length()
+	text_new_length = get_line(caret_line_curr).length()
 	# If inserting/deleting new line, pass. This check has to be at the top
-	if new_line_count != old_line_count:
-		old_line_count = new_line_count
-		old_text = get_line(current_caret_line)
-		old_text_length = get_line(current_caret_line).length()
+	if new_line_count != line_count_old:
+		line_count_old = new_line_count
+		text_old = get_line(caret_line_curr)
+		text_old_length = get_line(caret_line_curr).length()
 		return
 	# If you select all text and press `-`/`.` it would break because of a
-	## `new_text = ""`.
-	if new_text == "":
-		set_line(current_caret_line, "")
-		old_text = ""
-		old_text_length = 0
+	## `text_new = ""`.
+	if text_new == "":
+		set_line(caret_line_curr, "")
+		text_old = ""
+		text_old_length = 0
 		return
 	# If deleting text, pass
-	if new_text_length < old_text_length:
-		old_text_length = new_text_length
+	if text_new_length < text_old_length:
+		text_old_length = text_new_length
 		# Avoid deleting only '0' from '0.'/'0-', delete all
-		if new_text == "-" or new_text == ".":
-			set_line(current_caret_line, "")
-			old_text = ""
-			old_text_length = 0
+		if text_new == "-" or text_new == ".":
+			set_line(caret_line_curr, "")
+			text_old = ""
+			text_old_length = 0
 		return
 	# Else, need to determine the new character and the old text
 	# New character
-	new_char_index = get_caret_column() - 1
-	new_char = get_line(current_caret_line)[new_char_index]
+	char_new_index = get_caret_column() - 1
+	char_new = get_line(caret_line_curr)[char_new_index]
 	# Old text
-	var left_text: String = new_text.substr(0, new_char_index)
-	var right_text: String = new_text.substr(new_char_index+1, -1)
-	old_text = left_text + right_text
+	var left_text: String = text_new.substr(0, char_new_index)
+	var right_text: String = text_new.substr(char_new_index+1, -1)
+	text_old = left_text + right_text
 	# Go back to the old text to decide insertion
-	set_line(current_caret_line, old_text)
+	set_line(caret_line_curr, text_old)
 	# Filtering
-	new_char = filter.call(new_char)
+	char_new = filter.call(char_new)
 	# Set the caret at the right position for insertion
-	set_caret_column(new_char_index)
+	set_caret_column(char_new_index)
 	# Insert new text at the right position
-	insert_text_at_caret(new_char)
+	insert_text_at_caret(char_new)
 	# Update old length
-	old_text_length = get_line(current_caret_line).length()
+	text_old_length = get_line(caret_line_curr).length()
 
 
 ## Clamps the numeric value of the text if [param filter_mode] is a numeric mode.
@@ -287,7 +287,7 @@ func clamp_line(i: int) -> void:
 		return
 	_clamping = true
 	var value: float = float(get_line(i))
-	value = clamp(value, min_value, max_value)
+	value = clamp(value, value_min, value_max)
 	set_line(i, str(value))
 
 
@@ -302,5 +302,5 @@ func clamp_lines() -> void:
 	var value: float
 	for i in range(get_line_count()):
 		value = float(get_line(i))
-		value = clamp(value, min_value, max_value)
+		value = clamp(value, value_min, value_max)
 		set_line(i, str(value))

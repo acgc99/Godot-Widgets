@@ -6,20 +6,20 @@ extends Button
 
 
 ## Emitted when the outside button is pressed.
-signal outside_button_pressed
+signal button_outside_pressed
 ## Emitted when the left popup button is pressed.
-signal popup_left_button_pressed
+signal button_left_popup_pressed
 ## Emitted when the right popup button is pressed.
-signal popup_right_button_pressed
+signal button_right_popup_pressed
 
 @export_group("Texts")
-@export_subgroup("Title", "title_label")
+@export_subgroup("Title", "label_title")
 ## Popup title.
-@export var title_label_text: String:
-	set(title_label_text_):
-		title_label_text = title_label_text_
-		if title_label != null:
-			title_label.text = title_label_text
+@export var label_title_text: String:
+	set(label_title_text_):
+		label_title_text = label_title_text_
+		if label_title != null:
+			label_title.text = label_title_text
 @export_enum(
 	"Horizontal alignment left",
 	"Horizontal alignment center",
@@ -27,18 +27,18 @@ signal popup_right_button_pressed
 	"Horizontal alignment fill"
 )
 ## Popup title [param horizontal_alignment].
-var title_label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
-	set(title_label_horizontal_alignment_):
-		title_label_horizontal_alignment = title_label_horizontal_alignment_
-		if title_label != null:
-			title_label.horizontal_alignment = title_label_horizontal_alignment
-@export_subgroup("Message", "message_label")
+var label_title_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
+	set(label_title_horizontal_alignment_):
+		label_title_horizontal_alignment = label_title_horizontal_alignment_
+		if label_title != null:
+			label_title.horizontal_alignment = label_title_horizontal_alignment
+@export_subgroup("Message", "label_message")
 ## Popup message.
-@export_multiline var message_label_text: String:
-	set(message_label_text_):
-		message_label_text = message_label_text_
-		if message_label != null:
-			message_label.text = message_label_text
+@export_multiline var label_message_text: String:
+	set(label_message_text_):
+		label_message_text = label_message_text_
+		if label_message != null:
+			label_message.text = label_message_text
 @export_enum(
 	"Horizontal alignment left",
 	"Horizontal alignment center",
@@ -46,24 +46,24 @@ var title_label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 	"Horizontal alignment fill"
 )
 ## Popup message [param horizontal_alignment].
-var message_label_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
-	set(message_label_horizontal_alignment_):
-		message_label_horizontal_alignment = message_label_horizontal_alignment_
-		if message_label != null:
-			message_label.horizontal_alignment = message_label_horizontal_alignment
+var label_message_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
+	set(label_message_horizontal_alignment_):
+		label_message_horizontal_alignment = label_message_horizontal_alignment_
+		if label_message != null:
+			label_message.horizontal_alignment = label_message_horizontal_alignment
 @export_subgroup("Buttons")
 ## Popup left button text.
-@export var left_button_text: String:
-	set(left_button_text_):
-		left_button_text = left_button_text_
-		if left_button != null:
-			left_button.text = left_button_text
+@export var button_left_text: String:
+	set(button_left_text_):
+		button_left_text = button_left_text_
+		if button_left != null:
+			button_left.text = button_left_text
 ## Popup right button text.
-@export var right_button_text: String:
-	set(right_button_text_):
-		right_button_text = right_button_text_
-		if right_button != null:
-			right_button.text = right_button_text
+@export var button_right_text: String:
+	set(button_right_text_):
+		button_right_text = button_right_text_
+		if button_right != null:
+			button_right.text = button_right_text
 @export_group("Size Flags")
 @export_enum(
 	"Size Shrink Begin:0",
@@ -85,10 +85,10 @@ var buttons_container_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
 @export_group("Theme type variations")
 ## Outside button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
-@export var outside_button_theme_type_variation: String:
-	set(outside_button_theme_type_variation_):
-		outside_button_theme_type_variation = outside_button_theme_type_variation_
-		theme_type_variation = outside_button_theme_type_variation
+@export var button_outside_theme_type_variation: String:
+	set(button_outside_theme_type_variation_):
+		button_outside_theme_type_variation = button_outside_theme_type_variation_
+		theme_type_variation = button_outside_theme_type_variation
 ## Popup container [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]PanelContainer[/code].
 @export var panel_container_theme_type_variation: String:
@@ -112,18 +112,18 @@ var buttons_container_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
 			message_container.theme_type_variation = message_container_theme_type_variation
 ## Popup title [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Label[/code].
-@export var title_label_theme_type_variation: String:
-	set(title_label_theme_type_variation_):
-		title_label_theme_type_variation = title_label_theme_type_variation_
-		if title_label != null:
-			title_label.theme_type_variation = title_label_theme_type_variation
+@export var label_title_theme_type_variation: String:
+	set(label_title_theme_type_variation_):
+		label_title_theme_type_variation = label_title_theme_type_variation_
+		if label_title != null:
+			label_title.theme_type_variation = label_title_theme_type_variation
 ## Popup message [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Label[/code].
-@export var message_label_theme_type_variation: String:
-	set(message_label_theme_type_variation_):
-		message_label_theme_type_variation = message_label_theme_type_variation_
-		if message_label != null:
-			message_label.theme_type_variation = message_label_theme_type_variation
+@export var label_message_theme_type_variation: String:
+	set(label_message_theme_type_variation_):
+		label_message_theme_type_variation = label_message_theme_type_variation_
+		if label_message != null:
+			label_message.theme_type_variation = label_message_theme_type_variation
 ## Popup buttons container [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]HBoxContainer[/code].
 @export var buttons_container_theme_type_variation: String:
@@ -133,36 +133,36 @@ var buttons_container_size_flags_horizontal: int = Control.SIZE_SHRINK_CENTER:
 			buttons_container.theme_type_variation = buttons_container_theme_type_variation
 ## Popup left button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
-@export var left_button_theme_type_variation: String:
-	set(left_button_theme_type_variation_):
-		left_button_theme_type_variation = left_button_theme_type_variation_
-		if left_button != null:
-			left_button.theme_type_variation = left_button_theme_type_variation
+@export var button_left_theme_type_variation: String:
+	set(button_left_theme_type_variation_):
+		button_left_theme_type_variation = button_left_theme_type_variation_
+		if button_left != null:
+			button_left.theme_type_variation = button_left_theme_type_variation
 ## Popup right button [param theme_type_variation].
 ## The [code]Base Type[/code] must be [code]Button[/code].
-@export var right_button_theme_type_variation: String:
-	set(right_button_theme_type_variation_):
-		right_button_theme_type_variation = right_button_theme_type_variation_
-		if right_button != null:
-			right_button.theme_type_variation = right_button_theme_type_variation
+@export var button_right_theme_type_variation: String:
+	set(button_right_theme_type_variation_):
+		button_right_theme_type_variation = button_right_theme_type_variation_
+		if button_right != null:
+			button_right.theme_type_variation = button_right_theme_type_variation
 
 var animation_player: AnimationPlayer
 var panel_container: PanelContainer
 var margin_container: MarginContainer
 var message_container: VBoxContainer
-var title_label: Label
-var message_label: Label
+var label_title: Label
+var label_message: Label
 var buttons_container: HBoxContainer
-var left_button: Button
-var right_button: Button
+var button_left: Button
+var button_right: Button
 
 
 func _enter_tree() -> void:
 	pressed.connect(
 		func _on_outside_pressed() -> void:
-			outside_button_pressed.emit()
+			button_outside_pressed.emit()
 	)
-	theme_type_variation = outside_button_theme_type_variation
+	theme_type_variation = button_outside_theme_type_variation
 	top_level = true
 	size = get_parent().size
 	modulate = Color(1, 1, 1, 0)
@@ -184,42 +184,42 @@ func _enter_tree() -> void:
 	margin_container.add_child(message_container)
 	message_container.theme_type_variation = message_container_theme_type_variation
 	
-	title_label = Label.new()
-	message_container.add_child(title_label)
-	title_label.theme_type_variation = title_label_theme_type_variation
-	title_label.text = title_label_text
-	title_label.horizontal_alignment = title_label_horizontal_alignment
+	label_title = Label.new()
+	message_container.add_child(label_title)
+	label_title.theme_type_variation = label_title_theme_type_variation
+	label_title.text = label_title_text
+	label_title.horizontal_alignment = label_title_horizontal_alignment
 	
-	message_label = Label.new()
-	message_container.add_child(message_label)
-	message_label.theme_type_variation = message_label_theme_type_variation
-	message_label.text = message_label_text
-	message_label.horizontal_alignment = message_label_horizontal_alignment
+	label_message = Label.new()
+	message_container.add_child(label_message)
+	label_message.theme_type_variation = label_message_theme_type_variation
+	label_message.text = label_message_text
+	label_message.horizontal_alignment = label_message_horizontal_alignment
 	
 	buttons_container = HBoxContainer.new()
 	message_container.add_child(buttons_container)
 	buttons_container.theme_type_variation = buttons_container_theme_type_variation
 	buttons_container.size_flags_horizontal = buttons_container_size_flags_horizontal
 	
-	left_button = Button.new()
-	buttons_container.add_child(left_button)
-	left_button.pressed.connect(
-		func _on_popup_left_button_pressed() -> void:
-			popup_left_button_pressed.emit()
+	button_left = Button.new()
+	buttons_container.add_child(button_left)
+	button_left.pressed.connect(
+		func _on_button_left_popup_pressed() -> void:
+			button_left_popup_pressed.emit()
 	)
-	left_button.theme_type_variation = left_button_theme_type_variation
-	left_button.text = left_button_text
-	left_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button_left.theme_type_variation = button_left_theme_type_variation
+	button_left.text = button_left_text
+	button_left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
-	right_button = Button.new()
-	buttons_container.add_child(right_button)
-	right_button.pressed.connect(
-		func _on_popup_right_button_pressed() -> void:
-			popup_right_button_pressed.emit()
+	button_right = Button.new()
+	buttons_container.add_child(button_right)
+	button_right.pressed.connect(
+		func _on_button_right_popup_pressed() -> void:
+			button_right_popup_pressed.emit()
 	)
-	right_button.theme_type_variation = right_button_theme_type_variation
-	right_button.text = right_button_text
-	right_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button_right.theme_type_variation = button_right_theme_type_variation
+	button_right.text = button_right_text
+	button_right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
 	var animation_library: AnimationLibrary = AnimationLibrary.new()
 	var animation: Animation

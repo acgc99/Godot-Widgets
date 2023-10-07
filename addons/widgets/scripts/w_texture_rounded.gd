@@ -20,36 +20,36 @@ const SHADER: Shader = preload("res://addons/widgets/shaders/rounded_corners.gds
 		radius_scale = radius_scale_
 		material.set_shader_parameter("radius_scale", radius_scale)
 ## Enable/disable rounded top left corner.
-@export var rounded_top_left_corner: bool = true:
-	set(rounded_top_left_corner_):
-		rounded_top_left_corner = rounded_top_left_corner_
+@export var rounded_corner_top_left: bool = true:
+	set(rounded_corner_top_left_):
+		rounded_corner_top_left = rounded_corner_top_left_
 		material.set_shader_parameter(
-			"rounded_top_left_corner",
-			rounded_top_left_corner
+			"rounded_corner_top_left",
+			rounded_corner_top_left
 		)
 ## Enable/disable rounded top right corner.
-@export var rounded_top_right_corner: bool = true:
-	set(rounded_top_right_corner_):
-		rounded_top_right_corner = rounded_top_right_corner_
+@export var rounded_corner_top_right: bool = true:
+	set(rounded_corner_top_right_):
+		rounded_corner_top_right = rounded_corner_top_right_
 		material.set_shader_parameter(
-			"rounded_top_right_corner",
-			rounded_top_right_corner
+			"rounded_corner_top_right",
+			rounded_corner_top_right
 		)
 ## Enable/disable rounded bottom left corner.
-@export var rounded_bottom_left_corner: bool = true:
-	set(rounded_bottom_left_corner_):
-		rounded_bottom_left_corner = rounded_bottom_left_corner_
+@export var rounded_corner_bottom_left: bool = true:
+	set(rounded_corner_bottom_left_):
+		rounded_corner_bottom_left = rounded_corner_bottom_left_
 		material.set_shader_parameter(
-			"rounded_bottom_left_corner",
-			rounded_bottom_left_corner
+			"rounded_corner_bottom_left",
+			rounded_corner_bottom_left
 		)
 ## Enable/disable rounded bottom left corner.
-@export var rounded_bottom_right_corner: bool = true:
-	set(rounded_bottom_right_corner_):
-		rounded_bottom_right_corner = rounded_bottom_right_corner_
+@export var rounded_corner_bottom_right: bool = true:
+	set(rounded_corner_bottom_right_):
+		rounded_corner_bottom_right = rounded_corner_bottom_right_
 		material.set_shader_parameter(
-			"rounded_bottom_right_corner",
-			rounded_bottom_right_corner
+			"rounded_corner_bottom_right",
+			rounded_corner_bottom_right
 		)
 
 var shader_material: ShaderMaterial
@@ -61,20 +61,20 @@ func _enter_tree() -> void:
 	material = shader_material
 	material.set_shader_parameter("radius_scale", radius_scale)
 	material.set_shader_parameter(
-		"rounded_top_left_corner",
-		rounded_top_left_corner
+		"rounded_corner_top_left",
+		rounded_corner_top_left
 	)
 	material.set_shader_parameter(
-		"rounded_top_right_corner",
-		rounded_top_right_corner
+		"rounded_corner_top_right",
+		rounded_corner_top_right
 	)
 	material.set_shader_parameter(
-		"rounded_bottom_left_corner",
-		rounded_bottom_left_corner
+		"rounded_corner_bottom_left",
+		rounded_corner_bottom_left
 	)
 	material.set_shader_parameter(
-		"rounded_bottom_right_corner",
-		rounded_bottom_right_corner
+		"rounded_corner_bottom_right",
+		rounded_corner_bottom_right
 	)
 
 
