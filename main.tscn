@@ -15,7 +15,7 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_two.gd" id="11_uuvgh"]
 [ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://assets/png_icons/arrow-down-bold.png" id="12_yu17d"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vihdp"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_871pu"]
 shader = ExtResource("6_esdkb")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -25,7 +25,7 @@ shader_parameter/rounded_corner_bottom_right = true
 shader_parameter/width = 500.0
 shader_parameter/height = 200.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qte2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_73ptl"]
 shader = ExtResource("9_fqtwr")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -62,7 +62,6 @@ custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 script = ExtResource("2_pyenn")
 title = "Title"
-horizontal_alignment = 0
 button_left_icon = ExtResource("3_krt2y")
 button_right_icon = ExtResource("4_08bym")
 
@@ -87,7 +86,7 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 
 [node name="WTextureRounded" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_vihdp")
+material = SubResource("ShaderMaterial_871pu")
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -95,7 +94,7 @@ texture = ExtResource("6_4ctud")
 script = ExtResource("8_03kac")
 
 [node name="WCard" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_7qte2")
+material = SubResource("ShaderMaterial_73ptl")
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -144,8 +143,8 @@ visible = false
 modulate = Color(1, 1, 1, 0)
 top_level = true
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_right = 720.0
+offset_bottom = 1280.0
 mouse_filter = 2
 script = ExtResource("11_uuvgh")
 label_title_text = "Title"
