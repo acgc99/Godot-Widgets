@@ -1,19 +1,21 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5en2sqjkddpj"]
+[gd_scene load_steps=17 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_nav_bar.gd" id="2_pyenn"]
-[ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://addons/widgets/png_icons/arrow-left-bold.png" id="3_8tqhm"]
-[ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://addons/widgets/png_icons/home.png" id="4_x4a5t"]
+[ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://assets/png_icons/arrow-left-bold.png" id="3_krt2y"]
+[ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://assets/png_icons/home.png" id="4_08bym"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_numeric_input.gd" id="5_arsm4"]
+[ext_resource type="Texture2D" uid="uid://b3juesd7gu3d" path="res://assets/colors/black.png" id="6_4ctud"]
 [ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners.gdshader" id="6_esdkb"]
-[ext_resource type="Texture2D" uid="uid://b3juesd7gu3d" path="res://assets/black.png" id="7_j7cqe"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_texture_rounded.gd" id="8_03kac"]
 [ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners_panel.gdshader" id="9_fqtwr"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_card.gd" id="10_8kjpv"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_one.gd" id="10_lr3bw"]
+[ext_resource type="Texture2D" uid="uid://bh06vd6w24v78" path="res://assets/png_icons/arrow-up-bold.png" id="11_blpd4"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_two.gd" id="11_uuvgh"]
+[ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://assets/png_icons/arrow-down-bold.png" id="12_yu17d"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5hle0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nqt58"]
 shader = ExtResource("6_esdkb")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -23,7 +25,7 @@ shader_parameter/rounded_corner_bottom_right = true
 shader_parameter/width = 500.0
 shader_parameter/height = 200.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t2wl7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jfkhs"]
 shader = ExtResource("9_fqtwr")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -61,8 +63,8 @@ layout_mode = 2
 script = ExtResource("2_pyenn")
 title = "Title"
 horizontal_alignment = 0
-button_left_icon = ExtResource("3_8tqhm")
-button_right_icon = ExtResource("4_x4a5t")
+button_left_icon = ExtResource("3_krt2y")
+button_right_icon = ExtResource("4_08bym")
 
 [node name="Contents" type="ColorRect" parent="Page"]
 layout_mode = 2
@@ -85,23 +87,19 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 
 [node name="WTextureRounded" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_5hle0")
+material = SubResource("ShaderMaterial_nqt58")
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("7_j7cqe")
+texture = ExtResource("6_4ctud")
 script = ExtResource("8_03kac")
-rounded_corner_top_left = null
-rounded_corner_top_right = null
-rounded_corner_bottom_left = null
-rounded_corner_bottom_right = null
 
 [node name="WCard" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_t2wl7")
+material = SubResource("ShaderMaterial_jfkhs")
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("7_j7cqe")
+texture = ExtResource("6_4ctud")
 script = ExtResource("10_8kjpv")
 panel_color = Color(0, 1, 0, 1)
 label_text = "Card"
@@ -113,6 +111,8 @@ size_flags_horizontal = 4
 script = ExtResource("5_arsm4")
 text = "Value:"
 value_min = 0.0
+button_up = ExtResource("11_blpd4")
+button_down_icon = ExtResource("12_yu17d")
 
 [node name="ButtonOne" type="Button" parent="Page/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)

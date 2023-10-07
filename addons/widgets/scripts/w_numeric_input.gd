@@ -39,13 +39,13 @@ extends PanelContainer
 @export var step: float = 1.0
 @export_group("Buttons")
 ## Up button icon.
-@export var button_up: Texture2D = preload("res://addons/widgets/png_icons/arrow-up-bold.png"):
+@export var button_up: Texture2D:
 	set(button_up_):
 		button_up = button_up_
 		if up_button != null:
 			up_button.icon = button_up
 ## Down button icon.
-@export var button_down_icon: Texture2D = preload("res://addons/widgets/png_icons/arrow-down-bold.png"):
+@export var button_down_icon: Texture2D:
 	set(button_down_icon_):
 		button_down_icon = button_down_icon_
 		if button_down != null:
