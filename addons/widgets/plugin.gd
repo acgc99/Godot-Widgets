@@ -23,13 +23,13 @@ func _enter_tree() -> void:
 	)
 	add_custom_type(
 		"WNavBar",
-		"PanelContainer",
+		"Control",
 		preload("res://addons/widgets/scripts/w_nav_bar.gd"),
 		preload("res://addons/widgets/svg_icons/navigation-variant.svg")
 	)
 	add_custom_type(
 		"WNumericInput",
-		"PanelContainer",
+		"Control",
 		preload("res://addons/widgets/scripts/w_numeric_input.gd"),
 		preload("res://addons/widgets/svg_icons/arrow-expand-vertical.svg")
 	)

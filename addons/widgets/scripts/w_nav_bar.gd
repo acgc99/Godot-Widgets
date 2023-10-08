@@ -1,6 +1,6 @@
 @tool
 class_name WNavBar
-extends PanelContainer
+extends Control
 ## A widget with to [WIconButton] and a [Label] in the middle. Intended to be
 ## placed at the top/bottom of the scene (left/right buttons), but it can also
 ## be placed on sides.
@@ -81,6 +81,8 @@ var horizontal_alignment: int:
 		if button_right != null:
 			button_right.disabled = button_right_disabled
 
+## Panel container for a panel background
+var panel_container: PanelContainer
 ## Container for all elements.
 var container: HBoxContainer
 ## [Label] holding the title.
@@ -94,9 +96,12 @@ var button_right: WIconButton
 func _init() -> void:
 	item_rect_changed.connect(_resize_children)
 	tree_entered.connect(_resize_children)
+	# panel_container ##########################################################
+	panel_container = PanelContainer.new()
+	add_child(panel_container)
 	# container ################################################################
 	container = HBoxContainer.new()
-	add_child(container)
+	panel_container.add_child(container)
 	# button_left ##############################################################
 	button_left = WIconButton.new()
 	container.add_child(button_left)
@@ -127,8 +132,8 @@ func _init() -> void:
 
 
 func _resize_children() -> void:
-		button_left.custom_minimum_size = Vector2(size[1], 0)
-		button_right.custom_minimum_size = Vector2(size[1], 0)
+	button_left.custom_minimum_size = Vector2(size[1], 0)
+	button_right.custom_minimum_size = Vector2(size[1], 0)
 
 
 func _on_button_left_pressed() -> void:

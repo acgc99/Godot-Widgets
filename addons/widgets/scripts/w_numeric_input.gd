@@ -1,6 +1,6 @@
 @tool
 class_name WNumericInput
-extends PanelContainer
+extends Control
 ## A widget for numeric inputs with two [WIconButton] for easy touch.
 
 
@@ -82,6 +82,8 @@ extends PanelContainer
 		if button_down != null:
 			button_down.disabled = button_down_disabled
 
+## Panel container for a panel background
+var panel_container: PanelContainer
 ## [MarginContainer] to set margins for the widget.
 var margin_container: MarginContainer
 ## Container of all elements.
@@ -99,9 +101,12 @@ var button_down: WIconButton
 func _init() -> void:
 	item_rect_changed.connect(_resize_children)
 	tree_entered.connect(_resize_children)
+	# panel_container ##########################################################
+	panel_container = PanelContainer.new()
+	add_child(panel_container)
 	# margin_container #########################################################
 	margin_container = MarginContainer.new()
-	add_child(margin_container)
+	panel_container.add_child(margin_container)
 	# container ################################################################
 	container = HBoxContainer.new()
 	margin_container.add_child(container)
@@ -145,8 +150,8 @@ func _init() -> void:
 
 
 func _resize_children() -> void:
-		button_up.custom_minimum_size = Vector2(size[1], 0)
-		button_down.custom_minimum_size = Vector2(size[1], 0)
+	button_up.custom_minimum_size = Vector2(size[1], 0)
+	button_down.custom_minimum_size = Vector2(size[1], 0)
 
 
 func _on_button_up_pressed() -> void:
