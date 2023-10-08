@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b5en2sqjkddpj"]
+[gd_scene load_steps=19 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_nav_bar.gd" id="2_pyenn"]
@@ -14,8 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://bh06vd6w24v78" path="res://assets/png_icons/arrow-up-bold.png" id="11_blpd4"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_two.gd" id="11_uuvgh"]
 [ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://assets/png_icons/arrow-down-bold.png" id="12_yu17d"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_line_edit.gd" id="13_nvvi0"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wskx1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1mc2b"]
 shader = ExtResource("6_esdkb")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -25,7 +27,7 @@ shader_parameter/rounded_corner_bottom_right = true
 shader_parameter/width = 500.0
 shader_parameter/height = 200.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hmhvd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a41rd"]
 shader = ExtResource("9_fqtwr")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -86,7 +88,7 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 
 [node name="WTextureRounded" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_wskx1")
+material = SubResource("ShaderMaterial_1mc2b")
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -94,7 +96,7 @@ texture = ExtResource("6_4ctud")
 script = ExtResource("8_03kac")
 
 [node name="WCard" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_hmhvd")
+material = SubResource("ShaderMaterial_a41rd")
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -125,6 +127,25 @@ custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "WPopupButtonTwo"
+
+[node name="WFilteredLineEdit" type="LineEdit" parent="Page/Contents/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "53"
+script = ExtResource("13_nvvi0")
+filter_mode = 3
+value_max = 10.0
+
+[node name="WFilteredTextEdit" type="TextEdit" parent="Page/Contents/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+text = "12.
+-1.
+1.
+123"
+script = ExtResource("14_sa3kl")
+filter_mode = 5
+value_max = 10.0
+value_min = 0.0
 
 [node name="WPopupButtonOne" type="Button" parent="."]
 visible = false

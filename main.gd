@@ -4,6 +4,10 @@ extends Control
 @onready var popup_button_one: WPopupButtonOne = $WPopupButtonOne
 @onready var popup_button_two: WPopupButtonTwo = $WPopupButtonTwo
 
+func _ready():
+	$Page/Contents/MarginContainer/VBoxContainer/WFilteredLineEdit.clamp_text()
+	$Page/Contents/MarginContainer/VBoxContainer/WFilteredTextEdit.clamp_lines()
+
 
 func _on_button_one_pressed() -> void:
 	popup_button_one.popup()
