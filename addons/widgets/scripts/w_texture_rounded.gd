@@ -1,6 +1,6 @@
 @tool
-extends Control
 class_name WTextureRounded
+extends Control
 ## Like [TextureRect] but with rounded corners.
 ## Inner child [member TextureRect.expand_mode] is fixed to
 ## [member TextureRect.EXPAND_IGNORE_SIZE].

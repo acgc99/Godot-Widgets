@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_line_edit.gd" id="13_nvvi0"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwotw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3rpn2"]
 shader = ExtResource("9_fqtwr")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -88,7 +88,7 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [node name="WCard" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_jwotw")
+material = SubResource("ShaderMaterial_3rpn2")
 custom_minimum_size = Vector2(497.13, 200)
 layout_mode = 2
 size_flags_horizontal = 4
