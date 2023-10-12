@@ -4,11 +4,10 @@ extends TextureRect
 ## Like [code]TextureRect[/code] but with rounded corners and a panel for text
 ## and acts like a button.
 ##
-## 1) If 'strecth_mode = keep_aspect_covered', texture borders might be not
-## visible, since they are outside the node rectangle (although they are rounded).
-## 2) It is recommended to reload the scene if you changed the node properties
-## and you get weird results in the Editor. It seems that they are not updated
-## correctly.
+## Known issues:
+## 1) Take care of 'expand_mode' and 'stretch_mode', because image corners
+## might be outside node rectangle and therefore clipped. Corners are rounded,
+## but they are outside node's rectangle.
 
 ## Emitted when the card is pressed.
 signal pressed
@@ -70,7 +69,7 @@ const SHADER: Shader = preload("res://addons/widgets/shaders/rounded_corners_pan
 			panel_color
 		)
 ## Panel length is calculated by multiplying 'radius' and 'panel_scale'.
-@export_range(1.0, 3.0, 0.1) var panel_scale: float = 1.0:
+@export_range(1.0, 4.0, 0.1) var panel_scale: float = 2.0:
 	set(panel_scale_):
 		panel_scale = panel_scale_
 		material.set_shader_parameter(
@@ -89,15 +88,15 @@ var panel_pos: int = BOTTOM:
 			"panel_pos",
 			panel_pos
 		)
-		if label != null:
+		if _label != null:
 			_set_label_position()
 @export_subgroup("Label", "label")
 ## Label text.
 @export var label_text: String:
 	set(label_text_):
 		label_text = label_text_
-		if label != null:
-			label.text == label_text
+		if _label != null:
+			_label.text == label_text
 @export_enum(
 	"Left",
 	"Center",
@@ -107,20 +106,23 @@ var panel_pos: int = BOTTOM:
 var label_pos: int = LEFT:
 	set(label_pos_):
 		label_pos = label_pos_
-		if label != null:
+		if _label != null:
 			_set_label_position()
 
-var shader_material: ShaderMaterial
-var button: BaseButton
+var _shader_material: ShaderMaterial
+var _button: BaseButton
 var radius: float
 var panel_length: float
-var label: Label
+var _label: Label
 
 
 func _enter_tree() -> void:
-	shader_material = ShaderMaterial.new()
-	shader_material.shader = SHADER
-	material = shader_material
+	item_rect_changed.connect(_reset_shader_params)
+	tree_entered.connect(_reset_shader_params)
+	# _shader_material #########################################################
+	_shader_material = ShaderMaterial.new()
+	_shader_material.shader = SHADER
+	material = _shader_material
 	material.set_shader_parameter("radius_scale", radius_scale)
 	material.set_shader_parameter(
 		"rounded_corner_top_left",
@@ -150,45 +152,45 @@ func _enter_tree() -> void:
 		"panel_pos",
 		panel_pos
 	)
-	
-	button = BaseButton.new()
-	add_child(button)
-	button.pressed.connect(
-		func _on_pressed():
-			pressed.emit()
-	)
-	
-	label = Label.new()
-	add_child(label)
-	label.text = label_text
-	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-
-
-func _ready() -> void:
-	item_rect_changed.connect(
-		func _on_item_rect_changed():
-		shader_material.set_shader_parameter("width", size.x)
-		shader_material.set_shader_parameter("height", size.y)
-		radius = min(size.x, size.y)*radius_scale
-		panel_length = radius*panel_scale
-		button.size = size
-		_set_label_position()
-	)
-	item_rect_changed.emit()
+	# _button ###################################################################
+	_button = BaseButton.new()
+	add_child(_button)
+	_button.pressed.connect(_on_button_pressed)
+	# _label ####################################################################
+	_label = Label.new()
+	add_child(_label)
+	_label.text = label_text
+	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 
 
 ## Sets label position.
 func _set_label_position() -> void:
 	# position.y
-	var vertical_offset: float = (panel_length - label.size.y)/2.0
+	var vertical_offset: float = (panel_length - _label.size.y)/2.0
 	if panel_pos == TOP:
-		label.position.y = vertical_offset
+		_label.position.y = vertical_offset
 	else:
-		label.position.y = vertical_offset + (size.y - panel_length)
+		_label.position.y = vertical_offset + (size.y - panel_length)
 	# position.x
 	if label_pos == LEFT:
-		label.position.x = radius
+		_label.position.x = radius
 	elif label_pos == CENTER:
-		label.position.x = (size.x - label.size.x)/2.0
+		_label.position.x = (size.x - _label.size.x)/2.0
 	else:
-		label.position.x = size.x - radius - label.size.x
+		_label.position.x = size.x - radius - _label.size.x
+
+
+# Signal callables #############################################################
+
+
+func _reset_shader_params() -> void:
+	_shader_material.set_shader_parameter("width", size.x)
+	_shader_material.set_shader_parameter("height", size.y)
+	radius = min(size.x, size.y)*radius_scale
+	panel_length = radius*panel_scale
+	_button.size = size
+	_set_label_position()
+
+
+func _on_button_pressed() -> void:
+	pressed.emit()

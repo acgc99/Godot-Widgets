@@ -4,11 +4,9 @@ extends TextureRect
 ## Like [code]TextureRect[/code] but with rounded corners.
 ##
 ## Known issues:
-## 1) If 'strecth_mode = keep_aspect_covered', texture borders might be not
-## visible, since they are outside the node rectangle (although they are rounded).
-## 2) It is recommended to reload the scene if you changed the node properties
-## and you get weird results in the Editor. It seems that they are not updated
-## correctly.
+## 1) Take care of 'expand_mode' and 'stretch_mode', because image corners
+## might be outside node rectangle and therefore clipped. Corners are rounded,
+## but they are outside node's rectangle.
 
 
 const SHADER: Shader = preload("res://addons/widgets/shaders/rounded_corners.gdshader")
@@ -52,13 +50,16 @@ const SHADER: Shader = preload("res://addons/widgets/shaders/rounded_corners.gds
 			rounded_corner_bottom_right
 		)
 
-var shader_material: ShaderMaterial
+var _shader_material: ShaderMaterial
 
 
 func _enter_tree() -> void:
-	shader_material = ShaderMaterial.new()
-	shader_material.shader = SHADER
-	material = shader_material
+	item_rect_changed.connect(_reset_shader_params)
+	tree_entered.connect(_reset_shader_params)
+	# _shader_material #########################################################
+	_shader_material = ShaderMaterial.new()
+	_shader_material.shader = SHADER
+	material = _shader_material
 	material.set_shader_parameter("radius_scale", radius_scale)
 	material.set_shader_parameter(
 		"rounded_corner_top_left",
@@ -78,10 +79,9 @@ func _enter_tree() -> void:
 	)
 
 
-func _ready() -> void:
-	item_rect_changed.connect(
-		func _on_item_rect_changed():
-		shader_material.set_shader_parameter("width", size.x)
-		shader_material.set_shader_parameter("height", size.y)
-	)
-	item_rect_changed.emit()
+# Signal callables #############################################################
+
+
+func _reset_shader_params() -> void:
+	_shader_material.set_shader_parameter("width", size.x)
+	_shader_material.set_shader_parameter("height", size.y)

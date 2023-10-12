@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_line_edit.gd" id="13_nvvi0"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_un6xr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a13dk"]
 shader = ExtResource("6_esdkb")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -27,7 +27,7 @@ shader_parameter/rounded_corner_bottom_right = true
 shader_parameter/width = 500.0
 shader_parameter/height = 200.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5wsy"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lfs0k"]
 shader = ExtResource("9_fqtwr")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -35,9 +35,9 @@ shader_parameter/rounded_corner_top_right = true
 shader_parameter/rounded_corner_bottom_left = true
 shader_parameter/rounded_corner_bottom_right = true
 shader_parameter/panel_color = Color(0, 1, 0, 1)
-shader_parameter/panel_scale = 1.0
+shader_parameter/panel_scale = 2.0
 shader_parameter/panel_pos = true
-shader_parameter/width = 500.0
+shader_parameter/width = 497.13
 shader_parameter/height = 200.0
 
 [node name="Main" type="Control"]
@@ -88,7 +88,7 @@ theme_override_constants/margin_bottom = 50
 layout_mode = 2
 
 [node name="WTextureRounded" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_un6xr")
+material = SubResource("ShaderMaterial_a13dk")
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -97,8 +97,8 @@ expand_mode = 1
 script = ExtResource("8_03kac")
 
 [node name="WCard" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_n5wsy")
-custom_minimum_size = Vector2(500, 200)
+material = SubResource("ShaderMaterial_lfs0k")
+custom_minimum_size = Vector2(497.13, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("9_tksgc")
