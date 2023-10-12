@@ -1,87 +1,113 @@
 @tool
+extends Control
 class_name WTextureRounded
-extends TextureRect
-## Like [code]TextureRect[/code] but with rounded corners.
-##
-## Known issues:
-## 1) Take care of 'expand_mode' and 'stretch_mode', because image corners
-## might be outside node rectangle and therefore clipped. Corners are rounded,
-## but they are outside node's rectangle.
+## Like [TextureRect] but with rounded corners.
+## Inner child [member TextureRect.expand_mode] is fixed to
+## [member TextureRect.EXPAND_IGNORE_SIZE].
 
 
-const SHADER: Shader = preload("res://addons/widgets/shaders/rounded_corners.gdshader")
+## The node's [Texture2D] resource.
+@export var texture: Texture2D:
+	set(texture_):
+		texture = texture_
+		if _texture_rect != null:
+			_texture_rect.texture = texture
+@export_enum(
+	"Scale",
+	"Tile",
+	"Keep",
+	"Keep Centered",
+	"Keep Aspect",
+	"Keep Aspect Centered",
+	"Keep Aspect Covered"
+)
+## Controls the texture's behavior when resizing the node's bounding rectangle.
+## See [member StretchMode].
+## [br]
+## [br]
+## [b]Stretch Scale[/b]: Scale to fit the node's bounding rectangle.
+## [br]
+## [br]
+## [b]Stretch Tile[/b]: Tile inside the node's bounding rectangle.
+## [br]
+## [br]
+## [b]Stretch Keep[/b]: The texture keeps its original size and stays in the
+## bounding rectangle's top-left corner.
+## [br]
+## [br]
+## [b]Stretch Keep Centered[/b]: The texture keeps its original size and stays
+## centered in the node's bounding rectangle.
+## [br]
+## [br]
+## [b]Stretch Keep Aspect[/b]: Scale the texture to fit the node's bounding
+## rectangle, but maintain the texture's aspect ratio.
+## [br]
+## [br]
+## [b]Stretch Keep Aspect Centered[/b]: Scale the texture to fit the node's
+## bounding rectangle, center it and maintain its aspect ratio.
+## [br]
+## [br]
+## [b]Stretch Keep Aspect Covered[/b]: Scale the texture so that the shorter
+## side fits the bounding rectangle. The other side clips to the node's limits.
+var stretch_mode: int:
+	set(stretch_mode_):
+		stretch_mode = stretch_mode_
+		if _texture_rect != null:
+			_texture_rect.stretch_mode = stretch_mode
+## The top-left corner's radius. If [code]0[/code], the corner is not rounded.
+@export_range(0, 10, 1, "or_greater") var corner_radius_top_left: int:
+	set(corner_radius_top_left_):
+		corner_radius_top_left = corner_radius_top_left_
+		if _stylebox != null:
+			_stylebox.corner_radius_top_left = corner_radius_top_left
+## The top-right corner's radius. If [code]0[/code], the corner is not rounded.
+@export_range(0, 10, 1, "or_greater") var corner_radius_top_right: int:
+	set(corner_radius_top_right_):
+		corner_radius_top_right = corner_radius_top_right_
+		if _stylebox != null:
+			_stylebox.corner_radius_top_right = corner_radius_top_right
+## The bottom-right corner's radius. If [code]0[/code], the corner is not rounded.
+@export_range(0, 10, 1, "or_greater") var corner_radius_bottom_right: int:
+	set(corner_radius_bottom_right_):
+		corner_radius_bottom_right = corner_radius_bottom_right_
+		if _stylebox != null:
+			_stylebox.corner_radius_bottom_right = corner_radius_bottom_right
+## The bottom-left corner's radius. If [code]0[/code], the corner is not rounded.
+@export_range(0, 10, 1, "or_greater") var corner_radius_bottom_left: int:
+	set(corner_radius_bottom_left_):
+		corner_radius_bottom_left = corner_radius_bottom_left_
+		if _stylebox != null:
+			_stylebox.corner_radius_bottom_left = corner_radius_bottom_left
 
-## The calculated radius will be multiplied by [param radius_scale]. The initial
-## radius is calculated as [code]min(size.x, size.y)[/code].
-@export_range(0, 1, 0.1) var radius_scale: float = 0.1:
-	set(radius_scale_):
-		radius_scale = radius_scale_
-		material.set_shader_parameter("radius_scale", radius_scale)
-## Enable/disable rounded top left corner.
-@export var rounded_corner_top_left: bool = true:
-	set(rounded_corner_top_left_):
-		rounded_corner_top_left = rounded_corner_top_left_
-		material.set_shader_parameter(
-			"rounded_corner_top_left",
-			rounded_corner_top_left
-		)
-## Enable/disable rounded top right corner.
-@export var rounded_corner_top_right: bool = true:
-	set(rounded_corner_top_right_):
-		rounded_corner_top_right = rounded_corner_top_right_
-		material.set_shader_parameter(
-			"rounded_corner_top_right",
-			rounded_corner_top_right
-		)
-## Enable/disable rounded bottom left corner.
-@export var rounded_corner_bottom_left: bool = true:
-	set(rounded_corner_bottom_left_):
-		rounded_corner_bottom_left = rounded_corner_bottom_left_
-		material.set_shader_parameter(
-			"rounded_corner_bottom_left",
-			rounded_corner_bottom_left
-		)
-## Enable/disable rounded bottom left corner.
-@export var rounded_corner_bottom_right: bool = true:
-	set(rounded_corner_bottom_right_):
-		rounded_corner_bottom_right = rounded_corner_bottom_right_
-		material.set_shader_parameter(
-			"rounded_corner_bottom_right",
-			rounded_corner_bottom_right
-		)
-
-var _shader_material: ShaderMaterial
+# [Panelcontainer] containing the texture. It will clip the texture based on its
+# panel stylebox.
+var _panel_container: PanelContainer
+# [TextureRect] holding the texture.
+var _texture_rect: TextureRect
+# [param _panel_container] [StyleBoxFlat].
+var _stylebox: StyleBoxFlat
 
 
 func _enter_tree() -> void:
-	item_rect_changed.connect(_reset_shader_params)
-	tree_entered.connect(_reset_shader_params)
-	# _shader_material #########################################################
-	_shader_material = ShaderMaterial.new()
-	_shader_material.shader = SHADER
-	material = _shader_material
-	material.set_shader_parameter("radius_scale", radius_scale)
-	material.set_shader_parameter(
-		"rounded_corner_top_left",
-		rounded_corner_top_left
-	)
-	material.set_shader_parameter(
-		"rounded_corner_top_right",
-		rounded_corner_top_right
-	)
-	material.set_shader_parameter(
-		"rounded_corner_bottom_left",
-		rounded_corner_bottom_left
-	)
-	material.set_shader_parameter(
-		"rounded_corner_bottom_right",
-		rounded_corner_bottom_right
-	)
+	item_rect_changed.connect(_resize_children)
+	tree_entered.connect(_resize_children)
+	# _panel_container #########################################################
+	_panel_container = PanelContainer.new()
+	add_child(_panel_container)
+	_panel_container.clip_children = CanvasItem.CLIP_CHILDREN_ONLY
+	_stylebox = StyleBoxFlat.new()
+	_panel_container.add_theme_stylebox_override("panel", _stylebox)
+	_stylebox.corner_radius_top_left = corner_radius_top_left
+	_stylebox.corner_radius_top_right = corner_radius_top_right
+	_stylebox.corner_radius_bottom_right = corner_radius_bottom_right
+	_stylebox.corner_radius_bottom_left = corner_radius_bottom_left
+	# _texture_rect ############################################################
+	_texture_rect = TextureRect.new()
+	_panel_container.add_child(_texture_rect)
+	_texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_texture_rect.texture = texture
+	_texture_rect.stretch_mode = stretch_mode
 
 
-# Signal callables #############################################################
-
-
-func _reset_shader_params() -> void:
-	_shader_material.set_shader_parameter("width", size.x)
-	_shader_material.set_shader_parameter("height", size.y)
+func _resize_children() -> void:
+	_panel_container.custom_minimum_size = size

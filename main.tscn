@@ -1,33 +1,22 @@
-[gd_scene load_steps=19 format=3 uid="uid://b5en2sqjkddpj"]
+[gd_scene load_steps=17 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_nav_bar.gd" id="2_pyenn"]
 [ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://assets/png_icons/arrow-left-bold.png" id="3_krt2y"]
 [ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://assets/png_icons/home.png" id="4_08bym"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_numeric_input.gd" id="5_arsm4"]
-[ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners.gdshader" id="6_esdkb"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/w_texture_rounded.gd" id="8_03kac"]
 [ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners_panel.gdshader" id="9_fqtwr"]
 [ext_resource type="Texture2D" uid="uid://63ariwty7am3" path="res://assets/images/nikola-majksner-hXNGeAFOgT4-unsplash.jpg" id="9_tksgc"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_card.gd" id="10_8kjpv"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_one.gd" id="10_lr3bw"]
 [ext_resource type="Texture2D" uid="uid://bh06vd6w24v78" path="res://assets/png_icons/arrow-up-bold.png" id="11_blpd4"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_two.gd" id="11_uuvgh"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_texture_rounded.gd" id="12_iesyr"]
 [ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://assets/png_icons/arrow-down-bold.png" id="12_yu17d"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_line_edit.gd" id="13_nvvi0"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a13dk"]
-shader = ExtResource("6_esdkb")
-shader_parameter/radius_scale = 0.1
-shader_parameter/rounded_corner_top_left = true
-shader_parameter/rounded_corner_top_right = true
-shader_parameter/rounded_corner_bottom_left = true
-shader_parameter/rounded_corner_bottom_right = true
-shader_parameter/width = 500.0
-shader_parameter/height = 200.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lfs0k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jwotw"]
 shader = ExtResource("9_fqtwr")
 shader_parameter/radius_scale = 0.1
 shader_parameter/rounded_corner_top_left = true
@@ -87,17 +76,19 @@ theme_override_constants/margin_bottom = 50
 [node name="VBoxContainer" type="VBoxContainer" parent="Page/Contents/MarginContainer"]
 layout_mode = 2
 
-[node name="WTextureRounded" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_a13dk")
-custom_minimum_size = Vector2(500, 200)
+[node name="WTextureRounded" type="Control" parent="Page/Contents/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
-size_flags_horizontal = 4
+script = ExtResource("12_iesyr")
 texture = ExtResource("9_tksgc")
-expand_mode = 1
-script = ExtResource("8_03kac")
+stretch_mode = 6
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="WCard" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_lfs0k")
+material = SubResource("ShaderMaterial_jwotw")
 custom_minimum_size = Vector2(497.13, 200)
 layout_mode = 2
 size_flags_horizontal = 4
