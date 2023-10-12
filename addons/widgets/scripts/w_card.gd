@@ -60,7 +60,7 @@ const SHADER: Shader = preload("res://addons/widgets/shaders/rounded_corners_pan
 			rounded_corner_bottom_right
 		)
 @export_group("Card Panel")
-@export_subgroup("Panel_", "panel_")
+@export_subgroup("Panel", "panel")
 ## Panel color.
 @export var panel_color: Color = Color.BLACK:
 	set(panel_color_):
@@ -91,7 +91,7 @@ var panel_pos: int = BOTTOM:
 		)
 		if label != null:
 			_set_label_position()
-@export_subgroup("Label_", "label_")
+@export_subgroup("Label", "label")
 ## Label text.
 @export var label_text: String:
 	set(label_text_):

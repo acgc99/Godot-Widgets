@@ -16,8 +16,8 @@ signal pressed_right
 @export var title: String:
 	set(title_):
 		title = title_
-		if label_title != null:
-			label_title.text = title
+		if _label_title != null:
+			_label_title.text = title
 @export_enum(
 	"Horizontal alignment left",
 	"Horizontal alignment center",
@@ -28,112 +28,112 @@ signal pressed_right
 var horizontal_alignment: int:
 	set(horizontal_alignment_):
 		horizontal_alignment = horizontal_alignment_
-		if label_title != null:
-			label_title.horizontal_alignment = horizontal_alignment
+		if _label_title != null:
+			_label_title.horizontal_alignment = horizontal_alignment
 @export_group("Left button", "button_left")
 ## Left icon button [member WIconButton.icon].
 @export var button_left_icon: Texture2D:
 	set(button_left_icon_):
 		button_left_icon = button_left_icon_
-		if button_left != null:
-			button_left.icon = button_left_icon
+		if _button_left != null:
+			_button_left.icon = button_left_icon
 ## Left icon button [member WIconButton.flip_h].
 @export var button_left_flip_h: bool:
 	set(button_left_flip_h_):
 		button_left_flip_h = button_left_flip_h_
-		if button_left != null:
-			button_left.flip_h = button_left_flip_h
+		if _button_left != null:
+			_button_left.flip_h = button_left_flip_h
 ## Left icon button [member WIconButton.flip_v].
 @export var button_left_flip_v: bool:
 	set(button_left_flip_v_):
 		button_left_flip_v = button_left_flip_v_
-		if button_left != null:
-			button_left.flip_v = button_left_flip_v
+		if _button_left != null:
+			_button_left.flip_v = button_left_flip_v
 ## Left icon button [member WIconButton.disabled].
 @export var button_left_disabled: bool:
 	set(button_left_disabled_):
 		button_left_disabled = button_left_disabled_
-		if button_left != null:
-			button_left.disabled = button_left_disabled
+		if _button_left != null:
+			_button_left.disabled = button_left_disabled
 @export_group("Right button", "button_right")
 ## Right icon button [member WIconButton.icon].
 @export var button_right_icon: Texture2D:
 	set(button_right_icon_):
 		button_right_icon = button_right_icon_
-		if button_right != null:
-			button_right.icon = button_right_icon
+		if _button_right != null:
+			_button_right.icon = button_right_icon
 ## Right icon button [member WIconButton.flip_h].
 @export var button_right_flip_h: bool:
 	set(button_right_flip_h_):
 		button_right_flip_h = button_right_flip_h_
-		if button_right != null:
-			button_right.flip_h = button_right_flip_h
+		if _button_right != null:
+			_button_right.flip_h = button_right_flip_h
 ## Right icon button [member WIconButton.flip_v].
 @export var button_right_flip_v: bool:
 	set(button_right_flip_v_):
 		button_right_flip_v = button_right_flip_v_
-		if button_right != null:
-			button_right.flip_v = button_right_flip_v
+		if _button_right != null:
+			_button_right.flip_v = button_right_flip_v
 ## Right icon button [member WIconButton.disabled].
 @export var button_right_disabled: bool = false:
 	set(button_right_disabled_):
 		button_right_disabled = button_right_disabled_
-		if button_right != null:
-			button_right.disabled = button_right_disabled
+		if _button_right != null:
+			_button_right.disabled = button_right_disabled
 
 ## Panel container for a panel background
-var panel_container: PanelContainer
+var _panel_container: PanelContainer
 ## Container for all elements.
-var container: HBoxContainer
+var _container: HBoxContainer
 ## [Label] holding the title.
-var label_title: Label
+var _label_title: Label
 ## Left [WIconButton].
-var button_left: WIconButton
+var _button_left: WIconButton
 ## Right [WIconButton].
-var button_right: WIconButton
+var _button_right: WIconButton
 
 
 func _init() -> void:
 	item_rect_changed.connect(_resize_children)
 	tree_entered.connect(_resize_children)
-	# panel_container ##########################################################
-	panel_container = PanelContainer.new()
-	add_child(panel_container)
-	# container ################################################################
-	container = HBoxContainer.new()
-	panel_container.add_child(container)
-	# button_left ##############################################################
-	button_left = WIconButton.new()
-	container.add_child(button_left)
-	button_left.pressed.connect(_on_button_left_pressed)
-	button_left.icon = button_left_icon
-	button_left.flip_h = button_left_flip_h
-	button_left.flip_v = button_left_flip_v
-	button_left.disabled = button_left_disabled
-	# label_title ##############################################################
-	label_title = Label.new()
-	container.add_child(label_title)
-	label_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label_title.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	label_title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label_title.horizontal_alignment = horizontal_alignment
-	label_title.text = title
-	# button_right #############################################################
-	button_right = WIconButton.new()
-	container.add_child(button_right)
-	button_right.pressed.connect(_on_button_right_pressed)
-	button_right.icon = button_right_icon
-	button_right.flip_h = button_right_flip_h
-	button_right.flip_v = button_right_flip_v
-	button_right.disabled = button_right_disabled
+	# _panel_container #########################################################
+	_panel_container = PanelContainer.new()
+	add_child(_panel_container)
+	# _container ###############################################################
+	_container = HBoxContainer.new()
+	_panel_container.add_child(_container)
+	# _button_left #############################################################
+	_button_left = WIconButton.new()
+	_container.add_child(_button_left)
+	_button_left.pressed.connect(_on_button_left_pressed)
+	_button_left.icon = button_left_icon
+	_button_left.flip_h = button_left_flip_h
+	_button_left.flip_v = button_left_flip_v
+	_button_left.disabled = button_left_disabled
+	# _label_title #############################################################
+	_label_title = Label.new()
+	_container.add_child(_label_title)
+	_label_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_label_title.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_label_title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_label_title.horizontal_alignment = horizontal_alignment
+	_label_title.text = title
+	# _button_right ############################################################
+	_button_right = WIconButton.new()
+	_container.add_child(_button_right)
+	_button_right.pressed.connect(_on_button_right_pressed)
+	_button_right.icon = button_right_icon
+	_button_right.flip_h = button_right_flip_h
+	_button_right.flip_v = button_right_flip_v
+	_button_right.disabled = button_right_disabled
 
 
 # Signal callables #############################################################
 
 
 func _resize_children() -> void:
-	button_left.custom_minimum_size = Vector2(size[1], 0)
-	button_right.custom_minimum_size = Vector2(size[1], 0)
+	_button_left.custom_minimum_size = Vector2(size[1], 0)
+	_button_right.custom_minimum_size = Vector2(size[1], 0)
 
 
 func _on_button_left_pressed() -> void:
