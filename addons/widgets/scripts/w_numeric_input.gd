@@ -103,7 +103,7 @@ func _init() -> void:
 	tree_entered.connect(_resize_children)
 	# _panel_container #########################################################
 	_panel_container = PanelContainer.new()
-	add_child(_panel_container)
+	add_child(_panel_container, false, Node.INTERNAL_MODE_BACK)
 	# _margin_container ########################################################
 	_margin_container = MarginContainer.new()
 	_panel_container.add_child(_margin_container)
@@ -144,9 +144,6 @@ func _init() -> void:
 	_button_down.flip_h = button_down_flip_h
 	_button_down.flip_v = button_down_flip_v
 	_button_down.disabled = button_down_disabled
-
-
-# Signal callables #############################################################
 
 
 func _resize_children() -> void:

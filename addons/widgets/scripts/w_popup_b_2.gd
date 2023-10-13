@@ -113,7 +113,7 @@ func _init() -> void:
 	tree_entered.connect(_resize_children)
 	# _button_background #######################################################
 	_button_background = Button.new()
-	add_child(_button_background)
+	add_child(_button_background, false, Node.INTERNAL_MODE_BACK)
 	_button_background.pressed.connect(_on_button_background_pressed)
 	_button_background.focus_mode = focus_mode
 	# _margin_container_external ###############################################

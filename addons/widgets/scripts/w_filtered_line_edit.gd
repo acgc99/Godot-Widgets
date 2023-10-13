@@ -105,9 +105,6 @@ func clamp_text() -> void:
 	_clamping = false
 
 
-# Signal callables #############################################################
-
-
 ## Manages text input and filtering.
 func _on_text_changed(_text_new: String) -> void:
 	# Avoid modifications while clamping.
