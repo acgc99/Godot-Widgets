@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5en2sqjkddpj"]
+[gd_scene load_steps=18 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_nav_bar.gd" id="2_pyenn"]
 [ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://assets/png_icons/arrow-left-bold.png" id="3_krt2y"]
 [ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://assets/png_icons/home.png" id="4_08bym"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_numeric_input.gd" id="5_arsm4"]
+[ext_resource type="Shader" path="res://addons/widgets/shaders/rounded_corners_panel.gdshader" id="9_fqtwr"]
 [ext_resource type="Texture2D" uid="uid://63ariwty7am3" path="res://assets/images/nikola-majksner-hXNGeAFOgT4-unsplash.jpg" id="9_tksgc"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_card.gd" id="10_8kjpv"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_one.gd" id="10_lr3bw"]
@@ -14,6 +15,20 @@
 [ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://assets/png_icons/arrow-down-bold.png" id="12_yu17d"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_line_edit.gd" id="13_nvvi0"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_card_2.gd" id="16_rnobb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7jsrf"]
+shader = ExtResource("9_fqtwr")
+shader_parameter/radius_scale = 0.1
+shader_parameter/rounded_corner_top_left = true
+shader_parameter/rounded_corner_top_right = true
+shader_parameter/rounded_corner_bottom_left = true
+shader_parameter/rounded_corner_bottom_right = true
+shader_parameter/panel_color = Color(0, 1, 0, 1)
+shader_parameter/panel_scale = 2.0
+shader_parameter/panel_pos = true
+shader_parameter/width = 497.13
+shader_parameter/height = 200.0
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -26,6 +41,7 @@ scale = Vector2(1, 1.00372)
 script = ExtResource("1_e6ig7")
 
 [node name="Page" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,68 +89,16 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[node name="WCard" type="BaseButton" parent="Page/Contents/MarginContainer/VBoxContainer"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-editor_description = ""
-visible = true
-modulate = Color(1, 1, 1, 1)
-self_modulate = Color(1, 1, 1, 1)
-show_behind_parent = false
-top_level = false
-clip_children = 0
-light_mask = 1
-visibility_layer = 1
-z_index = 0
-z_as_relative = true
-y_sort_enabled = false
-texture_filter = 0
-texture_repeat = 0
-material = null
-use_parent_material = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 300)
-layout_direction = 0
+[node name="WCard" type="TextureRect" parent="Page/Contents/MarginContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_7jsrf")
+custom_minimum_size = Vector2(497.13, 200)
 layout_mode = 2
-size_flags_horizontal = 1
-size_flags_vertical = 1
-size_flags_stretch_ratio = 1.0
-auto_translate = true
-localize_numeral_system = true
-tooltip_text = ""
-focus_neighbor_left = NodePath("")
-focus_neighbor_top = NodePath("")
-focus_neighbor_right = NodePath("")
-focus_neighbor_bottom = NodePath("")
-focus_next = NodePath("")
-focus_previous = NodePath("")
-focus_mode = 2
-mouse_filter = 0
-mouse_force_pass_scroll_events = true
-mouse_default_cursor_shape = 0
-theme = null
-theme_type_variation = &""
-disabled = false
-toggle_mode = false
-button_pressed = false
-action_mode = 1
-button_mask = 1
-keep_pressed_outside = false
-button_group = null
-shortcut = null
-shortcut_feedback = true
-shortcut_in_tooltip = true
-script = ExtResource("10_8kjpv")
-title = "Card"
+size_flags_horizontal = 4
 texture = ExtResource("9_tksgc")
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+expand_mode = 1
+script = ExtResource("10_8kjpv")
+panel_color = Color(0, 1, 0, 1)
+label_text = "Card"
 
 [node name="WNumericInput" type="PanelContainer" parent="Page/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
@@ -204,6 +168,83 @@ label_title_text = "Title"
 label_message_text = "Lorem Ipsum"
 button_left_text = "Ok"
 button_right_text = "No"
+
+[node name="WCard2" type="BaseButton" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 504.0
+offset_bottom = 393.0
+grow_horizontal = 1
+grow_vertical = 1
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(0, 0)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+auto_translate = true
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("16_rnobb")
+texture = ExtResource("9_tksgc")
+stretch_mode = 6
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]

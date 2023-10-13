@@ -53,7 +53,7 @@ func _enter_tree() -> void:
 	)
 	add_custom_type(
 		"WCard",
-		"TextureRect",
+		"BaseButton",
 		preload("res://addons/widgets/scripts/w_card.gd"),
 		preload("res://addons/widgets/svg_icons/file-presentation-box.svg")
 	)
