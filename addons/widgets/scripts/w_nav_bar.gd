@@ -19,13 +19,12 @@ signal pressed_right
 		if _label_title != null:
 			_label_title.text = title
 @export_enum(
-	"Horizontal alignment left",
-	"Horizontal alignment center",
-	"Horizontal alignment right",
-	"Horizontal alignment fill"
+	"Left",
+	"Center",
+	"Right"
 )
 ## [WNavBar] title horizontal alignment.
-var horizontal_alignment: int:
+var horizontal_alignment: int = 1:
 	set(horizontal_alignment_):
 		horizontal_alignment = horizontal_alignment_
 		if _label_title != null:
