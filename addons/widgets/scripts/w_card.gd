@@ -114,7 +114,7 @@ var _margin_container: MarginContainer
 var _label: Label
 
 
-func _enter_tree() -> void:
+func _init() -> void:
 	item_rect_changed.connect(_resize_children)
 	tree_entered.connect(_resize_children)
 	# _panel_container #########################################################

@@ -88,7 +88,7 @@ var _texture_rect: TextureRect
 var _stylebox: StyleBoxFlat
 
 
-func _enter_tree() -> void:
+func _init() -> void:
 	item_rect_changed.connect(_resize_children)
 	tree_entered.connect(_resize_children)
 	# _panel_container #########################################################

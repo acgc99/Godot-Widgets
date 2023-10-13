@@ -85,7 +85,7 @@ var _filter: Callable
 var _clamping: bool
 
 
-func _enter_tree() -> void:
+func _init() -> void:
 	_text_old = text
 	_text_length_old = _text_old.length()
 	text_changed.connect(_on_text_changed)

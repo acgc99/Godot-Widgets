@@ -93,7 +93,7 @@ var _filter: Callable
 var _clamping: bool
 
 
-func _enter_tree() -> void:
+func _init() -> void:
 	_caret_line_curr = get_caret_line()
 	_text_old = get_line(_caret_line_curr)
 	_text_length_old = _text_old.length()
