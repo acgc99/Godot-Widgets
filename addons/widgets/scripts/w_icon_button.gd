@@ -32,6 +32,7 @@ func _init() -> void:
 	# _texture_rect_icon #######################################################
 	_texture_rect_icon = TextureRect.new()
 	add_child(_texture_rect_icon)
+	_texture_rect_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_texture_rect_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_texture_rect_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	_texture_rect_icon.texture = icon

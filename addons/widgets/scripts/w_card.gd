@@ -152,10 +152,8 @@ func _init() -> void:
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_label.horizontal_alignment = horizontal_alignment
 	_label.text = title
-	
+	# Others ###################################################################
 	_set_margins()
-#	_margin_container.add_theme_constant_override("margin_left", corner_radius_bottom_left)
-#	_margin_container.add_theme_constant_override("margin_right", corner_radius_bottom_right)
 
 
 func _resize_children() -> void:
