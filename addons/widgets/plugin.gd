@@ -17,7 +17,7 @@ func _enter_tree() -> void:
 	)
 	add_custom_type(
 		"WIconButton",
-		"Button",
+		"BaseButton",
 		preload("res://addons/widgets/scripts/w_icon_button.gd"),
 		preload("res://addons/widgets/svg_icons/alpha-x-circle.svg")
 	)
@@ -47,7 +47,7 @@ func _enter_tree() -> void:
 	)
 	add_custom_type(
 		"WTextureRounded",
-		"TextureRect",
+		"Control",
 		preload("res://addons/widgets/scripts/w_texture_rounded.gd"),
 		preload("res://addons/widgets/svg_icons/image.svg")
 	)

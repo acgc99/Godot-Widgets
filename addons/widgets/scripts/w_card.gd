@@ -120,6 +120,7 @@ func _init() -> void:
 	# _panel_container #########################################################
 	_panel_container = PanelContainer.new()
 	add_child(_panel_container)
+	_panel_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_panel_container.clip_children = CanvasItem.CLIP_CHILDREN_ONLY
 	_stylebox = StyleBoxFlat.new()
 	_panel_container.add_theme_stylebox_override("panel", _stylebox)
