@@ -206,7 +206,6 @@ title = "Title"
 message = "Popup message."
 button_left_text = "Left"
 button_right_text = "Right"
-buttons_size_flags_horizontal = 1
 
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]

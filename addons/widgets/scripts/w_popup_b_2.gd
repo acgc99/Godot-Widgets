@@ -115,6 +115,7 @@ func _init() -> void:
 	_button_background = Button.new()
 	add_child(_button_background)
 	_button_background.pressed.connect(_on_button_background_pressed)
+	_button_background.focus_mode = focus_mode
 	# _margin_container_external ###############################################
 	_margin_container_external = MarginContainer.new()
 	_button_background.add_child(_margin_container_external)
@@ -159,11 +160,13 @@ func _init() -> void:
 	_button_left = Button.new()
 	_container_buttons.add_child(_button_left)
 	_button_left.pressed.connect(_on_button_left_pressed)
+	_button_left.focus_mode = focus_mode
 	_button_left.text = button_left_text
 	# _button_right #############################################################
 	_button_right = Button.new()
 	_container_buttons.add_child(_button_right)
 	_button_right.pressed.connect(_on_button_right_pressed)
+	_button_right.focus_mode = focus_mode
 	_button_right.text = button_right_text
 	# Others ###################################################################
 	_set_buttons_size_flags_horizontal()
