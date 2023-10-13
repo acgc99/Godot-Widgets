@@ -34,15 +34,15 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/svg_icons/arrow-expand-vertical.svg")
 	)
 	add_custom_type(
-		"WPopupButtonOne",
-		"Button",
-		preload("res://addons/widgets/scripts/w_popup_button_one.gd"),
+		"WPopupB1",
+		"Control",
+		preload("res://addons/widgets/scripts/w_popup_b_1.gd"),
 		preload("res://addons/widgets/svg_icons/numeric-1-box-multiple.svg")
 	)
 	add_custom_type(
-		"WPopupButtonTwo",
-		"Button",
-		preload("res://addons/widgets/scripts/w_popup_button_two.gd"),
+		"WPopupB2",
+		"Control",
+		preload("res://addons/widgets/scripts/w_popup_b_2.gd"),
 		preload("res://addons/widgets/svg_icons/numeric-2-box-multiple.svg")
 	)
 	add_custom_type(
@@ -65,7 +65,7 @@ func _exit_tree() -> void:
 	remove_custom_type("WIconButton")
 	remove_custom_type("WNavBar")
 	remove_custom_type("WNumericInput")
-	remove_custom_type("WPopupButtonOne")
-	remove_custom_type("WPopupButtonTwo")
+	remove_custom_type("WPopupB1")
+	remove_custom_type("WPopupB2")
 	remove_custom_type("WTextureRounded")
 	remove_custom_type("WCard")

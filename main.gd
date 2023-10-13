@@ -1,43 +1,27 @@
 extends Control
 
+@onready var popup_b1: WPopupB1 = $WPopupB1
+@onready var popup_b2: WPopupB2 = $WPopupB2
+@onready var fline_edit: WFilteredLineEdit = $Page/Contents/MarginContainer/VBoxContainer/WFilteredLineEdit
+@onready var ftext_edit: WFilteredTextEdit = $Page/Contents/MarginContainer/VBoxContainer/WFilteredTextEdit
 
-@onready var popup_button_one: WPopupButtonOne = $WPopupButtonOne
-@onready var popup_button_two: WPopupButtonTwo = $WPopupButtonTwo
 
-func _ready():
-	$Page/Contents/MarginContainer/VBoxContainer/WFilteredLineEdit.clamp_text()
-	$Page/Contents/MarginContainer/VBoxContainer/WFilteredTextEdit.clamp_lines()
+func _ready() -> void:
+	fline_edit.clamp_text()
+	ftext_edit.clamp_lines()
 
 
 func _on_button_one_pressed() -> void:
-	popup_button_one.popup()
+	popup_b1.popup()
 
 
 func _on_button_two_pressed() -> void:
-	popup_button_two.popup()
+	popup_b2.popup()
 
 
-## WPopupButtonOne #############################################################
+func _dismiss_popup_b1() -> void:
+	popup_b1.dismiss()
 
 
-func _on_w_popup_button_one_button_outside_pressed() -> void:
-	popup_button_one.dismiss()
-
-
-func _on_w_popup_button_one_button_popup_pressed() -> void:
-	popup_button_one.dismiss()
-
-
-## WPopupButtonTwo #############################################################
-
-
-func _on_w_popup_button_two_button_left_popup_pressed() -> void:
-	popup_button_two.dismiss()
-
-
-func _on_w_popup_button_two_button_outside_pressed() -> void:
-	popup_button_two.dismiss()
-
-
-func _on_w_popup_button_two_button_right_popup_pressed() -> void:
-	popup_button_two.dismiss()
+func _dismiss_popup_b2() -> void:
+	popup_b2.dismiss()

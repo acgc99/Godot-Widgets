@@ -7,12 +7,12 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_numeric_input.gd" id="5_arsm4"]
 [ext_resource type="Texture2D" uid="uid://63ariwty7am3" path="res://assets/images/nikola-majksner-hXNGeAFOgT4-unsplash.jpg" id="9_tksgc"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_card.gd" id="10_8kjpv"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_one.gd" id="10_lr3bw"]
 [ext_resource type="Texture2D" uid="uid://bh06vd6w24v78" path="res://assets/png_icons/arrow-up-bold.png" id="11_blpd4"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_button_two.gd" id="11_uuvgh"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_texture_rounded.gd" id="12_iesyr"]
 [ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://assets/png_icons/arrow-down-bold.png" id="12_yu17d"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_line_edit.gd" id="13_nvvi0"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b_1.gd" id="13_sqya8"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b_2.gd" id="14_fn815"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
 
 [node name="Main" type="Control"]
@@ -151,13 +151,13 @@ button_down_icon = ExtResource("12_yu17d")
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "WPopupButtonOne"
+text = "Show PopupB1"
 
 [node name="ButtonTwo" type="Button" parent="Page/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "WPopupButtonTwo"
+text = "Show PopupB2"
 
 [node name="WFilteredLineEdit" type="LineEdit" parent="Page/Contents/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -178,37 +178,40 @@ filter_mode = 5
 value_max = 100.0
 value_min = -10.0
 
-[node name="WPopupButtonOne" type="Button" parent="."]
+[node name="WPopupB1" type="Control" parent="."]
 visible = false
-modulate = Color(1, 1, 1, 0)
-top_level = true
-layout_mode = 0
-offset_right = 720.0
-offset_bottom = 1280.0
-mouse_filter = 2
-script = ExtResource("10_lr3bw")
-label_title_text = "Title"
-label_message_text = "Lorem ipsum"
-button_text = "Ok"
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_sqya8")
+title = "Title"
+title_horizontal_alignment = 0
+message = "This is a message."
+message_horizontal_alignment = 0
+button_text = "Accept"
 
-[node name="WPopupButtonTwo" type="Button" parent="."]
+[node name="WPopupB2" type="Control" parent="."]
 visible = false
-modulate = Color(1, 1, 1, 0)
-top_level = true
-layout_mode = 0
-offset_right = 720.0
-offset_bottom = 1280.0
-mouse_filter = 2
-script = ExtResource("11_uuvgh")
-label_title_text = "Title"
-label_message_text = "Lorem Ipsum"
-button_left_text = "Ok"
-button_right_text = "No"
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_fn815")
+title = "Title"
+message = "Popup message."
+button_left_text = "Left"
+button_right_text = "Right"
+buttons_size_flags_horizontal = 1
 
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]
-[connection signal="button_outside_pressed" from="WPopupButtonOne" to="." method="_on_w_popup_button_one_button_outside_pressed"]
-[connection signal="button_popup_pressed" from="WPopupButtonOne" to="." method="_on_w_popup_button_one_button_popup_pressed"]
-[connection signal="button_left_popup_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_button_left_popup_pressed"]
-[connection signal="button_outside_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_button_outside_pressed"]
-[connection signal="button_right_popup_pressed" from="WPopupButtonTwo" to="." method="_on_w_popup_button_two_button_right_popup_pressed"]
+[connection signal="background_pressed" from="WPopupB1" to="." method="_dismiss_popup_b1"]
+[connection signal="button_pressed" from="WPopupB1" to="." method="_dismiss_popup_b1"]
+[connection signal="background_pressed" from="WPopupB2" to="." method="_dismiss_popup_b2"]
+[connection signal="left_button_pressed" from="WPopupB2" to="." method="_dismiss_popup_b2"]
+[connection signal="right_button_pressed" from="WPopupB2" to="." method="_dismiss_popup_b2"]
