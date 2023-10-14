@@ -10,20 +10,20 @@ extends BaseButton
 		icon = icon_
 		if _icon != null:
 			_icon.icon = icon
-## If [code]true[/code], texture is flipped horizontally.
+## If [code]true[/code], icon is flipped horizontally.
 @export var flip_h: bool:
 	set(flip_h_):
 		flip_h = flip_h_
 		if _icon != null:
 			_icon.flip_h = flip_h
-## If [code]true[/code], texture is flipped vertically.
+## If [code]true[/code], icon is flipped vertically.
 @export var flip_v: bool:
 	set(flip_v_):
 		flip_v = flip_v_
 		if _icon != null:
 			_icon.flip_v = flip_v
 
-## [WIcon] for the icon.
+## [WIcon] for the button.
 var _icon: WIcon
 
 

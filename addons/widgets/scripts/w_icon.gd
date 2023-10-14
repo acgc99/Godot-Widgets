@@ -12,13 +12,13 @@ extends Control
 		icon = icon_
 		if _texture_rect_icon != null:
 			_texture_rect_icon.texture = icon
-## If [code]true[/code], texture is flipped horizontally.
+## If [code]true[/code], icon is flipped horizontally.
 @export var flip_h: bool:
 	set(flip_h_):
 		flip_h = flip_h_
 		if _texture_rect_icon != null:
 			_texture_rect_icon.flip_h = flip_h
-## If [code]true[/code], texture is flipped vertically.
+## If [code]true[/code], icon is flipped vertically.
 @export var flip_v: bool:
 	set(flip_v_):
 		flip_v = flip_v_
