@@ -1,9 +1,9 @@
 @tool
 class_name WIcon
 extends Control
-## A widget to hold an icon. Used in other widgets. Essentially is a
-## [TextureRect] with [code]expand_mode = TextureRect.EXPAND_IGNORE_SIZE[/code]
-## and [code]stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED[/code].
+## A widget to hold an icon. Essentially is a [TextureRect] with
+## [code]expand_mode = TextureRect.EXPAND_IGNORE_SIZE[/code] and
+## [code]stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED[/code].
 
 
 ## Icon texture.
