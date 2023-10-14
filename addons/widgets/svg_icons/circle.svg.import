@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clto6sij24nrs"
-path="res://.godot/imported/alpha-x-circle.svg-2e9351238a572f7c30594505a6462bc5.ctex"
+uid="uid://cxseowjmmnwhl"
+path="res://.godot/imported/circle.svg-3d904a79eb2940f2b2836193a8e2c993.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/widgets/svg_icons/alpha-x-circle.svg"
-dest_files=["res://.godot/imported/alpha-x-circle.svg-2e9351238a572f7c30594505a6462bc5.ctex"]
+source_file="res://addons/widgets/svg_icons/circle.svg"
+dest_files=["res://.godot/imported/circle.svg-3d904a79eb2940f2b2836193a8e2c993.ctex"]
 
 [params]
 

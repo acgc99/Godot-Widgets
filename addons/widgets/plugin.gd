@@ -16,10 +16,16 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/svg_icons/TextEdit.svg")
 	)
 	add_custom_type(
+		"WIcon",
+		"Control",
+		preload("res://addons/widgets/scripts/w_icon.gd"),
+		preload("res://addons/widgets/svg_icons/circle.svg")
+	)
+	add_custom_type(
 		"WIconButton",
 		"BaseButton",
 		preload("res://addons/widgets/scripts/w_icon_button.gd"),
-		preload("res://addons/widgets/svg_icons/alpha-x-circle.svg")
+		preload("res://addons/widgets/svg_icons/circle-slice-8.svg")
 	)
 	add_custom_type(
 		"WNavBar",
@@ -62,6 +68,7 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	remove_custom_type("WFilteredLineEdit")
 	remove_custom_type("WFilteredTextEdit")
+	remove_custom_type("WIcon")
 	remove_custom_type("WIconButton")
 	remove_custom_type("WNavBar")
 	remove_custom_type("WNumericInput")
