@@ -117,41 +117,51 @@ var stretch_mode: int:
 		stretch_mode = stretch_mode_
 		if _texture_rect != null:
 			_texture_rect.stretch_mode = stretch_mode
-@export_subgroup("Corner Radii", "corner_radius")
+## This sets the number of vertices used for each corner. Higher values result
+## in rounder corners but take more processing power to compute. When choosing
+## a value, you should take the corner radius ([method set_corner_radius_all])
+## into account.
+## [br]
+## [br]
+## For corner radii less than 10, [code]4[/code] or [code]5[/code] should be
+## enough. For corner radii less than 30, values between [code]8[/code] and
+## [code]12[/code] should be enough.
+## [br]
+## [br]
+## A corner detail of [code]1[/code] will result in chamfered corners instead
+## of rounded corners, which is useful for some artistic effects.
+@export_range(1, 20, 1) var corner_detail: int = 8:
+	set(corner_detail_):
+		corner_detail = corner_detail_
+		_round_clipping_container.corner_detail = corner_detail
+@export_subgroup("Corner Radius", "corner_radius")
 ## The top-left corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 10, 1, "or_greater") var corner_radius_top_left: int:
 	set(corner_radius_top_left_):
 		corner_radius_top_left = corner_radius_top_left_
-		if _stylebox != null:
-			_stylebox.corner_radius_top_left = corner_radius_top_left
+		_round_clipping_container.corner_radius_top_left = corner_radius_top_left
 ## The top-right corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 10, 1, "or_greater") var corner_radius_top_right: int:
 	set(corner_radius_top_right_):
 		corner_radius_top_right = corner_radius_top_right_
-		if _stylebox != null:
-			_stylebox.corner_radius_top_right = corner_radius_top_right
+		_round_clipping_container.corner_radius_top_right = corner_radius_top_right
 ## The bottom-right corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 10, 1, "or_greater") var corner_radius_bottom_right: int:
 	set(corner_radius_bottom_right_):
 		corner_radius_bottom_right = corner_radius_bottom_right_
-		if _stylebox != null:
-			_stylebox.corner_radius_bottom_right = corner_radius_bottom_right
-			_positionate_title()
+		_round_clipping_container.corner_radius_bottom_right = corner_radius_bottom_right
+		_positionate_title()
 ## The bottom-left corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 10, 1, "or_greater") var corner_radius_bottom_left: int:
 	set(corner_radius_bottom_left_):
 		corner_radius_bottom_left = corner_radius_bottom_left_
-		if _stylebox != null:
-			_stylebox.corner_radius_bottom_left = corner_radius_bottom_left
-			_positionate_title()
+		_round_clipping_container.corner_radius_bottom_left = corner_radius_bottom_left
+		_positionate_title()
 
-# [Panelcontainer] containing the texture. It will clip the texture based on its
-# panel stylebox.
-var _panel_container: PanelContainer
+# Mask for round clipping.
+var _round_clipping_container: WRoundClippingContainer
 # [TextureRect] holding the texture.
 var _texture_rect: TextureRect
-# [param _panel_container] [StyleBoxFlat].
-var _stylebox: StyleBoxFlat
 # [PanelContainer] for the [Label].
 var _panel_container_label: PanelContainer
 # [MarginContainer] for the [Label]. Adds margin when corners are rounded and
@@ -171,26 +181,24 @@ var _icon_right: WIcon
 func _init() -> void:
 	item_rect_changed.connect(_resize_children)
 	tree_entered.connect(_resize_children)
-	# _panel_container #########################################################
-	_panel_container = PanelContainer.new()
-	add_child(_panel_container, false, Node.INTERNAL_MODE_BACK)
-	_panel_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_panel_container.clip_children = CanvasItem.CLIP_CHILDREN_ONLY
-	_stylebox = StyleBoxFlat.new()
-	_panel_container.add_theme_stylebox_override("panel", _stylebox)
-	_stylebox.corner_radius_top_left = corner_radius_top_left
-	_stylebox.corner_radius_top_right = corner_radius_top_right
-	_stylebox.corner_radius_bottom_right = corner_radius_bottom_right
-	_stylebox.corner_radius_bottom_left = corner_radius_bottom_left
+	# _round_clipping_container ################################################
+	_round_clipping_container = WRoundClippingContainer.new()
+	add_child(_round_clipping_container, false, Node.INTERNAL_MODE_BACK)
+	_round_clipping_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_round_clipping_container.corner_detail = corner_detail
+	_round_clipping_container.corner_radius_top_left = corner_radius_top_left
+	_round_clipping_container.corner_radius_top_right = corner_radius_top_right
+	_round_clipping_container.corner_radius_bottom_right = corner_radius_bottom_right
+	_round_clipping_container.corner_radius_bottom_left = corner_radius_bottom_left
 	# _texture_rect ############################################################
 	_texture_rect = TextureRect.new()
-	_panel_container.add_child(_texture_rect)
+	_round_clipping_container.add_child(_texture_rect)
 	_texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_texture_rect.texture = texture
 	_texture_rect.stretch_mode = stretch_mode
 	# _panel_container_label ###################################################
 	_panel_container_label = PanelContainer.new()
-	_panel_container.add_child(_panel_container_label)
+	_round_clipping_container.add_child(_panel_container_label)
 	_panel_container_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_panel_container_label.size_flags_vertical = Control.SIZE_SHRINK_END
 	# _margin_container ########################################################
@@ -226,7 +234,7 @@ func _init() -> void:
 
 
 func _resize_children() -> void:
-	_panel_container.custom_minimum_size = size
+	_round_clipping_container.custom_minimum_size = size
 	_set_icons_custom_minimum_size()
 
 

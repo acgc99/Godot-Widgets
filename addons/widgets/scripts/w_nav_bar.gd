@@ -5,13 +5,18 @@ extends Control
 ## placed at the top/bottom of the scene (left/right buttons), but it can also
 ## be placed on sides.
 
+## Enum corresponding to [param label_title_alignment]
+enum {
+	LEFT,
+	CENTER,
+	RIGHT
+}
 
 ## Emitted when the left button is pressed.
 signal pressed_left
 ## Emitted when the right button is pressed.
 signal pressed_right
 
-@export_group("Title")
 ## [WNavBar] title.
 @export var title: String:
 	set(title_):
@@ -24,11 +29,11 @@ signal pressed_right
 	"Right"
 )
 ## [WNavBar] title horizontal alignment.
-var horizontal_alignment: int = 1:
-	set(horizontal_alignment_):
-		horizontal_alignment = horizontal_alignment_
+var alignment: int = 1:
+	set(alignment_):
+		alignment = alignment_
 		if _label_title != null:
-			_label_title.horizontal_alignment = horizontal_alignment
+			_label_title.horizontal_alignment = alignment
 @export_group("Left button", "button_left")
 ## Left icon button [member WIconButton.icon].
 @export var button_left_icon: Texture2D:
@@ -80,10 +85,10 @@ var horizontal_alignment: int = 1:
 		if _button_right != null:
 			_button_right.disabled = button_right_disabled
 
-## Panel container for a panel background
+## [PanelContainer] for the widget. It is the background.
 var _panel_container: PanelContainer
-## Container for all elements.
-var _container: HBoxContainer
+## [HBoxContainer] for the buttons and the label.
+var _title_container: HBoxContainer
 ## [Label] holding the title.
 var _label_title: Label
 ## Left [WIconButton].
@@ -98,12 +103,12 @@ func _init() -> void:
 	# _panel_container #########################################################
 	_panel_container = PanelContainer.new()
 	add_child(_panel_container, false, Node.INTERNAL_MODE_BACK)
-	# _container ###############################################################
-	_container = HBoxContainer.new()
-	_panel_container.add_child(_container)
+	# _title_container #########################################################
+	_title_container = HBoxContainer.new()
+	_panel_container.add_child(_title_container)
 	# _button_left #############################################################
 	_button_left = WIconButton.new()
-	_container.add_child(_button_left)
+	_title_container.add_child(_button_left)
 	_button_left.pressed.connect(_on_button_left_pressed)
 	_button_left.icon = button_left_icon
 	_button_left.flip_h = button_left_flip_h
@@ -111,15 +116,15 @@ func _init() -> void:
 	_button_left.disabled = button_left_disabled
 	# _label_title #############################################################
 	_label_title = Label.new()
-	_container.add_child(_label_title)
+	_title_container.add_child(_label_title)
 	_label_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_label_title.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_label_title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_label_title.horizontal_alignment = horizontal_alignment
+	_label_title.horizontal_alignment = alignment
 	_label_title.text = title
 	# _button_right ############################################################
 	_button_right = WIconButton.new()
-	_container.add_child(_button_right)
+	_title_container.add_child(_button_right)
 	_button_right.pressed.connect(_on_button_right_pressed)
 	_button_right.icon = button_right_icon
 	_button_right.flip_h = button_right_flip_h

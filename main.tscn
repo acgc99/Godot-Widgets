@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b5en2sqjkddpj"]
+[gd_scene load_steps=18 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_nav_bar.gd" id="2_pyenn"]
@@ -15,6 +15,9 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b_1.gd" id="13_sqya8"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b_2.gd" id="14_fn815"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_round_clipping_container.gd" id="16_jc1rf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okmyq"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -69,6 +72,7 @@ layout_mode = 2
 script = ExtResource("12_iesyr")
 texture = ExtResource("9_tksgc")
 stretch_mode = 6
+corner_detail = 8
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -131,9 +135,16 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("10_8kjpv")
 title = "Card"
+title_position = 1
 icon_left_icon = ExtResource("8_c2b2g")
+icon_left_flip_h = false
+icon_left_flip_v = false
 icon_right_icon = ExtResource("8_c2b2g")
+icon_right_flip_h = false
+icon_right_flip_v = false
 texture = ExtResource("9_tksgc")
+stretch_mode = 0
+corner_detail = 8
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -210,6 +221,15 @@ message = "Popup message."
 button_left_text = "Left"
 button_right_text = "Right"
 
+[node name="WRoundClippingContainer" type="PanelContainer" parent="."]
+clip_children = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_okmyq")
+script = ExtResource("16_jc1rf")
+
+[connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/WCard" to="." method="_on_w_card_pressed"]
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]
 [connection signal="background_pressed" from="WPopupB1" to="." method="_dismiss_popup_b1"]

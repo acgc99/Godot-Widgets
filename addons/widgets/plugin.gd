@@ -4,6 +4,12 @@ extends EditorPlugin
 
 func _enter_tree() -> void:
 	add_custom_type(
+		"WRoundClippingContainer",
+		"PanelContainer",
+		preload("res://addons/widgets/scripts/w_round_clipping_container.gd"),
+		preload("res://addons/widgets/svg_icons/border-radius.svg")
+	)
+	add_custom_type(
 		"WFilteredLineEdit",
 		"LineEdit",
 		preload("res://addons/widgets/scripts/w_filtered_line_edit.gd"),
@@ -66,6 +72,7 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
+	remove_custom_type("WRoundClippingContainer")
 	remove_custom_type("WFilteredLineEdit")
 	remove_custom_type("WFilteredTextEdit")
 	remove_custom_type("WIcon")

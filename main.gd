@@ -25,3 +25,7 @@ func _dismiss_popup_b1() -> void:
 
 func _dismiss_popup_b2() -> void:
 	popup_b2.dismiss()
+
+
+func _on_w_card_pressed() -> void:
+	print("Card pressed")
