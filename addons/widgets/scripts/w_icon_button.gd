@@ -30,7 +30,7 @@ func _init() -> void:
 	# _icon ####################################################################
 	_icon = WIcon.new()
 	add_child(_icon, false, Node.INTERNAL_MODE_BACK)
-	_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_icon.mouse_filter = MOUSE_FILTER_IGNORE
 
 
 func _resize_children() -> void:

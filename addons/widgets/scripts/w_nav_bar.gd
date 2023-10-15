@@ -96,8 +96,8 @@ func _init() -> void:
 	# _label_title #############################################################
 	_label_title = Label.new()
 	_title_container.add_child(_label_title)
-	_label_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_label_title.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_label_title.size_flags_horizontal = SIZE_EXPAND_FILL
+	_label_title.size_flags_vertical = SIZE_EXPAND_FILL
 	_label_title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	# _button_right ############################################################
 	_button_right = WIconButton.new()

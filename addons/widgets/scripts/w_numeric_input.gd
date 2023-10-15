@@ -102,7 +102,7 @@ func _init() -> void:
 	# _label ###################################################################
 	_label = Label.new()
 	_container.add_child(_label)
-	_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_label.size_flags_horizontal = SIZE_EXPAND_FILL
 	_label.clip_text = true
 	_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	# _filtered_line_edit ######################################################

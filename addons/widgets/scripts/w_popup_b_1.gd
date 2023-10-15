@@ -108,7 +108,7 @@ func _init() -> void:
 	_button_background = Button.new()
 	add_child(_button_background, false, Node.INTERNAL_MODE_BACK)
 	_button_background.pressed.connect(_on_button_background_pressed)
-	_button_background.focus_mode = Control.FOCUS_NONE
+	_button_background.focus_mode = FOCUS_NONE
 	# _margin_container_external ###############################################
 	_margin_container_external = MarginContainer.new()
 	_button_background.add_child(_margin_container_external)
@@ -133,19 +133,19 @@ func _init() -> void:
 	# _label_title #############################################################
 	_label_title = Label.new()
 	_container.add_child(_label_title)
-	_label_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_label_title.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	_label_title.size_flags_horizontal = SIZE_EXPAND_FILL
+	_label_title.size_flags_vertical = SIZE_SHRINK_BEGIN
 	# _label_message ###########################################################
 	_label_message = Label.new()
 	_container.add_child(_label_message)
-	_label_message.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_label_message.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_label_message.size_flags_horizontal = SIZE_EXPAND_FILL
+	_label_message.size_flags_vertical = SIZE_EXPAND_FILL
 	# _button ##################################################################
 	_button = Button.new()
 	_container.add_child(_button)
 	_button.pressed.connect(_on_button_pressed)
-	_button.size_flags_vertical = Control.SIZE_SHRINK_END
-	_button.focus_mode = Control.FOCUS_NONE
+	_button.size_flags_vertical = SIZE_SHRINK_END
+	_button.focus_mode = FOCUS_NONE
 
 
 func _resize_children() -> void:
@@ -155,13 +155,13 @@ func _resize_children() -> void:
 
 func _set_button_size_flags_horizontal() -> void:
 	if button_size_flags_horizontal == FILL:
-		_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_button.size_flags_horizontal = SIZE_EXPAND_FILL
 	elif button_size_flags_horizontal == SHRINK_BEGIN:
-		_button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		_button.size_flags_horizontal = SIZE_SHRINK_BEGIN
 	elif button_size_flags_horizontal == SHRINK_CENTER:
-		_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		_button.size_flags_horizontal = SIZE_SHRINK_CENTER
 	else:
-		_button.size_flags_horizontal = Control.SIZE_SHRINK_END
+		_button.size_flags_horizontal = SIZE_SHRINK_END
 
 
 func _on_button_background_pressed() -> void:
@@ -180,7 +180,7 @@ func popup() -> void:
 		_tween_dismiss.kill()
 	_tween_popup = create_tween()
 	_tween_popup.tween_property(self, "modulate:a", 1.0, animation_lenght)
-	mouse_filter = Control.MOUSE_FILTER_STOP
+	mouse_filter = MOUSE_FILTER_STOP
 	visible = true
 
 
@@ -191,6 +191,6 @@ func dismiss() -> void:
 		_tween_popup.kill()
 	_tween_dismiss = create_tween()
 	_tween_dismiss.tween_property(self, "modulate:a", 0.0, animation_lenght)
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	mouse_filter = MOUSE_FILTER_IGNORE
 	await _tween_dismiss.finished
 	visible = false

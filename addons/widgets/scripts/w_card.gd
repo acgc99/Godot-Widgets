@@ -175,7 +175,7 @@ func _init() -> void:
 	# _round_clipping_container ################################################
 	_round_clipping_container = WRoundClippingContainer.new()
 	add_child(_round_clipping_container, false, Node.INTERNAL_MODE_BACK)
-	_round_clipping_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_round_clipping_container.mouse_filter = MOUSE_FILTER_IGNORE
 	# _texture_rect ############################################################
 	_texture_rect = TextureRect.new()
 	_round_clipping_container.add_child(_texture_rect)
@@ -183,13 +183,13 @@ func _init() -> void:
 	# _panel_container_label ###################################################
 	_panel_container_label = PanelContainer.new()
 	_round_clipping_container.add_child(_panel_container_label)
-	_panel_container_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_panel_container_label.size_flags_vertical = Control.SIZE_SHRINK_END
+	_panel_container_label.size_flags_horizontal = SIZE_EXPAND_FILL
+	_panel_container_label.size_flags_vertical = SIZE_SHRINK_END
 	# _margin_container ########################################################
 	_margin_container = MarginContainer.new()
 	_panel_container_label.add_child(_margin_container)
-	_margin_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_margin_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_margin_container.size_flags_vertical = SIZE_EXPAND_FILL
+	_margin_container.size_flags_horizontal = SIZE_EXPAND_FILL
 	# _container ###############################################################
 	_container = HBoxContainer.new()
 	_margin_container.add_child(_container)
@@ -200,8 +200,8 @@ func _init() -> void:
 	# _label ###################################################################
 	_label = Label.new()
 	_container.add_child(_label)
-	_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_label.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	_label.size_flags_vertical = SIZE_EXPAND_FILL
+	_label.size_flags_horizontal = SIZE_SHRINK_CENTER
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	# _icon_right ##############################################################
 	_icon_right = WIcon.new()
@@ -233,15 +233,15 @@ func _align_title() -> void:
 			corner_radius_bottom_left
 		)
 		_margin_container.add_theme_constant_override("margin_right", 0)
-		_container.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		_container.size_flags_horizontal = SIZE_SHRINK_BEGIN
 	elif alignment == CENTER:
 		_margin_container.add_theme_constant_override("margin_left", 0)
 		_margin_container.add_theme_constant_override("margin_right", 0)
-		_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		_container.size_flags_horizontal = SIZE_SHRINK_CENTER
 	else:
 		_margin_container.add_theme_constant_override("margin_left", 0)
 		_margin_container.add_theme_constant_override(
 			"margin_right",
 			corner_radius_bottom_right
 		)
-		_container.size_flags_horizontal = Control.SIZE_SHRINK_END
+		_container.size_flags_horizontal = SIZE_SHRINK_END
