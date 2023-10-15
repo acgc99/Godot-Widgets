@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_round_clipping_container.gd" id="16_jc1rf"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okmyq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6iqwe"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -43,6 +43,7 @@ custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 script = ExtResource("2_pyenn")
 title = "Title"
+alignment = 1
 button_left_icon = ExtResource("3_krt2y")
 button_right_icon = ExtResource("4_08bym")
 
@@ -72,7 +73,6 @@ layout_mode = 2
 script = ExtResource("12_iesyr")
 texture = ExtResource("9_tksgc")
 stretch_mode = 6
-corner_detail = 8
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -137,14 +137,8 @@ script = ExtResource("10_8kjpv")
 title = "Card"
 title_position = 1
 icon_left_icon = ExtResource("8_c2b2g")
-icon_left_flip_h = false
-icon_left_flip_v = false
 icon_right_icon = ExtResource("8_c2b2g")
-icon_right_flip_h = false
-icon_right_flip_v = false
 texture = ExtResource("9_tksgc")
-stretch_mode = 0
-corner_detail = 8
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -158,6 +152,7 @@ script = ExtResource("5_arsm4")
 text = "Value:"
 value_max = 10.0
 value_min = 0.0
+value_initial = 20.0
 button_up_icon = ExtResource("11_blpd4")
 button_down_icon = ExtResource("12_yu17d")
 
@@ -202,9 +197,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_sqya8")
 title = "Title"
-title_horizontal_alignment = 0
+title_horizontal_alignment = 1
 message = "This is a message."
-message_horizontal_alignment = 0
 button_text = "Accept"
 
 [node name="WPopupB2" type="Control" parent="."]
@@ -217,16 +211,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("14_fn815")
 title = "Title"
+title_horizontal_alignment = 1
 message = "Popup message."
 button_left_text = "Left"
 button_right_text = "Right"
+buttons_size_flags_horizontal = 2
 
 [node name="WRoundClippingContainer" type="PanelContainer" parent="."]
 clip_children = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_okmyq")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6iqwe")
 script = ExtResource("16_jc1rf")
 
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/WCard" to="." method="_on_w_card_pressed"]

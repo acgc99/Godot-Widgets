@@ -23,44 +23,39 @@ enum {
 @export var title: String:
 	set(title_):
 		title = title_
-		if _label_title != null:
-			_label_title.text = title
+		_label_title.text = title
 @export_enum(
 	"Left",
 	"Center",
 	"Right"
 )
 ## Title horizontal alignment.
-var title_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
+var title_horizontal_alignment: int:
 	set(title_horizontal_alignment_):
 		title_horizontal_alignment = title_horizontal_alignment_
-		if _label_title != null:
-			_label_title.horizontal_alignment = title_horizontal_alignment
+		_label_title.horizontal_alignment = title_horizontal_alignment
 @export_group("Message")
 ## Popup message.
 @export_multiline var message: String:
 	set(message_):
 		message = message_
-		if _label_message != null:
-			_label_message.text = message
+		_label_message.text = message
 @export_enum(
 	"Left",
 	"Center",
 	"Right"
 )
 ## Message horizontal alignment.
-var message_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
+var message_horizontal_alignment: int:
 	set(message_horizontal_alignment_):
 		message_horizontal_alignment = message_horizontal_alignment_
-		if _label_message != null:
-			_label_message.horizontal_alignment = message_horizontal_alignment
+		_label_message.horizontal_alignment = message_horizontal_alignment
 @export_group("Button")
 ## Popup button text.
 @export var button_text: String:
 	set(button_text_):
 		button_text = button_text_
-		if _button != null:
-			_button.text = button_text
+		_button.text = button_text
 @export_enum(
 	"Fill",
 	"Shrink begin",
@@ -71,8 +66,18 @@ var message_horizontal_alignment: int = HORIZONTAL_ALIGNMENT_CENTER:
 var button_size_flags_horizontal: int:
 	set(button_size_flags_horizontal_):
 		button_size_flags_horizontal = button_size_flags_horizontal_
-		if _button != null:
-			_set_button_size_flags_horizontal()
+		_set_button_size_flags_horizontal()
+@export_enum(
+	"None",
+	"Click",
+	"All"
+)
+## [param focus_mode] for the popup buttons.
+var buttons_focus_mode: int:
+	set(buttons_focus_mode_):
+		buttons_focus_mode = buttons_focus_mode_
+		_button_background.focus_mode = buttons_focus_mode
+		_button.focus_mode = buttons_focus_mode
 
 ## Background [Button].
 var _button_background: Button
@@ -103,7 +108,7 @@ func _init() -> void:
 	_button_background = Button.new()
 	add_child(_button_background, false, Node.INTERNAL_MODE_BACK)
 	_button_background.pressed.connect(_on_button_background_pressed)
-	_button_background.focus_mode
+	_button_background.focus_mode = Control.FOCUS_NONE
 	# _margin_container_external ###############################################
 	_margin_container_external = MarginContainer.new()
 	_button_background.add_child(_margin_container_external)
@@ -130,24 +135,17 @@ func _init() -> void:
 	_container.add_child(_label_title)
 	_label_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_label_title.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	_label_title.text = title
-	_label_title.horizontal_alignment = title_horizontal_alignment
 	# _label_message ###########################################################
 	_label_message = Label.new()
 	_container.add_child(_label_message)
 	_label_message.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_label_message.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_label_message.text = message
-	_label_message.horizontal_alignment = message_horizontal_alignment
 	# _button ##################################################################
 	_button = Button.new()
 	_container.add_child(_button)
 	_button.pressed.connect(_on_button_pressed)
 	_button.size_flags_vertical = Control.SIZE_SHRINK_END
-	_button.focus_mode = focus_mode
-	_button.text = button_text
-	# Others ###################################################################
-	_set_button_size_flags_horizontal()
+	_button.focus_mode = Control.FOCUS_NONE
 
 
 func _resize_children() -> void:
@@ -162,7 +160,7 @@ func _set_button_size_flags_horizontal() -> void:
 		_button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	elif button_size_flags_horizontal == SHRINK_CENTER:
 		_button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	elif button_size_flags_horizontal == SHRINK_END:
+	else:
 		_button.size_flags_horizontal = Control.SIZE_SHRINK_END
 
 

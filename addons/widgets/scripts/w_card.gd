@@ -16,15 +16,14 @@ enum {
 @export var title: String:
 	set(title_):
 		title = title_
-		if _label != null:
-			_label.text = title
+		_label.text = title
 @export_enum(
 	"Left",
 	"Center",
 	"Right"
 )
 # Title position
-var title_position: int = CENTER:
+var title_position: int:
 	set(title_position_):
 		title_position = title_position_
 		_positionate_title()
@@ -33,48 +32,41 @@ var title_position: int = CENTER:
 @export var icon_left_icon: Texture2D:
 	set(icon_left_icon_):
 		icon_left_icon = icon_left_icon_
-		if _icon_left != null:
-			_icon_left.icon = icon_left_icon
-			_set_icons_custom_minimum_size()
+		_icon_left.icon = icon_left_icon
+		_set_icons_custom_minimum_size()
 ## If [code]true[/code], left icon texture is flipped horizontally.
 @export var icon_left_flip_h: bool:
 	set(icon_left_flip_h_):
 		icon_left_flip_h = icon_left_flip_h_
-		if _icon_left != null:
-			_icon_left.flip_h = icon_left_flip_h
+		_icon_left.flip_h = icon_left_flip_h
 ## If [code]true[/code], left icon texture is flipped vertically.
 @export var icon_left_flip_v: bool:
 	set(icon_left_flip_v_):
 		icon_left_flip_v = icon_left_flip_v_
-		if _icon_left != null:
-			_icon_left.flip_v = icon_left_flip_v
+		_icon_left.flip_v = icon_left_flip_v
 @export_subgroup("Right Icon", "icon_right")
 ## Right icon texture.
 @export var icon_right_icon: Texture2D:
 	set(icon_right_icon_):
 		icon_right_icon = icon_right_icon_
-		if _icon_right != null:
-			_icon_right.icon = icon_right_icon
-			_set_icons_custom_minimum_size()
+		_icon_right.icon = icon_right_icon
+		_set_icons_custom_minimum_size()
 ## If [code]true[/code], right icon texture is flipped horizontally.
 @export var icon_right_flip_h: bool:
 	set(icon_right_flip_h_):
 		icon_right_flip_h = icon_right_flip_h_
-		if _icon_right != null:
-			_icon_right.flip_h = icon_right_flip_h
+		_icon_right.flip_h = icon_right_flip_h
 ## If [code]true[/code], right icon texture is flipped vertically.
 @export var icon_right_flip_v: bool:
 	set(icon_right_flip_v_):
 		icon_right_flip_v = icon_right_flip_v_
-		if _icon_right != null:
-			_icon_right.flip_v = icon_right_flip_v
+		_icon_right.flip_v = icon_right_flip_v
 @export_group("Background Texture")
 ## The node's [Texture2D] resource.
 @export var texture: Texture2D:
 	set(texture_):
 		texture = texture_
-		if _texture_rect != null:
-			_texture_rect.texture = texture
+		_texture_rect.texture = texture
 @export_enum(
 	"Scale",
 	"Tile",
@@ -115,8 +107,7 @@ var title_position: int = CENTER:
 var stretch_mode: int:
 	set(stretch_mode_):
 		stretch_mode = stretch_mode_
-		if _texture_rect != null:
-			_texture_rect.stretch_mode = stretch_mode
+		_texture_rect.stretch_mode = stretch_mode
 ## This sets the number of vertices used for each corner. Higher values result
 ## in rounder corners but take more processing power to compute. When choosing
 ## a value, you should take the corner radius ([method set_corner_radius_all])
@@ -185,17 +176,10 @@ func _init() -> void:
 	_round_clipping_container = WRoundClippingContainer.new()
 	add_child(_round_clipping_container, false, Node.INTERNAL_MODE_BACK)
 	_round_clipping_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_round_clipping_container.corner_detail = corner_detail
-	_round_clipping_container.corner_radius_top_left = corner_radius_top_left
-	_round_clipping_container.corner_radius_top_right = corner_radius_top_right
-	_round_clipping_container.corner_radius_bottom_right = corner_radius_bottom_right
-	_round_clipping_container.corner_radius_bottom_left = corner_radius_bottom_left
 	# _texture_rect ############################################################
 	_texture_rect = TextureRect.new()
 	_round_clipping_container.add_child(_texture_rect)
 	_texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	_texture_rect.texture = texture
-	_texture_rect.stretch_mode = stretch_mode
 	# _panel_container_label ###################################################
 	_panel_container_label = PanelContainer.new()
 	_round_clipping_container.add_child(_panel_container_label)
@@ -213,22 +197,15 @@ func _init() -> void:
 	# _icon_left ###############################################################
 	_icon_left = WIcon.new()
 	_container.add_child(_icon_left)
-	_icon_left.icon = icon_left_icon
-	_icon_left.flip_h = icon_left_flip_h
-	_icon_left.flip_v = icon_left_flip_v
 	# _label ###################################################################
 	_label = Label.new()
 	_container.add_child(_label)
 	_label.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_label.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_label.text = title
 	# _icon_right ##############################################################
 	_icon_right = WIcon.new()
 	_container.add_child(_icon_right)
-	_icon_right.icon = icon_right_icon
-	_icon_right.flip_h = icon_right_flip_h
-	_icon_right.flip_v = icon_right_flip_v
 	# Others ###################################################################
 	_positionate_title()
 
@@ -252,8 +229,6 @@ func _set_icons_custom_minimum_size() -> void:
 
 
 func _positionate_title() -> void:
-	if _margin_container == null or _container == null:
-		return
 	if title_position == LEFT:
 		_margin_container.add_theme_constant_override(
 			"margin_left",

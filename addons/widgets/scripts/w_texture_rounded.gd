@@ -10,8 +10,7 @@ extends Control
 @export var texture: Texture2D:
 	set(texture_):
 		texture = texture_
-		if _texture_rect != null:
-			_texture_rect.texture = texture
+		_texture_rect.texture = texture
 @export_enum(
 	"Scale",
 	"Tile",
@@ -52,8 +51,7 @@ extends Control
 var stretch_mode: int:
 	set(stretch_mode_):
 		stretch_mode = stretch_mode_
-		if _texture_rect != null:
-			_texture_rect.stretch_mode = stretch_mode
+		_texture_rect.stretch_mode = stretch_mode
 ## This sets the number of vertices used for each corner. Higher values result
 ## in rounder corners but take more processing power to compute. When choosing
 ## a value, you should take the corner radius ([method set_corner_radius_all])
@@ -105,17 +103,10 @@ func _init() -> void:
 	# _round_clipping_container ################################################
 	_round_clipping_container = WRoundClippingContainer.new()
 	add_child(_round_clipping_container, false, Node.INTERNAL_MODE_BACK)
-	_round_clipping_container.corner_detail = corner_detail
-	_round_clipping_container.corner_radius_top_left = corner_radius_top_left
-	_round_clipping_container.corner_radius_top_right = corner_radius_top_right
-	_round_clipping_container.corner_radius_bottom_right = corner_radius_bottom_right
-	_round_clipping_container.corner_radius_bottom_left = corner_radius_bottom_left
 	# _texture_rect ############################################################
 	_texture_rect = TextureRect.new()
 	_round_clipping_container.add_child(_texture_rect)
 	_texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	_texture_rect.texture = texture
-	_texture_rect.stretch_mode = stretch_mode
 
 
 func _resize_children() -> void:
