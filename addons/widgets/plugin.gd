@@ -64,6 +64,12 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/svg_icons/image.svg")
 	)
 	add_custom_type(
+		"WIconLabelIcon",
+		"Control",
+		preload("res://addons/widgets/scripts/w_icon_label_icon.gd"),
+		preload("res://addons/widgets/svg_icons/align-horizontal-distribute.svg")
+	)
+	add_custom_type(
 		"WCard",
 		"BaseButton",
 		preload("res://addons/widgets/scripts/w_card.gd"),
@@ -83,3 +89,4 @@ func _exit_tree() -> void:
 	remove_custom_type("WPopupB2")
 	remove_custom_type("WTextureRounded")
 	remove_custom_type("WCard")
+	remove_custom_type("WIconLabelIcon")
