@@ -52,6 +52,7 @@ var stretch_mode: int:
 	set(stretch_mode_):
 		stretch_mode = stretch_mode_
 		_texture_rect.stretch_mode = stretch_mode
+@export_category("WRoundClippingContainer")
 ## This sets the number of vertices used for each corner. Higher values result
 ## in rounder corners but take more processing power to compute. When choosing
 ## a value, you should take the corner radius ([method set_corner_radius_all])

@@ -124,6 +124,7 @@ func _init() -> void:
 	
 	_label = Label.new()
 	_container_horizontal.add_child(_label)
+	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	
 	_icon_right = WIcon.new()
 	_container_horizontal.add_child(_icon_right)

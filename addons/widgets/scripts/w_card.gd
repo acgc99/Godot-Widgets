@@ -11,57 +11,6 @@ enum {
 	RIGHT
 }
 
-@export_group("Title")
-## [WCard] title.
-@export var title: String:
-	set(title_):
-		title = title_
-		_label.text = title
-@export_enum(
-	"Left",
-	"Center",
-	"Right"
-)
-# Title horizontal alignment.
-var alignment: int:
-	set(alignment_):
-		alignment = alignment_
-		_align_title()
-@export_subgroup("Left icon", "icon_left")
-## Left icon texture.
-@export var icon_left_icon: Texture2D:
-	set(icon_left_icon_):
-		icon_left_icon = icon_left_icon_
-		_icon_left.icon = icon_left_icon
-		_set_icons_custom_minimum_size()
-## If [code]true[/code], left icon texture is flipped horizontally.
-@export var icon_left_flip_h: bool:
-	set(icon_left_flip_h_):
-		icon_left_flip_h = icon_left_flip_h_
-		_icon_left.flip_h = icon_left_flip_h
-## If [code]true[/code], left icon texture is flipped vertically.
-@export var icon_left_flip_v: bool:
-	set(icon_left_flip_v_):
-		icon_left_flip_v = icon_left_flip_v_
-		_icon_left.flip_v = icon_left_flip_v
-@export_subgroup("Right Icon", "icon_right")
-## Right icon texture.
-@export var icon_right_icon: Texture2D:
-	set(icon_right_icon_):
-		icon_right_icon = icon_right_icon_
-		_icon_right.icon = icon_right_icon
-		_set_icons_custom_minimum_size()
-## If [code]true[/code], right icon texture is flipped horizontally.
-@export var icon_right_flip_h: bool:
-	set(icon_right_flip_h_):
-		icon_right_flip_h = icon_right_flip_h_
-		_icon_right.flip_h = icon_right_flip_h
-## If [code]true[/code], right icon texture is flipped vertically.
-@export var icon_right_flip_v: bool:
-	set(icon_right_flip_v_):
-		icon_right_flip_v = icon_right_flip_v_
-		_icon_right.flip_v = icon_right_flip_v
-@export_group("Background Texture")
 ## The node's [Texture2D] resource.
 @export var texture: Texture2D:
 	set(texture_):
@@ -108,6 +57,73 @@ var stretch_mode: int:
 	set(stretch_mode_):
 		stretch_mode = stretch_mode_
 		_texture_rect.stretch_mode = stretch_mode
+@export_category("WIconLabelIcon")
+## [WCard] title.
+@export var title: String:
+	set(title_):
+		title = title_
+		_icon_label_icon.text = title
+@export_enum(
+	"Left",
+	"Center",
+	"Right"
+)
+# Title horizontal alignment.
+var alignment: int:
+	set(alignment_):
+		alignment = alignment_
+		_align_title()
+## Separation between the text and the icons.
+@export_range(0, 0, 1, "or_greater") var separation: int:
+	set(separation_):
+		separation = separation_
+		_icon_label_icon.separation = separation
+@export_group("Left icon", "icon_left")
+## Left icon texture.
+@export var icon_left_icon: Texture2D:
+	set(icon_left_icon_):
+		icon_left_icon = icon_left_icon_
+		_icon_label_icon.icon_left_icon = icon_left_icon
+## If [code]true[/code], left icon texture is flipped horizontally.
+@export var icon_left_flip_h: bool:
+	set(icon_left_flip_h_):
+		icon_left_flip_h = icon_left_flip_h_
+		_icon_label_icon.icon_left_flip_h = icon_left_flip_h
+## If [code]true[/code], left icon texture is flipped vertically.
+@export var icon_left_flip_v: bool:
+	set(icon_left_flip_v_):
+		icon_left_flip_v = icon_left_flip_v_
+		_icon_label_icon.icon_left_flip_v = icon_left_flip_v
+@export_group("Right Icon", "icon_right")
+## Right icon texture.
+@export var icon_right_icon: Texture2D:
+	set(icon_right_icon_):
+		icon_right_icon = icon_right_icon_
+		_icon_label_icon.icon_right_icon = icon_right_icon
+## If [code]true[/code], right icon texture is flipped horizontally.
+@export var icon_right_flip_h: bool:
+	set(icon_right_flip_h_):
+		icon_right_flip_h = icon_right_flip_h_
+		_icon_label_icon.icon_right_flip_h = icon_right_flip_h
+## If [code]true[/code], right icon texture is flipped vertically.
+@export var icon_right_flip_v: bool:
+	set(icon_right_flip_v_):
+		icon_right_flip_v = icon_right_flip_v_
+		_icon_label_icon.icon_right_flip_v = icon_right_flip_v
+@export_group("Margin", "margin")
+## Top margin.
+@export_range(0, 0, 1, "or_greater") var margin_top: int:
+	set(margin_top_):
+		margin_top = margin_top_
+		_icon_label_icon.margin_top = margin_top
+		_icon_label_icon._resize()
+## Bottom margin.
+@export_range(0, 0, 1, "or_greater") var margin_bottom: int:
+	set(margin_bottom_):
+		margin_bottom = margin_bottom_
+		_icon_label_icon.margin_bottom = margin_bottom
+		_icon_label_icon._resize()
+@export_category("WRoundClippingContainer")
 ## This sets the number of vertices used for each corner. Higher values result
 ## in rounder corners but take more processing power to compute. When choosing
 ## a value, you should take the corner radius ([method set_corner_radius_all])
@@ -125,7 +141,7 @@ var stretch_mode: int:
 	set(corner_detail_):
 		corner_detail = corner_detail_
 		_round_clipping_container.corner_detail = corner_detail
-@export_subgroup("Corner Radius", "corner_radius")
+@export_group("Corner Radius", "corner_radius")
 ## The top-left corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 10, 1, "or_greater") var corner_radius_top_left: int:
 	set(corner_radius_top_left_):
@@ -153,95 +169,39 @@ var stretch_mode: int:
 var _round_clipping_container: WRoundClippingContainer
 # [TextureRect] holding the texture.
 var _texture_rect: TextureRect
-# [PanelContainer] for the [Label].
-var _panel_container_label: PanelContainer
-# [MarginContainer] for the [Label]. Adds margin when corners are rounded and
-# [param _label] horizontal alignment makes text invisible due to
-# [_panel_container] clipping its children.
-var _margin_container: MarginContainer
-# [HBoxContainer] for the title and icons.
-var _container: HBoxContainer
-# [Label] for the text.
-var _label: Label
-# [WIcon] for the left icon.
-var _icon_left: WIcon
-# [WIcon] for the right icon.
-var _icon_right: WIcon
+# [WIConLabelIcon] for the label and icons.
+var _icon_label_icon: WIconLabelIcon
 
 
 func _init() -> void:
 	item_rect_changed.connect(_resize_children)
 	tree_entered.connect(_resize_children)
-	# _round_clipping_container ################################################
+	
 	_round_clipping_container = WRoundClippingContainer.new()
 	add_child(_round_clipping_container, false, Node.INTERNAL_MODE_BACK)
 	_round_clipping_container.mouse_filter = MOUSE_FILTER_IGNORE
-	# _texture_rect ############################################################
+	
 	_texture_rect = TextureRect.new()
 	_round_clipping_container.add_child(_texture_rect)
 	_texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	# _panel_container_label ###################################################
-	_panel_container_label = PanelContainer.new()
-	_round_clipping_container.add_child(_panel_container_label)
-	_panel_container_label.size_flags_horizontal = SIZE_EXPAND_FILL
-	_panel_container_label.size_flags_vertical = SIZE_SHRINK_END
-	# _margin_container ########################################################
-	_margin_container = MarginContainer.new()
-	_panel_container_label.add_child(_margin_container)
-	_margin_container.size_flags_vertical = SIZE_EXPAND_FILL
-	_margin_container.size_flags_horizontal = SIZE_EXPAND_FILL
-	# _container ###############################################################
-	_container = HBoxContainer.new()
-	_margin_container.add_child(_container)
-	_container.add_theme_constant_override("separation", 0)
-	# _icon_left ###############################################################
-	_icon_left = WIcon.new()
-	_container.add_child(_icon_left)
-	# _label ###################################################################
-	_label = Label.new()
-	_container.add_child(_label)
-	_label.size_flags_vertical = SIZE_EXPAND_FILL
-	_label.size_flags_horizontal = SIZE_SHRINK_CENTER
-	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	# _icon_right ##############################################################
-	_icon_right = WIcon.new()
-	_container.add_child(_icon_right)
+	
+	_icon_label_icon = WIconLabelIcon.new()
+	_round_clipping_container.add_child(_icon_label_icon)
+	_icon_label_icon.size_flags_vertical = Control.SIZE_SHRINK_END
 
 
 func _resize_children() -> void:
 	_round_clipping_container.custom_minimum_size = size
-	_set_icons_custom_minimum_size()
-
-
-func _set_icons_custom_minimum_size() -> void:
-	# _icon_left
-	if _icon_left.icon == null:
-		_icon_left.custom_minimum_size.x = 0
-	else:
-		_icon_left.custom_minimum_size.x = _label.size.y
-	# _icon_right
-	if _icon_right.icon == null:
-		_icon_right.custom_minimum_size.x = 0
-	else:
-		_icon_right.custom_minimum_size.x = _label.size.y
 
 
 func _align_title() -> void:
+	_icon_label_icon.alignment = alignment
 	if alignment == LEFT:
-		_margin_container.add_theme_constant_override(
-			"margin_left",
-			corner_radius_bottom_left
-		)
-		_margin_container.add_theme_constant_override("margin_right", 0)
-		_container.size_flags_horizontal = SIZE_SHRINK_BEGIN
+		_icon_label_icon.margin_left = corner_radius_bottom_left
+		_icon_label_icon.margin_right = 0
 	elif alignment == CENTER:
-		_margin_container.add_theme_constant_override("margin_left", 0)
-		_margin_container.add_theme_constant_override("margin_right", 0)
-		_container.size_flags_horizontal = SIZE_SHRINK_CENTER
+		_icon_label_icon.margin_left = 0
+		_icon_label_icon.margin_right = 0
 	else:
-		_margin_container.add_theme_constant_override("margin_left", 0)
-		_margin_container.add_theme_constant_override(
-			"margin_right",
-			corner_radius_bottom_right
-		)
-		_container.size_flags_horizontal = SIZE_SHRINK_END
+		_icon_label_icon.margin_left = 0
+		_icon_label_icon.margin_right = corner_radius_bottom_right
