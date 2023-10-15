@@ -4,7 +4,7 @@ extends BaseButton
 ## Similar to [WTextureRounded] but it is a button and contains a panel for
 ## a title.
 
-## Enum corresponding to [param title_position].
+## Enum corresponding to [param alignment].
 enum {
 	LEFT,
 	CENTER,
@@ -22,11 +22,11 @@ enum {
 	"Center",
 	"Right"
 )
-# Title position
-var title_position: int:
-	set(title_position_):
-		title_position = title_position_
-		_positionate_title()
+# Title horizontal alignment.
+var alignment: int:
+	set(alignment_):
+		alignment = alignment_
+		_align_title()
 @export_subgroup("Left icon", "icon_left")
 ## Left icon texture.
 @export var icon_left_icon: Texture2D:
@@ -141,13 +141,13 @@ var stretch_mode: int:
 	set(corner_radius_bottom_right_):
 		corner_radius_bottom_right = corner_radius_bottom_right_
 		_round_clipping_container.corner_radius_bottom_right = corner_radius_bottom_right
-		_positionate_title()
+		_align_title()
 ## The bottom-left corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 10, 1, "or_greater") var corner_radius_bottom_left: int:
 	set(corner_radius_bottom_left_):
 		corner_radius_bottom_left = corner_radius_bottom_left_
 		_round_clipping_container.corner_radius_bottom_left = corner_radius_bottom_left
-		_positionate_title()
+		_align_title()
 
 # Mask for round clipping.
 var _round_clipping_container: WRoundClippingContainer
@@ -206,8 +206,6 @@ func _init() -> void:
 	# _icon_right ##############################################################
 	_icon_right = WIcon.new()
 	_container.add_child(_icon_right)
-	# Others ###################################################################
-	_positionate_title()
 
 
 func _resize_children() -> void:
@@ -228,15 +226,15 @@ func _set_icons_custom_minimum_size() -> void:
 		_icon_right.custom_minimum_size.x = _label.size.y
 
 
-func _positionate_title() -> void:
-	if title_position == LEFT:
+func _align_title() -> void:
+	if alignment == LEFT:
 		_margin_container.add_theme_constant_override(
 			"margin_left",
 			corner_radius_bottom_left
 		)
 		_margin_container.add_theme_constant_override("margin_right", 0)
 		_container.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	elif title_position == CENTER:
+	elif alignment == CENTER:
 		_margin_container.add_theme_constant_override("margin_left", 0)
 		_margin_container.add_theme_constant_override("margin_right", 0)
 		_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER

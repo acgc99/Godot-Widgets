@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_round_clipping_container.gd" id="16_jc1rf"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6iqwe"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dm481"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -135,7 +135,7 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("10_8kjpv")
 title = "Card"
-title_position = 1
+alignment = 1
 icon_left_icon = ExtResource("8_c2b2g")
 icon_right_icon = ExtResource("8_c2b2g")
 texture = ExtResource("9_tksgc")
@@ -222,7 +222,7 @@ clip_children = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_6iqwe")
+theme_override_styles/panel = SubResource("StyleBoxFlat_dm481")
 script = ExtResource("16_jc1rf")
 
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/WCard" to="." method="_on_w_card_pressed"]
