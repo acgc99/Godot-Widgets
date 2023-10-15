@@ -49,6 +49,6 @@ var _stylebox: StyleBoxFlat
 
 
 func _init() -> void:
-	clip_children = CanvasItem.CLIP_CHILDREN_ONLY
+	clip_children = CLIP_CHILDREN_ONLY
 	_stylebox = StyleBoxFlat.new()
 	add_theme_stylebox_override("panel", _stylebox)

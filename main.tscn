@@ -136,6 +136,7 @@ alignment = 1
 icon_left_icon = ExtResource("8_c2b2g")
 icon_right_icon = ExtResource("8_c2b2g")
 texture = ExtResource("9_tksgc")
+stretch_mode = 6
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
