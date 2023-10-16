@@ -147,8 +147,8 @@ var _tween_dismiss: Tween
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize_children)
-	tree_entered.connect(_resize_children)
+	item_rect_changed.connect(_resize)
+	tree_entered.connect(_resize)
 	
 	_button_background = Button.new()
 	add_child(_button_background, false, Node.INTERNAL_MODE_BACK)
@@ -178,7 +178,7 @@ func _init() -> void:
 	_label_message.size_flags_vertical = SIZE_EXPAND_FILL
 
 
-func _resize_children() -> void:
+func _resize() -> void:
 	_button_background.size = size
 	_margin_container_external.size = size
 

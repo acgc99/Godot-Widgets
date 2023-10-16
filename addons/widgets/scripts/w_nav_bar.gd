@@ -81,8 +81,8 @@ var _button_right: WIconButton
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize_children)
-	tree_entered.connect(_resize_children)
+	item_rect_changed.connect(_resize)
+	tree_entered.connect(_resize)
 	# _panel_container #########################################################
 	_panel_container = PanelContainer.new()
 	add_child(_panel_container, false, Node.INTERNAL_MODE_BACK)
@@ -105,7 +105,7 @@ func _init() -> void:
 	_button_right.pressed.connect(_on_button_right_pressed)
 
 
-func _resize_children() -> void:
+func _resize() -> void:
 	_button_left.custom_minimum_size = Vector2(size[1], 0)
 	_button_right.custom_minimum_size = Vector2(size[1], 0)
 

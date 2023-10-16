@@ -27,8 +27,8 @@ var _texture_rect_icon: TextureRect
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize_children)
-	tree_entered.connect(_resize_children)
+	item_rect_changed.connect(_resize)
+	tree_entered.connect(_resize)
 	# _texture_rect_icon #######################################################
 	_texture_rect_icon = TextureRect.new()
 	add_child(_texture_rect_icon, false, Node.INTERNAL_MODE_BACK)
@@ -36,5 +36,5 @@ func _init() -> void:
 	_texture_rect_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 
 
-func _resize_children() -> void:
+func _resize() -> void:
 	_texture_rect_icon.size = size

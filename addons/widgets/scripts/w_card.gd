@@ -172,8 +172,8 @@ var _icon_label_icon: WIconLabelIcon
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize_children)
-	tree_entered.connect(_resize_children)
+	item_rect_changed.connect(_resize)
+	tree_entered.connect(_resize)
 	
 	_round_clipping_container = WRoundClippingContainer.new()
 	add_child(_round_clipping_container, false, Node.INTERNAL_MODE_BACK)
@@ -188,7 +188,7 @@ func _init() -> void:
 	_icon_label_icon.size_flags_vertical = Control.SIZE_SHRINK_END
 
 
-func _resize_children() -> void:
+func _resize() -> void:
 	_round_clipping_container.custom_minimum_size = size
 
 
