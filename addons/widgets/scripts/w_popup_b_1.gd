@@ -3,70 +3,29 @@ class_name WPopupB1
 extends Control
 ## A popup with one button.
 
+## Emitted when the popup is popuped (animation start).
+signal popuped
+## Emitted when the popup is dismissed (animation end).
+signal dismissed
 ## Emitted when the background button is pressed.
 signal background_pressed
 ## Emitted when the popup button is pressed.
 signal button_pressed
 
-## Enum corresponding to [_button] size flags horizontal.
+## Enum corresponding to [param mode].
 enum {
-	FILL,
-	SHRINK_BEGIN,
-	SHRINK_CENTER,
-	SHRINK_END
+	MODE_LEFT,
+	MODE_CENTER,
+	MODE_RIGHT,
+	MODE_FILL,
 }
 
-## Popup/dismiss animation duration. Not intended to be changed during runtime.
-@export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1
-@export_group("Title")
-## Popup title.
-@export var title: String:
-	set(title_):
-		title = title_
-		_label_title.text = title
-@export_enum(
-	"Left",
-	"Center",
-	"Right"
-)
-## Title horizontal alignment.
-var title_horizontal_alignment: int:
-	set(title_horizontal_alignment_):
-		title_horizontal_alignment = title_horizontal_alignment_
-		_label_title.horizontal_alignment = title_horizontal_alignment
-@export_group("Message")
-## Popup message.
-@export_multiline var message: String:
-	set(message_):
-		message = message_
-		_label_message.text = message
-@export_enum(
-	"Left",
-	"Center",
-	"Right"
-)
-## Message horizontal alignment.
-var message_horizontal_alignment: int:
-	set(message_horizontal_alignment_):
-		message_horizontal_alignment = message_horizontal_alignment_
-		_label_message.horizontal_alignment = message_horizontal_alignment
-@export_group("Button")
-## Popup button text.
+## The button's text that will be displayed inside the button's area.
 @export var button_text: String:
 	set(button_text_):
 		button_text = button_text_
 		_button.text = button_text
-@export_enum(
-	"Fill",
-	"Shrink begin",
-	"Shrink center",
-	"Shrink end"
-)
-## Popup button size flags horizontal.
-var button_size_flags_horizontal: int:
-	set(button_size_flags_horizontal_):
-		button_size_flags_horizontal = button_size_flags_horizontal_
-		_set_button_size_flags_horizontal()
+@export_category("WPopup")
 @export_enum(
 	"None",
 	"Click",
@@ -76,95 +35,147 @@ var button_size_flags_horizontal: int:
 var buttons_focus_mode: int:
 	set(buttons_focus_mode_):
 		buttons_focus_mode = buttons_focus_mode_
-		_button_background.focus_mode = buttons_focus_mode
+		_popup.buttons_focus_mode = buttons_focus_mode
 		_button.focus_mode = buttons_focus_mode
+## Popup/dismiss animation duration. Not intended to be changed during runtime.
+@export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1:
+	set(animation_lenght_):
+		animation_lenght = animation_lenght_
+		_popup.animation_lenght = animation_lenght
+## Separation between the title, message and buttons.
+@export_range(0, 0, 1, "or_greater") var separation: int = 4:
+	set(separation_):
+		separation = separation_
+		_popup.separation = separation
+@export_group("Title", "title")
+## Popup title.
+@export var title_text: String:
+	set(title_text_):
+		title_text = title_text_
+		_popup.title_text = title_text
+@export_enum(
+	"Left",
+	"Center",
+	"Right"
+)
+## Title horizontal alignment.
+var title_alignment: int:
+	set(title_alignment_):
+		title_alignment = title_alignment_
+		_popup.title_alignment = title_alignment
+@export_group("Message", "message")
+## Message text.
+@export_multiline var message_text: String:
+	set(message_text_):
+		message_text = message_text_
+		_popup.message_text = message_text
+@export_enum(
+	"Left",
+	"Center",
+	"Right"
+)
+## Message horizontal alignment.
+var message_alignment: int:
+	set(message_alignment_):
+		message_alignment = message_alignment_
+		_popup.message_alignment = message_alignment
+@export_group("External Margin", "margin_external")
+## Left external margin.
+@export_range(0, 0, 1, "or_greater") var margin_external_left: int:
+	set(margin_external_left_):
+		margin_external_left = margin_external_left_
+		_popup.margin_external_left = margin_external_left
+## Top external margin.
+@export_range(0, 0, 1, "or_greater") var margin_external_top: int:
+	set(margin_external_top_):
+		margin_external_top = margin_external_top_
+		_popup.margin_external_top = margin_external_top
+## Right external margin.
+@export_range(0, 0, 1, "or_greater") var margin_external_right: int:
+	set(margin_external_right_):
+		margin_external_right = margin_external_right_
+		_popup.margin_external_right = margin_external_right
+## Bottom external margin.
+@export_range(0, 0, 1, "or_greater") var margin_external_bottom: int:
+	set(margin_external_bottom_):
+		margin_external_bottom = margin_external_bottom_
+		_popup.margin_external_bottom = margin_external_bottom
+@export_group("Internal Margin", "margin_internal")
+## Left internal margin.
+@export_range(0, 0, 1, "or_greater") var margin_internal_left: int:
+	set(margin_internal_left_):
+		margin_internal_left = margin_internal_left_
+		_popup.margin_internal_left = margin_internal_left
+## Top internal margin.
+@export_range(0, 0, 1, "or_greater") var margin_internal_top: int:
+	set(margin_internal_top_):
+		margin_internal_top = margin_internal_top_
+		_popup.margin_internal_top = margin_internal_top
+## Right internal margin.
+@export_range(0, 0, 1, "or_greater") var margin_internal_right: int:
+	set(margin_internal_right_):
+		margin_internal_right = margin_internal_right_
+		_popup.margin_internal_right = margin_internal_right
+## Bottom internal margin.
+@export_range(0, 0, 1, "or_greater") var margin_internal_bottom: int:
+	set(margin_internal_bottom_):
+		margin_internal_bottom = margin_internal_bottom_
+		_popup.margin_internal_bottom = margin_internal_bottom
+@export_category("WHButtonsContainer")
+@export_enum(
+	"Left",
+	"Center",
+	"Right",
+	"Fill"
+)
+## Buttons' size and position mode.
+var mode: int:
+	set(mode_):
+		mode = mode_
+		_buttons_container.mode = mode
 
-## Background [Button].
-var _button_background: Button
-## External [MarginContainer] for setting popup size.
-var _margin_container_external: MarginContainer
-## [PanelContainer] for popup contents background.
-var _panel_container: PanelContainer
-## Internal [MarginContainer] for internal margins.
-var _margin_container_internal: MarginContainer
-## [VBoxContainer] for popup contents.
-var _container: VBoxContainer
-## [Label] for popup title.
-var _label_title: Label
-## [Label] for popup message.
-var _label_message: Label
-## [Button] for popup button.
+## [WPopup] base.
+var _popup: WPopup
+## [HBoxContainer] for the buttons.
+var _buttons_container: WHButtonsContainer
+## Popup [Button].
 var _button: Button
-## [Tween] for showing the popup.
-var _tween_popup: Tween
-## [Tween] for hiding the popup.
-var _tween_dismiss: Tween
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize_children)
-	tree_entered.connect(_resize_children)
-	# _button_background #######################################################
-	_button_background = Button.new()
-	add_child(_button_background, false, Node.INTERNAL_MODE_BACK)
-	_button_background.pressed.connect(_on_button_background_pressed)
-	_button_background.focus_mode = FOCUS_NONE
-	# _margin_container_external ###############################################
-	_margin_container_external = MarginContainer.new()
-	_button_background.add_child(_margin_container_external)
-	_margin_container_external.add_theme_constant_override("margin_left", 50)
-	_margin_container_external.add_theme_constant_override("margin_top", 500)
-	_margin_container_external.add_theme_constant_override("margin_right", 50)
-	_margin_container_external.add_theme_constant_override("margin_bottom", 500)
-	# _panel_container #########################################################
-	_panel_container = PanelContainer.new()
-	_margin_container_external.add_child(_panel_container)
-	# _margin_container_internal ###############################################
-	_margin_container_internal = MarginContainer.new()
-	_panel_container.add_child(_margin_container_internal)
-	_margin_container_internal.add_theme_constant_override("margin_left", 50)
-	_margin_container_internal.add_theme_constant_override("margin_top", 50)
-	_margin_container_internal.add_theme_constant_override("margin_right", 50)
-	_margin_container_internal.add_theme_constant_override("margin_bottom", 50)
-	# _container ###############################################################
-	_container = VBoxContainer.new()
-	_margin_container_internal.add_child(_container)
-	_container.add_theme_constant_override("separation", 0)
-	# _label_title #############################################################
-	_label_title = Label.new()
-	_container.add_child(_label_title)
-	_label_title.size_flags_horizontal = SIZE_EXPAND_FILL
-	_label_title.size_flags_vertical = SIZE_SHRINK_BEGIN
-	# _label_message ###########################################################
-	_label_message = Label.new()
-	_container.add_child(_label_message)
-	_label_message.size_flags_horizontal = SIZE_EXPAND_FILL
-	_label_message.size_flags_vertical = SIZE_EXPAND_FILL
-	# _button ##################################################################
+	item_rect_changed.connect(_resize)
+	tree_entered.connect(_resize)
+	
+	_popup = WPopup.new()
+	add_child(_popup)
+	_popup.background_pressed.connect(_on_background_pressed)
+	
+	_buttons_container = WHButtonsContainer.new()
+	_popup.add_buttons_container(_buttons_container)
+	_popup.popuped.connect(_on_popup_popuped)
+	_popup.popuped.connect(_on_popup_dismissed)
+	_buttons_container.size_flags_vertical = SIZE_SHRINK_END
+	_buttons_container.size_flags_horizontal = SIZE_EXPAND_FILL
+	
 	_button = Button.new()
-	_container.add_child(_button)
+	_buttons_container.add_child(_button)
 	_button.pressed.connect(_on_button_pressed)
-	_button.size_flags_vertical = SIZE_SHRINK_END
 	_button.focus_mode = FOCUS_NONE
 
 
-func _resize_children() -> void:
-	_button_background.size = size
-	_margin_container_external.size = size
+func _resize() -> void:
+	_popup.size = size
 
 
-func _set_button_size_flags_horizontal() -> void:
-	if button_size_flags_horizontal == FILL:
-		_button.size_flags_horizontal = SIZE_EXPAND_FILL
-	elif button_size_flags_horizontal == SHRINK_BEGIN:
-		_button.size_flags_horizontal = SIZE_SHRINK_BEGIN
-	elif button_size_flags_horizontal == SHRINK_CENTER:
-		_button.size_flags_horizontal = SIZE_SHRINK_CENTER
-	else:
-		_button.size_flags_horizontal = SIZE_SHRINK_END
+func _on_popup_popuped() -> void:
+	popuped.emit()
 
 
-func _on_button_background_pressed() -> void:
+func _on_popup_dismissed() -> void:
+	dismissed.emit()
+
+
+func _on_background_pressed() -> void:
 	background_pressed.emit()
 
 
@@ -172,25 +183,12 @@ func _on_button_pressed() -> void:
 	button_pressed.emit()
 
 
-## Called to show the popup.
 func popup() -> void:
-	modulate.a = 0
-	get_viewport().gui_release_focus()
-	if _tween_dismiss != null and _tween_dismiss.is_running():
-		_tween_dismiss.kill()
-	_tween_popup = create_tween()
-	_tween_popup.tween_property(self, "modulate:a", 1.0, animation_lenght)
-	mouse_filter = MOUSE_FILTER_STOP
 	visible = true
+	_popup.popup()
 
 
-## Called to dismiss the popup.
 func dismiss() -> void:
-	get_viewport().gui_release_focus()
-	if _tween_popup != null and _tween_popup.is_running():
-		_tween_popup.kill()
-	_tween_dismiss = create_tween()
-	_tween_dismiss.tween_property(self, "modulate:a", 0.0, animation_lenght)
-	mouse_filter = MOUSE_FILTER_IGNORE
-	await _tween_dismiss.finished
+	_popup.dismiss()
+	await _popup.dismissed
 	visible = false
