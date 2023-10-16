@@ -116,13 +116,11 @@ var alignment: int:
 	set(margin_top_):
 		margin_top = margin_top_
 		_icon_label_icon.margin_top = margin_top
-		_icon_label_icon._resize()
 ## Bottom margin.
 @export_range(0, 0, 1, "or_greater") var margin_bottom: int:
 	set(margin_bottom_):
 		margin_bottom = margin_bottom_
 		_icon_label_icon.margin_bottom = margin_bottom
-		_icon_label_icon._resize()
 @export_category("WRoundClippingContainer")
 ## This sets the number of vertices used for each corner. Higher values result
 ## in rounder corners but take more processing power to compute. When choosing
