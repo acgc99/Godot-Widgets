@@ -108,7 +108,7 @@ func _init() -> void:
 	
 	_filtered_line_edit = WFilteredLineEdit.new()
 	_container.add_child(_filtered_line_edit)
-	_filtered_line_edit.filter_mode = WFilteredLineEdit.FLOAT
+	_filtered_line_edit.filter_mode = WFilteredLineEdit.FILTER_FLOAT
 	_filtered_line_edit.flat = true
 	_filtered_line_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
 	_filtered_line_edit.alignment = HORIZONTAL_ALIGNMENT_RIGHT
