@@ -6,9 +6,9 @@ extends Control
 ## be placed on sides.
 
 ## Emitted when the left button is pressed.
-signal pressed_left
+signal left_button_pressed
 ## Emitted when the right button is pressed.
-signal pressed_right
+signal right_button_pressed
 
 ## [WNavBar] title.
 @export var title: String:
@@ -111,8 +111,8 @@ func _resize_children() -> void:
 
 
 func _on_button_left_pressed() -> void:
-	pressed_left.emit()
+	left_button_pressed.emit()
 
 
 func _on_button_right_pressed() -> void:
-	pressed_right.emit()
+	right_button_pressed.emit()
