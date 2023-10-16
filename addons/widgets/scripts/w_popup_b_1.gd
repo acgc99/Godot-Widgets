@@ -3,6 +3,7 @@ class_name WPopupB1
 extends Control
 ## A popup with one button.
 
+
 ## Emitted when the popup is popuped (animation start).
 signal popuped
 ## Emitted when the popup is dismissed (animation end).
@@ -134,11 +135,11 @@ var mode: int:
 		mode = mode_
 		_buttons_container.mode = mode
 
-## [WPopup] base.
+# [WPopup] base.
 var _popup: WPopup
-## [HBoxContainer] for the buttons.
+# [HBoxContainer] for the buttons.
 var _buttons_container: WHButtonsContainer
-## Popup [Button].
+# Popup [Button].
 var _button: Button
 
 

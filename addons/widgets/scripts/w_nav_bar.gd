@@ -5,6 +5,7 @@ extends Control
 ## placed at the top/bottom of the scene (left/right buttons), but it can also
 ## be placed on sides.
 
+
 ## Emitted when the left button is pressed.
 signal left_button_pressed
 ## Emitted when the right button is pressed.
@@ -68,38 +69,38 @@ var alignment: int:
 		button_right_disabled = button_right_disabled_
 		_button_right.disabled = button_right_disabled
 
-## [PanelContainer] for the widget. It is the background.
+# [PanelContainer] for the widget. It is the background.
 var _panel_container: PanelContainer
-## [HBoxContainer] for the buttons and the label.
+# [HBoxContainer] for the buttons and the label.
 var _title_container: HBoxContainer
-## [Label] holding the title.
+# [Label] holding the title.
 var _label_title: Label
-## Left [WIconButton].
+# Left [WIconButton].
 var _button_left: WIconButton
-## Right [WIconButton].
+# Right [WIconButton].
 var _button_right: WIconButton
 
 
 func _init() -> void:
 	item_rect_changed.connect(_resize)
 	tree_entered.connect(_resize)
-	# _panel_container #########################################################
+	
 	_panel_container = PanelContainer.new()
 	add_child(_panel_container, false, Node.INTERNAL_MODE_BACK)
-	# _title_container #########################################################
+	
 	_title_container = HBoxContainer.new()
 	_panel_container.add_child(_title_container)
-	# _button_left #############################################################
+	
 	_button_left = WIconButton.new()
 	_title_container.add_child(_button_left)
 	_button_left.pressed.connect(_on_button_left_pressed)
-	# _label_title #############################################################
+	
 	_label_title = Label.new()
 	_title_container.add_child(_label_title)
 	_label_title.size_flags_horizontal = SIZE_EXPAND_FILL
 	_label_title.size_flags_vertical = SIZE_EXPAND_FILL
 	_label_title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	# _button_right ############################################################
+	
 	_button_right = WIconButton.new()
 	_title_container.add_child(_button_right)
 	_button_right.pressed.connect(_on_button_right_pressed)

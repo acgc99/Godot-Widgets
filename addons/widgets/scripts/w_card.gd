@@ -4,6 +4,7 @@ extends BaseButton
 ## Similar to [WTextureRounded] but it is a button and contains a panel for
 ## a title.
 
+
 ## Enum corresponding to [param alignment].
 enum {
 	LEFT,

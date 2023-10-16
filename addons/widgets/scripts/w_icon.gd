@@ -22,14 +22,14 @@ extends Control
 		flip_v = flip_v_
 		_texture_rect_icon.flip_v = flip_v
 
-## [TextureRect] for the icon.
+# [TextureRect] for the icon.
 var _texture_rect_icon: TextureRect
 
 
 func _init() -> void:
 	item_rect_changed.connect(_resize)
 	tree_entered.connect(_resize)
-	# _texture_rect_icon #######################################################
+	
 	_texture_rect_icon = TextureRect.new()
 	add_child(_texture_rect_icon, false, Node.INTERNAL_MODE_BACK)
 	_texture_rect_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

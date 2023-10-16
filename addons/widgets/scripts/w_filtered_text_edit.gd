@@ -4,6 +4,7 @@ extends TextEdit
 ## [code]TextEdit[/code] with filters. It can clamp [param text] numeric value
 ## (single line or all lines).
 
+
 ## Enum correspoding to [param filter_mode].
 enum {
 	NONE,
@@ -65,31 +66,31 @@ var filter_mode: int:
 ## numeric [member filter_mode].
 @export var value_min: float = -INF
 
-## [RegEx] to filter text.
+# [RegEx] to filter text.
 var _reg: RegEx
-## Current caret line.
+# Current caret line.
 var _caret_line_curr: int
-## Text before inserting modifications.
+# Text before inserting modifications.
 var _text_old: String
-## Length of [member _text_old].
+# Length of [member _text_old].
 var _text_length_old: int
-## Previous number of lines before modification.
+# Previous number of lines before modification.
 var _line_count_old: int
-## New text.
+# New text.
 var _text_new: String
-## Lenght of [member _text_new] in [method _on_text_changed].
+# Lenght of [member _text_new] in [method _on_text_changed].
 var _text_length_new: int
-## Character to be added.
+# Character to be added.
 var _char_new: String
-## New line count.
+# New line count.
 var _line_count_new: int
-## Index of [param _char_new] in [param _text_new] in [method _on_text_changed].
-## It is the right column for the caret ([code]_char_index_new = caret_column - 1[/code])
-## since when [method insert_text_at_caret] is called, caret is moved forward.
+# Index of [param _char_new] in [param _text_new] in [method _on_text_changed].
+# It is the right column for the caret ([code]_char_index_new = caret_column - 1[/code])
+# since when [method insert_text_at_caret] is called, caret is moved forward.
 var _char_index_new: int
-## Function called for filtering.
+# Function called for filtering.
 var _filter: Callable
-## Control variable. Avoid modifications while clamping.
+# Control variable. Avoid modifications while clamping.
 var _clamping: bool
 
 
@@ -129,9 +130,6 @@ func clamp_lines() -> void:
 		value = clamp(value, value_min, value_max)
 		set_line(i, str(value))
 	_clamping = false
-
-
-# Signal callables #############################################################
 
 
 ## Manages text input and filtering.
@@ -184,9 +182,6 @@ func _on_text_changed() -> void:
 	insert_text_at_caret(_char_new)
 	# Update old length.
 	_text_length_old = get_line(_caret_line_curr).length()
-
-
-# Filters ######################################################################
 
 
 ## None.

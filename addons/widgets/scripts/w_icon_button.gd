@@ -20,14 +20,14 @@ extends BaseButton
 		flip_v = flip_v_
 		_icon.flip_v = flip_v
 
-## [WIcon] for the button.
+# [WIcon] for the button.
 var _icon: WIcon
 
 
 func _init() -> void:
 	item_rect_changed.connect(_resize)
 	tree_entered.connect(_resize)
-	# _icon ####################################################################
+	
 	_icon = WIcon.new()
 	add_child(_icon, false, Node.INTERNAL_MODE_BACK)
 	_icon.mouse_filter = MOUSE_FILTER_IGNORE

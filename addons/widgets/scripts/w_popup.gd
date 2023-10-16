@@ -3,6 +3,7 @@ class_name WPopup
 extends Control
 ## A popup without buttons.
 
+
 ## Emitted when the popup is popuped (animation start).
 signal popuped
 ## Emitted when the popup is dismissed (animation end).
@@ -126,23 +127,23 @@ var message_alignment: int:
 			margin_internal_bottom
 		)
 
-## Background [Button].
+# Background [Button].
 var _button_background: Button
-## External [MarginContainer] for setting popup size.
+# External [MarginContainer] for setting popup size.
 var _margin_container_external: MarginContainer
-## [PanelContainer] for popup contents background.
+# [PanelContainer] for popup contents background.
 var _panel_container: PanelContainer
-## Internal [MarginContainer] for internal margins.
+# Internal [MarginContainer] for internal margins.
 var _margin_container_internal: MarginContainer
-## [VBoxContainer] for popup contents.
+# [VBoxContainer] for popup contents.
 var _container: VBoxContainer
-## [Label] for popup title.
+# [Label] for popup title.
 var _label_title: Label
-## [Label] for popup message.
+# [Label] for popup message.
 var _label_message: Label
-## [Tween] for showing the popup.
+# [Tween] for showing the popup.
 var _tween_popup: Tween
-## [Tween] for hiding the popup.
+# [Tween] for hiding the popup.
 var _tween_dismiss: Tween
 
 
