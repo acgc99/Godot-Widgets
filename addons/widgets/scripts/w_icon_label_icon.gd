@@ -32,7 +32,7 @@ var alignment: int:
 		else:
 			_container_horizontal.size_flags_horizontal = SIZE_SHRINK_END
 ## Separation between the text and the icons.
-@export_range(0, 0, 1, "or_greater") var separation: int:
+@export_range(0, 0, 1, "or_greater") var separation: int = 4:
 	set(separation_):
 		separation = separation_
 		_container_horizontal.add_theme_constant_override("separation", separation)

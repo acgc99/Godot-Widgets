@@ -136,7 +136,6 @@ texture = ExtResource("9_tksgc")
 stretch_mode = 6
 title = "Popup WPopup"
 alignment = 1
-separation = 4
 icon_left_icon = ExtResource("8_c2b2g")
 icon_right_icon = ExtResource("8_c2b2g")
 margin_top = 10
