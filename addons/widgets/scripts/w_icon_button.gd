@@ -4,11 +4,12 @@ extends BaseButton
 ## A button based on [WIcon].
 
 
+@export_category("TextureRect")
 ## Icon texture.
-@export var icon: Texture2D:
-	set(icon_):
-		icon = icon_
-		_icon.icon = icon
+@export var texture: Texture2D:
+	set(texture_):
+		texture = texture_
+		_icon.texture = texture
 ## If [code]true[/code], icon is flipped horizontally.
 @export var flip_h: bool:
 	set(flip_h_):

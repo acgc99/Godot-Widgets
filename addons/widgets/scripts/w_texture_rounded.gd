@@ -17,11 +17,12 @@ enum {
 	STRETCH_KEEP_ASPECT_COVERED
 }
 
+@export_category("TextureRect")
 ## The node's [Texture2D] resource.
 @export var texture: Texture2D:
 	set(texture_):
 		texture = texture_
-		_texture_rect.texture = texture
+		_texture.texture = texture
 @export_enum(
 	"Scale",
 	"Tile",
@@ -62,7 +63,7 @@ enum {
 var stretch_mode: int:
 	set(stretch_mode_):
 		stretch_mode = stretch_mode_
-		_texture_rect.stretch_mode = stretch_mode
+		_texture.stretch_mode = stretch_mode
 @export_category("WRoundClippingContainer")
 ## This sets the number of vertices used for each corner. Higher values result
 ## in rounder corners but take more processing power to compute. When choosing
@@ -80,46 +81,46 @@ var stretch_mode: int:
 @export_range(1, 20, 1) var corner_detail: int = 8:
 	set(corner_detail_):
 		corner_detail = corner_detail_
-		_round_clipping_container.corner_detail = corner_detail
+		_container_clipping.corner_detail = corner_detail
 @export_subgroup("Corner Radius", "corner_radius")
 ## The top-left corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 0, 1, "or_greater") var corner_radius_top_left: int:
 	set(corner_radius_top_left_):
 		corner_radius_top_left = corner_radius_top_left_
-		_round_clipping_container.corner_radius_top_left = corner_radius_top_left
+		_container_clipping.corner_radius_top_left = corner_radius_top_left
 ## The top-right corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 0, 1, "or_greater") var corner_radius_top_right: int:
 	set(corner_radius_top_right_):
 		corner_radius_top_right = corner_radius_top_right_
-		_round_clipping_container.corner_radius_top_right = corner_radius_top_right
+		_container_clipping.corner_radius_top_right = corner_radius_top_right
 ## The bottom-right corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 0, 1, "or_greater") var corner_radius_bottom_right: int:
 	set(corner_radius_bottom_right_):
 		corner_radius_bottom_right = corner_radius_bottom_right_
-		_round_clipping_container.corner_radius_bottom_right = corner_radius_bottom_right
+		_container_clipping.corner_radius_bottom_right = corner_radius_bottom_right
 ## The bottom-left corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 0, 1, "or_greater") var corner_radius_bottom_left: int:
 	set(corner_radius_bottom_left_):
 		corner_radius_bottom_left = corner_radius_bottom_left_
-		_round_clipping_container.corner_radius_bottom_left = corner_radius_bottom_left
+		_container_clipping.corner_radius_bottom_left = corner_radius_bottom_left
 
 # Mask for round clipping.
-var _round_clipping_container: WRoundClippingContainer
+var _container_clipping: WRoundClippingContainer
 # [TextureRect] holding the texture.
-var _texture_rect: TextureRect
+var _texture: TextureRect
 
 
 func _init() -> void:
 	item_rect_changed.connect(_resize)
 	tree_entered.connect(_resize)
 	
-	_round_clipping_container = WRoundClippingContainer.new()
-	add_child(_round_clipping_container, false, Node.INTERNAL_MODE_BACK)
+	_container_clipping = WRoundClippingContainer.new()
+	add_child(_container_clipping, false, Node.INTERNAL_MODE_BACK)
 	
-	_texture_rect = TextureRect.new()
-	_round_clipping_container.add_child(_texture_rect)
-	_texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_texture = TextureRect.new()
+	_container_clipping.add_child(_texture)
+	_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 
 
 func _resize() -> void:
-	_round_clipping_container.custom_minimum_size = size
+	_container_clipping.custom_minimum_size = size

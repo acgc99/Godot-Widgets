@@ -26,51 +26,51 @@ var alignment: int:
 	set(alignment_):
 		alignment = alignment_
 		if alignment == ALIGNMENT_LEFT:
-			_container_horizontal.size_flags_horizontal = SIZE_SHRINK_BEGIN
+			_container_ili.size_flags_horizontal = SIZE_SHRINK_BEGIN
 		elif alignment == ALIGNMENT_CENTER:
-			_container_horizontal.size_flags_horizontal = SIZE_SHRINK_CENTER
+			_container_ili.size_flags_horizontal = SIZE_SHRINK_CENTER
 		else:
-			_container_horizontal.size_flags_horizontal = SIZE_SHRINK_END
+			_container_ili.size_flags_horizontal = SIZE_SHRINK_END
 ## Separation between the text and the icons.
 @export_range(0, 0, 1, "or_greater") var separation: int = 4:
 	set(separation_):
 		separation = separation_
-		_container_horizontal.add_theme_constant_override("separation", separation)
+		_container_ili.add_theme_constant_override("separation", separation)
 		_resize()
-@export_group("Left icon", "icon_left")
+@export_group("Left Icon", "left")
 ## Left icon texture.
-@export var icon_left_icon: Texture2D:
-	set(icon_left_icon_):
-		icon_left_icon = icon_left_icon_
-		_icon_left.icon = icon_left_icon
+@export var left_texture: Texture2D:
+	set(left_texture_):
+		left_texture = left_texture_
+		_icon_left.texture = left_texture
 		_set_icon_left_custom_minimum_size()
 ## If [code]true[/code], left icon texture is flipped horizontally.
-@export var icon_left_flip_h: bool:
-	set(icon_left_flip_h_):
-		icon_left_flip_h = icon_left_flip_h_
-		_icon_left.flip_h = icon_left_flip_h
+@export var left_flip_h: bool:
+	set(left_flip_h_):
+		left_flip_h = left_flip_h_
+		_icon_left.flip_h = left_flip_h
 ## If [code]true[/code], left icon texture is flipped vertically.
-@export var icon_left_flip_v: bool:
-	set(icon_left_flip_v_):
-		icon_left_flip_v = icon_left_flip_v_
-		_icon_left.flip_v = icon_left_flip_v
-@export_group("Right Icon", "icon_right")
+@export var left_flip_v: bool:
+	set(left_flip_v_):
+		left_flip_v = left_flip_v_
+		_icon_left.flip_v = left_flip_v
+@export_group("Right Icon", "right")
 ## Right icon texture.
-@export var icon_right_icon: Texture2D:
-	set(icon_right_icon_):
-		icon_right_icon = icon_right_icon_
-		_icon_right.icon = icon_right_icon
+@export var right_texture: Texture2D:
+	set(right_texture_):
+		right_texture = right_texture_
+		_icon_right.texture = right_texture
 		_set_icon_right_custom_minimum_size()
 ## If [code]true[/code], right icon texture is flipped horizontally.
-@export var icon_right_flip_h: bool:
-	set(icon_right_flip_h_):
-		icon_right_flip_h = icon_right_flip_h_
-		_icon_right.flip_h = icon_right_flip_h
+@export var right_flip_h: bool:
+	set(right_flip_h):
+		right_flip_h = right_flip_h
+		_icon_right.flip_h = right_flip_h
 ## If [code]true[/code], right icon texture is flipped vertically.
-@export var icon_right_flip_v: bool:
-	set(icon_right_flip_v_):
-		icon_right_flip_v = icon_right_flip_v_
-		_icon_right.flip_v = icon_right_flip_v
+@export var right_flip_v: bool:
+	set(right_flip_v_):
+		right_flip_v_ = right_flip_v_
+		_icon_right.flip_v = right_flip_v
 @export_group("Margin", "margin")
 ## Left margin.
 @export_range(0, 0, 1, "or_greater") var margin_left: int:
@@ -102,7 +102,7 @@ var _container_panel: PanelContainer
 # [MarginContainer] for left and right margins.
 var _container_margin: MarginContainer
 # [HBoxContainer] for the [Label] and [WIcon]s.
-var _container_horizontal: HBoxContainer
+var _container_ili: HBoxContainer
 # [Label].
 var _label: Label
 # Left [WIcon].
@@ -121,19 +121,19 @@ func _init() -> void:
 	_container_margin = MarginContainer.new()
 	_container_panel.add_child(_container_margin)
 	
-	_container_horizontal = HBoxContainer.new()
-	_container_margin.add_child(_container_horizontal)
+	_container_ili = HBoxContainer.new()
+	_container_margin.add_child(_container_ili)
 	
 	_icon_left = WIcon.new()
-	_container_horizontal.add_child(_icon_left)
+	_container_ili.add_child(_icon_left)
 	
 	_label = Label.new()
-	_container_horizontal.add_child(_label)
+	_container_ili.add_child(_label)
 	_label.item_rect_changed.connect(_resize)
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	
 	_icon_right = WIcon.new()
-	_container_horizontal.add_child(_icon_right)
+	_container_ili.add_child(_icon_right)
 
 
 func _ready() -> void:
@@ -147,13 +147,13 @@ func _resize() -> void:
 		_icon_right.custom_minimum_size + \
 		_label.size + \
 		Vector2(margin_left + margin_right, margin_top + margin_bottom) + \
-		Vector2(2*_container_horizontal.get_theme_constant("separation"), 0)
+		Vector2(2*_container_ili.get_theme_constant("separation"), 0)
 	
 	_container_panel.size = size
 
 
 func _set_icon_left_custom_minimum_size() -> void:
-	if _icon_left.icon == null:
+	if _icon_left.texture == null:
 		_icon_left.custom_minimum_size.x = 0
 	else:
 		_icon_left.custom_minimum_size.x = _label.size.y
@@ -161,7 +161,7 @@ func _set_icon_left_custom_minimum_size() -> void:
 
 
 func _set_icon_right_custom_minimum_size() -> void:
-	if _icon_right.icon == null:
+	if _icon_right.texture == null:
 		_icon_right.custom_minimum_size.x = 0
 	else:
 		_icon_right.custom_minimum_size.x = _label.size.y

@@ -23,11 +23,12 @@ enum {
 	ALIGNMENT_RIGHT
 }
 
+@export_category("TextureRect")
 ## The node's [Texture2D] resource.
 @export var texture: Texture2D:
 	set(texture_):
 		texture = texture_
-		_texture_rect.texture = texture
+		_texture.texture = texture
 @export_enum(
 	"Scale",
 	"Tile",
@@ -68,13 +69,13 @@ enum {
 var stretch_mode: int:
 	set(stretch_mode_):
 		stretch_mode = stretch_mode_
-		_texture_rect.stretch_mode = stretch_mode
+		_texture.stretch_mode = stretch_mode
 @export_category("WIconLabelIcon")
 ## [WCard] title.
-@export var title: String:
-	set(title_):
-		title = title_
-		_icon_label_icon.text = title
+@export var text: String:
+	set(text_):
+		text = text_
+		_ili.text = text
 @export_enum(
 	"Left",
 	"Center",
@@ -84,55 +85,55 @@ var stretch_mode: int:
 var alignment: int:
 	set(alignment_):
 		alignment = alignment_
-		_align_title()
+		_align_elements()
 ## Separation between the text and the icons.
 @export_range(0, 0, 1, "or_greater") var separation: int = 4:
 	set(separation_):
 		separation = separation_
-		_icon_label_icon.separation = separation
-@export_group("Left icon", "icon_left")
+		_ili.separation = separation
+@export_group("Left icon", "left")
 ## Left icon texture.
-@export var icon_left_icon: Texture2D:
-	set(icon_left_icon_):
-		icon_left_icon = icon_left_icon_
-		_icon_label_icon.icon_left_icon = icon_left_icon
+@export var left_texture: Texture2D:
+	set(left_texture_):
+		left_texture = left_texture_
+		_ili.left_texture = left_texture_
 ## If [code]true[/code], left icon texture is flipped horizontally.
-@export var icon_left_flip_h: bool:
-	set(icon_left_flip_h_):
-		icon_left_flip_h = icon_left_flip_h_
-		_icon_label_icon.icon_left_flip_h = icon_left_flip_h
+@export var left_flip_h: bool:
+	set(left_flip_h_):
+		left_flip_h = left_flip_h_
+		_ili.left_flip_h = left_flip_h
 ## If [code]true[/code], left icon texture is flipped vertically.
-@export var icon_left_flip_v: bool:
-	set(icon_left_flip_v_):
-		icon_left_flip_v = icon_left_flip_v_
-		_icon_label_icon.icon_left_flip_v = icon_left_flip_v
-@export_group("Right Icon", "icon_right")
+@export var left_flip_v: bool:
+	set(left_flip_v_):
+		left_flip_v = left_flip_v_
+		_ili.left_flip_v = left_flip_v
+@export_group("Right Icon", "right")
 ## Right icon texture.
-@export var icon_right_icon: Texture2D:
-	set(icon_right_icon_):
-		icon_right_icon = icon_right_icon_
-		_icon_label_icon.icon_right_icon = icon_right_icon
+@export var right_texture: Texture2D:
+	set(right_texture_):
+		right_texture = right_texture_
+		_ili.right_texture = right_texture
 ## If [code]true[/code], right icon texture is flipped horizontally.
-@export var icon_right_flip_h: bool:
-	set(icon_right_flip_h_):
-		icon_right_flip_h = icon_right_flip_h_
-		_icon_label_icon.icon_right_flip_h = icon_right_flip_h
+@export var right_flip_h: bool:
+	set(right_flip_h_):
+		right_flip_h_ = right_flip_h
+		_ili.right_flip_h = right_flip_h
 ## If [code]true[/code], right icon texture is flipped vertically.
-@export var icon_right_flip_v: bool:
-	set(icon_right_flip_v_):
-		icon_right_flip_v = icon_right_flip_v_
-		_icon_label_icon.icon_right_flip_v = icon_right_flip_v
+@export var right_flip_v: bool:
+	set(right_flip_v_):
+		right_flip_v = right_flip_v_
+		_ili.right_flip_v = right_flip_v
 @export_group("Margin", "margin")
 ## Top margin.
 @export_range(0, 0, 1, "or_greater") var margin_top: int:
 	set(margin_top_):
 		margin_top = margin_top_
-		_icon_label_icon.margin_top = margin_top
+		_ili.margin_top = margin_top
 ## Bottom margin.
 @export_range(0, 0, 1, "or_greater") var margin_bottom: int:
 	set(margin_bottom_):
 		margin_bottom = margin_bottom_
-		_icon_label_icon.margin_bottom = margin_bottom
+		_ili.margin_bottom = margin_bottom
 @export_category("WRoundClippingContainer")
 ## This sets the number of vertices used for each corner. Higher values result
 ## in rounder corners but take more processing power to compute. When choosing
@@ -150,68 +151,68 @@ var alignment: int:
 @export_range(1, 20, 1) var corner_detail: int = 8:
 	set(corner_detail_):
 		corner_detail = corner_detail_
-		_round_clipping_container.corner_detail = corner_detail
+		_container_clipping.corner_detail = corner_detail
 @export_group("Corner Radius", "corner_radius")
 ## The top-left corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 0, 1, "or_greater") var corner_radius_top_left: int:
 	set(corner_radius_top_left_):
 		corner_radius_top_left = corner_radius_top_left_
-		_round_clipping_container.corner_radius_top_left = corner_radius_top_left
+		_container_clipping.corner_radius_top_left = corner_radius_top_left
 ## The top-right corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 0, 1, "or_greater") var corner_radius_top_right: int:
 	set(corner_radius_top_right_):
 		corner_radius_top_right = corner_radius_top_right_
-		_round_clipping_container.corner_radius_top_right = corner_radius_top_right
+		_container_clipping.corner_radius_top_right = corner_radius_top_right
 ## The bottom-right corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 0, 1, "or_greater") var corner_radius_bottom_right: int:
 	set(corner_radius_bottom_right_):
 		corner_radius_bottom_right = corner_radius_bottom_right_
-		_round_clipping_container.corner_radius_bottom_right = corner_radius_bottom_right
-		_align_title()
+		_container_clipping.corner_radius_bottom_right = corner_radius_bottom_right
+		_align_elements()
 ## The bottom-left corner's radius. If [code]0[/code], the corner is not rounded.
 @export_range(0, 0, 1, "or_greater") var corner_radius_bottom_left: int:
 	set(corner_radius_bottom_left_):
 		corner_radius_bottom_left = corner_radius_bottom_left_
-		_round_clipping_container.corner_radius_bottom_left = corner_radius_bottom_left
-		_align_title()
+		_container_clipping.corner_radius_bottom_left = corner_radius_bottom_left
+		_align_elements()
 
 # Mask for round clipping.
-var _round_clipping_container: WRoundClippingContainer
+var _container_clipping: WRoundClippingContainer
 # [TextureRect] holding the texture.
-var _texture_rect: TextureRect
+var _texture: TextureRect
 # [WIConLabelIcon] for the label and icons.
-var _icon_label_icon: WIconLabelIcon
+var _ili: WIconLabelIcon
 
 
 func _init() -> void:
 	item_rect_changed.connect(_resize)
 	tree_entered.connect(_resize)
 	
-	_round_clipping_container = WRoundClippingContainer.new()
-	add_child(_round_clipping_container, false, Node.INTERNAL_MODE_BACK)
-	_round_clipping_container.mouse_filter = MOUSE_FILTER_IGNORE
+	_container_clipping = WRoundClippingContainer.new()
+	add_child(_container_clipping, false, Node.INTERNAL_MODE_BACK)
+	_container_clipping.mouse_filter = MOUSE_FILTER_IGNORE
 	
-	_texture_rect = TextureRect.new()
-	_round_clipping_container.add_child(_texture_rect)
-	_texture_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_texture = TextureRect.new()
+	_container_clipping.add_child(_texture)
+	_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	
-	_icon_label_icon = WIconLabelIcon.new()
-	_round_clipping_container.add_child(_icon_label_icon)
-	_icon_label_icon.size_flags_vertical = Control.SIZE_SHRINK_END
+	_ili = WIconLabelIcon.new()
+	_container_clipping.add_child(_ili)
+	_ili.size_flags_vertical = Control.SIZE_SHRINK_END
 
 
 func _resize() -> void:
-	_round_clipping_container.custom_minimum_size = size
+	_container_clipping.custom_minimum_size = size
 
 
-func _align_title() -> void:
-	_icon_label_icon.alignment = alignment
+func _align_elements() -> void:
+	_ili.alignment = alignment
 	if alignment == ALIGNMENT_LEFT:
-		_icon_label_icon.margin_left = corner_radius_bottom_left
-		_icon_label_icon.margin_right = 0
+		_ili.margin_left = corner_radius_bottom_left
+		_ili.margin_right = 0
 	elif alignment == ALIGNMENT_CENTER:
-		_icon_label_icon.margin_left = 0
-		_icon_label_icon.margin_right = 0
+		_ili.margin_left = 0
+		_ili.margin_right = 0
 	else:
-		_icon_label_icon.margin_left = 0
-		_icon_label_icon.margin_right = corner_radius_bottom_right
+		_ili.margin_left = 0
+		_ili.margin_right = corner_radius_bottom_right

@@ -56,15 +56,14 @@ var filter_mode: int:
 		else:
 			_reg.compile("[\\d.-]")
 			_filter = _filter_float
-@export_group("Values", "value")
 ## Maximun numeric value of the [member WFilteredLineEdit.text] when
 ## [method WFilteredLineEdit.clamp_text] is called. Only used in a
 ## numeric [member filter_mode].
-@export var value_max: float = INF
+@export var max: float = INF
 ## Minimum numeric value of the [member WFilteredLineEdit.text] when
 ## [method WFilteredLineEdit.clamp_text] is called. Only used in a
 ## numeric [member filter_mode].
-@export var value_min: float = -INF
+@export var min: float = -INF
 
 # [RegEx] to filter text.
 var _reg: RegEx
@@ -101,7 +100,7 @@ func clamp_text() -> void:
 		return
 	_clamping = true
 	var value: float = float(text)
-	value = clamp(value, value_min, value_max)
+	value = clamp(value, min, max)
 	text = str(value)
 	_clamping = false
 

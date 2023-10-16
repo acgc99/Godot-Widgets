@@ -41,7 +41,7 @@ var buttons_focus_mode: int:
 @export_range(0, 0, 1, "or_greater") var separation: int = 4:
 	set(separation_):
 		separation = separation_
-		_container.add_theme_constant_override("separation", separation)
+		_container_tmb.add_theme_constant_override("separation", separation)
 @export_group("Title", "title")
 ## Popup title.
 @export var title_text: String:
@@ -74,83 +74,83 @@ var message_alignment: int:
 	set(message_alignment_):
 		message_alignment = message_alignment_
 		_label_message.horizontal_alignment = message_alignment
-@export_group("External Margin", "margin_external")
+@export_group("External Margin", "external_margin")
 ## Left external margin.
-@export_range(0, 0, 1, "or_greater") var margin_external_left: int:
-	set(margin_external_left_):
-		margin_external_left = margin_external_left_
-		_margin_container_external.add_theme_constant_override(
+@export_range(0, 0, 1, "or_greater") var external_margin_left: int:
+	set(external_margin_left_):
+		external_margin_left = external_margin_left_
+		_container_margin_external.add_theme_constant_override(
 			"margin_left",
-			margin_external_left
+			external_margin_left
 		)
 ## Top external margin.
-@export_range(0, 0, 1, "or_greater") var margin_external_top: int:
-	set(margin_external_top_):
-		margin_external_top = margin_external_top_
-		_margin_container_external.add_theme_constant_override(
+@export_range(0, 0, 1, "or_greater") var external_margin_top: int:
+	set(external_margin_top_):
+		external_margin_top = external_margin_top_
+		_container_margin_external.add_theme_constant_override(
 			"margin_top",
-			margin_external_top
+			external_margin_top
 		)
 ## Right external margin.
-@export_range(0, 0, 1, "or_greater") var margin_external_right: int:
-	set(margin_external_right_):
-		margin_external_right = margin_external_right_
-		_margin_container_external.add_theme_constant_override(
+@export_range(0, 0, 1, "or_greater") var external_margin_right: int:
+	set(external_margin_right_):
+		external_margin_right = external_margin_right_
+		_container_margin_external.add_theme_constant_override(
 			"margin_right",
-			margin_external_right
+			external_margin_right
 		)
 ## Bottom external margin.
-@export_range(0, 0, 1, "or_greater") var margin_external_bottom: int:
-	set(margin_external_bottom_):
-		margin_external_bottom = margin_external_bottom_
-		_margin_container_external.add_theme_constant_override(
+@export_range(0, 0, 1, "or_greater") var external_margin_bottom: int:
+	set(external_margin_bottom_):
+		external_margin_bottom = external_margin_bottom_
+		_container_margin_external.add_theme_constant_override(
 			"margin_bottom",
-			margin_external_bottom
+			external_margin_bottom
 		)
-@export_group("Internal Margin", "margin_internal")
+@export_group("Internal Margin", "internal_margin")
 ## Left internal margin.
-@export_range(0, 0, 1, "or_greater") var margin_internal_left: int:
-	set(margin_internal_left_):
-		margin_internal_left = margin_internal_left_
-		_margin_container_internal.add_theme_constant_override(
+@export_range(0, 0, 1, "or_greater") var internal_margin_left: int:
+	set(internal_margin_left_):
+		internal_margin_left = internal_margin_left_
+		_container_margin_internal.add_theme_constant_override(
 			"margin_left",
-			margin_internal_left
+			internal_margin_left
 		)
 ## Top internal margin.
-@export_range(0, 0, 1, "or_greater") var margin_internal_top: int:
-	set(margin_internal_top_):
-		margin_internal_top = margin_internal_top_
-		_margin_container_internal.add_theme_constant_override(
+@export_range(0, 0, 1, "or_greater") var internal_margin_top: int:
+	set(internal_margin_top_):
+		internal_margin_top = internal_margin_top_
+		_container_margin_internal.add_theme_constant_override(
 			"margin_top",
-			margin_internal_top
+			internal_margin_top
 		)
 ## Right internal margin.
-@export_range(0, 0, 1, "or_greater") var margin_internal_right: int:
-	set(margin_internal_right_):
-		margin_internal_right = margin_internal_right_
-		_margin_container_internal.add_theme_constant_override(
+@export_range(0, 0, 1, "or_greater") var internal_margin_right: int:
+	set(internal_margin_right_):
+		internal_margin_right = internal_margin_right_
+		_container_margin_internal.add_theme_constant_override(
 			"margin_right",
-			margin_internal_right
+			internal_margin_right
 		)
 ## Bottom internal margin.
-@export_range(0, 0, 1, "or_greater") var margin_internal_bottom: int:
-	set(margin_internal_bottom_):
-		margin_internal_bottom = margin_internal_bottom_
-		_margin_container_internal.add_theme_constant_override(
+@export_range(0, 0, 1, "or_greater") var internal_margin_bottom: int:
+	set(internal_margin_bottom_):
+		internal_margin_bottom = internal_margin_bottom_
+		_container_margin_internal.add_theme_constant_override(
 			"margin_bottom",
-			margin_internal_bottom
+			internal_margin_bottom
 		)
 
 # Background [Button].
 var _button_background: Button
 # External [MarginContainer] for setting popup size.
-var _margin_container_external: MarginContainer
+var _container_margin_external: MarginContainer
 # [PanelContainer] for popup contents background.
-var _panel_container: PanelContainer
+var _container_panel: PanelContainer
 # Internal [MarginContainer] for internal margins.
-var _margin_container_internal: MarginContainer
-# [VBoxContainer] for popup contents.
-var _container: VBoxContainer
+var _container_margin_internal: MarginContainer
+# [VBoxContainer] for popup contents. TMB: title, message and buttons.
+var _container_tmb: VBoxContainer
 # [Label] for popup title.
 var _label_title: Label
 # [Label] for popup message.
@@ -170,32 +170,32 @@ func _init() -> void:
 	_button_background.pressed.connect(_on_button_background_pressed)
 	_button_background.focus_mode = FOCUS_NONE
 	
-	_margin_container_external = MarginContainer.new()
-	_button_background.add_child(_margin_container_external)
+	_container_margin_external = MarginContainer.new()
+	_button_background.add_child(_container_margin_external)
 	
-	_panel_container = PanelContainer.new()
-	_margin_container_external.add_child(_panel_container)
+	_container_panel = PanelContainer.new()
+	_container_margin_external.add_child(_container_panel)
 	
-	_margin_container_internal = MarginContainer.new()
-	_panel_container.add_child(_margin_container_internal)
+	_container_margin_internal = MarginContainer.new()
+	_container_panel.add_child(_container_margin_internal)
 	
-	_container = VBoxContainer.new()
-	_margin_container_internal.add_child(_container)
+	_container_tmb = VBoxContainer.new()
+	_container_margin_internal.add_child(_container_tmb)
 	
 	_label_title = Label.new()
-	_container.add_child(_label_title)
+	_container_tmb.add_child(_label_title)
 	_label_title.size_flags_horizontal = SIZE_EXPAND_FILL
 	_label_title.size_flags_vertical = SIZE_SHRINK_BEGIN
 	
 	_label_message = Label.new()
-	_container.add_child(_label_message)
+	_container_tmb.add_child(_label_message)
 	_label_message.size_flags_horizontal = SIZE_EXPAND_FILL
 	_label_message.size_flags_vertical = SIZE_EXPAND_FILL
 
 
 func _resize() -> void:
 	_button_background.size = size
-	_margin_container_external.size = size
+	_container_margin_external.size = size
 
 
 func _on_button_background_pressed() -> void:
@@ -205,7 +205,7 @@ func _on_button_background_pressed() -> void:
 ## Adds the buttons container ([HBoxContainer]) to the popup and sets its
 ## size flags. It does not handle button positions neither sizes.
 func add_buttons_container(buttons_container: HBoxContainer) -> void:
-	_container.add_child(buttons_container)
+	_container_tmb.add_child(buttons_container)
 	buttons_container.size_flags_horizontal = SIZE_EXPAND_FILL
 	buttons_container.size_flags_vertical = SIZE_SHRINK_END
 

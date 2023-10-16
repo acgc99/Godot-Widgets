@@ -102,48 +102,48 @@ var message_alignment: int:
 	set(message_alignment_):
 		message_alignment = message_alignment_
 		_popup.message_alignment = message_alignment
-@export_group("External Margin", "margin_external")
+@export_group("External Margin", "external_margin")
 ## Left external margin.
-@export_range(0, 0, 1, "or_greater") var margin_external_left: int:
-	set(margin_external_left_):
-		margin_external_left = margin_external_left_
-		_popup.margin_external_left = margin_external_left
+@export_range(0, 0, 1, "or_greater") var external_margin_left: int:
+	set(external_margin_left_):
+		external_margin_left = external_margin_left_
+		_popup.external_margin_left = external_margin_left
 ## Top external margin.
-@export_range(0, 0, 1, "or_greater") var margin_external_top: int:
-	set(margin_external_top_):
-		margin_external_top = margin_external_top_
-		_popup.margin_external_top = margin_external_top
+@export_range(0, 0, 1, "or_greater") var external_margin_top: int:
+	set(external_margin_top_):
+		external_margin_top = external_margin_top_
+		_popup.external_margin_top = external_margin_top
 ## Right external margin.
-@export_range(0, 0, 1, "or_greater") var margin_external_right: int:
-	set(margin_external_right_):
-		margin_external_right = margin_external_right_
-		_popup.margin_external_right = margin_external_right
+@export_range(0, 0, 1, "or_greater") var external_margin_right: int:
+	set(external_margin_right_):
+		external_margin_right = external_margin_right_
+		_popup.external_margin_right = external_margin_right
 ## Bottom external margin.
-@export_range(0, 0, 1, "or_greater") var margin_external_bottom: int:
-	set(margin_external_bottom_):
-		margin_external_bottom = margin_external_bottom_
-		_popup.margin_external_bottom = margin_external_bottom
-@export_group("Internal Margin", "margin_internal")
+@export_range(0, 0, 1, "or_greater") var external_margin_bottom: int:
+	set(external_margin_bottom_):
+		external_margin_bottom = external_margin_bottom_
+		_popup.external_margin_bottom = external_margin_bottom
+@export_group("Internal Margin", "internal_margin")
 ## Left internal margin.
-@export_range(0, 0, 1, "or_greater") var margin_internal_left: int:
-	set(margin_internal_left_):
-		margin_internal_left = margin_internal_left_
-		_popup.margin_internal_left = margin_internal_left
+@export_range(0, 0, 1, "or_greater") var internal_margin_left: int:
+	set(internal_margin_left_):
+		internal_margin_left = internal_margin_left_
+		_popup.internal_margin_left = internal_margin_left
 ## Top internal margin.
-@export_range(0, 0, 1, "or_greater") var margin_internal_top: int:
-	set(margin_internal_top_):
-		margin_internal_top = margin_internal_top_
-		_popup.margin_internal_top = margin_internal_top
+@export_range(0, 0, 1, "or_greater") var internal_margin_top: int:
+	set(internal_margin_top_):
+		internal_margin_top = internal_margin_top_
+		_popup.internal_margin_top = internal_margin_top
 ## Right internal margin.
-@export_range(0, 0, 1, "or_greater") var margin_internal_right: int:
-	set(margin_internal_right_):
-		margin_internal_right = margin_internal_right_
-		_popup.margin_internal_right = margin_internal_right
+@export_range(0, 0, 1, "or_greater") var internal_margin_right: int:
+	set(internal_margin_right_):
+		internal_margin_right = internal_margin_right_
+		_popup.internal_margin_right = internal_margin_right
 ## Bottom internal margin.
-@export_range(0, 0, 1, "or_greater") var margin_internal_bottom: int:
-	set(margin_internal_bottom_):
-		margin_internal_bottom = margin_internal_bottom_
-		_popup.margin_internal_bottom = margin_internal_bottom
+@export_range(0, 0, 1, "or_greater") var internal_margin_bottom: int:
+	set(internal_margin_bottom_):
+		internal_margin_bottom = internal_margin_bottom_
+		_popup.internal_margin_bottom = internal_margin_bottom
 @export_category("WHButtonsContainer")
 ## Separation between the the buttons.
 @export_range(0, 0, 1, "or_greater") var buttons_separation: int = 4:
