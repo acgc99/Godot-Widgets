@@ -15,6 +15,20 @@ signal left_button_pressed
 ## Emitted when the popup right button is pressed.
 signal right_button_pressed
 
+## Enum corresponding to [param buttons_focus_mode].
+enum {
+	BUTTONS_FOCUS_NONE,
+	BUTTONS_FOCUS_CLICK,
+	BUTTONS_FOCUS_ALL
+}
+
+## Enum corresponding to [param title_alignment] and [param message_alignment].
+enum {
+	ALIGNMENT_LEFT,
+	ALIGNMENT_CENTER,
+	ALIGNMENT_RIGHT
+}
+
 ## Enum corresponding to [param mode].
 enum {
 	MODE_LEFT,
@@ -47,7 +61,7 @@ var buttons_focus_mode: int:
 		_button_left.focus_mode = buttons_focus_mode
 		_button_right.focus_mode = buttons_focus_mode
 ## Popup/dismiss animation duration. Not intended to be changed during runtime.
-@export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1:
+@export_range(0, 0, 0.25, "or_greater") var animation_lenght: float = 1:
 	set(animation_lenght_):
 		animation_lenght = animation_lenght_
 		_popup.animation_lenght = animation_lenght

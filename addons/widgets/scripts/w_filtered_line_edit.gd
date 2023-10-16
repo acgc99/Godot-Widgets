@@ -6,12 +6,12 @@ extends LineEdit
 
 ## Enum correspoding to [member filter_mode].
 enum {
-	NONE,
-	DIGITLESS,
-	INTEGER_POSITIVE,
-	INTEGER,
-	FLOAT_POSITIVE,
-	FLOAT
+	FILTER_NONE,
+	FILTER_DIGITLESS,
+	FILTER_INTEGER_POSITIVE,
+	FILTER_INTEGER,
+	FILTER_FLOAT_POSITIVE,
+	FILTER_FLOAT
 }
 
 @export_enum(
@@ -34,22 +34,22 @@ var filter_mode: int:
 		filter_mode = filter_mode_
 		_reg = RegEx.new()
 		# None.
-		if filter_mode == NONE:
+		if filter_mode == FILTER_NONE:
 			_filter = _filter_none
 		# Digitless.
-		elif filter_mode == DIGITLESS:
+		elif filter_mode == FILTER_DIGITLESS:
 			_reg.compile("\\d")
 			_filter = _filter_digitless
 		# Positive integer.
-		elif filter_mode == INTEGER_POSITIVE:
+		elif filter_mode == FILTER_INTEGER_POSITIVE:
 			_reg.compile("\\d")
 			_filter = _filter_integer_positive
 		# Integer.
-		elif filter_mode == INTEGER:
+		elif filter_mode == FILTER_INTEGER:
 			_reg.compile("[\\d-]")
 			_filter = _filter_integer
 		# Positve float.
-		elif filter_mode == FLOAT_POSITIVE:
+		elif filter_mode == FILTER_FLOAT_POSITIVE:
 			_reg.compile("[\\d.]")
 			_filter = _filter_float_positive
 		# Float

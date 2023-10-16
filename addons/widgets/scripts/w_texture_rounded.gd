@@ -6,6 +6,17 @@ extends Control
 ## [member TextureRect.EXPAND_IGNORE_SIZE].
 
 
+## Enum corresponding to [param stretch_mode].
+enum {
+	STRETCH_SCALE,
+	STRETCH_TILE,
+	STRETCH_KEEP,
+	STRETCH_KEEP_CENTERED,
+	STRETCH_KEEP_ASPECT,
+	STRETCH_KEEP_ASPECT_CENTERED,
+	STRETCH_KEEP_ASPECT_COVERED
+}
+
 ## The node's [Texture2D] resource.
 @export var texture: Texture2D:
 	set(texture_):
@@ -72,22 +83,22 @@ var stretch_mode: int:
 		_round_clipping_container.corner_detail = corner_detail
 @export_subgroup("Corner Radius", "corner_radius")
 ## The top-left corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_top_left: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_top_left: int:
 	set(corner_radius_top_left_):
 		corner_radius_top_left = corner_radius_top_left_
 		_round_clipping_container.corner_radius_top_left = corner_radius_top_left
 ## The top-right corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_top_right: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_top_right: int:
 	set(corner_radius_top_right_):
 		corner_radius_top_right = corner_radius_top_right_
 		_round_clipping_container.corner_radius_top_right = corner_radius_top_right
 ## The bottom-right corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_bottom_right: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_bottom_right: int:
 	set(corner_radius_bottom_right_):
 		corner_radius_bottom_right = corner_radius_bottom_right_
 		_round_clipping_container.corner_radius_bottom_right = corner_radius_bottom_right
 ## The bottom-left corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_bottom_left: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_bottom_left: int:
 	set(corner_radius_bottom_left_):
 		corner_radius_bottom_left = corner_radius_bottom_left_
 		_round_clipping_container.corner_radius_bottom_left = corner_radius_bottom_left

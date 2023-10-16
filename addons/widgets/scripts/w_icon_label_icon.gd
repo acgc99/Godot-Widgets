@@ -6,9 +6,9 @@ extends Control
 
 ## Enum corresponding to [param alignment].
 enum {
-	LEFT,
-	CENTER,
-	RIGHT
+	ALIGNMENT_LEFT,
+	ALIGNMENT_CENTER,
+	ALIGNMENT_RIGHT
 }
 
 ## The text to display between the icons.
@@ -25,9 +25,9 @@ enum {
 var alignment: int:
 	set(alignment_):
 		alignment = alignment_
-		if alignment == LEFT:
+		if alignment == ALIGNMENT_LEFT:
 			_container_horizontal.size_flags_horizontal = SIZE_SHRINK_BEGIN
-		elif alignment == CENTER:
+		elif alignment == ALIGNMENT_CENTER:
 			_container_horizontal.size_flags_horizontal = SIZE_SHRINK_CENTER
 		else:
 			_container_horizontal.size_flags_horizontal = SIZE_SHRINK_END

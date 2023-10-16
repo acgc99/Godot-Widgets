@@ -5,11 +5,22 @@ extends BaseButton
 ## a title.
 
 
+## Enum corresponding to [param stretch_mode].
+enum {
+	STRETCH_SCALE,
+	STRETCH_TILE,
+	STRETCH_KEEP,
+	STRETCH_KEEP_CENTERED,
+	STRETCH_KEEP_ASPECT,
+	STRETCH_KEEP_ASPECT_CENTERED,
+	STRETCH_KEEP_ASPECT_COVERED
+}
+
 ## Enum corresponding to [param alignment].
 enum {
-	LEFT,
-	CENTER,
-	RIGHT
+	ALIGNMENT_LEFT,
+	ALIGNMENT_CENTER,
+	ALIGNMENT_RIGHT
 }
 
 ## The node's [Texture2D] resource.
@@ -142,23 +153,23 @@ var alignment: int:
 		_round_clipping_container.corner_detail = corner_detail
 @export_group("Corner Radius", "corner_radius")
 ## The top-left corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_top_left: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_top_left: int:
 	set(corner_radius_top_left_):
 		corner_radius_top_left = corner_radius_top_left_
 		_round_clipping_container.corner_radius_top_left = corner_radius_top_left
 ## The top-right corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_top_right: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_top_right: int:
 	set(corner_radius_top_right_):
 		corner_radius_top_right = corner_radius_top_right_
 		_round_clipping_container.corner_radius_top_right = corner_radius_top_right
 ## The bottom-right corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_bottom_right: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_bottom_right: int:
 	set(corner_radius_bottom_right_):
 		corner_radius_bottom_right = corner_radius_bottom_right_
 		_round_clipping_container.corner_radius_bottom_right = corner_radius_bottom_right
 		_align_title()
 ## The bottom-left corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_bottom_left: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_bottom_left: int:
 	set(corner_radius_bottom_left_):
 		corner_radius_bottom_left = corner_radius_bottom_left_
 		_round_clipping_container.corner_radius_bottom_left = corner_radius_bottom_left
@@ -195,10 +206,10 @@ func _resize() -> void:
 
 func _align_title() -> void:
 	_icon_label_icon.alignment = alignment
-	if alignment == LEFT:
+	if alignment == ALIGNMENT_LEFT:
 		_icon_label_icon.margin_left = corner_radius_bottom_left
 		_icon_label_icon.margin_right = 0
-	elif alignment == CENTER:
+	elif alignment == ALIGNMENT_CENTER:
 		_icon_label_icon.margin_left = 0
 		_icon_label_icon.margin_right = 0
 	else:

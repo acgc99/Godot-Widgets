@@ -25,22 +25,22 @@ extends PanelContainer
 		_stylebox.corner_detail = corner_detail
 @export_group("Corner Radius", "corner_radius")
 ## The top-left corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_top_left: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_top_left: int:
 	set(corner_radius_top_left_):
 		corner_radius_top_left = corner_radius_top_left_
 		_stylebox.corner_radius_top_left = corner_radius_top_left
 ## The top-right corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_top_right: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_top_right: int:
 	set(corner_radius_top_right_):
 		corner_radius_top_right = corner_radius_top_right_
 		_stylebox.corner_radius_top_right = corner_radius_top_right
 ## The bottom-right corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_bottom_right: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_bottom_right: int:
 	set(corner_radius_bottom_right_):
 		corner_radius_bottom_right = corner_radius_bottom_right_
 		_stylebox.corner_radius_bottom_right = corner_radius_bottom_right
 ## The bottom-left corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 10, 1, "or_greater") var corner_radius_bottom_left: int:
+@export_range(0, 0, 1, "or_greater") var corner_radius_bottom_left: int:
 	set(corner_radius_bottom_left_):
 		corner_radius_bottom_left = corner_radius_bottom_left_
 		_stylebox.corner_radius_bottom_left = corner_radius_bottom_left

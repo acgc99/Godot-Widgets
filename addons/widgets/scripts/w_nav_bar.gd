@@ -11,6 +11,13 @@ signal left_button_pressed
 ## Emitted when the right button is pressed.
 signal right_button_pressed
 
+## Enum corresponding to [param alignment].
+enum {
+	ALIGNMENT_LEFT,
+	ALIGNMEN_CENTER,
+	ALIGNMENT_RIGHT
+}
+
 ## [WNavBar] title.
 @export var title: String:
 	set(title_):

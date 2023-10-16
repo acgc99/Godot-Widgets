@@ -11,6 +11,20 @@ signal dismissed
 ## Emitted when the background button is pressed.
 signal background_pressed
 
+## Enum corresponding to [param buttons_focus_mode].
+enum {
+	BUTTONS_FOCUS_NONE,
+	BUTTONS_FOCUS_CLICK,
+	BUTTONS_FOCUS_ALL
+}
+
+## Enum corresponding to [param title_alignment] and [param message_alignment].
+enum {
+	ALIGNMENT_LEFT,
+	ALIGNMENT_CENTER,
+	ALIGNMENT_RIGHT
+}
+
 @export_enum(
 	"None",
 	"Click",
@@ -22,7 +36,7 @@ var buttons_focus_mode: int:
 		buttons_focus_mode = buttons_focus_mode_
 		_button_background.focus_mode = buttons_focus_mode
 ## Popup/dismiss animation duration. Not intended to be changed during runtime.
-@export_range(0, 2, 0.25, "or_greater") var animation_lenght: float = 1
+@export_range(0, 0, 0.25, "or_greater") var animation_lenght: float = 1
 ## Separation between the title, message and buttons.
 @export_range(0, 0, 1, "or_greater") var separation: int = 4:
 	set(separation_):
