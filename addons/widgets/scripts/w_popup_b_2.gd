@@ -29,12 +29,12 @@ enum {
 	ALIGNMENT_RIGHT
 }
 
-## Enum corresponding to [param mode].
+## Enum corresponding to [param sizing].
 enum {
-	MODE_LEFT,
-	MODE_CENTER,
-	MODE_RIGHT,
-	MODE_FILL,
+	SIZING_SHRINK_LEFT,
+	SIZING_SHRINK_CENTER,
+	SIZING_RIGHT,
+	SIZING_FILL,
 }
 
 ## The left button's text that will be displayed inside the button's area.
@@ -151,16 +151,16 @@ var message_alignment: int:
 		buttons_separation = buttons_separation_
 		_buttons_container.buttons_separation = buttons_separation
 @export_enum(
-	"Left",
-	"Center",
-	"Right",
+	"Shrink Left",
+	"Shrink Center",
+	"Shrink Right",
 	"Fill"
 )
 ## Buttons' size and position mode.
-var mode: int:
-	set(mode_):
-		mode = mode_
-		_buttons_container.mode = mode
+var sizing: int:
+	set(sizing_):
+		sizing = sizing_
+		_buttons_container.sizing = sizing
 
 # [WPopup] base.
 var _popup: WPopup

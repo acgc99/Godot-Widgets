@@ -5,12 +5,12 @@ extends HBoxContainer
 ## [b]Do not modify [param alignment][b].
 
 
-## Enum corresponding to [param mode].
+## Enum corresponding to [param sizing].
 enum {
-	MODE_LEFT,
-	MODE_CENTER,
-	MODE_RIGHT,
-	MODE_FILL,
+	SIZING_SHRINK_LEFT,
+	SIZING_SHRINK_CENTER,
+	SIZING_RIGHT,
+	SIZING_FILL,
 }
 
 ## Separation between the text and the icons.
@@ -19,24 +19,24 @@ enum {
 		buttons_separation = buttons_separation_
 		add_theme_constant_override("separation", buttons_separation)
 @export_enum(
-	"Left",
-	"Center",
-	"Right",
+	"Shrink Left",
+	"Shrink Center",
+	"Shrink Right",
 	"Fill"
 )
 ## Buttons' size and position mode.
-var mode: int:
-	set(mode_):
-		mode = mode_
-		if mode == MODE_LEFT:
+var sizing: int:
+	set(sizing_):
+		sizing = sizing_
+		if sizing == SIZING_SHRINK_LEFT:
 			alignment = ALIGNMENT_BEGIN
 			for button in get_children():
 				button.size_flags_horizontal = SIZE_SHRINK_BEGIN
-		elif mode == MODE_CENTER:
+		elif sizing == SIZING_SHRINK_CENTER:
 			alignment = ALIGNMENT_CENTER
 			for button in get_children():
 				button.size_flags_horizontal = SIZE_SHRINK_CENTER
-		elif mode == MODE_RIGHT:
+		elif sizing == SIZING_RIGHT:
 			alignment = ALIGNMENT_END
 			for button in get_children():
 				button.size_flags_horizontal = SIZE_SHRINK_END

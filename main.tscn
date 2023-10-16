@@ -228,7 +228,7 @@ margin_internal_left = 20
 margin_internal_top = 20
 margin_internal_right = 20
 margin_internal_bottom = 20
-mode = 2
+sizing = 2
 
 [node name="WPopupB2" type="Control" parent="."]
 visible = false
@@ -251,7 +251,7 @@ margin_internal_left = 20
 margin_internal_top = 20
 margin_internal_right = 20
 margin_internal_bottom = 20
-mode = 2
+sizing = 2
 
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/WCard" to="." method="_on_w_card_pressed"]
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
