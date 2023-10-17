@@ -1,7 +1,7 @@
 @tool
 class_name WIconButton
 extends BaseButton
-## A button based on [WIcon].
+## Widget button based on [WIcon].
 
 
 @export_category("TextureRect")
@@ -10,18 +10,18 @@ extends BaseButton
 	set(texture_):
 		texture = texture_
 		_icon.texture = texture
-## If [code]true[/code], icon is flipped horizontally.
+## If [code]true[/code], icon texture is flipped horizontally.
 @export var flip_h: bool:
 	set(flip_h_):
 		flip_h = flip_h_
 		_icon.flip_h = flip_h
-## If [code]true[/code], icon is flipped vertically.
+## If [code]true[/code], icon texture is flipped vertically.
 @export var flip_v: bool:
 	set(flip_v_):
 		flip_v = flip_v_
 		_icon.flip_v = flip_v
 
-# [WIcon] for the button.
+# [WIcon] for the button's texture.
 var _icon: WIcon
 
 

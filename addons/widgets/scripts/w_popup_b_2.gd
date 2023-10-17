@@ -87,7 +87,7 @@ var title_alignment: int:
 		title_alignment = title_alignment_
 		_popup.title_alignment = title_alignment
 @export_group("Message", "message")
-## Message text.
+## Popup message.
 @export_multiline var message_text: String:
 	set(message_text_):
 		message_text = message_text_
@@ -162,9 +162,9 @@ var sizing: int:
 		sizing = sizing_
 		_buttons_container.sizing = sizing
 
-# [WPopup] base.
+# Base [WPopup].
 var _popup: WPopup
-# [HBoxContainer] for the buttons.
+# [WHButtonsContainer] for the buttons.
 var _buttons_container: WHButtonsContainer
 # Popup left [Button].
 var _button_left: Button

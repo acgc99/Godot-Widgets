@@ -1,8 +1,8 @@
 @tool
 class_name WFilteredTextEdit
 extends TextEdit
-## [code]TextEdit[/code] with filters. It can clamp [param text] numeric value
-## (single line or all lines).
+## Widget like [code]TextEdit[/code] but with filters.
+## It can clamp [param text] numeric value (single line or all lines).
 
 
 ## Enum correspoding to [param filter_mode].
@@ -183,19 +183,19 @@ func _on_text_changed() -> void:
 	_text_length_old = get_line(_caret_line_curr).length()
 
 
-## None.
+## Filter: None.
 func _filter_none(char_new_: String) -> String:
 	return char_new_
 
 
-## Digitless,
+## Filter: Digitless.
 func _filter_digitless(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return char_new
 	return ""
 
 
-## Positive integer.
+## Filter: Positive integer.
 func _filter_integer_positive(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return ""
@@ -210,7 +210,7 @@ func _filter_integer_positive(char_new: String) -> String:
 	return char_new
 
 
-## Integer.
+## Filter: Integer.
 func _filter_integer(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return ""
@@ -255,7 +255,7 @@ func _filter_integer(char_new: String) -> String:
 	return char_new
 
 
-## Positive float.
+## Filter: Positive float.
 func _filter_float_positive(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return ""
@@ -284,7 +284,7 @@ func _filter_float_positive(char_new: String) -> String:
 	return char_new
 
 
-## Float.
+## Filter: Float.
 func _filter_float(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return ""

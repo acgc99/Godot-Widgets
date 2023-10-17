@@ -1,7 +1,7 @@
 @tool
 class_name WIcon
 extends Control
-## A widget to hold an icon. Essentially is a [TextureRect] with
+## Widget to hold an icon. Essentially is a [TextureRect] with
 ## [code]expand_mode = TextureRect.EXPAND_IGNORE_SIZE[/code] and
 ## [code]stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED[/code].
 
@@ -12,12 +12,12 @@ extends Control
 	set(texture_):
 		texture = texture_
 		_texture.texture = texture
-## If [code]true[/code], icon is flipped horizontally.
+## If [code]true[/code], icon texture is flipped horizontally.
 @export var flip_h: bool:
 	set(flip_h_):
 		flip_h = flip_h_
 		_texture.flip_h = flip_h
-## If [code]true[/code], icon is flipped vertically.
+## If [code]true[/code], icon texture is flipped vertically.
 @export var flip_v: bool:
 	set(flip_v_):
 		flip_v = flip_v_

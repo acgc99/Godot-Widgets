@@ -1,7 +1,7 @@
 @tool
 class_name WPopup
 extends Control
-## A popup without buttons.
+## Widget popup without buttons.
 
 
 ## Emitted when the popup is popuped (animation start).
@@ -59,7 +59,7 @@ var title_alignment: int:
 		title_alignment = title_alignment_
 		_label_title.horizontal_alignment = title_alignment
 @export_group("Message", "message")
-## Message text.
+## Popup message.
 @export_multiline var message_text: String:
 	set(message_text_):
 		message_text = message_text_
@@ -141,15 +141,15 @@ var message_alignment: int:
 			internal_margin_bottom
 		)
 
-# Background [Button].
+# Main widget container. Background [Button].
 var _button_background: Button
-# External [MarginContainer] for setting popup size.
+# External margins for setting popup size.
 var _container_margin_external: MarginContainer
-# [PanelContainer] for popup contents background.
+# Popup contents background.
 var _container_panel: PanelContainer
-# Internal [MarginContainer] for internal margins.
+# Internal margins.
 var _container_margin_internal: MarginContainer
-# [VBoxContainer] for popup contents. TMB: title, message and buttons.
+# Container for popup contents. TMB: title, message and buttons.
 var _container_tmb: VBoxContainer
 # [Label] for popup title.
 var _label_title: Label
@@ -202,9 +202,9 @@ func _on_button_background_pressed() -> void:
 	background_pressed.emit()
 
 
-## Adds the buttons container ([HBoxContainer]) to the popup and sets its
+## Adds the buttons container ([WHButtonsContainer]) to the popup and sets its
 ## size flags. It does not handle button positions neither sizes.
-func add_buttons_container(buttons_container: HBoxContainer) -> void:
+func add_buttons_container(buttons_container: WHButtonsContainer) -> void:
 	_container_tmb.add_child(buttons_container)
 	buttons_container.size_flags_horizontal = SIZE_EXPAND_FILL
 	buttons_container.size_flags_vertical = SIZE_SHRINK_END

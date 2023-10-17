@@ -1,7 +1,7 @@
 @tool
 class_name WNumericInput
 extends Control
-## A widget for numeric inputs with two [WIconButton] for easy touch.
+## Widget for numeric inputs with two [WIconButton] for easy touch.
 
 
 ## Text.
@@ -25,60 +25,62 @@ extends Control
 		initial = initial_
 		_filtered_line_edit.text = str(initial)
 		_filtered_line_edit.clamp_text()
-## Step added/subtracted when the buttons are pressed.
+## Step added/subtracted when buttons are pressed.
 @export_range(0.0, 0.0, 1.0, "or_greater") var step: float = 1.0
 @export_group("Up Button", "up")
-## Up icon button [member WIconButton.icon].
+## Up [WIconButton] texture.
 @export var up_texture: Texture2D:
 	set(up_texture_):
 		up_texture = up_texture_
 		_button_up.texture = up_texture
-## Up icon button [member WIconButton.flip_h].
+## If [code]true[/code], up [WIconButton] texture is flipped horizontally.
 @export var up_flip_h: bool:
 	set(up_flip_h_):
 		up_flip_h = up_flip_h_
 		_button_up.flip_h = up_flip_h
-## Up icon button [member WIconButton.flip_v].
+## If [code]true[/code], left [WIconButton] texture is flipped vertically.
 @export var up_flip_v: bool:
 	set(up_flip_v_):
 		up_flip_v = up_flip_v_
 		_button_up.flip_v = up_flip_v
-## Up icon button [member WIconButton.disabled].
+## If [code]true[/code], up [WIconButton] is in disabled state and
+## can't be clicked or toggled.
 @export var up_disabled: bool:
 	set(up_disabled_):
 		up_disabled = up_disabled_
 		_button_up.disabled = up_disabled
 @export_group("Down Button", "down")
-## Down icon button [member WIconButton.icon].
+## Down [WIconButton] texture.
 @export var down_texture: Texture2D:
 	set(down_texture_):
 		down_texture = down_texture_
 		_button_down.texture = down_texture
-## Down icon button [member WIconButton.flip_h].
+## If [code]true[/code], down [WIconButton] texture is flipped horizontally.
 @export var down_flip_h: bool:
 	set(down_flip_h_):
 		down_flip_h = down_flip_h_
 		_button_down.flip_h = down_flip_h
-## Down icon button [member WIconButton.flip_v].
+## If [code]true[/code], down [WIconButton] texture is flipped vertically.
 @export var down_flip_v: bool:
 	set(down_flip_v_):
 		down_flip_v = down_flip_v_
 		_button_down.flip_v = down_flip_v
-## Down icon button [member WIconButton.disabled].
+## If [code]true[/code], down [WIconButton] is in disabled state and
+## can't be clicked or toggled.
 @export var down_disabled: bool:
 	set(down_disabled_):
 		down_disabled = down_disabled_
 		_button_down.disabled = down_disabled
 
-# Panel container for a panel background
+# Main widget container.
 var _container_panel: PanelContainer
 # [MarginContainer] to set margins for the widget.
 var _container_margin: MarginContainer
-# Container of all elements.
+# Container of label, line edit and buttons.
 var _container_input: HBoxContainer
-# [Label] holding the text.
+# [Label] for the text.
 var _label: Label
-# [WFilteredLineEdit] holding the value.
+# [WFilteredLineEdit] for the value.
 var _filtered_line_edit: WFilteredLineEdit
 # Up [WIconButton].
 var _button_up: WIconButton

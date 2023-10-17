@@ -1,8 +1,8 @@
 @tool
 class_name WCard
 extends BaseButton
-## Similar to [WTextureRounded] but it is a button and contains a panel for
-## a title.
+## Widget button similar to [WTextureRounded] but with a [WIconLabelIcon] for
+## text and icons.
 
 
 ## Enum corresponding to [param stretch_mode].
@@ -71,7 +71,7 @@ var stretch_mode: int:
 		stretch_mode = stretch_mode_
 		_texture.stretch_mode = stretch_mode
 @export_category("WIconLabelIcon")
-## [WCard] title.
+## [WCard] text.
 @export var text: String:
 	set(text_):
 		text = text_
@@ -81,7 +81,7 @@ var stretch_mode: int:
 	"Center",
 	"Right"
 )
-# Title horizontal alignment.
+# Text horizontal alignment.
 var alignment: int:
 	set(alignment_):
 		alignment = alignment_
@@ -176,7 +176,7 @@ var alignment: int:
 		_container_clipping.corner_radius_bottom_left = corner_radius_bottom_left
 		_align_elements()
 
-# Mask for round clipping.
+# Main widget container. Mask for round clipping.
 var _container_clipping: WRoundClippingContainer
 # [TextureRect] holding the texture.
 var _texture: TextureRect

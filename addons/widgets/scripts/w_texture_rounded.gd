@@ -1,8 +1,8 @@
 @tool
 class_name WTextureRounded
 extends Control
-## Like [TextureRect] but with rounded corners.
-## Inner child [member TextureRect.expand_mode] is fixed to
+## Widget like [TextureRect] but with rounded corners. Inner child
+## [member TextureRect.expand_mode] is fixed to
 ## [member TextureRect.EXPAND_IGNORE_SIZE].
 
 
@@ -104,7 +104,7 @@ var stretch_mode: int:
 		corner_radius_bottom_left = corner_radius_bottom_left_
 		_container_clipping.corner_radius_bottom_left = corner_radius_bottom_left
 
-# Mask for round clipping.
+# Main widget container. Mask for round clipping.
 var _container_clipping: WRoundClippingContainer
 # [TextureRect] holding the texture.
 var _texture: TextureRect

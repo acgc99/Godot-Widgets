@@ -1,9 +1,9 @@
 @tool
 class_name WNavBar
 extends Control
-## A widget with to [WIconButton] and a [Label] in the middle. Intended to be
-## placed at the top/bottom of the scene (left/right buttons), but it can also
-## be placed on sides.
+## Widget with two [WIconButton] and a [Label] in the middle. Buttons are pushed
+## to left/right sides. Intended to be placed at the top/bottom of the scene
+## (left/right buttons), but it can also be placed on sides if rotated.
 
 
 ## Emitted when the left button is pressed.
@@ -18,7 +18,7 @@ enum {
 	ALIGNMENT_RIGHT
 }
 
-## [WNavBar] title.
+## [WNavBar] text.
 @export var text: String:
 	set(text_):
 		text = text_
@@ -28,59 +28,61 @@ enum {
 	"Center",
 	"Right"
 )
-## [WNavBar] title horizontal alignment.
+## [WNavBar] text horizontal alignment.
 var alignment: int:
 	set(alignment_):
 		alignment = alignment_
 		_label.horizontal_alignment = alignment
 @export_group("Left button", "left")
-## Left icon button [member WIconButton.icon].
+## Left [WIconButton] texture.
 @export var left_texture: Texture2D:
 	set(left_texture_):
 		left_texture = left_texture_
 		_button_left.texture = left_texture
-## Left icon button [member WIconButton.flip_h].
+## If [code]true[/code], left [WIconButton] texture is flipped horizontally.
 @export var left_flip_h: bool:
 	set(left_flip_h_):
 		left_flip_h = left_flip_h_
 		_button_left.flip_h = left_flip_h
-## Left icon button [member WIconButton.flip_v].
+## If [code]true[/code], left [WIconButton] texture is flipped vertically.
 @export var left_flip_v: bool:
 	set(left_flip_v_):
 		left_flip_v = left_flip_v_
 		_button_left.flip_v = left_flip_v
-## Left icon button [member WIconButton.disabled].
+## If [code]true[/code], left [WIconButton] is in disabled state and
+## can't be clicked or toggled.
 @export var left_disabled: bool:
 	set(left_disabled_):
 		left_disabled = left_disabled_
 		_button_left.disabled = left_disabled
 @export_group("Right button", "right")
-## Right icon button [member WIconButton.icon].
+## Right [WIconButton] texture.
 @export var right_texture: Texture2D:
 	set(right_texture_):
 		right_texture = right_texture_
 		_button_right.texture = right_texture
-## Right icon button [member WIconButton.flip_h].
+## If [code]true[/code], right [WIconButton] texture is flipped horizontally.
 @export var right_flip_h: bool:
 	set(right_flip_h_):
 		right_flip_h = right_flip_h_
 		_button_right.flip_h = right_flip_h
-## Right icon button [member WIconButton.flip_v].
+## If [code]true[/code], right [WIconButton] texture is flipped vertically.
 @export var right_flip_v: bool:
 	set(right_flip_v_):
 		right_flip_v = right_flip_v_
 		_button_right.flip_v = right_flip_v
-## Right icon button [member WIconButton.disabled].
+## If [code]true[/code], right [WIconButton] is in disabled state and
+## can't be clicked or toggled.
 @export var right_disabled: bool:
 	set(right_disabled_):
 		right_disabled = right_disabled_
 		_button_right.disabled = right_disabled
 
-# [PanelContainer] for the widget. It is the background.
+# Main widget container.
 var _container_panel: PanelContainer
-# [HBoxContainer] for the buttons and the label.
-var _container_title: HBoxContainer
-# [Label] holding the title.
+# Container of the buttons and the label. BLB: button, label, button.
+var _container_blb: HBoxContainer
+# [Label] for the text.
 var _label: Label
 # Left [WIconButton].
 var _button_left: WIconButton
@@ -95,21 +97,21 @@ func _init() -> void:
 	_container_panel = PanelContainer.new()
 	add_child(_container_panel, false, Node.INTERNAL_MODE_BACK)
 	
-	_container_title = HBoxContainer.new()
-	_container_panel.add_child(_container_title)
+	_container_blb = HBoxContainer.new()
+	_container_panel.add_child(_container_blb)
 	
 	_button_left = WIconButton.new()
-	_container_title.add_child(_button_left)
+	_container_blb.add_child(_button_left)
 	_button_left.pressed.connect(_on_button_left_pressed)
 	
 	_label = Label.new()
-	_container_title.add_child(_label)
+	_container_blb.add_child(_label)
 	_label.size_flags_horizontal = SIZE_EXPAND_FILL
 	_label.size_flags_vertical = SIZE_EXPAND_FILL
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	
 	_button_right = WIconButton.new()
-	_container_title.add_child(_button_right)
+	_container_blb.add_child(_button_right)
 	_button_right.pressed.connect(_on_button_right_pressed)
 
 

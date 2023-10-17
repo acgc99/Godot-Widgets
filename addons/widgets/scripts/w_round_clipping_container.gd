@@ -1,9 +1,8 @@
 @tool
 class_name WRoundClippingContainer
 extends PanelContainer
-## Acts like a mask of a rounded [StyleBoxFlat] with rounded corners clipping
-## childrens. This node is used by [WTextureRounded] and [WCard] to get
-## rounded corners. Don't modificate its "theme_override_styles/panel".
+## Widget that acts like a mask of a [StyleBoxFlat] with rounded corners plus
+## clipping childrens. Don't modificate its "theme_override_styles/panel".
 
 
 ## This sets the number of vertices used for each corner. Higher values result

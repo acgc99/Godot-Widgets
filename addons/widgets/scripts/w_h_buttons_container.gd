@@ -1,7 +1,7 @@
 @tool
 class_name WHButtonsContainer
 extends HBoxContainer
-## A widget designed to contain [Button]s horizontally.
+## Widget designed to contain [Button]s horizontally and size them.
 ## [b]Do not modify [param alignment][b].
 
 
@@ -25,6 +25,18 @@ enum {
 	"Fill"
 )
 ## Buttons' size and position mode.
+## [br]
+## [br]
+## [b]Shrink Left[/b]: buttons start from left side and they take minimum space.
+## [br]
+## [br]
+## [b]Shrink Center[/b]: buttons are centered and they take minimum space.
+## [br]
+## [br]
+## [b]Shrink Right[/b]: buttons start from right side and they take minimum space.
+## [br]
+## [br]
+## [b]Filll[/b]: buttons are centered and they take maximum space.
 var sizing: int:
 	set(sizing_):
 		sizing = sizing_

@@ -1,7 +1,7 @@
 @tool
 class_name WIconLabelIcon
 extends Control
-## A [PanelContainer] with a [Label] and one [WIcon] on each side.
+## Widget with two [WIcon] and a [Label] in the middle.
 
 
 ## Enum corresponding to [param alignment].
