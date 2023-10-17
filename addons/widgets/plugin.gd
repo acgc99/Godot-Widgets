@@ -4,6 +4,12 @@ extends EditorPlugin
 
 func _enter_tree() -> void:
 	add_custom_type(
+		"WRoundClippingContainer",
+		"PanelContainer",
+		preload("res://addons/widgets/scripts/w_round_clipping_container.gd"),
+		preload("res://addons/widgets/svg_icons/border-radius.svg")
+	)
+	add_custom_type(
 		"WFilteredLineEdit",
 		"LineEdit",
 		preload("res://addons/widgets/scripts/w_filtered_line_edit.gd"),
@@ -40,6 +46,18 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/svg_icons/arrow-expand-vertical.svg")
 	)
 	add_custom_type(
+		"WPopup",
+		"Control",
+		preload("res://addons/widgets/scripts/w_popup.gd"),
+		preload("res://addons/widgets/svg_icons/message-text.svg")
+	)
+	add_custom_type(
+		"WHButtonsContainer",
+		"HBoxContainer",
+		preload("res://addons/widgets/scripts/w_h_buttons_container.gd"),
+		preload("res://addons/widgets/svg_icons/dots-horizontal.svg")
+	)
+	add_custom_type(
 		"WPopupB1",
 		"Control",
 		preload("res://addons/widgets/scripts/w_popup_b_1.gd"),
@@ -58,6 +76,12 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/svg_icons/image.svg")
 	)
 	add_custom_type(
+		"WIconLabelIcon",
+		"Control",
+		preload("res://addons/widgets/scripts/w_icon_label_icon.gd"),
+		preload("res://addons/widgets/svg_icons/align-horizontal-distribute.svg")
+	)
+	add_custom_type(
 		"WCard",
 		"BaseButton",
 		preload("res://addons/widgets/scripts/w_card.gd"),
@@ -66,13 +90,17 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
+	remove_custom_type("WRoundClippingContainer")
 	remove_custom_type("WFilteredLineEdit")
 	remove_custom_type("WFilteredTextEdit")
 	remove_custom_type("WIcon")
 	remove_custom_type("WIconButton")
 	remove_custom_type("WNavBar")
 	remove_custom_type("WNumericInput")
+	remove_custom_type("WPopup")
+	remove_custom_type("WHButtonsContainer")
 	remove_custom_type("WPopupB1")
 	remove_custom_type("WPopupB2")
 	remove_custom_type("WTextureRounded")
 	remove_custom_type("WCard")
+	remove_custom_type("WIconLabelIcon")

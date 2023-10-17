@@ -1,46 +1,41 @@
 @tool
 class_name WIcon
 extends Control
-## A widget to hold an icon. Essentially is a [TextureRect] with
+## Widget to hold an icon. Essentially is a [TextureRect] with
 ## [code]expand_mode = TextureRect.EXPAND_IGNORE_SIZE[/code] and
 ## [code]stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED[/code].
 
 
+@export_category("TextureRect")
 ## Icon texture.
-@export var icon: Texture2D:
-	set(icon_):
-		icon = icon_
-		if _texture_rect_icon != null:
-			_texture_rect_icon.texture = icon
-## If [code]true[/code], icon is flipped horizontally.
+@export var texture: Texture2D:
+	set(texture_):
+		texture = texture_
+		_texture.texture = texture
+## If [code]true[/code], icon texture is flipped horizontally.
 @export var flip_h: bool:
 	set(flip_h_):
 		flip_h = flip_h_
-		if _texture_rect_icon != null:
-			_texture_rect_icon.flip_h = flip_h
-## If [code]true[/code], icon is flipped vertically.
+		_texture.flip_h = flip_h
+## If [code]true[/code], icon texture is flipped vertically.
 @export var flip_v: bool:
 	set(flip_v_):
 		flip_v = flip_v_
-		if _texture_rect_icon != null:
-			_texture_rect_icon.flip_v = flip_v
+		_texture.flip_v = flip_v
 
-## [TextureRect] for the icon.
-var _texture_rect_icon: TextureRect
+# [TextureRect] for the icon.
+var _texture: TextureRect
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize_children)
-	tree_entered.connect(_resize_children)
-	# _texture_rect_icon #######################################################
-	_texture_rect_icon = TextureRect.new()
-	add_child(_texture_rect_icon, false, Node.INTERNAL_MODE_BACK)
-	_texture_rect_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	_texture_rect_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_texture_rect_icon.texture = icon
-	_texture_rect_icon.flip_h = flip_h
-	_texture_rect_icon.flip_v = flip_v
+	item_rect_changed.connect(_resize)
+	tree_entered.connect(_resize)
+	
+	_texture = TextureRect.new()
+	add_child(_texture, false, Node.INTERNAL_MODE_BACK)
+	_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 
 
-func _resize_children() -> void:
-	_texture_rect_icon.size = size
+func _resize() -> void:
+	_texture.size = size

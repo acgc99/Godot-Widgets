@@ -1,16 +1,18 @@
 @tool
 class_name WFilteredLineEdit
 extends LineEdit
-## [code]LineEdit[/code] with filters. It can clamp [member text] numeric value.
+## Widget like [code]LineEdit[/code] but with filters.
+## It can clamp [member text] numeric value.
+
 
 ## Enum correspoding to [member filter_mode].
 enum {
-	NONE,
-	DIGITLESS,
-	INTEGER_POSITIVE,
-	INTEGER,
-	FLOAT_POSITIVE,
-	FLOAT
+	FILTER_NONE,
+	FILTER_DIGITLESS,
+	FILTER_INTEGER_POSITIVE,
+	FILTER_INTEGER,
+	FILTER_FLOAT_POSITIVE,
+	FILTER_FLOAT
 }
 
 @export_enum(
@@ -33,55 +35,54 @@ var filter_mode: int:
 		filter_mode = filter_mode_
 		_reg = RegEx.new()
 		# None.
-		if filter_mode == NONE:
+		if filter_mode == FILTER_NONE:
 			_filter = _filter_none
 		# Digitless.
-		elif filter_mode == DIGITLESS:
+		elif filter_mode == FILTER_DIGITLESS:
 			_reg.compile("\\d")
 			_filter = _filter_digitless
 		# Positive integer.
-		elif filter_mode == INTEGER_POSITIVE:
+		elif filter_mode == FILTER_INTEGER_POSITIVE:
 			_reg.compile("\\d")
 			_filter = _filter_integer_positive
 		# Integer.
-		elif filter_mode == INTEGER:
+		elif filter_mode == FILTER_INTEGER:
 			_reg.compile("[\\d-]")
 			_filter = _filter_integer
 		# Positve float.
-		elif filter_mode == FLOAT_POSITIVE:
+		elif filter_mode == FILTER_FLOAT_POSITIVE:
 			_reg.compile("[\\d.]")
 			_filter = _filter_float_positive
 		# Float
 		else:
 			_reg.compile("[\\d.-]")
 			_filter = _filter_float
-@export_group("Values", "value")
 ## Maximun numeric value of the [member WFilteredLineEdit.text] when
 ## [method WFilteredLineEdit.clamp_text] is called. Only used in a
 ## numeric [member filter_mode].
-@export var value_max: float = INF
+@export var max: float = INF
 ## Minimum numeric value of the [member WFilteredLineEdit.text] when
 ## [method WFilteredLineEdit.clamp_text] is called. Only used in a
 ## numeric [member filter_mode].
-@export var value_min: float = -INF
+@export var min: float = -INF
 
-## [RegEx] to filter text.
+# [RegEx] to filter text.
 var _reg: RegEx
-## Text before inserting modifications.
+# Text before inserting modifications.
 var _text_old: String
-## Length of [member _text_old].
+# Length of [member _text_old].
 var _text_length_old: int
-## Lenght of [param _text_new] in [method _on_text_changed].
+# Lenght of [param _text_new] in [method _on_text_changed].
 var _text_length_new: int
-## Character to be added.
+# Character to be added.
 var _char_new: String
-## Index of [param _char_new] in [param _text_new] in [method _on_text_changed].
-## It is the right column for the caret ([code]_char_index_new = caret_column - 1[/code])
-## since when [method insert_text_at_caret] is called, caret is moved forward.
+# Index of [param _char_new] in [param _text_new] in [method _on_text_changed].
+# It is the right column for the caret ([code]_char_index_new = caret_column - 1[/code])
+# since when [method insert_text_at_caret] is called, caret is moved forward.
 var _char_index_new: int
-## Function called for filtering.
+# Function called for filtering.
 var _filter: Callable
-## Control variable. Avoid modifications while clamping.
+# Control variable. Avoid modifications while clamping.
 var _clamping: bool
 
 
@@ -100,7 +101,7 @@ func clamp_text() -> void:
 		return
 	_clamping = true
 	var value: float = float(text)
-	value = clamp(value, value_min, value_max)
+	value = clamp(value, min, max)
 	text = str(value)
 	_clamping = false
 
@@ -113,7 +114,7 @@ func _on_text_changed(_text_new: String) -> void:
 	# Update new length.
 	_text_length_new = text.length()
 	# If you select all text and press `-`/`.` it would break because of a
-	## [code] _text_new = ""[/code].
+	# [code] _text_new = ""[/code].
 	if _text_new == "":
 		text = ""
 		_text_old = ""
@@ -150,22 +151,19 @@ func _on_text_changed(_text_new: String) -> void:
 	_text_length_old = text.length()
 
 
-# Filters ######################################################################
-
-
-## None.
+## Filter: None.
 func _filter_none(char_new: String) -> String:
 	return char_new
 
 
-## Digitless.
+## Filter: Digitless.
 func _filter_digitless(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return char_new
 	return ""
 
 
-## Positive integer.
+## Filter: Positive integer.
 func _filter_integer_positive(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return ""
@@ -180,7 +178,7 @@ func _filter_integer_positive(char_new: String) -> String:
 	return char_new
 
 
-## Integer.
+## Filter: Integer.
 func _filter_integer(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return ""
@@ -226,7 +224,7 @@ func _filter_integer(char_new: String) -> String:
 	return char_new
 
 
-## Positive float.
+## Filter: Positive float.
 func _filter_float_positive(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return ""
@@ -255,7 +253,7 @@ func _filter_float_positive(char_new: String) -> String:
 	return char_new
 
 
-## Float.
+## Filter: Float.
 func _filter_float(char_new: String) -> String:
 	if _reg.search(char_new) == null:
 		return ""

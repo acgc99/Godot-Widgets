@@ -5,6 +5,7 @@ extends Control
 @onready var fline_edit: WFilteredLineEdit = $Page/Contents/MarginContainer/VBoxContainer/WFilteredLineEdit
 @onready var ftext_edit: WFilteredTextEdit = $Page/Contents/MarginContainer/VBoxContainer/WFilteredTextEdit
 
+@onready var popup: WPopup = $WPopup
 
 func _ready() -> void:
 	fline_edit.clamp_text()
@@ -25,3 +26,11 @@ func _dismiss_popup_b1() -> void:
 
 func _dismiss_popup_b2() -> void:
 	popup_b2.dismiss()
+
+
+func _on_w_card_pressed() -> void:
+	popup.popup()
+
+
+func _dismiss_popup() -> void:
+	popup.dismiss()

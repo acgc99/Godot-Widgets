@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b5en2sqjkddpj"]
+[gd_scene load_steps=17 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_nav_bar.gd" id="2_pyenn"]
@@ -13,8 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://assets/png_icons/arrow-down-bold.png" id="12_yu17d"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_line_edit.gd" id="13_nvvi0"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b_1.gd" id="13_sqya8"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b_2.gd" id="14_fn815"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b_2.gd" id="16_te4sp"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup.gd" id="16_yn2wa"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -39,9 +40,10 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 script = ExtResource("2_pyenn")
-title = "Title"
-button_left_icon = ExtResource("3_krt2y")
-button_right_icon = ExtResource("4_08bym")
+text = "Title"
+alignment = 1
+left_texture = ExtResource("3_krt2y")
+right_texture = ExtResource("4_08bym")
 
 [node name="Contents" type="ColorRect" parent="Page"]
 layout_mode = 2
@@ -130,10 +132,14 @@ shortcut = null
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("10_8kjpv")
-title = "Card"
-icon_left_icon = ExtResource("8_c2b2g")
-icon_right_icon = ExtResource("8_c2b2g")
 texture = ExtResource("9_tksgc")
+stretch_mode = 6
+text = "Popup WPopup"
+alignment = 1
+left_texture = ExtResource("8_c2b2g")
+right_texture = ExtResource("8_c2b2g")
+margin_top = 10
+margin_bottom = 10
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -145,29 +151,29 @@ layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("5_arsm4")
 text = "Value:"
-value_max = 10.0
-value_min = 0.0
-button_up_icon = ExtResource("11_blpd4")
-button_down_icon = ExtResource("12_yu17d")
+max = 10.0
+min = 0.0
+initial = 5.0
+up_texture = ExtResource("11_blpd4")
+down_texture = ExtResource("12_yu17d")
 
 [node name="ButtonOne" type="Button" parent="Page/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Show PopupB1"
+text = "Popup WPopupB1"
 
 [node name="ButtonTwo" type="Button" parent="Page/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Show PopupB2"
+text = "Popup WPopupB2"
 
 [node name="WFilteredLineEdit" type="LineEdit" parent="Page/Contents/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "53"
 script = ExtResource("13_nvvi0")
 filter_mode = 3
-value_max = 10.0
 
 [node name="WFilteredTextEdit" type="TextEdit" parent="Page/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 200)
@@ -178,8 +184,26 @@ text = "123
 -120"
 script = ExtResource("14_sa3kl")
 filter_mode = 5
-value_max = 100.0
-value_min = -10.0
+
+[node name="WPopup" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_yn2wa")
+title_text = "WPopup"
+message_text = "This is a simple popup. Press outside to dismiss."
+external_margin_left = 50
+external_margin_top = 500
+external_margin_right = 50
+external_margin_bottom = 500
+internal_margin_left = 20
+internal_margin_top = 20
+internal_margin_right = 20
+internal_margin_bottom = 20
 
 [node name="WPopupB1" type="Control" parent="."]
 visible = false
@@ -190,11 +214,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_sqya8")
-title = "Title"
-title_horizontal_alignment = 0
-message = "This is a message."
-message_horizontal_alignment = 0
-button_text = "Accept"
+button_text = "Ok"
+title_text = "WPopup1"
+message_text = "This is a popup with one button."
+external_margin_left = 50
+external_margin_top = 500
+external_margin_right = 50
+external_margin_bottom = 500
+internal_margin_left = 20
+internal_margin_top = 20
+internal_margin_right = 20
+internal_margin_bottom = 20
+sizing = 2
 
 [node name="WPopupB2" type="Control" parent="."]
 visible = false
@@ -204,14 +235,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("14_fn815")
-title = "Title"
-message = "Popup message."
-button_left_text = "Left"
-button_right_text = "Right"
+script = ExtResource("16_te4sp")
+left_button_text = "Left"
+right_button_text = "Right"
+title_text = "WPopup2"
+message_text = "This is a popup with two button."
+external_margin_left = 50
+external_margin_top = 500
+external_margin_right = 50
+external_margin_bottom = 500
+internal_margin_left = 20
+internal_margin_top = 20
+internal_margin_right = 20
+internal_margin_bottom = 20
+sizing = 2
 
+[connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/WCard" to="." method="_on_w_card_pressed"]
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
 [connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]
+[connection signal="background_pressed" from="WPopup" to="." method="_dismiss_popup"]
 [connection signal="background_pressed" from="WPopupB1" to="." method="_dismiss_popup_b1"]
 [connection signal="button_pressed" from="WPopupB1" to="." method="_dismiss_popup_b1"]
 [connection signal="background_pressed" from="WPopupB2" to="." method="_dismiss_popup_b2"]
