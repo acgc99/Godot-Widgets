@@ -17,6 +17,7 @@ Rules for new widgets (open issue if not applied to existing ones):
   - Signal naming convention. Use actions in past simple, e.g.: `values_clamped`. Use human readable form.
 - Take care of widgets minimum size.
 - Document inner children use.
+- Widgets must have an unique icon of format `.svg` and color `#8eef97`.
 
 Recomended names:
 - If the widget has a main container, put `# Main widget container.` above its declaration.
