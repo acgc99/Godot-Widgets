@@ -75,7 +75,7 @@ func _enter_tree() -> void:
 	add_custom_type(
 		"WPageContainer",
 		"VBoxContainer",
-		preload("res://addons/widgets/scripts/w_page.gd"),
+		preload("res://addons/widgets/scripts/w_page_container.gd"),
 		preload("res://addons/widgets/svg_icons/page-layout-header.svg")
 	)
 	add_custom_type(

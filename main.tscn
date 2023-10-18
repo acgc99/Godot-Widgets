@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/w_page.gd" id="5_7s04u"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_page_container.gd" id="2_kyxw3"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_numeric_input.gd" id="5_arsm4"]
 [ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://assets/png_icons/arrow-left-bold.png" id="6_xvjs4"]
 [ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://assets/png_icons/home.png" id="7_q4q5h"]
@@ -34,7 +34,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
-script = ExtResource("5_7s04u")
+script = ExtResource("2_kyxw3")
 navbar_height = 72
 text = "Title"
 navbar_alignment = 1
