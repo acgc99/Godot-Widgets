@@ -2,11 +2,12 @@
 
 **Version 3.0.0 is under development.**
 
-<img style="float: LEFT;" src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/assets/widgets.png" width="150" height="auto">
+<img align="left" src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/assets/widgets.png" width="150" height="auto">
 
 This Godot plugin implement multiple `Node`s designed for mobile GUI.
 
 It is inspired by [Material Design](https://m3.material.io/), but I am doing it to fit my needs while trying to generalize a bit for other users and learning more about Godot. If you have new ideas, feel free to share them.
+<br/><br/><br/>
 
 | About      | Current Release                     |
 |------------|-------------------------------------|
