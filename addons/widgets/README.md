@@ -1,97 +1,72 @@
-## Godot-Widgets
+# Godot-Widgets
 
-A collection of widgets that are useful for GUIs. Inspired by [Material Design](https://m3.material.io/).
+**Version 3.0.0 is under development.**
 
-Inspired means "inspired", you won't find the exact same things here.
+<img style="float: LEFT;" src="https://github.com/acgc99/Godot-Widgets/blob/main/widgets.png?raw=true" width="150" height="auto">
 
-Widgets are highly customizable, check their properties in the Godot Editor. If you feel that something is missing or there is a bug, please, open a new issue.
+This Godot plugin implement multiple `Node`s designed for mobile GUI.
 
-If you download the full repository, you will get a small showcase project.
+It is inspired by [Material Design](https://m3.material.io/), but I am doing it to fit my needs while trying to generalize a bit for other users and learning more about Godot. If you have new ideas, feel free to share them.
 
----
+| About      | Current Release                     |
+|------------|-------------------------------------|
+| Version    | 3.0.0 **(under development)**       |
+| Date       | yyyy/mm/dd                          |
+| Godot      | Godot 4.1.2                         |
+| License    | [MIT License](../../LICENSE.md)     |
+| Author     | [acgc99](https://github.com/acgc99) |
 
-### FilteredEdits (v2.0.0)
+**Widgets Index**:
+- [`WIcon`](#w_icon)
+- [`WRoundClippingContainer`](#w_round_clipping_container)
+- [`WFilteredLineEdit`](#w_filtered_line_edit)
+- [`WFilteredTextEdit`](#w_filtered_text_edit)
+- [`WHButtonsContainer`](#w_h_buttons_container)
+- [`WIconButton`](#w_icon_button)
+- [`WIconLabelIcon`](#w_icon_label_icon)
+- [`WTextureRounded`](#w_texture_rounded)
+- [`WNavBar`](#w_nav_bar)
+- [`WNumericInput`](#w_numeric_input)
+- [`WPopup`](#w_popup_b1)
+- [`WCard`](#w_card)
+- [`WPopupB1`](#w_popup_b1)
+- [`WPopupB2`](#w_popup_b2)
 
-The original addon [FilteredEdits](https://godotengine.org/asset-library/asset/1992) has been embedded into this plugin to avoid dependencies issues. There is no problem since I'm the same author. **Attention: this makes this plugin incompatible with FilteredEdits, disable or remove that plugin, you will find the same functions here.**
+## `WIcon` <a name="w_icon"></a>
 
----
+Widget to hold an icon. Essentially is a `TextureRect` with `expand_mode = TextureRect.EXPAND_IGNORE_SIZE` and
+`stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED`.
 
-### `IconButton`
+### Properties
 
-A button that consists on an icon. You might have to set its `custom_minimum_size` if used inside a `Container` or any of its variations.
+| Type      | Property | Basic Description                                | Default Value |
+|-----------|----------|--------------------------------------------------|---------------|
+| Texture2D | texture  | Icon texture                                     |               |
+| bool      | flip_h   | If `true`, icon texture is flipped horizontally. | false         |
+| bool      | flip_v   | If `true`, icon texture is flipped vertically.   | false         |
 
-It is used for other widgets, but you can also use it.
+## `WRoundClippingContainer` <a name="w_round_clipping_container"></a>
 
----
+## `WFilteredLineEdit` <a name="w_filtered_line_edit"></a>
 
-### `NavBar`
+## `WFilteredTextEdit` <a name="w_filtered_text_edit"></a>
 
-Widget to navigate through game scenes. It contains buttons and a label, you have to implement the logic for switching scenes.
+## `WHButtonsContainer` <a name="w_h_buttons_container"></a>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/navbar.png" width="500"/>
-</p>
+## `WIconButton` <a name="w_icon_button"></a>
 
----
+## `WIconLabelIcon` <a name="w_icon_label_icon"></a>
 
-### `NumericInput`
+## `WTextureRounded` <a name="w_texture_rounded"></a>
 
-Widget so that the game user can only input numeric values (`float`). It also has two buttons to increase/decrease the value.
+## `WNavBar` <a name="w_nav_bar"></a>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/numeric_input.png" width="500"/>
-</p>
+## `WNumericInput` <a name="w_numeric_input"></a>
 
----
+## `WPopup` <a name="w_popup"></a>
 
-### `OneButtonPopup`
+## `WCard` <a name="w_card"></a>
 
-A popup with one button. Smooth appearing/disappearing.
+## `WPopupB1` <a name="w_popup_b1"></a>
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/one_button_popup.png" height="300"/>
-</p>
-
----
-
-### `TwoButtonsPopup`
-
-A popup with two buttons. Smooth appearing/disappearing.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/two_buttons_popup.png" height="300"/>
-</p>
-
----
-
-### `TextureRounded`
-
-Like `TextureRect` but with rounded corners.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/texture_rounded.png" height="200"/>
-</p>
-
-Known issues:
-- If 'strecth_mode = keep_aspect_covered', texture borders might be not visible, since they are outside the node rectangle (although they are rounded).
-- It is recommended to reload the scene if you changed the node properties and you get weird results in the Editor. It seems that they are not updated correctly.
-
----
-
-### `Card`
-
-Like `TextureRect` but with rounded corners and a panel for text and acts like a button.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/acgc99/Godot-Widgets/main/screenshots/card.png" height="200"/>
-</p>
-
-Known issues:
-- If 'strecth_mode = keep_aspect_covered', texture borders might be not visible, since they are outside the node rectangle (although they are rounded).
-- It is recommended to reload the scene if you changed the node properties and you get weird results in the Editor. It seems that they are not updated correctly.
-
----
-
-### Assets
-
-All non-Godot icons has been downloaded form [Pictogrammers](https://pictogrammers.com/docs/general/license/).
+## `WPopupB2` <a name="w_popup_b2"></a>
