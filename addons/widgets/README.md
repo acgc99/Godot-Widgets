@@ -6,6 +6,8 @@ This Godot plugin implement multiple `Node`s designed for mobile GUIs.
 
 It is inspired by [Material Design](https://m3.material.io/), but I am doing it to fit my needs while trying to generalize a bit for other users and learning more about Godot. If you have new ideas, feel free to share them.
 
+If you want to contribute, read [CONTRIBUTING.md](https://github.com/acgc99/Godot-Widgets/blob/main/docs/CONTRIBUTING.md).
+
 | About      | Current Release                     |
 |------------|-------------------------------------|
 | Version    | 3.0.0 **(under development)**       |
@@ -64,10 +66,16 @@ Widget to hold an icon. Essentially is a `TextureRect` with `expand_mode = Textu
 
 ## `WPopup` <a name="w_popup"></a>
 
+Popups have to be placed below the nodes (on scene tree) you want to be covered by it. This is equivalent to set `top_level = true` on the popup.
+
 ## `WPageContainer` <a name="w_page_container"></a>
 
 ## `WCard` <a name="w_card"></a>
 
 ## `WPopupB1` <a name="w_popup_b1"></a>
 
+Popups have to be placed below the nodes (on scene tree) you want to be covered by it. This is equivalent to set `top_level = true` on the popup.
+
 ## `WPopupB2` <a name="w_popup_b2"></a>
+
+Popups have to be placed below the nodes (on scene tree) you want to be covered by it. This is equivalent to set `top_level = true` on the popup.

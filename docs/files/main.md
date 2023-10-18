@@ -6,6 +6,8 @@ This Godot plugin implement multiple `Node`s designed for mobile GUIs.
 
 It is inspired by [Material Design](https://m3.material.io/), but I am doing it to fit my needs while trying to generalize a bit for other users and learning more about Godot. If you have new ideas, feel free to share them.
 
+If you want to contribute, read [CONTRIBUTING.md](https://github.com/acgc99/Godot-Widgets/blob/main/docs/CONTRIBUTING.md).
+
 | About      | Current Release                     |
 |------------|-------------------------------------|
 | Version    | 3.0.0 **(under development)**       |
