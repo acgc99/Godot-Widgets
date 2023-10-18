@@ -19,7 +19,7 @@ It is inspired by [Material Design](https://m3.material.io/), but I am doing it 
 - [`WRoundClippingContainer`](#w_round_clipping_container)
 - [`WFilteredLineEdit`](#w_filtered_line_edit)
 - [`WFilteredTextEdit`](#w_filtered_text_edit)
-- [`WHButtonsContainer`](#w_h_buttons_container)
+- [`WHSizingContainer`](#w_h_sizing_container)
 - [`WIconButton`](#w_icon_button)
 - [`WIconLabelIcon`](#w_icon_label_icon)
 - [`WTextureRounded`](#w_texture_rounded)
@@ -49,7 +49,7 @@ Widget to hold an icon. Essentially is a `TextureRect` with `expand_mode = Textu
 
 ## `WFilteredTextEdit` <a name="w_filtered_text_edit"></a>
 
-## `WHButtonsContainer` <a name="w_h_buttons_container"></a>
+## `WHSizingContainer` <a name="w_h_sizing_container"></a>
 
 ## `WIconButton` <a name="w_icon_button"></a>
 

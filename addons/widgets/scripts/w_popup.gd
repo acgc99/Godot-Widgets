@@ -204,7 +204,7 @@ func _on_button_background_pressed() -> void:
 
 ## Adds the buttons container ([WHButtonsContainer]) to the popup and sets its
 ## size flags. It does not handle button positions neither sizes.
-func add_buttons_container(buttons_container: WHButtonsContainer) -> void:
+func add_buttons_container(buttons_container: WHSizingContainer) -> void:
 	_container_tmb.add_child(buttons_container)
 	buttons_container.size_flags_horizontal = SIZE_EXPAND_FILL
 	buttons_container.size_flags_vertical = SIZE_SHRINK_END

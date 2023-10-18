@@ -6,7 +6,7 @@
 [WRoundClippingContainer](w_round_clipping_container.md)
 [WFilteredLineEdit](w_filtered_line_edit.md)
 [WFilteredTextEdit](w_filtered_text_edit.md)
-[WHButtonsContainer](w_h_buttons_container.md)
+[WHSizingContainer](w_h_sizing_container.md)
 
 # Level 1
 

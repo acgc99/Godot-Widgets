@@ -29,9 +29,9 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/svg_icons/TextEdit.svg")
 	)
 	add_custom_type(
-		"WHButtonsContainer",
+		"WHSizingContainer",
 		"HBoxContainer",
-		preload("res://addons/widgets/scripts/w_h_buttons_container.gd"),
+		preload("res://addons/widgets/scripts/w_h_sizing_container.gd"),
 		preload("res://addons/widgets/svg_icons/dots-horizontal.svg")
 	)
 	# level 1
@@ -105,7 +105,7 @@ func _exit_tree() -> void:
 	remove_custom_type("WIconLabelIcon")
 	remove_custom_type("WIconButton")
 	# level 0
-	remove_custom_type("WHButtonsContainer")
+	remove_custom_type("WHSizingContainer")
 	remove_custom_type("WFilteredTextEdit")
 	remove_custom_type("WFilteredLineEdit")
 	remove_custom_type("WRoundClippingContainer")

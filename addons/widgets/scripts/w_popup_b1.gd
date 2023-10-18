@@ -134,7 +134,7 @@ var message_alignment: int:
 	set(internal_margin_bottom_):
 		internal_margin_bottom = internal_margin_bottom_
 		_popup.internal_margin_bottom = internal_margin_bottom
-@export_category("WHButtonsContainer")
+@export_category("WHSizingContainer")
 @export_enum(
 	"Shrink Left",
 	"Shrink Center",
@@ -149,8 +149,8 @@ var sizing: int:
 
 # Base [WPopup].
 var _popup: WPopup
-# [WHButtonsContainer] for the buttons.
-var _buttons_container: WHButtonsContainer
+# [WHSizingContainer] for the buttons.
+var _buttons_container: WHSizingContainer
 # Popup [Button].
 var _button: Button
 
@@ -163,7 +163,7 @@ func _init() -> void:
 	add_child(_popup)
 	_popup.background_pressed.connect(_on_background_pressed)
 	
-	_buttons_container = WHButtonsContainer.new()
+	_buttons_container = WHSizingContainer.new()
 	_popup.add_buttons_container(_buttons_container)
 	_popup.popuped.connect(_on_popup_popuped)
 	_popup.popuped.connect(_on_popup_dismissed)
