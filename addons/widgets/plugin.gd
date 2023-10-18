@@ -73,6 +73,12 @@ func _enter_tree() -> void:
 	)
 	# level 2
 	add_custom_type(
+		"WPageContainer",
+		"VBoxContainer",
+		preload("res://addons/widgets/scripts/w_page.gd"),
+		preload("res://addons/widgets/svg_icons/page-layout-header.svg")
+	)
+	add_custom_type(
 		"WCard",
 		"BaseButton",
 		preload("res://addons/widgets/scripts/w_card.gd"),
@@ -97,6 +103,7 @@ func _exit_tree() -> void:
 	remove_custom_type("WPopupB2")
 	remove_custom_type("WPopupB1")
 	remove_custom_type("WCard")
+	remove_custom_type("WPageContainer")
 	# level 1
 	remove_custom_type("WPopup")
 	remove_custom_type("WNumericInput")

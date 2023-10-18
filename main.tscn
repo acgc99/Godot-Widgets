@@ -1,10 +1,10 @@
 [gd_scene load_steps=17 format=3 uid="uid://b5en2sqjkddpj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/w_nav_bar.gd" id="2_pyenn"]
-[ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://assets/png_icons/arrow-left-bold.png" id="3_krt2y"]
-[ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://assets/png_icons/home.png" id="4_08bym"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_page.gd" id="5_7s04u"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_numeric_input.gd" id="5_arsm4"]
+[ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://assets/png_icons/arrow-left-bold.png" id="6_xvjs4"]
+[ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://assets/png_icons/home.png" id="7_q4q5h"]
 [ext_resource type="Texture2D" uid="uid://bt7uf41ersuf2" path="res://assets/png_icons/star.png" id="8_c2b2g"]
 [ext_resource type="Texture2D" uid="uid://63ariwty7am3" path="res://assets/images/nikola-majksner-hXNGeAFOgT4-unsplash.jpg" id="9_tksgc"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_card.gd" id="10_8kjpv"]
@@ -17,17 +17,16 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b1.gd" id="15_yk7q0"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup.gd" id="16_yn2wa"]
 
-[node name="Main" type="Control"]
+[node name="Page" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1, 1.00372)
 script = ExtResource("1_e6ig7")
 
-[node name="Page" type="VBoxContainer" parent="."]
+[node name="WPageContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,22 +34,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
-
-[node name="WNavBar" type="PanelContainer" parent="Page"]
-custom_minimum_size = Vector2(0, 72)
-layout_mode = 2
-script = ExtResource("2_pyenn")
+script = ExtResource("5_7s04u")
+navbar_height = 72
 text = "Title"
-alignment = 1
-left_texture = ExtResource("3_krt2y")
-right_texture = ExtResource("4_08bym")
+navbar_alignment = 1
+left_texture = ExtResource("6_xvjs4")
+right_texture = ExtResource("7_q4q5h")
 
-[node name="Contents" type="ColorRect" parent="Page"]
+[node name="Contents" type="ColorRect" parent="WPageContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-color = Color(0.776471, 0.776471, 0.776471, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Page/Contents"]
+[node name="MarginContainer" type="MarginContainer" parent="WPageContainer/Contents"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,10 +57,10 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Page/Contents/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WPageContainer/Contents/MarginContainer"]
 layout_mode = 2
 
-[node name="WTextureRounded" type="Control" parent="Page/Contents/MarginContainer/VBoxContainer"]
+[node name="WTextureRounded" type="Control" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 script = ExtResource("12_iesyr")
@@ -76,7 +71,7 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[node name="WCard" type="BaseButton" parent="Page/Contents/MarginContainer/VBoxContainer"]
+[node name="WCard" type="BaseButton" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -145,7 +140,7 @@ corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
-[node name="WNumericInput" type="PanelContainer" parent="Page/Contents/MarginContainer/VBoxContainer"]
+[node name="WNumericInput" type="PanelContainer" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -157,25 +152,25 @@ initial = 5.0
 up_texture = ExtResource("11_blpd4")
 down_texture = ExtResource("12_yu17d")
 
-[node name="ButtonOne" type="Button" parent="Page/Contents/MarginContainer/VBoxContainer"]
+[node name="ButtonOne" type="Button" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Popup WPopupB1"
 
-[node name="ButtonTwo" type="Button" parent="Page/Contents/MarginContainer/VBoxContainer"]
+[node name="ButtonTwo" type="Button" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Popup WPopupB2"
 
-[node name="WFilteredLineEdit" type="LineEdit" parent="Page/Contents/MarginContainer/VBoxContainer"]
+[node name="WFilteredLineEdit" type="LineEdit" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "53"
 script = ExtResource("13_nvvi0")
 filter_mode = 3
 
-[node name="WFilteredTextEdit" type="TextEdit" parent="Page/Contents/MarginContainer/VBoxContainer"]
+[node name="WFilteredTextEdit" type="TextEdit" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 text = "123
@@ -250,9 +245,11 @@ internal_margin_right = 20
 internal_margin_bottom = 20
 sizing = 2
 
-[connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/WCard" to="." method="_on_w_card_pressed"]
-[connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
-[connection signal="pressed" from="Page/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]
+[connection signal="navbar_left_button_pressed" from="WPageContainer" to="." method="_on_w_page_container_navbar_left_button_pressed"]
+[connection signal="navbar_right_button_pressed" from="WPageContainer" to="." method="_on_w_page_container_navbar_right_button_pressed"]
+[connection signal="pressed" from="WPageContainer/Contents/MarginContainer/VBoxContainer/WCard" to="." method="_on_w_card_pressed"]
+[connection signal="pressed" from="WPageContainer/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
+[connection signal="pressed" from="WPageContainer/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]
 [connection signal="background_pressed" from="WPopup" to="." method="_dismiss_popup"]
 [connection signal="background_pressed" from="WPopupB1" to="." method="_dismiss_popup_b1"]
 [connection signal="button_pressed" from="WPopupB1" to="." method="_dismiss_popup_b1"]

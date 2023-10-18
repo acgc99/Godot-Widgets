@@ -116,6 +116,7 @@ func _init() -> void:
 
 
 func _resize() -> void:
+	_container_panel.size = size
 	_button_left.custom_minimum_size = Vector2(size[1], 0)
 	_button_right.custom_minimum_size = Vector2(size[1], 0)
 

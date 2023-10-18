@@ -26,6 +26,7 @@ It is inspired by [Material Design](https://m3.material.io/), but I am doing it 
 - [`WNavBar`](#w_nav_bar)
 - [`WNumericInput`](#w_numeric_input)
 - [`WPopup`](#w_popup_b1)
+- [`WPageContainer`](#w_page_container)
 - [`WCard`](#w_card)
 - [`WPopupB1`](#w_popup_b1)
 - [`WPopupB2`](#w_popup_b2)
@@ -62,6 +63,8 @@ Widget to hold an icon. Essentially is a `TextureRect` with `expand_mode = Textu
 ## `WNumericInput` <a name="w_numeric_input"></a>
 
 ## `WPopup` <a name="w_popup"></a>
+
+## `WPageContainer` <a name="w_page_container"></a>
 
 ## `WCard` <a name="w_card"></a>
 

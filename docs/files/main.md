@@ -26,6 +26,7 @@ It is inspired by [Material Design](https://m3.material.io/), but I am doing it 
 - [`WNavBar`](#w_nav_bar)
 - [`WNumericInput`](#w_numeric_input)
 - [`WPopup`](#w_popup_b1)
+- [`WPageContainer`](#w_page_container)
 - [`WCard`](#w_card)
 - [`WPopupB1`](#w_popup_b1)
 - [`WPopupB2`](#w_popup_b2)
