@@ -143,9 +143,9 @@ func _ready() -> void:
 
 func _resize() -> void:
 	custom_minimum_size = \
-		_icon_left.custom_minimum_size + \
-		_icon_right.custom_minimum_size + \
-		_label.size + \
+		_icon_left.get_combined_minimum_size() + \
+		_icon_right.get_combined_minimum_size() + \
+		_label.get_combined_minimum_size() + \
 		Vector2(margin_left + margin_right, margin_top + margin_bottom) + \
 		Vector2(2*_container_ili.get_theme_constant("separation"), 0)
 	
@@ -153,7 +153,7 @@ func _resize() -> void:
 
 
 func _set_icon_left_custom_minimum_size() -> void:
-	if _icon_left.texture == null:
+	if left_texture == null:
 		_icon_left.custom_minimum_size.x = 0
 	else:
 		_icon_left.custom_minimum_size.x = _label.size.y
@@ -161,7 +161,7 @@ func _set_icon_left_custom_minimum_size() -> void:
 
 
 func _set_icon_right_custom_minimum_size() -> void:
-	if _icon_right.texture == null:
+	if right_texture == null:
 		_icon_right.custom_minimum_size.x = 0
 	else:
 		_icon_right.custom_minimum_size.x = _label.size.y

@@ -42,12 +42,14 @@ var buttons_focus_mode: int:
 	set(separation_):
 		separation = separation_
 		_container_tmb.add_theme_constant_override("separation", separation)
+		_resize()
 @export_group("Title", "title")
 ## Popup title.
 @export var title_text: String:
 	set(title_text_):
 		title_text = title_text_
 		_label_title.text = title_text
+		_resize()
 @export_enum(
 	"Left",
 	"Center",
@@ -64,6 +66,7 @@ var title_alignment: int:
 	set(message_text_):
 		message_text = message_text_
 		_label_message.text = message_text
+		_resize()
 @export_enum(
 	"Left",
 	"Center",
@@ -83,6 +86,7 @@ var message_alignment: int:
 			"margin_left",
 			external_margin_left
 		)
+		_resize()
 ## Top external margin.
 @export_range(0, 0, 1, "or_greater") var external_margin_top: int:
 	set(external_margin_top_):
@@ -91,6 +95,7 @@ var message_alignment: int:
 			"margin_top",
 			external_margin_top
 		)
+		_resize()
 ## Right external margin.
 @export_range(0, 0, 1, "or_greater") var external_margin_right: int:
 	set(external_margin_right_):
@@ -99,6 +104,7 @@ var message_alignment: int:
 			"margin_right",
 			external_margin_right
 		)
+		_resize()
 ## Bottom external margin.
 @export_range(0, 0, 1, "or_greater") var external_margin_bottom: int:
 	set(external_margin_bottom_):
@@ -107,6 +113,7 @@ var message_alignment: int:
 			"margin_bottom",
 			external_margin_bottom
 		)
+		_resize()
 @export_group("Internal Margin", "internal_margin")
 ## Left internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_left: int:
@@ -116,6 +123,7 @@ var message_alignment: int:
 			"margin_left",
 			internal_margin_left
 		)
+		_resize()
 ## Top internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_top: int:
 	set(internal_margin_top_):
@@ -124,6 +132,7 @@ var message_alignment: int:
 			"margin_top",
 			internal_margin_top
 		)
+		_resize()
 ## Right internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_right: int:
 	set(internal_margin_right_):
@@ -132,6 +141,7 @@ var message_alignment: int:
 			"margin_right",
 			internal_margin_right
 		)
+		_resize()
 ## Bottom internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_bottom: int:
 	set(internal_margin_bottom_):
@@ -140,6 +150,7 @@ var message_alignment: int:
 			"margin_bottom",
 			internal_margin_bottom
 		)
+		_resize()
 
 # Main widget container. Background [Button].
 var _button_background: Button
@@ -184,17 +195,36 @@ func _init() -> void:
 	
 	_label_title = Label.new()
 	_container_tmb.add_child(_label_title)
-	_label_title.size_flags_horizontal = SIZE_EXPAND_FILL
+	_label_title.size_flags_horizontal = SIZE_SHRINK_BEGIN
 	_label_title.size_flags_vertical = SIZE_SHRINK_BEGIN
 	
 	_label_message = Label.new()
 	_container_tmb.add_child(_label_message)
 	_label_message.size_flags_horizontal = SIZE_EXPAND_FILL
 	_label_message.size_flags_vertical = SIZE_EXPAND_FILL
+	_label_message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
 
 func _resize() -> void:
+	var margin_lr: int = 0
+	margin_lr += _container_margin_external.get_theme_constant("margin_left")
+	margin_lr += _container_margin_external.get_theme_constant("margin_right")
+	margin_lr += _container_margin_internal.get_theme_constant("margin_left")
+	margin_lr += _container_margin_internal.get_theme_constant("margin_right")
+	var margin_tb: int = 0
+	margin_tb += _container_margin_external.get_theme_constant("margin_top")
+	margin_tb += _container_margin_external.get_theme_constant("margin_bottom")
+	margin_tb += _container_margin_internal.get_theme_constant("margin_top")
+	margin_tb += _container_margin_internal.get_theme_constant("margin_bottom")
+	custom_minimum_size = \
+		_button_background.get_combined_minimum_size() + \
+		_label_title.get_combined_minimum_size() + \
+		Vector2(0, _label_message.get_combined_minimum_size().y) + \
+		Vector2(0, 3*_container_tmb.get_theme_constant("separation")) + \
+		Vector2(margin_lr, margin_tb)
+	
 	_button_background.size = size
+	
 	_container_margin_external.size = size
 
 

@@ -39,6 +39,7 @@ var alignment: int:
 	set(left_texture_):
 		left_texture = left_texture_
 		_button_left.texture = left_texture
+		_set_button_left_custom_minimum_size()
 ## If [code]true[/code], left [WIconButton] texture is flipped horizontally.
 @export var left_flip_h: bool:
 	set(left_flip_h_):
@@ -61,6 +62,7 @@ var alignment: int:
 	set(right_texture_):
 		right_texture = right_texture_
 		_button_right.texture = right_texture
+		_set_button_right_custom_minimum_size()
 ## If [code]true[/code], right [WIconButton] texture is flipped horizontally.
 @export var right_flip_h: bool:
 	set(right_flip_h_):
@@ -115,10 +117,35 @@ func _init() -> void:
 	_button_right.pressed.connect(_on_button_right_pressed)
 
 
+func _ready() -> void:
+	_set_button_left_custom_minimum_size()
+	_set_button_right_custom_minimum_size()
+
+
 func _resize() -> void:
+	custom_minimum_size = \
+		_button_left.get_combined_minimum_size() + \
+		_button_right.get_combined_minimum_size() + \
+		_label.get_combined_minimum_size() + \
+		Vector2(2*_container_blb.get_theme_constant("separation"), 0)
+	
 	_container_panel.size = size
-	_button_left.custom_minimum_size = Vector2(size[1], 0)
-	_button_right.custom_minimum_size = Vector2(size[1], 0)
+
+
+func _set_button_left_custom_minimum_size() -> void:
+	if left_texture == null:
+		_button_left.custom_minimum_size.x = 0
+	else:
+		_button_left.custom_minimum_size.x = _label.size.y
+	_resize()
+
+
+func _set_button_right_custom_minimum_size() -> void:
+	if right_texture == null:
+		_button_right.custom_minimum_size.x = 0
+	else:
+		_button_right.custom_minimum_size.x = _label.size.y
+	_resize()
 
 
 func _on_button_left_pressed() -> void:

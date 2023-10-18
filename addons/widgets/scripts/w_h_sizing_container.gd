@@ -59,3 +59,14 @@ var sizing: int:
 		var flags: int = SIZING_TO_FLAGS[sizing]
 		for child in get_children():
 			child.size_flags_horizontal = flags
+
+#
+#func _ready() -> void:
+#	_resize()
+#
+#
+#func _resize() -> void:
+#	var cms: Vector2 = Vector2.ZERO
+#	for child in get_children():
+#		cms += child.get_combined_minimum_size()
+#	custom_minimum_size = cms

@@ -27,6 +27,7 @@ grow_vertical = 2
 script = ExtResource("1_e6ig7")
 
 [node name="WPageContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,7 +96,7 @@ texture_repeat = 0
 material = null
 use_parent_material = false
 clip_contents = false
-custom_minimum_size = Vector2(0, 300)
+custom_minimum_size = Vector2(179, 46)
 layout_direction = 0
 layout_mode = 2
 size_flags_horizontal = 1
@@ -141,7 +142,7 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [node name="WNumericInput" type="PanelContainer" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
+custom_minimum_size = Vector2(183.063, 57)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("5_arsm4")
@@ -182,6 +183,7 @@ filter_mode = 5
 
 [node name="WPopup" type="Control" parent="."]
 visible = false
+custom_minimum_size = Vector2(213, 1164)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -202,6 +204,7 @@ internal_margin_bottom = 20
 
 [node name="WPopupB1" type="Control" parent="."]
 visible = false
+custom_minimum_size = Vector2(252, 1140)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -224,6 +227,7 @@ sizing = 2
 
 [node name="WPopupB2" type="Control" parent="."]
 visible = false
+custom_minimum_size = Vector2(313, 1140)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

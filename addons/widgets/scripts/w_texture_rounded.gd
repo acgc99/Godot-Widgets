@@ -123,4 +123,4 @@ func _init() -> void:
 
 
 func _resize() -> void:
-	_container_clipping.custom_minimum_size = size
+	_container_clipping.size = size

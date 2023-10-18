@@ -202,7 +202,9 @@ func _init() -> void:
 
 
 func _resize() -> void:
-	_container_clipping.custom_minimum_size = size
+	custom_minimum_size = _ili.get_combined_minimum_size()
+	
+	_container_clipping.size = size
 
 
 func _align_elements() -> void:

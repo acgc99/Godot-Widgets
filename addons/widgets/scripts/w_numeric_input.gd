@@ -33,6 +33,7 @@ extends Control
 	set(up_texture_):
 		up_texture = up_texture_
 		_button_up.texture = up_texture
+		_set_button_up_custom_minimum_size()
 ## If [code]true[/code], up [WIconButton] texture is flipped horizontally.
 @export var up_flip_h: bool:
 	set(up_flip_h_):
@@ -55,6 +56,7 @@ extends Control
 	set(down_texture_):
 		down_texture = down_texture_
 		_button_down.texture = down_texture
+		_set_button_down_custom_minimum_size()
 ## If [code]true[/code], down [WIconButton] texture is flipped horizontally.
 @export var down_flip_h: bool:
 	set(down_flip_h_):
@@ -104,8 +106,8 @@ func _init() -> void:
 	_label = Label.new()
 	_container_input.add_child(_label)
 	_label.size_flags_horizontal = SIZE_EXPAND_FILL
-	_label.clip_text = true
-	_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+#	_label.clip_text = true
+#	_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	
 	_filtered_line_edit = WFilteredLineEdit.new()
 	_container_input.add_child(_filtered_line_edit)
@@ -113,6 +115,7 @@ func _init() -> void:
 	_filtered_line_edit.flat = true
 	_filtered_line_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
 	_filtered_line_edit.alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_filtered_line_edit.text = "0"
 	
 	_button_up = WIconButton.new()
 	_container_input.add_child(_button_up)
@@ -123,9 +126,43 @@ func _init() -> void:
 	_button_down.pressed.connect(_on_button_down_pressed)
 
 
+func _ready() -> void:
+	_set_button_up_custom_minimum_size()
+	_set_button_down_custom_minimum_size()
+
+
 func _resize() -> void:
-	_button_up.custom_minimum_size = Vector2(size[1], 0)
-	_button_down.custom_minimum_size = Vector2(size[1], 0)
+	var margin_lr: int = 0
+	margin_lr += _container_margin.get_theme_constant("margin_left")
+	margin_lr += _container_margin.get_theme_constant("margin_right")
+	var margin_tb: int = 0
+	margin_tb += _container_margin.get_theme_constant("margin_top")
+	margin_tb += _container_margin.get_theme_constant("margin_bottom")
+	custom_minimum_size = \
+		_button_up.get_combined_minimum_size() + \
+		_button_down.get_combined_minimum_size() + \
+		_label.get_combined_minimum_size() + \
+		_filtered_line_edit.get_combined_minimum_size() + \
+		Vector2(margin_lr, margin_tb) + \
+		Vector2(4*_container_input.get_theme_constant("separation"), 0)
+	
+	_container_panel.size = size
+
+
+func _set_button_up_custom_minimum_size() -> void:
+	if up_texture == null:
+		_button_up.custom_minimum_size.x = 0
+	else:
+		_button_up.custom_minimum_size.x = _label.size.y
+	_resize()
+
+
+func _set_button_down_custom_minimum_size() -> void:
+	if down_texture == null:
+		_button_down.custom_minimum_size.x = 0
+	else:
+		_button_down.custom_minimum_size.x = _label.size.y
+	_resize()
 
 
 func _on_button_up_pressed() -> void:
