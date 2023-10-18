@@ -7,6 +7,7 @@ extends Control
 
 @onready var popup: WPopup = $WPopup
 
+
 func _ready() -> void:
 	fline_edit.clamp_text()
 	ftext_edit.clamp_lines()

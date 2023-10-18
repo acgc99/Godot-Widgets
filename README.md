@@ -2,7 +2,7 @@
 
 ![](https://github.com/acgc99/Godot-Widgets/blob/main/assets/widgets.png?raw=true)
 
-This Godot plugin implement multiple `Node`s designed for mobile GUI.
+This Godot plugin implement multiple `Node`s designed for mobile GUIs.
 
 It is inspired by [Material Design](https://m3.material.io/), but I am doing it to fit my needs while trying to generalize a bit for other users and learning more about Godot. If you have new ideas, feel free to share them.
 

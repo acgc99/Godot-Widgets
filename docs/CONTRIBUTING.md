@@ -22,7 +22,7 @@ Work in Progress
   - Widget signals have to be in a table (signature-basic description).
   - Explain each public property, public method and signal.
 - Integration:
-  - Add reference to it on `files/source.md` at the right position. This file has to end with an empty line.
+  - Add reference to it on `files/source.md` at the right position: level 0 for widgets that doesn't depend on other widgets; level 1 for widgets that depend on another widget class; level 2 for widgets that depend on two widget classes... This file has to end with an empty line.
   - Add reference to it on `docs/files/main.md` widgets index.
   - Run `docs/docs_merger.py` to generate `README.md`
 

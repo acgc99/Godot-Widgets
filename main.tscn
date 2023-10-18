@@ -12,9 +12,9 @@
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_texture_rounded.gd" id="12_iesyr"]
 [ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://assets/png_icons/arrow-down-bold.png" id="12_yu17d"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_line_edit.gd" id="13_nvvi0"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b_1.gd" id="13_sqya8"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b_2.gd" id="16_te4sp"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b2.gd" id="15_820td"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b1.gd" id="15_yk7q0"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup.gd" id="16_yn2wa"]
 
 [node name="Main" type="Control"]
@@ -213,10 +213,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("13_sqya8")
+script = ExtResource("15_yk7q0")
 button_text = "Ok"
 title_text = "WPopup1"
-message_text = "This is a popup with one button."
+message_text = "This is a popup with two button."
 external_margin_left = 50
 external_margin_top = 500
 external_margin_right = 50
@@ -235,7 +235,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("16_te4sp")
+script = ExtResource("15_820td")
 left_button_text = "Left"
 right_button_text = "Right"
 title_text = "WPopup2"
