@@ -1,8 +1,6 @@
 # Godot-Widgets
 
-**Version 3.0.0 is under development.**
-
-<img style="float: LEFT;" src="https://github.com/acgc99/Godot-Widgets/blob/main/widgets.png?raw=true" width="150" height="auto">
+![](https://github.com/acgc99/Godot-Widgets/blob/main/assets/widgets.png?raw=true)
 
 This Godot plugin implement multiple `Node`s designed for mobile GUI.
 
