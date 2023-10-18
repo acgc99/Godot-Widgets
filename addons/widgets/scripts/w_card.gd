@@ -5,6 +5,12 @@ extends BaseButton
 ## text and icons.
 
 
+## Enum corresponding to [param ili_position].
+enum {
+	ILI_BOTTOM,
+	ILI_TOP
+}
+
 ## Enum corresponding to [param stretch_mode].
 enum {
 	STRETCH_SCALE,
@@ -23,6 +29,18 @@ enum {
 	ALIGNMENT_RIGHT
 }
 
+@export_enum(
+	"Bottom",
+	"Top"
+)
+## Position of the [WIconLabelIcon].
+var ili_position: int:
+	set(ili_position_):
+		ili_position = ili_position_
+		if ili_position == ILI_BOTTOM:
+			_ili.size_flags_vertical = Control.SIZE_SHRINK_END
+		else:
+			_ili.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 @export_category("TextureRect")
 ## The node's [Texture2D] resource.
 @export var texture: Texture2D:

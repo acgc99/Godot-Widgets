@@ -27,7 +27,6 @@ grow_vertical = 2
 script = ExtResource("1_e6ig7")
 
 [node name="WPageContainer" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,7 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 script = ExtResource("2_kyxw3")
-navbar_height = 72
+navbar_height = 75
 text = "Title"
 navbar_alignment = 1
 left_texture = ExtResource("6_xvjs4")
