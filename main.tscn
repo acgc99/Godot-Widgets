@@ -141,16 +141,16 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [node name="WNumericInput" type="PanelContainer" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(132, 31)
+custom_minimum_size = Vector2(179, 31)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("5_arsm4")
+up_texture = ExtResource("11_blpd4")
+down_texture = ExtResource("12_yu17d")
 text = "Value:"
 max = 10.0
 min = 0.0
 initial = 5.0
-up_texture = ExtResource("11_blpd4")
-down_texture = ExtResource("12_yu17d")
 
 [node name="ButtonOne" type="Button" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)

@@ -13,45 +13,8 @@ enum {
 	OVERRUN_TRIM_WORD_ELLIPSIS
 }
 
-## Text.
-@export var text: String:
-	set(text_):
-		text = text_
-		_label.text = text
-		_set_custom_minimum_size(get_combined_minimum_size())
-## Maximum value.
-@export var max: float = INF:
-	set(max_):
-		max = max_
-		_filtered_line_edit.max = max
-## Minimum value.
-@export var min: float = -INF:
-	set(min_):
-		min = min_
-		_filtered_line_edit.min = min
-## Initial value.
-@export var initial: float:
-	set(initial_):
-		initial = initial_
-		_filtered_line_edit.text = str(initial)
-		_filtered_line_edit.clamp_text()
 ## Step added/subtracted when buttons are pressed.
 @export_range(0.0, 0.0, 1.0, "or_greater") var step: float = 1.0
-@export_enum(
-	"Trim Nothing",
-	"Trim Characters",
-	"Trim Words",
-	"Ellipsis",
-	"Word Ellipsis"
-)
-## Sets the clipping behavior when the text exceeds the node's bounding
-## rectangle. See [TextServer.OverrunBehavior] for description of all modes.
-## [b]It might be needed to enlarge [param custom_minimum_size.x] to visualize
-## text when this parameter is different from [param OVERRUN_NO_TRIMMING][/b].
-var text_overrun_behavior: int:
-	set(text_overrun_behavior_):
-		text_overrun_behavior = text_overrun_behavior_
-		_label.text_overrun_behavior = text_overrun_behavior
 @export_group("Up Button", "up")
 ## Up [WIconButton] texture.
 @export var up_texture: Texture2D:
@@ -100,6 +63,45 @@ var text_overrun_behavior: int:
 	set(down_disabled_):
 		down_disabled = down_disabled_
 		_button_down.disabled = down_disabled
+@export_category("Label")
+## Text.
+@export var text: String:
+	set(text_):
+		text = text_
+		_label.text = text
+		_set_custom_minimum_size(get_combined_minimum_size())
+@export_enum(
+	"Trim Nothing",
+	"Trim Characters",
+	"Trim Words",
+	"Ellipsis",
+	"Word Ellipsis"
+)
+## Sets the clipping behavior when the text exceeds the node's bounding
+## rectangle. See [TextServer.OverrunBehavior] for description of all modes.
+## [b]It might be needed to enlarge [param custom_minimum_size.x] to visualize
+## text when this parameter is different from [param OVERRUN_NO_TRIMMING][/b].
+var text_overrun_behavior: int:
+	set(text_overrun_behavior_):
+		text_overrun_behavior = text_overrun_behavior_
+		_label.text_overrun_behavior = text_overrun_behavior
+@export_category("WFilteredLineEdit")
+## Maximum value.
+@export var max: float = INF:
+	set(max_):
+		max = max_
+		_filtered_line_edit.max = max
+## Minimum value.
+@export var min: float = -INF:
+	set(min_):
+		min = min_
+		_filtered_line_edit.min = min
+## Initial value.
+@export var initial: float:
+	set(initial_):
+		initial = initial_
+		_filtered_line_edit.text = str(initial)
+		_filtered_line_edit.clamp_text()
 
 # Main widget container.
 var _container_panel: PanelContainer
