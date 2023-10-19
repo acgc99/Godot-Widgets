@@ -4,6 +4,15 @@ extends "res://addons/widgets/scripts/w_control.gd"
 ## Widget for numeric inputs with two [WIconButton] for easy touch.
 
 
+## Enum corresponding to [param text_overrun_behavior].
+enum {
+	OVERRUN_NO_TRIMMING,
+	OVERRUN_TRIM_CHAR,
+	OVERRUN_TRIM_WORD,
+	OVERRUN_TRIM_ELLIPSIS,
+	OVERRUN_TRIM_WORD_ELLIPSIS
+}
+
 ## Text.
 @export var text: String:
 	set(text_):
@@ -28,6 +37,21 @@ extends "res://addons/widgets/scripts/w_control.gd"
 		_filtered_line_edit.clamp_text()
 ## Step added/subtracted when buttons are pressed.
 @export_range(0.0, 0.0, 1.0, "or_greater") var step: float = 1.0
+@export_enum(
+	"Trim Nothing",
+	"Trim Characters",
+	"Trim Words",
+	"Ellipsis",
+	"Word Ellipsis"
+)
+## Sets the clipping behavior when the text exceeds the node's bounding
+## rectangle. See [TextServer.OverrunBehavior] for description of all modes.
+## [b]It might be needed to enlarge [param custom_minimum_size.x] to visualize
+## text when this parameter is different from [param OVERRUN_NO_TRIMMING][/b].
+var text_overrun_behavior: int:
+	set(text_overrun_behavior_):
+		text_overrun_behavior = text_overrun_behavior_
+		_label.text_overrun_behavior = text_overrun_behavior
 @export_group("Up Button", "up")
 ## Up [WIconButton] texture.
 @export var up_texture: Texture2D:
@@ -109,8 +133,6 @@ func _init() -> void:
 	_label = Label.new()
 	_container_input.add_child(_label)
 	_label.size_flags_horizontal = SIZE_EXPAND_FILL
-#	_label.clip_text = true
-#	_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	
 	_filtered_line_edit = WFilteredLineEdit.new()
 	_container_input.add_child(_filtered_line_edit)

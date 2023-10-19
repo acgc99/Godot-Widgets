@@ -141,7 +141,7 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 
 [node name="WNumericInput" type="PanelContainer" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(183.063, 57)
+custom_minimum_size = Vector2(132, 31)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("5_arsm4")
