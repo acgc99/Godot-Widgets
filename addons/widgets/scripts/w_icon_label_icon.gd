@@ -149,7 +149,7 @@ func _resize_children() -> void:
 
 
 func _calculate_widget_minimum_size() -> Vector2:
-	var widget_minimum_size: Vector2 = _container_ili.get_combined_minimum_size()
+	var widget_minimum_size: Vector2 = _container_margin.get_combined_minimum_size()
 	return widget_minimum_size
 
 

@@ -1,8 +1,8 @@
 @tool
 class_name WControl
 extends Control
-## Widget class from which all non-button widgets must inherit. Override methods
-## on inherited classes, but take care to keep functionalities.
+## Widget class from which widgets must inherit instead of [Control].
+## Override methods on inherited classes, but take care to keep functionalities.
 
 
 func _ready() -> void:

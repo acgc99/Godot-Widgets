@@ -182,7 +182,7 @@ filter_mode = 5
 
 [node name="WPopup" type="Control" parent="."]
 visible = false
-custom_minimum_size = Vector2(213, 1554)
+custom_minimum_size = Vector2(282, 1260)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -203,7 +203,7 @@ internal_margin_bottom = 20
 
 [node name="WPopupB1" type="Control" parent="."]
 visible = false
-custom_minimum_size = Vector2(252, 1507)
+custom_minimum_size = Vector2(300, 1295)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -226,7 +226,7 @@ sizing = 2
 
 [node name="WPopupB2" type="Control" parent="."]
 visible = false
-custom_minimum_size = Vector2(313, 1507)
+custom_minimum_size = Vector2(317, 1295)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

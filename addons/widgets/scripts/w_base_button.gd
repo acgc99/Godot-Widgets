@@ -1,8 +1,8 @@
 @tool
 class_name WBaseButton
 extends BaseButton
-## Widget class from which all non-button widgets must inherit. Override methods
-## on inherited classes, but take care to keep functionalities.
+## Widget class from which widgets must inherit instead of [BaseButton].
+## Override methods on inherited classes, but take care to keep functionalities.
 
 
 func _ready() -> void:

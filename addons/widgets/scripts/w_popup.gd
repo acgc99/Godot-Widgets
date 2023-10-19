@@ -1,6 +1,6 @@
 @tool
 class_name WPopup
-extends Control
+extends "res://addons/widgets/scripts/w_control.gd"
 ## Widget popup without buttons.
 
 
@@ -42,14 +42,14 @@ var buttons_focus_mode: int:
 	set(separation_):
 		separation = separation_
 		_container_tmb.add_theme_constant_override("separation", separation)
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 @export_group("Title", "title")
 ## Popup title.
 @export var title_text: String:
 	set(title_text_):
 		title_text = title_text_
 		_label_title.text = title_text
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 @export_enum(
 	"Left",
 	"Center",
@@ -66,7 +66,7 @@ var title_alignment: int:
 	set(message_text_):
 		message_text = message_text_
 		_label_message.text = message_text
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 @export_enum(
 	"Left",
 	"Center",
@@ -86,7 +86,7 @@ var message_alignment: int:
 			"margin_left",
 			external_margin_left
 		)
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 ## Top external margin.
 @export_range(0, 0, 1, "or_greater") var external_margin_top: int:
 	set(external_margin_top_):
@@ -95,7 +95,7 @@ var message_alignment: int:
 			"margin_top",
 			external_margin_top
 		)
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 ## Right external margin.
 @export_range(0, 0, 1, "or_greater") var external_margin_right: int:
 	set(external_margin_right_):
@@ -104,7 +104,7 @@ var message_alignment: int:
 			"margin_right",
 			external_margin_right
 		)
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 ## Bottom external margin.
 @export_range(0, 0, 1, "or_greater") var external_margin_bottom: int:
 	set(external_margin_bottom_):
@@ -113,7 +113,7 @@ var message_alignment: int:
 			"margin_bottom",
 			external_margin_bottom
 		)
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 @export_group("Internal Margin", "internal_margin")
 ## Left internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_left: int:
@@ -123,7 +123,7 @@ var message_alignment: int:
 			"margin_left",
 			internal_margin_left
 		)
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 ## Top internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_top: int:
 	set(internal_margin_top_):
@@ -132,7 +132,7 @@ var message_alignment: int:
 			"margin_top",
 			internal_margin_top
 		)
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 ## Right internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_right: int:
 	set(internal_margin_right_):
@@ -141,7 +141,7 @@ var message_alignment: int:
 			"margin_right",
 			internal_margin_right
 		)
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 ## Bottom internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_bottom: int:
 	set(internal_margin_bottom_):
@@ -150,7 +150,7 @@ var message_alignment: int:
 			"margin_bottom",
 			internal_margin_bottom
 		)
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
 
 # Main widget container. Background [Button].
 var _button_background: Button
@@ -173,8 +173,8 @@ var _tween_dismiss: Tween
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize)
-	tree_entered.connect(_resize)
+	item_rect_changed.connect(_resize_children)
+	tree_entered.connect(_resize_children)
 	
 	_button_background = Button.new()
 	add_child(_button_background, false, Node.INTERNAL_MODE_BACK)
@@ -205,7 +205,12 @@ func _init() -> void:
 	_label_message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
 
-func _resize() -> void:
+func _resize_children() -> void:
+	_button_background.size = size
+	_container_margin_external.size = size
+
+
+func _calculate_widget_minimum_size() -> Vector2:
 	var margin_lr: int = 0
 	margin_lr += _container_margin_external.get_theme_constant("margin_left")
 	margin_lr += _container_margin_external.get_theme_constant("margin_right")
@@ -216,16 +221,13 @@ func _resize() -> void:
 	margin_tb += _container_margin_external.get_theme_constant("margin_bottom")
 	margin_tb += _container_margin_internal.get_theme_constant("margin_top")
 	margin_tb += _container_margin_internal.get_theme_constant("margin_bottom")
-	custom_minimum_size = \
-		_button_background.get_combined_minimum_size() + \
+	var widget_minimum_size: Vector2
+	widget_minimum_size = \
 		_label_title.get_combined_minimum_size() + \
 		Vector2(0, _label_message.get_combined_minimum_size().y) + \
-		Vector2(0, 3*_container_tmb.get_theme_constant("separation")) + \
+		_container_tmb.get_combined_minimum_size() + \
 		Vector2(margin_lr, margin_tb)
-	
-	_button_background.size = size
-	
-	_container_margin_external.size = size
+	return widget_minimum_size
 
 
 func _on_button_background_pressed() -> void:

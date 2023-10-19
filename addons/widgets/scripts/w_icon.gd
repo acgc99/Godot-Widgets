@@ -1,6 +1,6 @@
 @tool
 class_name WIcon
-extends Control
+extends "res://addons/widgets/scripts/w_control.gd"
 ## Widget to hold an icon. Essentially is a [TextureRect] with
 ## [code]expand_mode = TextureRect.EXPAND_IGNORE_SIZE[/code] and
 ## [code]stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED[/code].
@@ -28,8 +28,8 @@ var _texture: TextureRect
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize)
-	tree_entered.connect(_resize)
+	item_rect_changed.connect(_resize_children)
+	tree_entered.connect(_resize_children)
 	
 	_texture = TextureRect.new()
 	add_child(_texture, false, Node.INTERNAL_MODE_BACK)
@@ -37,5 +37,5 @@ func _init() -> void:
 	_texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 
 
-func _resize() -> void:
+func _resize_children() -> void:
 	_texture.size = size
