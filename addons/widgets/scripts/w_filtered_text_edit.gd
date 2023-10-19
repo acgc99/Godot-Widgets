@@ -23,7 +23,7 @@ enum {
 	"Positive Float",
 	"Float"
 )
-## Filter modes:
+## Filter modes:[br]
 ## [param None]. No filter.
 ## [br]
 ## [br]

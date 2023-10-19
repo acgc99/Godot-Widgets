@@ -24,7 +24,7 @@ enum {
 	"Float"
 )
 ## Filter modes.
-## Note that "." and "-" count as characters in [member max_length].
+## Note that "." and "-" count as characters in [member max_length]. [br]
 ## [param None]. No filter.
 ## [br]
 ## [br]

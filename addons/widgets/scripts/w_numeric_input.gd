@@ -14,8 +14,6 @@ enum {
 }
 ## Enum correspoding to [member filter_mode].
 enum {
-	FILTER_NONE,
-	FILTER_DIGITLESS,
 	FILTER_INTEGER_POSITIVE,
 	FILTER_INTEGER,
 	FILTER_FLOAT_POSITIVE,
@@ -96,20 +94,12 @@ var text_overrun_behavior: int:
 		_label.text_overrun_behavior = text_overrun_behavior
 @export_category("WFilteredLineEdit")
 @export_enum(
-	"None",
-	"Digitless",
 	"Positive Integer",
 	"Integer",
 	"Positive Float",
 	"Float"
 )
 ## Filter modes.
-## [param None]. No filter.
-## [br]
-## [br]
-## [param Digitless]. No digits, 0-9.
-## [br]
-## [br]
 ## [param Positive Integer]. Positive or zero integer.
 ## [br]
 ## [br]
@@ -123,7 +113,7 @@ var text_overrun_behavior: int:
 var filter_mode: int:
 	set(filter_mode_):
 		filter_mode = filter_mode_
-		_filtered_line_edit.filter_mode = filter_mode
+		_filtered_line_edit.filter_mode = filter_mode + 2
 ## Maximum value.
 @export var max: float = INF:
 	set(max_):
@@ -180,6 +170,7 @@ func _init() -> void:
 	_filtered_line_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
 	_filtered_line_edit.alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_filtered_line_edit.text = "0"
+	_filtered_line_edit.filter_mode = WFilteredLineEdit.FILTER_INTEGER_POSITIVE
 	
 	_button_up = WIconButton.new()
 	_container_input.add_child(_button_up)
