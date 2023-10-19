@@ -5,6 +5,19 @@ extends EditorPlugin
 func _enter_tree() -> void:
 	# level 0
 	add_custom_type(
+		"WControl",
+		"Control",
+		preload("res://addons/widgets/scripts/w_control.gd"),
+		preload("res://addons/widgets/svg_icons/alpha-w-circle-outline.svg")
+	)
+	add_custom_type(
+		"WBaseButton",
+		"BaseButton",
+		preload("res://addons/widgets/scripts/w_base_button.gd"),
+		preload("res://addons/widgets/svg_icons/alpha-w-circle.svg")
+	)
+	# level 1
+	add_custom_type(
 		"WIcon",
 		"Control",
 		preload("res://addons/widgets/scripts/w_icon.gd"),
@@ -34,7 +47,7 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/scripts/w_h_sizing_container.gd"),
 		preload("res://addons/widgets/svg_icons/dots-horizontal.svg")
 	)
-	# level 1
+	# level 2
 	add_custom_type(
 		"WIconButton",
 		"BaseButton",
@@ -71,7 +84,7 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/scripts/w_popup.gd"),
 		preload("res://addons/widgets/svg_icons/message-text.svg")
 	)
-	# level 2
+	# level 3
 	add_custom_type(
 		"WPageContainer",
 		"VBoxContainer",
@@ -99,21 +112,24 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
-	# level 2
+	# level 3
 	remove_custom_type("WPopupB2")
 	remove_custom_type("WPopupB1")
 	remove_custom_type("WCard")
 	remove_custom_type("WPageContainer")
-	# level 1
+	# level 2
 	remove_custom_type("WPopup")
 	remove_custom_type("WNumericInput")
 	remove_custom_type("WNavBar")
 	remove_custom_type("WTextureRounded")
 	remove_custom_type("WIconLabelIcon")
 	remove_custom_type("WIconButton")
-	# level 0
+	# level 1
 	remove_custom_type("WHSizingContainer")
 	remove_custom_type("WFilteredTextEdit")
 	remove_custom_type("WFilteredLineEdit")
 	remove_custom_type("WRoundClippingContainer")
 	remove_custom_type("WIcon")
+	# level 0
+	remove_custom_type("WBaseButton")
+	remove_custom_type("WControl")

@@ -1,6 +1,6 @@
 @tool
 class_name WIconButton
-extends BaseButton
+extends "res://addons/widgets/scripts/w_base_button.gd"
 ## Widget button based on [WIcon].
 
 
@@ -26,13 +26,13 @@ var _icon: WIcon
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize)
-	tree_entered.connect(_resize)
+	item_rect_changed.connect(_resize_children)
+	tree_entered.connect(_resize_children)
 	
 	_icon = WIcon.new()
 	add_child(_icon, false, Node.INTERNAL_MODE_BACK)
 	_icon.mouse_filter = MOUSE_FILTER_IGNORE
 
 
-func _resize() -> void:
+func _resize_children() -> void:
 	_icon.size = size

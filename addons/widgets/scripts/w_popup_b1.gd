@@ -1,6 +1,6 @@
 @tool
 class_name WPopupB1
-extends Control
+extends "res://addons/widgets/scripts/w_control.gd"
 ## A popup with one button.
 
 
@@ -38,7 +38,8 @@ enum {
 	set(button_text_):
 		button_text = button_text_
 		_button.text = button_text
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 @export_category("WPopup")
 @export_enum(
 	"None",
@@ -61,14 +62,16 @@ var buttons_focus_mode: int:
 	set(separation_):
 		separation = separation_
 		_popup.separation = separation
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 @export_group("Title", "title")
 ## Popup title.
 @export var title_text: String:
 	set(title_text_):
 		title_text = title_text_
 		_popup.title_text = title_text
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 @export_enum(
 	"Left",
 	"Center",
@@ -85,7 +88,8 @@ var title_alignment: int:
 	set(message_text_):
 		message_text = message_text_
 		_popup.message_text = message_text
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 @export_enum(
 	"Left",
 	"Center",
@@ -102,50 +106,58 @@ var message_alignment: int:
 	set(external_margin_left_):
 		external_margin_left = external_margin_left_
 		_popup.external_margin_left = external_margin_left
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 ## Top external margin.
 @export_range(0, 0, 1, "or_greater") var external_margin_top: int:
 	set(external_margin_top_):
 		external_margin_top = external_margin_top_
 		_popup.external_margin_top = external_margin_top
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 ## Right external margin.
 @export_range(0, 0, 1, "or_greater") var external_margin_right: int:
 	set(external_margin_right_):
 		external_margin_right = external_margin_right_
 		_popup.external_margin_right = external_margin_right
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 ## Bottom external margin.
 @export_range(0, 0, 1, "or_greater") var external_margin_bottom: int:
 	set(external_margin_bottom_):
 		external_margin_bottom = external_margin_bottom_
 		_popup.external_margin_bottom = external_margin_bottom
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 @export_group("Internal Margin", "internal_margin")
 ## Left internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_left: int:
 	set(internal_margin_left_):
 		internal_margin_left = internal_margin_left_
 		_popup.internal_margin_left = internal_margin_left
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 ## Top internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_top: int:
 	set(internal_margin_top_):
 		internal_margin_top = internal_margin_top_
 		_popup.internal_margin_top = internal_margin_top
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 ## Right internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_right: int:
 	set(internal_margin_right_):
 		internal_margin_right = internal_margin_right_
 		_popup.internal_margin_right = internal_margin_right
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 ## Bottom internal margin.
 @export_range(0, 0, 1, "or_greater") var internal_margin_bottom: int:
 	set(internal_margin_bottom_):
 		internal_margin_bottom = internal_margin_bottom_
 		_popup.internal_margin_bottom = internal_margin_bottom
-		_resize()
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_popup.force_minimum_size()
 @export_category("WHSizingContainer")
 @export_enum(
 	"Shrink Left",
@@ -168,8 +180,8 @@ var _button: Button
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize)
-	tree_entered.connect(_resize)
+	item_rect_changed.connect(_resize_children)
+	tree_entered.connect(_resize_children)
 	
 	_popup = WPopup.new()
 	add_child(_popup)
@@ -188,11 +200,13 @@ func _init() -> void:
 	_button.focus_mode = FOCUS_NONE
 
 
-func _resize() -> void:
-	custom_minimum_size = _popup.custom_minimum_size + \
-		_container_buttons.get_combined_minimum_size()
-	
+func _resize_children() -> void:
 	_popup.size = size
+
+
+func _calculate_widget_minimum_size() -> Vector2:
+	var widget_minimum_size: Vector2 = _popup.get_combined_minimum_size()
+	return widget_minimum_size
 
 
 func _on_popup_popuped() -> void:

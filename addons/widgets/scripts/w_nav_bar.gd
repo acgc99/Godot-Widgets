@@ -1,6 +1,6 @@
 @tool
 class_name WNavBar
-extends Control
+extends "res://addons/widgets/scripts/w_control.gd"
 ## Widget with two [WIconButton] and a [Label] in the middle. Buttons are pushed
 ## to left/right sides. Intended to be placed at the top/bottom of the scene
 ## (left/right buttons), but it can also be placed on sides if rotated.
@@ -23,6 +23,7 @@ enum {
 	set(text_):
 		text = text_
 		_label.text = text
+		_set_custom_minimum_size(get_combined_minimum_size())
 @export_enum(
 	"Left",
 	"Center",
@@ -40,6 +41,7 @@ var alignment: int:
 		left_texture = left_texture_
 		_button_left.texture = left_texture
 		_set_button_left_custom_minimum_size()
+		_set_custom_minimum_size(get_combined_minimum_size())
 ## If [code]true[/code], left [WIconButton] texture is flipped horizontally.
 @export var left_flip_h: bool:
 	set(left_flip_h_):
@@ -63,6 +65,7 @@ var alignment: int:
 		right_texture = right_texture_
 		_button_right.texture = right_texture
 		_set_button_right_custom_minimum_size()
+		_set_custom_minimum_size(get_combined_minimum_size())
 ## If [code]true[/code], right [WIconButton] texture is flipped horizontally.
 @export var right_flip_h: bool:
 	set(right_flip_h_):
@@ -93,8 +96,8 @@ var _button_right: WIconButton
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize)
-	tree_entered.connect(_resize)
+	item_rect_changed.connect(_resize_children)
+	tree_entered.connect(_resize_children)
 	
 	_container_panel = PanelContainer.new()
 	add_child(_container_panel, false, Node.INTERNAL_MODE_BACK)
@@ -120,32 +123,30 @@ func _init() -> void:
 func _ready() -> void:
 	_set_button_left_custom_minimum_size()
 	_set_button_right_custom_minimum_size()
+	_set_custom_minimum_size(get_combined_minimum_size())
 
 
-func _resize() -> void:
-	custom_minimum_size = \
-		_button_left.get_combined_minimum_size() + \
-		_button_right.get_combined_minimum_size() + \
-		_label.get_combined_minimum_size() + \
-		Vector2(2*_container_blb.get_theme_constant("separation"), 0)
-	
+func _resize_children() -> void:
 	_container_panel.size = size
+
+
+func _calculate_widget_minimum_size() -> Vector2:
+	var widget_minimum_size: Vector2 = _container_blb.get_combined_minimum_size()
+	return widget_minimum_size
 
 
 func _set_button_left_custom_minimum_size() -> void:
 	if left_texture == null:
 		_button_left.custom_minimum_size.x = 0
 	else:
-		_button_left.custom_minimum_size.x = _label.size.y
-	_resize()
+		_button_left.custom_minimum_size.x = _container_panel.size.y
 
 
 func _set_button_right_custom_minimum_size() -> void:
 	if right_texture == null:
 		_button_right.custom_minimum_size.x = 0
 	else:
-		_button_right.custom_minimum_size.x = _label.size.y
-	_resize()
+		_button_right.custom_minimum_size.x = _container_panel.size.y
 
 
 func _on_button_left_pressed() -> void:

@@ -111,8 +111,8 @@ var _texture: TextureRect
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize)
-	tree_entered.connect(_resize)
+	item_rect_changed.connect(_resize_children)
+	tree_entered.connect(_resize_children)
 	
 	_container_clipping = WRoundClippingContainer.new()
 	add_child(_container_clipping, false, Node.INTERNAL_MODE_BACK)
@@ -122,5 +122,5 @@ func _init() -> void:
 	_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 
 
-func _resize() -> void:
+func _resize_children() -> void:
 	_container_clipping.size = size

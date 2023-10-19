@@ -10,7 +10,8 @@ signal navbar_left_button_pressed
 ## Emitted when the [WNavBar] right button is pressed.
 signal navbar_right_button_pressed
 
-## Height of the [WNavBar].
+## Height of the [WNavBar]. It is only applied if the minimum height of the
+## [WNavBar] is smaller than this parameter.
 @export var navbar_height: int:
 	set(navbar_height_):
 		navbar_height = navbar_height_

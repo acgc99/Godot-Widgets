@@ -1,6 +1,6 @@
 @tool
 class_name WCard
-extends BaseButton
+extends "res://addons/widgets/scripts/w_base_button.gd"
 ## Widget button similar to [WTextureRounded] but with a [WIconLabelIcon] for
 ## text and icons.
 
@@ -94,6 +94,8 @@ var stretch_mode: int:
 	set(text_):
 		text = text_
 		_ili.text = text
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_ili.force_minimum_size()
 @export_enum(
 	"Left",
 	"Center",
@@ -115,6 +117,8 @@ var alignment: int:
 	set(left_texture_):
 		left_texture = left_texture_
 		_ili.left_texture = left_texture_
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_ili.force_minimum_size()
 ## If [code]true[/code], left icon texture is flipped horizontally.
 @export var left_flip_h: bool:
 	set(left_flip_h_):
@@ -131,6 +135,8 @@ var alignment: int:
 	set(right_texture_):
 		right_texture = right_texture_
 		_ili.right_texture = right_texture
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_ili.force_minimum_size()
 ## If [code]true[/code], right icon texture is flipped horizontally.
 @export var right_flip_h: bool:
 	set(right_flip_h_):
@@ -147,11 +153,15 @@ var alignment: int:
 	set(margin_top_):
 		margin_top = margin_top_
 		_ili.margin_top = margin_top
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_ili.force_minimum_size()
 ## Bottom margin.
 @export_range(0, 0, 1, "or_greater") var margin_bottom: int:
 	set(margin_bottom_):
 		margin_bottom = margin_bottom_
 		_ili.margin_bottom = margin_bottom
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_ili.force_minimum_size()
 @export_category("WRoundClippingContainer")
 ## This sets the number of vertices used for each corner. Higher values result
 ## in rounder corners but take more processing power to compute. When choosing
@@ -203,8 +213,8 @@ var _ili: WIconLabelIcon
 
 
 func _init() -> void:
-	item_rect_changed.connect(_resize)
-	tree_entered.connect(_resize)
+	item_rect_changed.connect(_resize_children)
+	tree_entered.connect(_resize_children)
 	
 	_container_clipping = WRoundClippingContainer.new()
 	add_child(_container_clipping, false, Node.INTERNAL_MODE_BACK)
@@ -219,10 +229,13 @@ func _init() -> void:
 	_ili.size_flags_vertical = Control.SIZE_SHRINK_END
 
 
-func _resize() -> void:
-	custom_minimum_size = _ili.get_combined_minimum_size()
-	
+func _resize_children() -> void:
 	_container_clipping.size = size
+
+
+func _calculate_widget_minimum_size() -> Vector2:
+	var widget_minimum_size: Vector2 = _ili.get_combined_minimum_size()
+	return widget_minimum_size
 
 
 func _align_elements() -> void:

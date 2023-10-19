@@ -1,5 +1,7 @@
 # Contributing
 
+inherit only for ones that require controlling minimum size (have a widget_m_s)
+
 ## New ideas
 
 Open an issue so you can tell why it is important and how others could benefit from that idea.
@@ -8,8 +10,12 @@ Open an issue so you can tell why it is important and how others could benefit f
 
 Things to take care of:
 - Order of calling: `_init > getters > setters > _enter_tree > _ready`.
+- `Control.get_combined_minimum_size()` gives the real minimum size (considers children).
 
 Rules for new widgets (open issue if not applied to existing ones):
+- Inheritance:
+  - If a widget would inherit from `Control`, it must inherit from `WControl` (`extends "res://addons/widgets/scripts/w_control.gd"`).
+  - If a widget would inherit from `BaseButton`, it must inherit from `WBaseButton` (`extends "res://addons/widgets/scripts/w_base_button.gd"`).
 - When a widget uses another widget, export its properties (only customizable ones) with `@export_category`. In the case of widgets like `WNavBar`, this is not possible, because it uses two `WIconButton`... so in that cases, use `@export_group` specifying which widget is under that group.
 - Naming conventions:
   - Variable naming convention. In general, use `<name>_<adjectives>`, e.g.: `button_left`. For variables exposed on the Inspector, use human readable names, e.g.: `left_texture` for `button_left` texture (in this case, since there is a "left", it would be required to use a `@export_group` or `@export_subgroup` with prefix `left`).
