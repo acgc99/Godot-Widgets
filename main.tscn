@@ -148,6 +148,7 @@ script = ExtResource("5_arsm4")
 up_texture = ExtResource("11_blpd4")
 down_texture = ExtResource("12_yu17d")
 text = "Value:"
+filter_mode = 2
 max = 10.0
 min = 0.0
 initial = 5.0

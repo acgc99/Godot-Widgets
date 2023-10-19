@@ -12,6 +12,15 @@ enum {
 	OVERRUN_TRIM_ELLIPSIS,
 	OVERRUN_TRIM_WORD_ELLIPSIS
 }
+## Enum correspoding to [member filter_mode].
+enum {
+	FILTER_NONE,
+	FILTER_DIGITLESS,
+	FILTER_INTEGER_POSITIVE,
+	FILTER_INTEGER,
+	FILTER_FLOAT_POSITIVE,
+	FILTER_FLOAT
+}
 
 ## Step added/subtracted when buttons are pressed.
 @export_range(0.0, 0.0, 1.0, "or_greater") var step: float = 1.0
@@ -86,6 +95,35 @@ var text_overrun_behavior: int:
 		text_overrun_behavior = text_overrun_behavior_
 		_label.text_overrun_behavior = text_overrun_behavior
 @export_category("WFilteredLineEdit")
+@export_enum(
+	"None",
+	"Digitless",
+	"Positive Integer",
+	"Integer",
+	"Positive Float",
+	"Float"
+)
+## Filter modes.
+## [param None]. No filter.
+## [br]
+## [br]
+## [param Digitless]. No digits, 0-9.
+## [br]
+## [br]
+## [param Positive Integer]. Positive or zero integer.
+## [br]
+## [br]
+## [param Integer]. Integer.
+## [br]
+## [br]
+## [param Positive float]. Positive float.
+## [br]
+## [br]
+## [param Float]. Float.
+var filter_mode: int:
+	set(filter_mode_):
+		filter_mode = filter_mode_
+		_filtered_line_edit.filter_mode = filter_mode
 ## Maximum value.
 @export var max: float = INF:
 	set(max_):
@@ -138,7 +176,6 @@ func _init() -> void:
 	
 	_filtered_line_edit = WFilteredLineEdit.new()
 	_container_input.add_child(_filtered_line_edit)
-	_filtered_line_edit.filter_mode = WFilteredLineEdit.FILTER_FLOAT
 	_filtered_line_edit.flat = true
 	_filtered_line_edit.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
 	_filtered_line_edit.alignment = HORIZONTAL_ALIGNMENT_RIGHT

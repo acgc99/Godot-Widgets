@@ -22,13 +22,24 @@ enum {
 	"Integer",
 	"Positive Float",
 	"Float"
-) ## Filter modes:
-## [param None] (no filter),
-## [param Digitless] (no digits, 0-9),
-## [param Positive Integer] (positive or zero integer),
-## [param Integer] (integer),
-## [param Positive float] (positive float) and
-## [param Float] (float).
+)
+## Filter modes:
+## [param None]. No filter.
+## [br]
+## [br]
+## [param Digitless]. No digits, 0-9.
+## [br]
+## [br]
+## [param Positive Integer]. Positive or zero integer.
+## [br]
+## [br]
+## [param Integer]. Integer.
+## [br]
+## [br]
+## [param Positive float]. Positive float.
+## [br]
+## [br]
+## [param Float]. Float.
 var filter_mode: int:
 	set(filter_mode_):
 		filter_mode = filter_mode_
@@ -99,6 +110,7 @@ func _init() -> void:
 	_text_length_old = _text_old.length()
 	_line_count_old = get_line_count()
 	text_changed.connect(_on_text_changed)
+	_filter = _filter_none
 
 
 ## Clamps the numeric value of the text if [param filter_mode] is a numeric mode.
