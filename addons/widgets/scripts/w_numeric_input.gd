@@ -24,22 +24,12 @@ enum {
 @export_range(0.0, 0.0, 1.0, "or_greater") var step: float = 1.0
 @export_group("Up Button", "up")
 ## Up [WIconButton] texture.
-@export var up_texture: Texture2D:
-	set(up_texture_):
-		up_texture = up_texture_
-		_button_up.texture = up_texture
+@export var up_icon: Texture2D:
+	set(up_icon_):
+		up_icon = up_icon_
+		_button_up.icon = up_icon
 		_set_button_up_custom_minimum_size()
 		_set_custom_minimum_size(get_combined_minimum_size())
-## If [code]true[/code], up [WIconButton] texture is flipped horizontally.
-@export var up_flip_h: bool:
-	set(up_flip_h_):
-		up_flip_h = up_flip_h_
-		_button_up.flip_h = up_flip_h
-## If [code]true[/code], left [WIconButton] texture is flipped vertically.
-@export var up_flip_v: bool:
-	set(up_flip_v_):
-		up_flip_v = up_flip_v_
-		_button_up.flip_v = up_flip_v
 ## If [code]true[/code], up [WIconButton] is in disabled state and
 ## can't be clicked or toggled.
 @export var up_disabled: bool:
@@ -48,28 +38,51 @@ enum {
 		_button_up.disabled = up_disabled
 @export_group("Down Button", "down")
 ## Down [WIconButton] texture.
-@export var down_texture: Texture2D:
-	set(down_texture_):
-		down_texture = down_texture_
-		_button_down.texture = down_texture
+@export var down_icon: Texture2D:
+	set(down_icon_):
+		down_icon = down_icon_
+		_button_down.icon = down_icon
 		_set_button_down_custom_minimum_size()
 		_set_custom_minimum_size(get_combined_minimum_size())
-## If [code]true[/code], down [WIconButton] texture is flipped horizontally.
-@export var down_flip_h: bool:
-	set(down_flip_h_):
-		down_flip_h = down_flip_h_
-		_button_down.flip_h = down_flip_h
-## If [code]true[/code], down [WIconButton] texture is flipped vertically.
-@export var down_flip_v: bool:
-	set(down_flip_v_):
-		down_flip_v = down_flip_v_
-		_button_down.flip_v = down_flip_v
 ## If [code]true[/code], down [WIconButton] is in disabled state and
 ## can't be clicked or toggled.
 @export var down_disabled: bool:
 	set(down_disabled_):
 		down_disabled = down_disabled_
 		_button_down.disabled = down_disabled
+@export_group("Theme Type Variation", "ttv")
+## [param theme_type_variation] of the background panel.
+## Base type: [PanelContainer].
+@export var ttv_panel: String:
+	set(ttv_panel_):
+		ttv_panel = ttv_panel_
+		_container_panel.theme_type_variation = ttv_panel
+## [param theme_type_variation] of the margins.
+## Base type: [MarginContainer].
+@export var ttv_maring: String:
+	set(ttv_maring_):
+		ttv_maring = ttv_maring_
+		_container_margin.theme_type_variation = ttv_maring
+## [param theme_type_variation] of the label, line edit and buttons container.
+## Base type: [HBoxContainer].
+@export var ttv_separation: String:
+	set(ttv_separation_):
+		ttv_separation = ttv_separation_
+		_container_input.theme_type_variation = ttv_separation
+## [param theme_type_variation] of the up button.
+## Base type: [Button].
+@export var ttv_up_button: String:
+	set(ttv_up_button_):
+		ttv_up_button = ttv_up_button_
+		_button_up.theme_type_variation = ttv_up_button
+		_set_custom_minimum_size(get_combined_minimum_size())
+## [param theme_type_variation] of the down button.
+## Base type: [Button].
+@export var ttv_down_button: String:
+	set(ttv_down_button_):
+		ttv_down_button = ttv_down_button_
+		_button_down.theme_type_variation = ttv_down_button
+		_set_custom_minimum_size(get_combined_minimum_size())
 @export_category("Label")
 ## Text.
 @export var text: String:
@@ -92,6 +105,13 @@ var text_overrun_behavior: int:
 	set(text_overrun_behavior_):
 		text_overrun_behavior = text_overrun_behavior_
 		_label.text_overrun_behavior = text_overrun_behavior
+@export_group("Theme Type Variation Label", "ttv")
+## [param theme_type_variation] of the label.
+## Base type: [Label].
+@export var ttv_label: String:
+	set(ttv_label_):
+		ttv_label = ttv_label_
+		_label.theme_type_variation = ttv_label
 @export_category("WFilteredLineEdit")
 @export_enum(
 	"Positive Integer",
@@ -130,6 +150,13 @@ var filter_mode: int:
 		initial = initial_
 		_filtered_line_edit.text = str(initial)
 		_filtered_line_edit.clamp_text()
+@export_group("Theme Type Variation WFIlteredLineEdit", "ttv")
+## [param theme_type_variation] of the input field.
+## Base type: [LineEdit].
+@export var ttv_line_edit: String:
+	set(ttv_line_edit_):
+		ttv_line_edit = ttv_line_edit_
+		_filtered_line_edit.theme_type_variation = ttv_line_edit
 
 # Main widget container.
 var _container_panel: PanelContainer
@@ -197,14 +224,14 @@ func _calculate_widget_minimum_size() -> Vector2:
 
 
 func _set_button_up_custom_minimum_size() -> void:
-	if up_texture == null:
+	if up_icon == null:
 		_button_up.custom_minimum_size.x = 0
 	else:
 		_button_up.custom_minimum_size.x = _label.size.y
 
 
 func _set_button_down_custom_minimum_size() -> void:
-	if down_texture == null:
+	if down_icon == null:
 		_button_down.custom_minimum_size.x = 0
 	else:
 		_button_down.custom_minimum_size.x = _label.size.y

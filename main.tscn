@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_e6ig7"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_page_container.gd" id="2_kyxw3"]
+[ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://rsc/png_icons/arrow-left-bold.png" id="3_kq0jf"]
+[ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://rsc/png_icons/home.png" id="4_x4fug"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_numeric_input.gd" id="5_arsm4"]
-[ext_resource type="Texture2D" uid="uid://b7lc6qyouyeo" path="res://assets/png_icons/arrow-left-bold.png" id="6_xvjs4"]
-[ext_resource type="Texture2D" uid="uid://bf3fdhw1j03dq" path="res://assets/png_icons/home.png" id="7_q4q5h"]
-[ext_resource type="Texture2D" uid="uid://bt7uf41ersuf2" path="res://assets/png_icons/star.png" id="8_c2b2g"]
-[ext_resource type="Texture2D" uid="uid://63ariwty7am3" path="res://assets/images/nikola-majksner-hXNGeAFOgT4-unsplash.jpg" id="9_tksgc"]
-[ext_resource type="Script" path="res://addons/widgets/scripts/w_card.gd" id="10_8kjpv"]
-[ext_resource type="Texture2D" uid="uid://bh06vd6w24v78" path="res://assets/png_icons/arrow-up-bold.png" id="11_blpd4"]
+[ext_resource type="Script" path="res://addons/widgets/scripts/w_card.gd" id="5_edgc6"]
+[ext_resource type="Texture2D" uid="uid://63ariwty7am3" path="res://rsc/images/nikola-majksner-hXNGeAFOgT4-unsplash.jpg" id="6_eddgn"]
+[ext_resource type="Texture2D" uid="uid://bt7uf41ersuf2" path="res://rsc/png_icons/star.png" id="7_34xhs"]
+[ext_resource type="Texture2D" uid="uid://bh06vd6w24v78" path="res://rsc/png_icons/arrow-up-bold.png" id="10_dkper"]
+[ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://rsc/png_icons/arrow-down-bold.png" id="11_tr68c"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_texture_rounded.gd" id="12_iesyr"]
-[ext_resource type="Texture2D" uid="uid://bp0pc1x80gf1g" path="res://assets/png_icons/arrow-down-bold.png" id="12_yu17d"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_line_edit.gd" id="13_nvvi0"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_filtered_text_edit.gd" id="14_sa3kl"]
 [ext_resource type="Script" path="res://addons/widgets/scripts/w_popup_b2.gd" id="15_820td"]
@@ -38,8 +38,13 @@ script = ExtResource("2_kyxw3")
 navbar_height = 75
 text = "Title"
 navbar_alignment = 1
-left_texture = ExtResource("6_xvjs4")
-right_texture = ExtResource("7_q4q5h")
+left_icon = ExtResource("3_kq0jf")
+right_icon = ExtResource("4_x4fug")
+ttv_panel = "WNavBar_Background"
+ttv_separation = "WNavBar_Separation"
+ttv_label = "WNavBar_Label"
+ttv_left_button = "WIconButton_Default"
+ttv_right_button = "WIconButton_Default"
 
 [node name="Contents" type="ColorRect" parent="WPageContainer"]
 layout_mode = 2
@@ -60,98 +65,45 @@ theme_override_constants/margin_bottom = 50
 [node name="VBoxContainer" type="VBoxContainer" parent="WPageContainer/Contents/MarginContainer"]
 layout_mode = 2
 
+[node name="WCard" type="Control" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(179, 300)
+layout_mode = 2
+script = ExtResource("5_edgc6")
+ttv_button = "WPopup_Button1"
+texture = ExtResource("6_eddgn")
+text = "Popup WPopup"
+alignment = 1
+left_texture = ExtResource("7_34xhs")
+right_texture = ExtResource("7_34xhs")
+ttv_panel = "WRoundClipping_Panel"
+
 [node name="WTextureRounded" type="Control" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 script = ExtResource("12_iesyr")
-texture = ExtResource("9_tksgc")
+texture = ExtResource("6_eddgn")
 stretch_mode = 6
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-
-[node name="WCard" type="BaseButton" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-editor_description = ""
-visible = true
-modulate = Color(1, 1, 1, 1)
-self_modulate = Color(1, 1, 1, 1)
-show_behind_parent = false
-top_level = false
-clip_children = 0
-light_mask = 1
-visibility_layer = 1
-z_index = 0
-z_as_relative = true
-y_sort_enabled = false
-texture_filter = 0
-texture_repeat = 0
-material = null
-use_parent_material = false
-clip_contents = false
-custom_minimum_size = Vector2(219, 300)
-layout_direction = 0
-layout_mode = 2
-size_flags_horizontal = 1
-size_flags_vertical = 1
-size_flags_stretch_ratio = 1.0
-auto_translate = true
-localize_numeral_system = true
-tooltip_text = ""
-focus_neighbor_left = NodePath("")
-focus_neighbor_top = NodePath("")
-focus_neighbor_right = NodePath("")
-focus_neighbor_bottom = NodePath("")
-focus_next = NodePath("")
-focus_previous = NodePath("")
-focus_mode = 2
-mouse_filter = 0
-mouse_force_pass_scroll_events = true
-mouse_default_cursor_shape = 0
-theme = null
-theme_type_variation = &""
-disabled = false
-toggle_mode = false
-button_pressed = false
-action_mode = 1
-button_mask = 1
-keep_pressed_outside = false
-button_group = null
-shortcut = null
-shortcut_feedback = true
-shortcut_in_tooltip = true
-script = ExtResource("10_8kjpv")
-texture = ExtResource("9_tksgc")
-stretch_mode = 6
-text = "Popup WPopup"
-alignment = 1
-left_texture = ExtResource("8_c2b2g")
-right_texture = ExtResource("8_c2b2g")
-margin_top = 10
-margin_bottom = 10
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+ttv_panel = "WRoundClipping_Panel"
 
 [node name="WNumericInput" type="PanelContainer" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(179, 31)
+custom_minimum_size = Vector2(201, 41)
 layout_mode = 2
 size_flags_horizontal = 4
 script = ExtResource("5_arsm4")
-up_texture = ExtResource("11_blpd4")
-down_texture = ExtResource("12_yu17d")
+up_icon = ExtResource("10_dkper")
+down_icon = ExtResource("11_tr68c")
+ttv_panel = "WPopup_Panel"
+ttv_maring = "WNumericInput_Margin"
+ttv_separation = "WNumericInput_Separation"
+ttv_up_button = "WIconButton_Default"
+ttv_down_button = "WIconButton_Default"
 text = "Value:"
+ttv_label = "WNumericInput_Label"
 filter_mode = 3
 max = 10.0
 min = 0.0
 initial = 5.0
+ttv_line_edit = "WNumericInput_LineEdit"
 
 [node name="ButtonOne" type="Button" parent="WPageContainer/Contents/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
@@ -183,28 +135,30 @@ filter_mode = 5
 
 [node name="WPopup" type="Control" parent="."]
 visible = false
-custom_minimum_size = Vector2(282, 1260)
+custom_minimum_size = Vector2(460, 2152)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -34.0
+offset_right = 1.0
+offset_bottom = 34.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("16_yn2wa")
 title_text = "WPopup"
 message_text = "This is a simple popup. Press outside to dismiss."
-external_margin_left = 50
-external_margin_top = 500
-external_margin_right = 50
-external_margin_bottom = 500
-internal_margin_left = 20
-internal_margin_top = 20
-internal_margin_right = 20
-internal_margin_bottom = 20
+ttv_background = "WPopup_Background"
+ttv_panel = "WPopup_Panel"
+ttv_title = "WPopup_Title"
+ttv_message = "WPopup_Message"
+ttv_separation = "WPopup_Separation"
+ttv_external_margin = "WPopup_ExternalMargin"
+ttv_internal_margin = "WPopup_InternalMargin"
 
 [node name="WPopupB1" type="Control" parent="."]
 visible = false
-custom_minimum_size = Vector2(300, 1295)
+custom_minimum_size = Vector2(496, 2283)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -213,21 +167,21 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("15_yk7q0")
 button_text = "Ok"
+ttv_button = "WPopup_Button1"
 title_text = "WPopup1"
 message_text = "This is a popup with two button."
-external_margin_left = 50
-external_margin_top = 500
-external_margin_right = 50
-external_margin_bottom = 500
-internal_margin_left = 20
-internal_margin_top = 20
-internal_margin_right = 20
-internal_margin_bottom = 20
+ttv_background = "WPopup_Background"
+ttv_panel = "WPopup_Panel"
+ttv_title = "WPopup_Title"
+ttv_message = "WPopup_Message"
+ttv_separation = "WPopup_Separation"
+ttv_external_margin = "WPopup_ExternalMargin"
+ttv_internal_margin = "WPopup_InternalMargin"
 sizing = 2
 
 [node name="WPopupB2" type="Control" parent="."]
 visible = false
-custom_minimum_size = Vector2(317, 1295)
+custom_minimum_size = Vector2(436, 1383)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -237,21 +191,22 @@ grow_vertical = 2
 script = ExtResource("15_820td")
 left_button_text = "Left"
 right_button_text = "Right"
+ttv_left_button = "WPopup_Button1"
+ttv_right_button = "WPopup_Button2"
 title_text = "WPopup2"
 message_text = "This is a popup with two button."
-external_margin_left = 50
-external_margin_top = 500
-external_margin_right = 50
-external_margin_bottom = 500
-internal_margin_left = 20
-internal_margin_top = 20
-internal_margin_right = 20
-internal_margin_bottom = 20
+ttv_background = "WPopup_Background"
+ttv_panel = "WPopup_Panel"
+ttv_title = "WPopup_Title"
+ttv_message = "WPopup_Message"
+ttv_separation = "WPopup_Separation"
+ttv_external_margin = "WPopup_ExternalMargin"
+ttv_internal_margin = "WPopup_InternalMargin"
 sizing = 2
+ttv_buttons_separation = "WNavBar_Separation"
 
 [connection signal="navbar_left_button_pressed" from="WPageContainer" to="." method="_on_w_page_container_navbar_left_button_pressed"]
 [connection signal="navbar_right_button_pressed" from="WPageContainer" to="." method="_on_w_page_container_navbar_right_button_pressed"]
-[connection signal="pressed" from="WPageContainer/Contents/MarginContainer/VBoxContainer/WCard" to="." method="_on_w_card_pressed"]
 [connection signal="pressed" from="WPageContainer/Contents/MarginContainer/VBoxContainer/ButtonOne" to="." method="_on_button_one_pressed"]
 [connection signal="pressed" from="WPageContainer/Contents/MarginContainer/VBoxContainer/ButtonTwo" to="." method="_on_button_two_pressed"]
 [connection signal="background_pressed" from="WPopup" to="." method="_dismiss_popup"]

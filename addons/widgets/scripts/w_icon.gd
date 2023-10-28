@@ -37,5 +37,12 @@ func _init() -> void:
 	_texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 
 
+func _set(property: StringName, value: Variant) -> bool:
+	if property == "mouse_filter":
+		_texture.mouse_filter = value
+		return false
+	return false
+
+
 func _resize_children() -> void:
 	_texture.size = size
