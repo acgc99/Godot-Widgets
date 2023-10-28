@@ -37,12 +37,6 @@ var buttons_focus_mode: int:
 		_button_background.focus_mode = buttons_focus_mode
 ## Popup/dismiss animation duration. Not intended to be changed during runtime.
 @export_range(0, 0, 0.25, "or_greater") var animation_lenght: float = 1
-## Separation between the title, message and buttons.
-@export_range(0, 0, 1, "or_greater") var separation: int = 4:
-	set(separation_):
-		separation = separation_
-		_container_tmb.add_theme_constant_override("separation", separation)
-		_set_custom_minimum_size(get_combined_minimum_size())
 @export_group("Title", "title")
 ## Popup title.
 @export var title_text: String:
@@ -77,79 +71,55 @@ var message_alignment: int:
 	set(message_alignment_):
 		message_alignment = message_alignment_
 		_label_message.horizontal_alignment = message_alignment
-@export_group("External Margin", "external_margin")
-## Left external margin.
-@export_range(0, 0, 1, "or_greater") var external_margin_left: int:
-	set(external_margin_left_):
-		external_margin_left = external_margin_left_
-		_container_margin_external.add_theme_constant_override(
-			"margin_left",
-			external_margin_left
-		)
+@export_group("Theme Type Variation", "ttv")
+## [param theme_type_variation] of the background button.
+## Base type: [Button].
+@export var ttv_background: String:
+	set(ttv_background_):
+		ttv_background = ttv_background_
+		_button_background.theme_type_variation = ttv_background
 		_set_custom_minimum_size(get_combined_minimum_size())
-## Top external margin.
-@export_range(0, 0, 1, "or_greater") var external_margin_top: int:
-	set(external_margin_top_):
-		external_margin_top = external_margin_top_
-		_container_margin_external.add_theme_constant_override(
-			"margin_top",
-			external_margin_top
-		)
+## [param theme_type_variation] of the popup panel.
+## Base type: [PanelContainer].
+@export var ttv_panel: String:
+	set(ttv_panel_):
+		ttv_panel = ttv_panel_
+		_container_panel.theme_type_variation = ttv_panel
 		_set_custom_minimum_size(get_combined_minimum_size())
-## Right external margin.
-@export_range(0, 0, 1, "or_greater") var external_margin_right: int:
-	set(external_margin_right_):
-		external_margin_right = external_margin_right_
-		_container_margin_external.add_theme_constant_override(
-			"margin_right",
-			external_margin_right
-		)
+## [param theme_type_variation] of the title.
+## Base type: [Label].
+@export var ttv_title: String:
+	set(ttv_title_):
+		ttv_title = ttv_title_
+		_label_title.theme_type_variation = ttv_title
 		_set_custom_minimum_size(get_combined_minimum_size())
-## Bottom external margin.
-@export_range(0, 0, 1, "or_greater") var external_margin_bottom: int:
-	set(external_margin_bottom_):
-		external_margin_bottom = external_margin_bottom_
-		_container_margin_external.add_theme_constant_override(
-			"margin_bottom",
-			external_margin_bottom
-		)
+## [param theme_type_variation] of the message.
+## Base type: [Label].
+@export var ttv_message: String:
+	set(ttv_message_):
+		ttv_message = ttv_message_
+		_label_message.theme_type_variation = ttv_message
 		_set_custom_minimum_size(get_combined_minimum_size())
-@export_group("Internal Margin", "internal_margin")
-## Left internal margin.
-@export_range(0, 0, 1, "or_greater") var internal_margin_left: int:
-	set(internal_margin_left_):
-		internal_margin_left = internal_margin_left_
-		_container_margin_internal.add_theme_constant_override(
-			"margin_left",
-			internal_margin_left
-		)
+## [param theme_type_variation] of the title, message and buttons container.
+## Base type: [VBoxContainer].
+@export var ttv_separation: String:
+	set(ttv_separation_):
+		ttv_separation = ttv_separation_
+		_container_tmb.theme_type_variation = ttv_separation
 		_set_custom_minimum_size(get_combined_minimum_size())
-## Top internal margin.
-@export_range(0, 0, 1, "or_greater") var internal_margin_top: int:
-	set(internal_margin_top_):
-		internal_margin_top = internal_margin_top_
-		_container_margin_internal.add_theme_constant_override(
-			"margin_top",
-			internal_margin_top
-		)
+## [param theme_type_variation] of the external margins.
+## Base type: [MarginContainer].
+@export var ttv_external_margin: String:
+	set(ttv_external_margin_):
+		ttv_external_margin = ttv_external_margin_
+		_container_margin_external.theme_type_variation = ttv_external_margin
 		_set_custom_minimum_size(get_combined_minimum_size())
-## Right internal margin.
-@export_range(0, 0, 1, "or_greater") var internal_margin_right: int:
-	set(internal_margin_right_):
-		internal_margin_right = internal_margin_right_
-		_container_margin_internal.add_theme_constant_override(
-			"margin_right",
-			internal_margin_right
-		)
-		_set_custom_minimum_size(get_combined_minimum_size())
-## Bottom internal margin.
-@export_range(0, 0, 1, "or_greater") var internal_margin_bottom: int:
-	set(internal_margin_bottom_):
-		internal_margin_bottom = internal_margin_bottom_
-		_container_margin_internal.add_theme_constant_override(
-			"margin_bottom",
-			internal_margin_bottom
-		)
+## [param theme_type_variation] of the internal margins.
+## Base type: [MarginContainer].
+@export var ttv_internal_margin: String:
+	set(ttv_internal_margin_):
+		ttv_internal_margin = ttv_internal_margin_
+		_container_margin_internal.theme_type_variation = ttv_internal_margin
 		_set_custom_minimum_size(get_combined_minimum_size())
 
 # Main widget container. Background [Button].

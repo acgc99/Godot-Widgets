@@ -36,22 +36,12 @@ var alignment: int:
 		_label.horizontal_alignment = alignment
 @export_group("Left button", "left")
 ## Left [WIconButton] texture.
-@export var left_texture: Texture2D:
-	set(left_texture_):
-		left_texture = left_texture_
-		_button_left.texture = left_texture
+@export var left_icon: Texture2D:
+	set(left_icon_):
+		left_icon = left_icon_
+		_button_left.icon = left_icon
 		_set_button_left_custom_minimum_size()
 		_set_custom_minimum_size(get_combined_minimum_size())
-## If [code]true[/code], left [WIconButton] texture is flipped horizontally.
-@export var left_flip_h: bool:
-	set(left_flip_h_):
-		left_flip_h = left_flip_h_
-		_button_left.flip_h = left_flip_h
-## If [code]true[/code], left [WIconButton] texture is flipped vertically.
-@export var left_flip_v: bool:
-	set(left_flip_v_):
-		left_flip_v = left_flip_v_
-		_button_left.flip_v = left_flip_v
 ## If [code]true[/code], left [WIconButton] is in disabled state and
 ## can't be clicked or toggled.
 @export var left_disabled: bool:
@@ -60,28 +50,53 @@ var alignment: int:
 		_button_left.disabled = left_disabled
 @export_group("Right button", "right")
 ## Right [WIconButton] texture.
-@export var right_texture: Texture2D:
-	set(right_texture_):
-		right_texture = right_texture_
-		_button_right.texture = right_texture
+@export var right_icon: Texture2D:
+	set(right_icon_):
+		right_icon = right_icon_
+		_button_right.icon = right_icon
 		_set_button_right_custom_minimum_size()
 		_set_custom_minimum_size(get_combined_minimum_size())
-## If [code]true[/code], right [WIconButton] texture is flipped horizontally.
-@export var right_flip_h: bool:
-	set(right_flip_h_):
-		right_flip_h = right_flip_h_
-		_button_right.flip_h = right_flip_h
-## If [code]true[/code], right [WIconButton] texture is flipped vertically.
-@export var right_flip_v: bool:
-	set(right_flip_v_):
-		right_flip_v = right_flip_v_
-		_button_right.flip_v = right_flip_v
 ## If [code]true[/code], right [WIconButton] is in disabled state and
 ## can't be clicked or toggled.
 @export var right_disabled: bool:
 	set(right_disabled_):
 		right_disabled = right_disabled_
 		_button_right.disabled = right_disabled
+@export_group("Theme Type Variation", "ttv")
+## [param theme_type_variation] of background panel.
+## Base type: [PanelContainer].
+@export var ttv_panel: String:
+	set(ttv_panel_):
+		ttv_panel = ttv_panel_
+		_container_panel.theme_type_variation = ttv_panel
+## [param theme_type_variation] of buttons and label container.
+## Base type: [HBoxContainer].
+@export var ttv_separation: String:
+	set(ttv_separation_):
+		ttv_separation = ttv_separation_
+		_container_blb.theme_type_variation = ttv_separation
+		_set_custom_minimum_size(get_combined_minimum_size())
+## [param theme_type_variation] of the label.
+## Base type: [Label].
+@export var ttv_label: String:
+	set(ttv_label_):
+		ttv_label = ttv_label_
+		_label.theme_type_variation = ttv_label
+		_set_custom_minimum_size(get_combined_minimum_size())
+## [param theme_type_variation] of the left button.
+## Base type: [Button].
+@export var ttv_left_button: String:
+	set(ttv_left_button_):
+		ttv_left_button = ttv_left_button_
+		_button_left.theme_type_variation = ttv_left_button
+		_set_custom_minimum_size(get_combined_minimum_size())
+## [param theme_type_variation] of the right button.
+## Base type: [Button].
+@export var ttv_right_button: String:
+	set(ttv_right_button_):
+		ttv_right_button = ttv_right_button_
+		_button_right.theme_type_variation = ttv_right_button
+		_set_custom_minimum_size(get_combined_minimum_size())
 
 # Main widget container.
 var _container_panel: PanelContainer
@@ -136,14 +151,14 @@ func _calculate_widget_minimum_size() -> Vector2:
 
 
 func _set_button_left_custom_minimum_size() -> void:
-	if left_texture == null:
+	if left_icon == null:
 		_button_left.custom_minimum_size.x = 0
 	else:
 		_button_left.custom_minimum_size.x = _container_panel.size.y
 
 
 func _set_button_right_custom_minimum_size() -> void:
-	if right_texture == null:
+	if right_icon == null:
 		_button_right.custom_minimum_size.x = 0
 	else:
 		_button_right.custom_minimum_size.x = _container_panel.size.y

@@ -32,12 +32,6 @@ var alignment: int:
 			_container_ili.size_flags_horizontal = SIZE_SHRINK_CENTER
 		else:
 			_container_ili.size_flags_horizontal = SIZE_SHRINK_END
-## Separation between the text and the icons.
-@export_range(0, 0, 1, "or_greater") var separation: int = 4:
-	set(separation_):
-		separation = separation_
-		_container_ili.add_theme_constant_override("separation", separation)
-		_set_custom_minimum_size(get_combined_minimum_size())
 @export_group("Left Icon", "left")
 ## Left icon texture.
 @export var left_texture: Texture2D:
@@ -74,30 +68,32 @@ var alignment: int:
 	set(right_flip_v_):
 		right_flip_v_ = right_flip_v_
 		_icon_right.flip_v = right_flip_v
-@export_group("Margin", "margin")
-## Left margin.
-@export_range(0, 0, 1, "or_greater") var margin_left: int:
-	set(margin_left_):
-		margin_left = margin_left_
-		_container_margin.add_theme_constant_override("margin_left", margin_left)
+@export_group("Theme Type Variation", "ttv")
+## [param theme_type_variation] of background panel.
+## Base type: [PanelContainer].
+@export var ttv_background: String:
+	set(ttv_background_):
+		ttv_background = ttv_background_
+		_container_panel.theme_type_variation = ttv_background
+## [param theme_type_variation] of margins.
+## Base type: [MarginContainer].
+@export var ttv_margin: String:
+	set(ttv_margin_):
+		ttv_margin = ttv_margin_
+		_container_margin.theme_type_variation = ttv_margin
+## [param theme_type_variation] of icons and label container.
+## Base type: [HBoxContainer].
+@export var ttv_separation: String:
+	set(ttv_separation_):
+		ttv_separation = ttv_separation_
+		_container_ili.theme_type_variation = ttv_separation
 		_set_custom_minimum_size(get_combined_minimum_size())
-## Top margin.
-@export_range(0, 0, 1, "or_greater") var margin_top: int:
-	set(margin_top_):
-		margin_top = margin_top_
-		_container_margin.add_theme_constant_override("margin_top", margin_top)
-		_set_custom_minimum_size(get_combined_minimum_size())
-## Right margin.
-@export_range(0, 0, 1, "or_greater") var margin_right: int:
-	set(margin_right_):
-		margin_right = margin_right_
-		_container_margin.add_theme_constant_override("margin_right", margin_right)
-		_set_custom_minimum_size(get_combined_minimum_size())
-## Bottom margin.
-@export_range(0, 0, 1, "or_greater") var margin_bottom: int:
-	set(margin_bottom_):
-		margin_bottom = margin_bottom_
-		_container_margin.add_theme_constant_override("margin_bottom", margin_bottom)
+## [param theme_type_variation] of the label.
+## Base type: [Label].
+@export var ttv_label: String:
+	set(ttv_label_):
+		ttv_label = ttv_label_
+		_label.theme_type_variation = ttv_label
 		_set_custom_minimum_size(get_combined_minimum_size())
 
 # [PanelContainer] for the widget. It is the background.
@@ -142,6 +138,17 @@ func _ready() -> void:
 	_set_icon_left_custom_minimum_size()
 	_set_icon_right_custom_minimum_size()
 	_set_custom_minimum_size(get_combined_minimum_size())
+
+
+func _set(property: StringName, value: Variant) -> bool:
+	if property == "mouse_filter":
+		_container_panel.mouse_filter = value
+		_container_margin.mouse_filter = value
+		_container_ili.mouse_filter = value
+		_icon_left.mouse_filter = value
+		_icon_right.mouse_filter = value
+		return false
+	return false
 
 
 func _resize_children() -> void:

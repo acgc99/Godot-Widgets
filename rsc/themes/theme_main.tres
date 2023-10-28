@@ -1,0 +1,97 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://cmglb2u20q4op"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_md2fg"]
+bg_color = Color(0, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_02xpp"]
+bg_color = Color(0.99, 0.34, 0.39, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_olqwg"]
+bg_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_58hpd"]
+bg_color = Color(0.635294, 0.584314, 0.611765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4if8r"]
+bg_color = Color(0.145098, 1, 0.278431, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lil2r"]
+bg_color = Color(0.858824, 0.482353, 0.341176, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51md3"]
+bg_color = Color(0.705882, 0.447059, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yjw2m"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_egkr3"]
+bg_color = Color(0.0588235, 0.643137, 0.913725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ikvmf"]
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[resource]
+WCard_Label/base_type = &"Label"
+WCard_Label/font_sizes/font_size = 20
+WIconButton_Default/base_type = &"Button"
+WIconButton_Default/colors/icon_disabled_color = Color(0.368627, 0.368627, 0.368627, 1)
+WIconButton_Default/colors/icon_focus_color = Color(0, 0, 1, 1)
+WIconButton_Default/colors/icon_hover_color = Color(0, 0, 0, 1)
+WIconButton_Default/colors/icon_hover_pressed_color = Color(0, 1, 0, 1)
+WIconButton_Default/colors/icon_normal_color = Color(1, 1, 1, 1)
+WIconButton_Default/colors/icon_pressed_color = Color(1, 0, 0, 1)
+WIconLabelIcon_Margin/base_type = &"MarginContainer"
+WIconLabelIcon_Margin/constants/margin_bottom = 10
+WIconLabelIcon_Margin/constants/margin_left = 0
+WIconLabelIcon_Margin/constants/margin_right = 0
+WIconLabelIcon_Margin/constants/margin_top = 10
+WNavBar_Background/base_type = &"PanelContainer"
+WNavBar_Background/styles/panel = SubResource("StyleBoxFlat_md2fg")
+WNavBar_Label/base_type = &"Label"
+WNavBar_Label/colors/font_color = Color(0, 0, 0, 1)
+WNavBar_Label/font_sizes/font_size = 54
+WNavBar_Separation/base_type = &"HBoxContainer"
+WNavBar_Separation/constants/separation = 10
+WNumericInput_Label/base_type = &"Label"
+WNumericInput_Label/colors/font_color = Color(0, 1, 0, 1)
+WNumericInput_LineEdit/base_type = &"LineEdit"
+WNumericInput_LineEdit/colors/font_color = Color(1, 0, 0, 1)
+WNumericInput_Margin/base_type = &"MarginContainer"
+WNumericInput_Margin/constants/margin_bottom = 5
+WNumericInput_Margin/constants/margin_left = 5
+WNumericInput_Margin/constants/margin_right = 5
+WNumericInput_Margin/constants/margin_top = 5
+WNumericInput_Separation/base_type = &"HBoxContainer"
+WNumericInput_Separation/constants/separation = 8
+WPopup_Background/base_type = &"Button"
+WPopup_Background/styles/normal = SubResource("StyleBoxFlat_02xpp")
+WPopup_Button1/base_type = &"Button"
+WPopup_Button1/styles/disabled = SubResource("StyleBoxFlat_olqwg")
+WPopup_Button1/styles/focus = SubResource("StyleBoxFlat_58hpd")
+WPopup_Button1/styles/hover = SubResource("StyleBoxFlat_4if8r")
+WPopup_Button1/styles/normal = SubResource("StyleBoxFlat_lil2r")
+WPopup_Button1/styles/pressed = SubResource("StyleBoxFlat_51md3")
+WPopup_Button2/base_type = &"Button"
+WPopup_Button2/styles/normal = SubResource("StyleBoxFlat_yjw2m")
+WPopup_ExternalMargin/base_type = &"MarginContainer"
+WPopup_ExternalMargin/constants/margin_bottom = 500
+WPopup_ExternalMargin/constants/margin_left = 50
+WPopup_ExternalMargin/constants/margin_right = 50
+WPopup_ExternalMargin/constants/margin_top = 500
+WPopup_InternalMargin/base_type = &"MarginContainer"
+WPopup_InternalMargin/constants/margin_bottom = 20
+WPopup_InternalMargin/constants/margin_left = 20
+WPopup_InternalMargin/constants/margin_right = 20
+WPopup_InternalMargin/constants/margin_top = 20
+WPopup_Message/base_type = &"Label"
+WPopup_Panel/base_type = &"PanelContainer"
+WPopup_Panel/styles/panel = SubResource("StyleBoxFlat_egkr3")
+WPopup_Separation/base_type = &"VBoxContainer"
+WPopup_Separation/constants/separation = 4
+WPopup_Title/base_type = &"Label"
+WPopup_Title/font_sizes/font_size = 32
+WRoundClipping_Panel/base_type = &"PanelContainer"
+WRoundClipping_Panel/styles/panel = SubResource("StyleBoxFlat_ikvmf")

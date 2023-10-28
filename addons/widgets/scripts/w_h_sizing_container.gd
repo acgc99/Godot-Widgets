@@ -28,11 +28,6 @@ const SIZING_TO_FLAGS: Dictionary = {
 	SIZING_FILL: SIZE_EXPAND_FILL,
 }
 
-## Separation between the text and the icons.
-@export_range(0, 0, 1, "or_greater") var separation: int = 4:
-	set(separation_):
-		separation = separation_
-		add_theme_constant_override("separation", separation)
 @export_enum(
 	"Shrink Left",
 	"Shrink Center",

@@ -34,20 +34,10 @@ var navbar_alignment: int:
 		_navbar.alignment = navbar_alignment
 @export_group("Left button", "left")
 ## Left [WIconButton] texture.
-@export var left_texture: Texture2D:
-	set(left_texture_):
-		left_texture = left_texture_
-		_navbar.left_texture = left_texture
-## If [code]true[/code], left [WIconButton] texture is flipped horizontally.
-@export var left_flip_h: bool:
-	set(left_flip_h_):
-		left_flip_h = left_flip_h_
-		_navbar.left_flip_h = left_flip_h
-## If [code]true[/code], left [WIconButton] texture is flipped vertically.
-@export var left_flip_v: bool:
-	set(left_flip_v_):
-		left_flip_v = left_flip_v_
-		_navbar.left_flip_v = left_flip_v
+@export var left_icon: Texture2D:
+	set(left_icon_):
+		left_icon = left_icon_
+		_navbar.left_icon = left_icon
 ## If [code]true[/code], left [WIconButton] is in disabled state and
 ## can't be clicked or toggled.
 @export var left_disabled: bool:
@@ -56,26 +46,48 @@ var navbar_alignment: int:
 		_navbar.left_disabled = left_disabled
 @export_group("Right button", "right")
 ## Right [WIconButton] texture.
-@export var right_texture: Texture2D:
-	set(right_texture_):
-		right_texture = right_texture_
-		_navbar.right_texture = right_texture
-## If [code]true[/code], right [WIconButton] texture is flipped horizontally.
-@export var right_flip_h: bool:
-	set(right_flip_h_):
-		right_flip_h = right_flip_h_
-		_navbar.right_flip_h = right_flip_h
-## If [code]true[/code], right [WIconButton] texture is flipped vertically.
-@export var right_flip_v: bool:
-	set(right_flip_v_):
-		right_flip_v = right_flip_v_
-		_navbar.right_flip_v = right_flip_v
+@export var right_icon: Texture2D:
+	set(right_icon_):
+		right_icon = right_icon_
+		_navbar.right_icon = right_icon
 ## If [code]true[/code], right [WIconButton] is in disabled state and
 ## can't be clicked or toggled.
 @export var right_disabled: bool:
 	set(right_disabled_):
 		right_disabled = right_disabled_
 		_navbar.right_disabled = right_disabled
+@export_group("Theme Type Variation WNavBar", "ttv")
+## [param theme_type_variation] of background panel.
+## Base type: [PanelContainer].
+@export var ttv_panel: String:
+	set(ttv_panel_):
+		ttv_panel = ttv_panel_
+		_navbar.ttv_panel = ttv_panel
+## [param theme_type_variation] of buttons and label container.
+## Base type: [HBoxContainer].
+@export var ttv_separation: String:
+	set(ttv_separation_):
+		ttv_separation = ttv_separation_
+		_navbar.ttv_separation = ttv_separation
+## [param theme_type_variation] of the label.
+## Base type: [Label].
+@export var ttv_label: String:
+	set(ttv_label_):
+		ttv_label = ttv_label_
+		_navbar.ttv_label = ttv_label
+## [param theme_type_variation] of the left button.
+## Base type: [Button].
+@export var ttv_left_button: String:
+	set(ttv_left_button_):
+		ttv_left_button = ttv_left_button_
+		_navbar.ttv_left_button = ttv_left_button
+## [param theme_type_variation] of the right button.
+## Base type: [Button].
+@export var ttv_right_button: String:
+	set(ttv_right_button_):
+		ttv_right_button = ttv_right_button_
+		_navbar.ttv_right_button = ttv_right_button
+
 
 ## Page [WNavBar].
 var _navbar: WNavBar

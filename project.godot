@@ -32,6 +32,10 @@ enabled=PackedStringArray("res://addons/widgets/plugin.cfg")
 
 import/blender/enabled=false
 
+[gui]
+
+theme/custom="res://rsc/themes/theme_main.tres"
+
 [rendering]
 
 renderer/rendering_method="mobile"

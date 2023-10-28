@@ -50,7 +50,7 @@ func _enter_tree() -> void:
 	# level 2
 	add_custom_type(
 		"WIconButton",
-		"BaseButton",
+		"Control",
 		preload("res://addons/widgets/scripts/w_icon_button.gd"),
 		preload("res://addons/widgets/svg_icons/circle-slice-8.svg")
 	)
@@ -93,7 +93,7 @@ func _enter_tree() -> void:
 	)
 	add_custom_type(
 		"WCard",
-		"BaseButton",
+		"Control",
 		preload("res://addons/widgets/scripts/w_card.gd"),
 		preload("res://addons/widgets/svg_icons/file-presentation-box.svg")
 	)

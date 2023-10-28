@@ -1,9 +1,13 @@
 @tool
 class_name WCard
-extends "res://addons/widgets/scripts/w_base_button.gd"
+extends "res://addons/widgets/scripts/w_control.gd"
 ## Widget button similar to [WTextureRounded] but with a [WIconLabelIcon] for
 ## text and icons.
 
+signal button_down
+signal button_up
+signal pressed
+signal toggled(button_pressed_: bool)
 
 ## Enum corresponding to [param ili_position].
 enum {
@@ -41,6 +45,69 @@ var ili_position: int:
 			_ili.size_flags_vertical = Control.SIZE_SHRINK_END
 		else:
 			_ili.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+@export_category("Button")
+@export_group("Theme Type Variation Button", "ttv")
+## [param theme_type_variation] of the button.
+## Base type: [Button].
+@export var ttv_button: String:
+	set(ttv_button_):
+		ttv_button = ttv_button_
+		_button.theme_type_variation = ttv_button
+@export_category("BaseButton")
+@export var disabled: bool:
+	set(disabled_):
+		disabled = disabled_
+		_button.disabled = disabled
+		if disabled:
+			_container_clipping.modulate = _button.get_theme_stylebox("disabled", ttv_button).bg_color
+		else:
+			_container_clipping.modulate = _button.get_theme_stylebox("normal", ttv_button).bg_color
+@export var toggle_mode: bool:
+	set(toggle_mode_):
+		toggle_mode = toggle_mode_
+		_button.toggle_mode = toggle_mode
+@export var button_pressed: bool:
+	set(button_pressed_):
+		button_pressed = button_pressed_
+		_button.button_pressed = button_pressed
+@export_enum(
+	"Button Press",
+	"Button Release"
+)
+var action_mode: int = 1:
+	set(action_mode_):
+		action_mode = action_mode_
+		_button.action_mode = action_mode
+@export_flags(
+	"Mouse Left",
+	"Mouse Right",
+	"Mouse Middle"
+)
+var button_mask: int = 1:
+	set(button_mask_):
+		button_mask = button_mask_
+		_button.button_mask = button_mask
+@export var keep_pressed_outside: bool:
+	set(keep_pressed_outside_):
+		keep_pressed_outside = keep_pressed_outside_
+		_button.keep_pressed_outside = keep_pressed_outside
+@export var button_group: ButtonGroup:
+	set(button_group_):
+		button_group = button_group_
+		_button.button_group = button_group
+@export_group("Shortcut")
+@export var shortcut: Shortcut:
+	set(shortcut_):
+		shortcut = shortcut_
+		_button.shortcut = shortcut
+@export var shortcut_feedback: bool = true:
+	set(shortcut_feedback_):
+		shortcut_feedback = shortcut_feedback_
+		_button.shortcut_feedback = shortcut_feedback
+@export var shortcut_in_tooltip: bool = true:
+	set(shortcut_in_tooltip_):
+		shortcut_in_tooltip = shortcut_in_tooltip_
+		_button.shortcut_in_tooltip = shortcut_in_tooltip
 @export_category("TextureRect")
 ## The node's [Texture2D] resource.
 @export var texture: Texture2D:
@@ -106,11 +173,6 @@ var alignment: int:
 	set(alignment_):
 		alignment = alignment_
 		_align_elements()
-## Separation between the text and the icons.
-@export_range(0, 0, 1, "or_greater") var separation: int = 4:
-	set(separation_):
-		separation = separation_
-		_ili.separation = separation
 @export_group("Left icon", "left")
 ## Left icon texture.
 @export var left_texture: Texture2D:
@@ -147,65 +209,51 @@ var alignment: int:
 	set(right_flip_v_):
 		right_flip_v = right_flip_v_
 		_ili.right_flip_v = right_flip_v
-@export_group("Margin", "margin")
-## Top margin.
-@export_range(0, 0, 1, "or_greater") var margin_top: int:
-	set(margin_top_):
-		margin_top = margin_top_
-		_ili.margin_top = margin_top
+@export_group("Theme Type Variation WIconLabelIcon", "ttv")
+## [param theme_type_variation] of background panel.
+## Base type: [PanelContainer].
+@export var ttv_background: String:
+	set(ttv_background_):
+		ttv_background = ttv_background_
+		_ili.ttv_background = ttv_background
+## [param theme_type_variation] of margins.
+## Base type: [MarginContainer].
+@export var ttv_margin: String:
+	set(ttv_margin_):
+		ttv_margin = ttv_margin_
+		_ili.ttv_margin = ttv_margin
 		_set_custom_minimum_size(get_combined_minimum_size())
 		_ili.force_minimum_size()
-## Bottom margin.
-@export_range(0, 0, 1, "or_greater") var margin_bottom: int:
-	set(margin_bottom_):
-		margin_bottom = margin_bottom_
-		_ili.margin_bottom = margin_bottom
+## [param theme_type_variation] of icons and label container.
+## Base type: [HBoxContainer].
+@export var ttv_separation: String:
+	set(ttv_separation_):
+		ttv_separation = ttv_separation_
+		_ili.ttv_separation = ttv_separation
+		_set_custom_minimum_size(get_combined_minimum_size())
+		_ili.force_minimum_size()		
+## [param theme_type_variation] of the label.
+## Base type: [Label].
+@export var ttv_label: String:
+	set(ttv_label_):
+		ttv_label = ttv_label_
+		_ili.ttv_label = ttv_label
 		_set_custom_minimum_size(get_combined_minimum_size())
 		_ili.force_minimum_size()
 @export_category("WRoundClippingContainer")
-## This sets the number of vertices used for each corner. Higher values result
-## in rounder corners but take more processing power to compute. When choosing
-## a value, you should take the corner radius ([method set_corner_radius_all])
-## into account.
-## [br]
-## [br]
-## For corner radii less than 10, [code]4[/code] or [code]5[/code] should be
-## enough. For corner radii less than 30, values between [code]8[/code] and
-## [code]12[/code] should be enough.
-## [br]
-## [br]
-## A corner detail of [code]1[/code] will result in chamfered corners instead
-## of rounded corners, which is useful for some artistic effects.
-@export_range(1, 20, 1) var corner_detail: int = 8:
-	set(corner_detail_):
-		corner_detail = corner_detail_
-		_container_clipping.corner_detail = corner_detail
-@export_group("Corner Radius", "corner_radius")
-## The top-left corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 0, 1, "or_greater") var corner_radius_top_left: int:
-	set(corner_radius_top_left_):
-		corner_radius_top_left = corner_radius_top_left_
-		_container_clipping.corner_radius_top_left = corner_radius_top_left
-## The top-right corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 0, 1, "or_greater") var corner_radius_top_right: int:
-	set(corner_radius_top_right_):
-		corner_radius_top_right = corner_radius_top_right_
-		_container_clipping.corner_radius_top_right = corner_radius_top_right
-## The bottom-right corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 0, 1, "or_greater") var corner_radius_bottom_right: int:
-	set(corner_radius_bottom_right_):
-		corner_radius_bottom_right = corner_radius_bottom_right_
-		_container_clipping.corner_radius_bottom_right = corner_radius_bottom_right
-		_align_elements()
-## The bottom-left corner's radius. If [code]0[/code], the corner is not rounded.
-@export_range(0, 0, 1, "or_greater") var corner_radius_bottom_left: int:
-	set(corner_radius_bottom_left_):
-		corner_radius_bottom_left = corner_radius_bottom_left_
-		_container_clipping.corner_radius_bottom_left = corner_radius_bottom_left
+@export_group("Theme Type Variation WRoundClippingContainer", "ttv")
+## [param theme_type_variation] of panel.
+## Base type: [PanelContainer].
+@export var ttv_panel: String:
+	set(ttv_panel_):
+		ttv_panel = ttv_panel_
+		_container_clipping.theme_type_variation = ttv_panel
 		_align_elements()
 
 # Main widget container. Mask for round clipping.
 var _container_clipping: WRoundClippingContainer
+## Underlaying button.
+var _button: Button
 # [TextureRect] holding the texture.
 var _texture: TextureRect
 # [WIConLabelIcon] for the label and icons.
@@ -220,13 +268,33 @@ func _init() -> void:
 	add_child(_container_clipping, false, Node.INTERNAL_MODE_BACK)
 	_container_clipping.mouse_filter = MOUSE_FILTER_IGNORE
 	
+	_button = Button.new()
+	_container_clipping.add_child(_button)
+	_button.button_down.connect(_on_button_button_down)
+	_button.button_up.connect(_on_button_button_up)
+	_button.pressed.connect(_on_button_pressed)
+	_button.toggled.connect(_on_button_toggled)
+	_button.mouse_entered.connect(_on_button_mouse_entered)
+	_button.mouse_exited.connect(_on_button_mouse_exited)
+	_button.focus_entered.connect(_on_button_focus_entered)
+	_button.focus_exited.connect(_on_button_focus_exited)
+	
 	_texture = TextureRect.new()
 	_container_clipping.add_child(_texture)
 	_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_texture.mouse_filter = MOUSE_FILTER_IGNORE
 	
 	_ili = WIconLabelIcon.new()
 	_container_clipping.add_child(_ili)
 	_ili.size_flags_vertical = Control.SIZE_SHRINK_END
+	_ili.mouse_filter = MOUSE_FILTER_IGNORE
+
+
+func _ready() -> void:
+	if disabled:
+		_container_clipping.modulate = _button.get_theme_stylebox("disabled", ttv_button).bg_color
+	else:
+		_container_clipping.modulate = _button.get_theme_stylebox("normal", ttv_button).bg_color
 
 
 func _resize_children() -> void:
@@ -241,11 +309,56 @@ func _calculate_widget_minimum_size() -> Vector2:
 func _align_elements() -> void:
 	_ili.alignment = alignment
 	if alignment == ALIGNMENT_LEFT:
-		_ili.margin_left = corner_radius_bottom_left
-		_ili.margin_right = 0
+		_ili.add_theme_constant_override(
+			"margin_left",
+			_container_clipping.get_theme_stylebox("panel", ttv_panel).corner_radius_bottom_left
+		)
+		_ili.add_theme_constant_override("margin_right", 0)
 	elif alignment == ALIGNMENT_CENTER:
-		_ili.margin_left = 0
-		_ili.margin_right = 0
+		_ili.add_theme_constant_override("margin_left", 0)
+		_ili.add_theme_constant_override("margin_right", 0)
 	else:
-		_ili.margin_left = 0
-		_ili.margin_right = corner_radius_bottom_right
+		_ili.add_theme_constant_override("margin_left", 0)
+		_ili.add_theme_constant_override(
+			"margin_right",
+			_container_clipping.get_theme_stylebox("panel", ttv_panel).corner_radius_bottom_right
+		)
+
+
+func _on_button_button_down() -> void:
+	_container_clipping.modulate = _button.get_theme_stylebox("pressed", ttv_button).bg_color
+	button_down.emit()
+
+
+func _on_button_button_up() -> void:
+	# TODO: this requires control over focus mode to fully set focus style
+	_container_clipping.modulate = _button.get_theme_stylebox("normal", ttv_button).bg_color
+	button_up.emit()
+
+
+func _on_button_pressed() -> void:
+	pressed.emit()
+
+
+func _on_button_toggled(button_pressed_: bool) -> void:
+	toggled.emit(button_pressed_)
+
+
+func _on_button_mouse_entered() -> void:
+	if not disabled:
+		_container_clipping.modulate = _button.get_theme_stylebox("hover", ttv_button).bg_color
+
+
+func _on_button_mouse_exited() -> void:
+	if not disabled:
+		_container_clipping.modulate = _button.get_theme_stylebox("normal", ttv_button).bg_color
+
+
+func _on_button_focus_entered() -> void:
+	if not disabled:
+		_container_clipping.modulate = _button.get_theme_stylebox("focus", ttv_button).bg_color
+
+
+func _on_button_focus_exited() -> void:
+	if not disabled:
+		_container_clipping.modulate = _button.get_theme_stylebox("normal", ttv_button).bg_color
