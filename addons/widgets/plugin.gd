@@ -10,12 +10,6 @@ func _enter_tree() -> void:
 		preload("res://addons/widgets/scripts/w_control.gd"),
 		preload("res://addons/widgets/svg_icons/alpha-w-circle-outline.svg")
 	)
-	add_custom_type(
-		"WBaseButton",
-		"BaseButton",
-		preload("res://addons/widgets/scripts/w_base_button.gd"),
-		preload("res://addons/widgets/svg_icons/alpha-w-circle.svg")
-	)
 	# level 1
 	add_custom_type(
 		"WIcon",
@@ -131,5 +125,4 @@ func _exit_tree() -> void:
 	remove_custom_type("WRoundClippingContainer")
 	remove_custom_type("WIcon")
 	# level 0
-	remove_custom_type("WBaseButton")
 	remove_custom_type("WControl")
